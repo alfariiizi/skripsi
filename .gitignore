@@ -1,0 +1,31 @@
+# LaTeX-generated files
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.gz
+*.bbl
+*.blg
+*.brf
+*.fls
+*.fdb_latexmk
+*.pdf
+*.dvi
+
+# Compiled LaTeX formats
+*.dvi
+*.pdf
+
+# Auto-generated files by TeX editors
+*.bak
+*.swp
+
+# LaTeX project-specific files
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+
+# Ignore generated directories
+_build/
+latex.out/

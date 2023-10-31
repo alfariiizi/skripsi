@@ -1,0 +1,299 @@
+\chapter{Metode Penelitian}
+
+\section{Bahan}
+Data latih dalam penelitian ini akan menggunakan data sumber distribusi $\rho$ dari dataset acak yang memiliki rentang [-1,1] yang dibuat menggunakan program PlasmaNet \citep{cheng_illarramendi_bauerheim_cuenot_2021}. Dan kemudian dihitung potensial listrik $\phi$ menggunakan \emph{solver} Gauss-Seidel untuk plasma berbasis C++ \citep{lubos_brieda_2019}.
+
+\section{Alat}
+Perangkat keras yang digunakan peneliti dalam penelitian ini adalah berupa komputer dengan bentuk komputer jinjing (\emph{laptop}) dengan spesifikasi sebagai berikut:
+
+\begin{table}[ht]
+\centering
+\caption{Spesifikasi komputer alat}
+\begin{tabular}{|M{3cm}|M{4cm}|}
+\hline
+\textbf{Komponen} & \textbf{Spesifikasi} \\
+\hline
+Sistem operasi & Windows 11 Home\\
+\hline
+CPU & AMD Ryzen 5 5600U with Radeon Graphics, 2.30 GHz, 6 Cores, 12 Logical Processor \\
+\hline
+GPU & NVIDIA GeForce RTX 3050, 4GB\\
+\hline
+RAM & 16 GB\\
+\hline
+Penyimpanan & Solid State Drive 512 GB\\
+\hline
+\end{tabular}
+\end{table}
+
+Kemudian, dalam menjalankan penelitian, penulis menggunakan berbagai perangkat lunak untuk membuat data, mengolah data, dan melatih data. Adapun perangkat-perangkat lunak tersebut adalah:
+\begin{itemize}
+    \item Visual Studio Code: sebagai pengolah kode
+    \item Google Colab Pro dengan GPU T4: untuk melatih model dengan \emph{graphic processing unit} (GPU)
+    \item Bahasa pemrograman C++: untuk membangun \emph{solver} Gauss-Seidel
+    \item Bahasa pemrograman Python: untuk membangun model dan melatih model \emph{machine learning}
+\end{itemize}
+
+\section{Prosedur Kerja dan Pengambilan Data}
+Secara garis besar, alur penelitian ini berawal dari pembuatan data latih pasangan $\rho$ dan $\phi$, yaitu dengan cara menghitung $\phi$ menggunakan metode Gauss-Seidel dari data $\rho$ yang didapatkan dari PlasmaNet, kemudian pemrosesan data agar siap untuk jadi data latih, dilanjutkan ke pelatihan model CNN, dan kemudian pengujian model CNN. Pada Gambar \ref{flowchart} disajikan alur penelitian dengan model diagram alir (\emph{flowchart}).
+
+\begin{figure}[h!]\label{flowchart}
+    \centering
+    \includegraphics[width=3cm, scale=0.5]{gambar/flowchart2.jpg}
+    \caption{Diagram alir penelitian}
+    \label{flowchart}
+\end{figure}
+
+\subsection{Pengambilan Data Latih}\label{data_latih}
+Dalam konteks pemelajaran mendalam (\emph{deep learning}), data latih berarti pasangan data antara data masukan dan data target. Dan data hasil prediksi adalah data uji dan data hasil prediksi. Tahap pertama penelitian ini adalah pembuatan data latih. Untuk data masukan, digunakan data distribusi acak (sisi kanan pada Persamaan \eqref{poisson umum}) yang dibuat menggunakan program PlasmaNet yang dapat dikontrol skala spasialnya. Data distribusi acak memiliki nilai yang membentang pada rentang [-1, 1] secara kontinyu. Data ini dibuat pada kisi dengan resolusi kasar dengan ukuran $n_{kasar} = [n_p/c]$. Dengan $n_p$ adalah jumlah piksel pada tiap sumbu dan $c$ adalah ukuran filter. Kemudian interpolasi bikubik membuat bidang random dengan ukuran struktur terkontrol pada kisi target \citep{cheng_illarramendi_bauerheim_cuenot_2021}, dengan $c$ adalah ukuran struktur minimum. Data distribusi yang diambil pada penelitian ini adalah sebanyak 20.200 data dengan domain $100 \times 100$. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=8cm]{gambar/random.png}
+    \caption{Contoh nilai distribusi acak dalam $6 \times 6$ pada kisi kasar (kiri) yang diinterpolasikan pada kisi halus $101 \times 101$ (kanan) \emph{Sumber: \citep{cheng_illarramendi_bauerheim_cuenot_2021}}}
+\end{figure}
+
+Tahapan pertama yang dilakukan dalam pengambilan data sekaligus dalam penelitian ini adalah pembuatan \emph{solver} Gauss-Seidel untuk menghasilkan pasangan dataset latih (\emph{training dataset}). Hal pertama yang harus diperhatikan dalam pembuatan program pemecah (\emph{solver}) masalah Poisson adalah domain fisis yang digunakan. Seperti yang telah disebutkan pada Bab \ref{tipus}, konteks pemecahan masalah ini adalah terletak pada koordinat silinder Gambar \ref{domain_silinder}. Untuk menjaga karakter kinetik model sepenuhnya, perlu dilakukan pengurangan dimensi sistem, membatasi domain menjadi dua dimensi ($r,z$) mengabaikan variasi azimut dari besaran yang terlibat (simulasi simetri aksial) \citep{f_taccogna_longo_capitelli_schneider_2005} dengan $r \neq 0$. Pemilihan domain ini dikarenakan ada banyak pemanfaatan yang dapat digunakan dalam implementasi fisis, salah satunya adalah pendorong Hall (\emph{Hall thruster}). Untuk itu, disesuaikanlah domain silinder ini dengan model pendorong Hall, adapun model domain pendorong Hall yang digunakan dalam penelitian ini adalah SPT-100 karena selain memiliki sejarah keberhasilan yang banyak \citep{braga_miranda_2019}, perangkat ini juga banyak digunakan sebagai patokan atau percontohan dalam beberapa penelitian \citep{Shiferaw2013, f_taccogna_longo_capitelli_schneider_2005, braga_miranda_2019, boeuf_2017}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=5cm]{gambar/silinder.png}
+    \caption{Tampang lintang koordinat silinder. Penelitian ini menghitung potensial listrik pada koordinat silinder dengan pendekatan simetri aksial, yaitu pada sumbu $r-z$.\emph{ Sumber: \citep{Shiferaw2013} dengan penyesuaian oleh Penulis}}
+    \label{domain_silinder}
+\end{figure}
+
+Disadur dari \cite{braga_miranda_2019} dan \cite{f_taccogna_longo_capitelli_schneider_2005}, spesifikasi teknis dan ukuran domain dari model SPT-100 ditampilkan dalam Tabel \ref{spt_100}. Domain komputasi numerik pada penelitian ini diilustrasikan dalam model 2 dimensi dari SPT-100 yang ditampilkan pada Gambar \ref{spt_100_2d}. 
+
+\begin{table}[h!]
+\centering
+\caption{Informasi domain fisis dan teknis pendorong Hall SPT-100 }
+\label{spt_100}
+\begin{tabular}{ll}
+\hline
+\textbf{Dimensi}             & \textbf{Ukuran} \\ \hline
+Panjang kanal (m)            & 0,025           \\ \hline
+Lebar kanal (m)              & 0,015           \\ \hline
+Panjang kanal keluar (m)     & 0,01            \\ \hline
+Jari-jari silinder dalam (m) & 0,035           \\ \hline
+Jari-jari silinder luar (m)  & 0,05            \\ \hline
+Dorongan (N)                 & 0,08            \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=5cm]{gambar/spt_100_2d.png}
+    \caption{Model 2 dimensi dari kanal SPT-100 sebagai domain komputasi numerik. Lebar kanal dimulai dari 0,035 - 0,050 m dan panjang kanal dimulai dari 0,00 - 0,025 m. \emph{ Sumber: \citep{braga_miranda_2019}}}
+    \label{spt_100_2d}
+\end{figure}
+
+\subsubsection{Pengambilan Data Distribusi Pada Program PlasmaNet}
+
+Data distribusi muatan $\rho$ yang akan digunakan untuk menghitung potensial listrik pada pemecah Gauss-Seidel diambil menggunakan program PlasmaNet \citep{cheng_illarramendi_bauerheim_cuenot_2021}. Program ini menyediakan pasangan data distribusi partikel secara acak maupun distribusi partikel dengan pola sinusoidal dan potensial listriknya. Namun, pasangan data tersebut tidak dapat digunakan karena potensial listrik yang digunakan mengikuti syarat batas tertentu seperti pada domain komputasi yang disebutkan sebelumnya, sehingga hanya akan digunakan data distribusinya ($\rho$) saja.
+
+Dalam pembentukan data distribusi acak, perumusan matematis telah dijelaskan sebelumnya pada Subbagian \ref{data_latih}. Hal yang harus diperhatikan untuk pembuatan data distribusi acak ini adalah mengenai syarat awal domain serta ukuran spasial domain kasar dan halus. Pertama, akan ditinjau mengenai syarat awal yang digunakan untuk membentuk distribusi acak. 
+
+\begin{mypythoncode}[Syarat awal pembuatan data distribusi acak di PlasmaNet]
+xmin: 0.035
+xmax: 0.050
+nnx: 100   
+ymin: 0.0  
+ymax: 0.050
+nny: 100   
+
+\end{mypythoncode}
+
+Kode cuplikan Kode 1 dapat dibandingkan dengan Gambar \ref{spt_100_2d}, \texttt{xmin} dan \texttt{xmax} merupakan lebar kanal dan \texttt{ymin} dan \texttt{ymax} merupakan panjang kanal. Pada bagian ini dilakukan peniruan domain SPT-100 untuk distribusi muatan (Gambar \ref{ukuran spt 100}). Kemudian, \texttt{nnx} dan \texttt{nny} adalah jumlah piksel untuk tiap sumbu.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=10cm]{gambar/domain spt100 ukuran.png}
+    \caption{Ukuran kanal SPT-100. \emph{ Sumber: Penulis}}
+    \label{ukuran spt 100}
+\end{figure}
+
+Tahapan selanjutnya dalam pembuatan set data acak adalah memilih parameter $c$ yang akan menentukan ukuran struktur minimum pada ukuran domain kasar. Pada penelitian ini, akan digunakan domain $100 \times 100$ dan dipilih $c = 16$. Hal ini akan membuat domain medan acak dengan ukuran $100/8 \times 100/8 \approx 12$ dan kemudian akan diinterpolasikan kembali ke ukuran asli $100 \times 100$.
+
+Setelah didapatkan kumpulan data acak, data tersebut tidak dapat langsung digunakan karena setelah dilakukan investigasi singkat pada data-data yang ada, nilai-nilai data pada set data distribusi yang dihasilkan sangat kecil (misalnya, banyak medan dengan nilai piksel di orde $10^{-34}$) sehingga menyebabkan kesulitan pada perhitungan oleh komputer. Sehingga tahapan selanjutnya adalah peningkatan (\textit{scale-up}). Upaya peningkatan nilai $\rho$ untuk seluruh jumlah dataset (\texttt{len(rho)}) dilakukan dengan cara sebagai berikut:
+
+\begin{mypythoncode}[Kode cuplikan peningkatan nilai rho]
+a = len(rho) 
+for i in range (a):
+    rho_max = np.max(rho[i])
+    rho_min = abs(np.min(rho[i]))
+    
+    if rho_max > rho_min:
+        c = 1/rho_max
+    else:
+        c = 1/rho_min
+    
+    rho[i] = rho[i]*c
+\end{mypythoncode}
+
+Pada kode tersebut, dicari nilai ekstrim mutlak tertinggi pada tiap medan, dan kemudian nilai ekstrim mutlak tersebut digunakan sebagai nilai pembagi di masing-masing domain.
+
+\subsubsection{Syarat Awal dari \textit{Solver} Gauss-Seidel}
+
+Setelah data distribusi partikel siap, akan dilanjutkan dengan pemecahan masalah menggunakan metode Gauss-Seidel. Pada subbab ini dan subbab selanjutnya, akan dibahas mengenai syarat awal dan algoritma dari \textit{solver} Gauss-Seidel yang digunakan.
+
+Untuk membangun \textit{solver} perhitungan potensial listrik menggunakan metode Gauss-Seidel ini, digunakan bahasa pemrograman C++. Bahasa pemrograman C++ dipilih pertama-tama karena bahasa ini berkali-kali lipat lebih cepat dibandingkan Python, walaupun Python memiliki pustaka (\textit{library}) yang cukup bagus dan dapat mengoptimasi kerja komputasi, semisal Numpy \citep{lubos_brieda_2019}. Selain itu, Python memiliki kekurangan dalam tipe variabel yang dapat memicu \textit{bugs}, terlebih khusus saat pembedaan variabel \textit{integer} dan \textit{floating point}. Dari segi pustaka, ada banyak pustaka saintifik yang diimplementasikan menggunakan C++ tanpa pembungkus (\textit{wrappers}) pihak ketiga.
+
+Syarat awal pada \textit{solver} ini didefinisikan dalam sebuah \textit{header file}. Dalam \textit{header file} ini berisi konstanta yang digunakan dan juga tebakan awal Gauss-Seidel. Pada penelitian ini digunakan satu konstanta yaitu $\epsilon_0 = 8.8541878 \times 10^{-12}$ \citep{lubos_brieda_2019}. Dan untuk tebakan awal, digunakan nilai tebakan awal = 0 untuk seluruh piksel pada matriks tebakan awal.
+
+\subsubsection{Algoritma \textit{Solver} Gauss-Seidel}
+
+Pada subbagian ini akan dibahas mengenai implementasi dari Subbagian \ref{gauss_seidel_silinder} pada \textit{solver} Gauss-Seidel menggunakan bahasa pemrograman C++. Secara umum, \textit{solver} ini akan menjalankan 2 file. Yang pertama adalah file untuk mendefinisikan algoritma dari Gauss-Seidel sekaligus untuk menuliskan hasil (dalam penelitian ini file tersebut diberi nama \texttt{Potential.cpp} (Lampiran \ref{kode_potential_cpp})) dan file yang kedua adalah untuk memberikan syarat awal atau konteks besaran domain dan juga pada file ini terjadi pemanggilan fungsi-fungsi yang didefinisikan pada \texttt{Potential.cpp} beserta pengisian nilainya. Nama file ini pada penelitian ini adalah \texttt{main.cpp} (Lampiran \ref{kode_main_cpp}). 
+
+Tahap paling awal pada \texttt{Potential.cpp} adalah pemanggilan \textit{header file} dan pustaka yang dibutuhkan. Setelah itu, dilakukan penginisialisasian menggunakan \textit{constructor} \texttt{Solver} untuk matriks masukan dan matriks luaran. Kemudian, akan didefinisikan besaran-besaran lain yang merupakan jarak domain pada fungsi \texttt{setextents} dan untuk jumlah iterasi maksimal dan toleransi ralat diatur pada fungsi \texttt{setParam}.
+
+Setelah semua kondisi diatur, masuk pada perhitungan iterasi pada fungsi \texttt{writeSolveGS}. Di  sini, argumen yang digunakan adalah
+\texttt{filename}, \texttt{reshape\_\texttt{\-}rows}, \texttt{reshape\_cols}, yang nilai argumennya semuanya terletak pada \texttt{main.cpp}. Berikut adalah \textit{pseudocode} dari algoritma implementasi perhitungan Gauss-Seidel:
+\begin{lstlisting}[breaklines=true, breakatwhitespace=true]
+DEFINISIKAN variabel: idz, idr, idz2 (idz pangkat dua), idr2 (idr pangkat dua), crz
+SET L2 ke 0
+SET converged ke False
+
+FOR iterasi < nilai iterasi maksimal:
+    iterasi ditambah 1
+    FOR i < jumlah baris keseluruhan data:
+        i ditambah 1
+        FOR j < jumlah kolom:
+            j ditambah 1
+            IF i = 0 ATAU i kelipatan 100: #syarat batas paling atas
+                CONTINUE
+            ELSE IF i modulo 100 = 99: #syarat batas paling bawah
+                phi(i,j) = phi(i-1, j)
+            ELSE IF j = 0: #syarat batas paling kiri
+                CONTINUE
+            ELSE IF j = 99: #syarat batas paling kanan
+                CONTINUE
+            ELSE: #selain di syarat batas (interiornya)
+                hitung crj
+                hitung phi baru menggunakan rho dari file yang ada
+                lanjutkan dengan SOR
+
+    IF iterasi kelipatan 100:
+        hitung L2 antara 2 iterasi
+
+        IF L2 < nilai toleransi
+            perhitungan konvergen atau converged = True
+            BREAK
+
+    IF tidak konvergen:
+        tampilkan teks: "Gauss seidel standar gagal konvergen, L2=", masukkan nilai L2
+
+    #penulisan hasil phi pada file csv
+    FOR i < jumlah baris keseluruhan data:
+        i ditambah 1
+        FOR j < jumlah kolom:
+            j ditambah 1
+            IF j pada indeks kolom terakhir:
+                tulis phi(i,j) diikuti pindah baris
+            ELSE
+                tulis phi(i,j) diikuti tanda koma (,)
+\end{lstlisting}
+
+Variabel-variabel yang didefinisikan di awal merupakan variabel yang akan digunakan pada perhitungan interior domain, yang detail perhitungannya dapat dilihat pada kode sumber. Untuk syarat batas pada atas, kiri, dan kanan, diimplementasikan syarat batas Dirichlet nol, sedangkan pada batas paling bawah diterapkan syarat batas Neumann. Pada perhitungan Gauss-Seidel di interior menggunakan implementasi penyelesaian persamaan Poisson menggunakanm metode Gauss-Seidel seperti pada Subbagian \ref{gauss_seidel_silinder} dan parameter SOR 1,4 untuk mempercepat konvergensi seperti pada \cite{lubos_brieda_2019}.
+
+Setiap 100 iterasi, dihitung nilai metrik L2 untuk menentukan nilai ralatnya. Nilai L2 ini merupakan nilai rerata ralat dari seluruh piksel iterasi tersebut dengan iterasi sebelumnya. Apabila nilai setelah iterasi ke-100 nilai L2 sudah di bawah nilai toleransi, maka iterasi pada medan tersebut dihentikan. Namun apabila belum,iterasi dilanjutkan pada iterasi kelipatan 100 lainnya dan diperiksa lagi apakah sudah di bawah nilai toleransi. Apabila nilai L2 pada medan tersebut belum sampai di bawah nilai toleransi sampai pada jumlah iterasi maksimal, maka iterasi pada medan tersebut dianggap gagal dan program akan mengeluarkan pesan galat "Gauss seidel standar gagal konvergen, L2=" diikuti dengan nilai L2 terakhir. 
+
+Untuk memanggil fungsi-fungsi yang ada pada program Lampiran \ref{kode_potential_cpp}, digunakan program lain, yaitu program pada Lampiran \ref{kode_main_cpp}. Dalam Lampiran \ref{kode_main_cpp} ditampilkan contoh kasus saat program menghitung 2.000 data. Variabel \texttt{nz} adalah jumlah baris keseluruhan data, sehingga nilainya $2.000 \times 100 = 200.000$, dan variabel \texttt{nr} adalah jumlah kolom domain, yaitu 100.
+
+Variabel \texttt{totalData} merupakan jumlah seluruh piksel yang dilibatkan dalam perhitungan ini. File \textit{comma separated value} (CSV) dari data distribusi yang digunakan dipanggil pada variabel \texttt{rho} yang kemudian diubah bentuknya menjadi $nz \times nr$. Untuk parameter domain SPT-100 (Tabel \ref{spt_100}) didefinisikan pada pemanggilan fungsi \texttt{setextents}. Jumlah iterasi maksimal yang digunakan pada perhitungan ini sebesar 100.000 dan nilai toleransi yang diizinkan adalah 0,01. Kedua parameter tersebut didefinisikan pada fungsi \texttt{setParam}. Tidak ada referensi baku mengenai nilai maksimal iterasi dan nilai ralat yang digunakan. Pada \cite{lubos_brieda_2019}, untuk ukuran domain $21 \times 21 \times 21$ sebanyak 1 data, digunakan nilai iterasi maksimal 5000 dan nilai toleransi 0. Berdasarkan acuan ini, dicoba nilai iterasi maksimal dan nilai toleransi ralat yang wajar, dapat diandalkan, serta realtif cepat untuk domain 100 $\times$ 100 dengan 2.000 data (digunakan jumlah 2.000 data dalam sekali perhitungan untuk mencegah agar jangan sampai terjadi kerusakan pada perangkat keras karena durasi \textit{runtime} yang terlalu lama dan penggunaan memori yang terlalu besar), maka digunakan jumlah iterasi maksimal sebanyak 100.000 dan toleransi ralat sebesar 0,01.
+
+Selain data latih, untuk melatih model yang ada, dibutuhkan data validasi (\emph{validation data}) untuk melihat peforma dari model tanpa bias dari data latih \citep{jason_brownlee_2017}. Dalam penelitian ini, data validasi diambil sebanyak 25\% dari total data latih.
+
+\subsection{Pengambilan Data Uji}
+Setelah model didapatkan untuk dilatih, kemudian model diuji dengan data lain yang tidak pernah dilihat sebelumnya oleh model. Data tersebut sebagian merupakan kumpulan data dengan distribusi acak dan sebagian merupakan data dengan distribusi partikel mengikuti aturan Gaussian (Persamaan \eqref{gaussian}):
+
+\begin{equation}\label{gaussian}
+    f(x,y) = A \enspace exp \left(-\left(\frac{(x-x_0)^2}{2 \sigma^2_X} + \frac{(y-y_0)^2}{2 \sigma^2_Y}\right)\right)
+\end{equation}
+
+Dengan $A$ adalah amplitudo, $x_0$ dan $y_0$ merupakan koordinat titik pusat, dan $\sigma_x$, $\sigma_y$ merupakan standar deviasi pada sumbu $x$ dan $y$.
+
+\subsection{Pemrosesan data}
+Salah satu keuntungan terbesar penggunaan jaringan saraf buatan adalah, tidak perlu dilakukan \emph{feature engineering}. Lapisan tersembunyi (\emph{hidden layer}) yang akan mempelajar fitur-fitur dari data yang diberikan \citep{denny2015}. Sehingga tidak diperlukan pemrosesan data yang membutuhkan usaha besar.
+
+Pemrosesan data yang dilakukan adalah pengubahan dimensi bentuk dan normalisasi. Perubahan bentuk dalam hal ini adalah pengubahan data-data menjadi masing-masing bentuk matriks persegi dalam satu kolom. Kemudian dilakukan normalisasi untuk mentransformasi fitur menjadi skala yang mirip, sehingga meningkatkan peforma dan stabilitas pelatihan model \citep{google_2022}. Normalisasi yang dilakukan adalah penskalaan (\emph{scaling}). Penskalaan berarti mengubah nilai titik data dari rentang aslinya ke rentang standar (biasanya 0 sampai 1 atau -1 sampai 1).
+
+\subsection{Pendefinisian arsitektur}
+
+Pendefinisian arsitektur dilakukan sesuai dengan bentuk data yang masuk dan bentuk data luaran yang dikehendaki. Penambahan regulator, \emph{pooling layer}, dan \emph{padding} juga dilakukan di sini. Tidak ada patokan yang baku mengenai bentuk arsitektur dan \emph{hyperparameter} yang akan digunakan. Penentuannya akan dilakukan dengan metode \emph{trial and error}.
+
+\subsection{Pelatihan model}
+Model atau arsitektur yang sudah ada kemudian dilatih atau di-\emph{fitting} dengan data latih yang disediakan dan divalidasi dengan data validasi yang terpisah dari data latih. Pada proses pelatihan ini menggunakan fungsi ralat MSE \ref{mse}, dengan \emph{batch size} 32, 200 \emph{epoch}. Kemudian dengan menggunakan pengoptimasi ADAM \citep{kingma2017adam} dengan laju pemelajaran awal (\emph{inital learning rate}) = 0.001 dan diterapkan penjadwalan laju pemelajaran dengan langkah peluruhan (\emph{decay steps}) = 10000 dan laju peluruhan (\emph{decay rate}) = 0.9.
+
+Sembari dilatih, semua model dari tiap \emph{epoch} disimpan dalam bentuk file h5 dan kemudian dipilih model yang paling baik dengan cara melihat kurva pemelajaran yang muncul setelah model terlatih seutuhnya. Kriteria model yang paling baik adalah model dengan \emph{validation loss} paling rendah dan berada di bawah atau sama atau hampir sama dari \emph{training validatrion} (\emph{goodfit}).
+
+\subsection{Evaluasi dan pengujian}
+Masuk ke tahap evaluasi dan pengujian, pertama akan dimuat data uji yang sudah dibuat sebelumnya. Kemudian, muat model \emph{epoch} ke-100, \emph{epoch} ke-200, dan \emph{epoch} dengan model paling baik. Kemudian lakukan prediksi dengan data distribusi $\rho_{uji}$ untuk tiap model.
+
+Selanjutnya, akan dibandingkan $\phi_{pred}$ yang merupakan hasil prediksi model dan $\phi_{uji}$. Sebelum dilakukan pembandingan, data $\phi_{uji}$ dilakukan normalisasi terlebih dahulu. Uji yang pertama adalah uji visual pada matriks yang diuji. Di sini akan dilihat secara visual seberapa mirip antara $\phi_{uji}$ dan $\phi_{pred}$.
+
+Selanjutnya akan dipilih beberapa piksel secara acak untuk diketahui nilainya, baik pada $\phi_{uji}$ maupun $\phi_{pred}$. Data piksel tersebut kemudian dibandingkan dengan cara dihitung MSE dan MAPE-nya.
+
+Uji selanjutnya adalah pengujian menggunakan MAPE. Akan dipilih nilai-nilai yang jauh dari nol. Kemudian dihitung MAPE dari nilai tersebut. Dari pengujian tersebut ditentukan nilai MAPE tertinggi, MAPE terendah, dan rata-rata dari keseluruhan MAPE.
+
+% \subsection{Rencana Kegiatan Penelitian}
+% % Please add the following required packages to your document preamble:
+% % \usepackage{lscape}
+% % \usepackage{longtable}
+% % Note: It may be necessary to compile the document several times to get a multi-page table to line up properly
+% \begin{landscape}
+% \begin{longtable}[c]{|l|l|l|l|l|l|l|l|l|l|l|l|}
+% \caption{Tabel Rencana Kegiatan Desember 2022 -- September 2023}
+% \label{des_sep}\\
+% \hline
+% No. & Kegiatan                    & Desember   & Januari    & Februari   & Maret      & April      & Mei        & Juni       & Juli       & Agustus    & September \\ \hline
+% \endfirsthead
+% %
+% \multicolumn{12}{c}%
+% {{\bfseries Table \thetable\ continued from previous page}} \\
+% \hline
+% No. & Kegiatan                    & Desember   & Januari    & Februari   & Maret      & April      & Mei        & Juni       & Juli       & Agustus    & September \\ \hline
+% \endhead
+% %
+% 1 &
+%   \begin{tabular}[c]{@{}l@{}}Pembelajaran \\ machine learning\end{tabular} &
+%   \checkmark &
+%   \checkmark &
+%   \checkmark &
+%   \checkmark &
+%   \checkmark &
+%   \checkmark &
+%    &
+%    &
+%    &
+%    \\ \hline
+% 2   & Pemantapan isu              & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark &            &            &            &           \\ \hline
+% 3 &
+%   \begin{tabular}[c]{@{}l@{}}Prototyping menggunakan \\ dimensi yang lebih rendah\end{tabular} &
+%   \checkmark &
+%   \checkmark &
+%   \checkmark &
+%   \checkmark &
+%   \checkmark &
+%   \checkmark &
+%    &
+%    &
+%    &
+%    \\ \hline
+% 4   & Penulisan proposal          &            &            &            &            &            & \checkmark &            &            &            &           \\ \hline
+% 5   & Pengambilan data            &            &            &            &            &            & \checkmark & \checkmark & \checkmark & \checkmark &           \\ \hline
+% 6   & Prototyping arsitektur UNet &            &            &            &            &            &            &            &            & \checkmark &           \\ \hline
+% 7   & Penelitian  arsitektur      &            &            &            &            &            &            &            &            & \checkmark &           \\ \hline
+% 8 &
+%   \begin{tabular}[c]{@{}l@{}}Penulisan hasil dan\\ pembahasan\end{tabular} &
+%    &
+%    &
+%    &
+%    &
+%    &
+%    &
+%    &
+%    &
+%   \checkmark &
+%   \checkmark \\ \hline
+% \end{longtable}
+% \end{landscape}

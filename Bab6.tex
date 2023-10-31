@@ -1,0 +1,13 @@
+\chapter{KESIMPULAN DAN SARAN}
+\section{Kesimpulan}
+Dari penelitian ini, dapat disimpulkan
+\begin{enumerate}
+    \item Algoritma CNN yang digunakan dalam pemecahan permasalahan regresi pada persamaan diferensial parsial diimplementasikan dalam bentuk arsitektur U-Net yang dihilangkan bagian \textit{crop and copy}-nya dengan menggunakan data latih yang sudah dinormalisir pada rentang tertentu, menggunakan MSE sebagai \textit{loss function}, dan \textit{exponential decay learning rate schedule} untuk laju pemelajaran pada pengoptimasi ADAM. Untuk hasil akurat untuk jenis distribusi yang berbeda, hendaknya melatih model dengan data yang berbeda atau membangun model lain dengan data latih yang spesifik.
+    \item Hasil yang didapat dari perhitungan menggunakan dua model sama-sama dapat memberikan gambaran visual umum dan ralat yang dihasilkan relatif kecil dan dapat diterima. Meski begitu, hasil yang didapat belum dapat menggantikan perhitungan menggunakan metode numerik, namun dapat digunakan sebagai tebakan awal metode numerik iteratif seperti Gauss-Seidel.
+\end{enumerate}
+
+\section{Saran}
+\begin{enumerate}
+    \item Dilakukan \textit{data cleaning} sebelum menggunakan data latih dan data uji
+    \item Membuka kemungkinan pada jenis/bentuk arsitektur lain, khususnya pemanfaatan \textit{transfer learning} dalam pembentukan arsitektur.
+\end{enumerate}

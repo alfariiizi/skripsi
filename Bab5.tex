@@ -1,0 +1,344 @@
+\chapter{HASIL DAN PEMBAHASAN}
+
+\section{Hasil dari Metode Gauss-Seidel}
+Untuk menghitung seluruh data menggunakan program ini, dilakukan pembagian kloter yang setiap kloternya menghitung 2000--2200 data. Hal ini dilakukan untuk menghindari perhitungan yang terlalu lama, penggunaan memori yang terlalu besar, dan juga untuk mengantisipasi kesalahan yang besar. Untuk 20200, data dibagi menjadi 10 kloter perhitungan. Pada Gambar \ref{grafik_durasi} disajikan data dari 5 perhitungan waktu program. Dari data tersebut dapat kita simpulkan bahwa rata-rata waktu perhitungan untuk 2000--2200 data adalah 6712 detik atau 1,8 jam. Sehingga, untuk menghasilkan perhitungan $\phi$ untuk satu medan adalah sebesar 3,356 detik.
+
+Dalam perhitungan dengan jumlah yang besar atau simulasi kontinyu, misalnya, waktu perhitungan merupakan sesuatu yang sangat berpengaruh. Waktu 3,356 detik untuk sekitar 2000 medan akan memakan waktu yang relatif lama. Metode iteratif Gauss-Seidel memang membutuhkan waktu konvergen yang lama, namun dibandingkan dengan metode iteratif lainnya seperti Jacobi, metode Gauss-Seidel memiliki keakuratan yang relatif lebih tinggi \citep{Ford2015}. Metode Gauss-Seidel juga merupakan metode yang memberikan perkenalan mengenai konsep penggunaan iterasi untuk penyelesaian sistem (linear, dan sebagainya) dan basis untuk metode yang lebih canggih\defcitealias{Ford2015}{ibid} \citepalias{Ford2015}. Hal ini sangat baik untuk pembelajaran mahasiswa sarjana karena mudah diphami dan mudah untuk diimplementasikan.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/grafik_durasi.png}
+    \caption{Grafik durasi perhitungan Gauss-Seidel terhadap jumlah data}
+    \label{grafik_durasi}
+\end{figure}
+
+Perhitungan tersebut menghasilkan kumpulan data $\phi$ sejumlah banyaknya data $\rho$ yang memiliki rentang nilai data dari 1814160 sampai -1794090. Apabila dibandingkan dengan nilai toleransi sebesar 0,01, nilai ekstrim dari $\phi$ yang dihasilkan oleh \textit{solver} ini  relatif sangat besar, sehingga ralat yang terjadi sangat dapat diterima. Dari histogram pada Gambar \ref{hist_rata2phi} dapat kita ketahui bahwa nilai rata-rata dari $\phi$ tersebar pada rentang yang sangat besar dan relatif jauh dari nilai toleransi 0,01. Data ini tetap dapat menjustifikasi bahwa nilai toleransi ralat 0,01 merupakan nilai yang relatif sangat kecil bagi hasil $\phi$. Pesebaran nilai ekstrim dari seluruh medan terdapat pada Gambar \ref{phi_gs_rendah_tinggi}.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/phi_gs_rendah_tinggi.png}
+    \caption{Kiri: Histogram nilai tertinggi pada 20200 data $\phi$. Kanan: Histogram nilai tertinggi pada 20200 data $\phi$.}
+    \label{phi_gs_rendah_tinggi}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/hist_rata2phi.png}
+    \caption{Histogram nilai rata-rata phi dari seluruh medan.}
+    \label{hist_rata2phi}
+\end{figure}
+
+\cite{cheng_illarramendi_bauerheim_cuenot_2021} menjelaskan bahwa dua puncak Gaussian yang terlihat pada medan distribusi muatan akan tersebar dan menyatu pada medan potensial yang dihasilkan. Hal ini disebutkan oleh mereka karena filter \textit{low-pass} oleh operator Laplacian terbalik. Hal yang sama dapat dilihat pada potensial yang dihasilkan dalam perhitungan ini pada Gambar \ref{rho_phi_GS}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/rho_phi_GS.png}
+    \caption{Contoh 3 pasang medan $\rho$ dan $\phi$ hasil perhitungan Gauss-Seidel}
+    \label{rho_phi_GS}
+\end{figure}
+
+Selanjutnya, data $\phi$ yang sudah terbentuk dilakukan normalisasi untuk mendapatkan skala yang sama pada tiap medan agar jaringan saraf (\textit{neural network}) dapat belajar dengan baik \citep{cheng_illarramendi_bauerheim_cuenot_2021}. Teknik penskalaan yang digunakan adalah dengan membagi keseluruhan 20200 data dengan nilai ekstrim mutlak dari keseluruhan data, dalam hal ini adalah 1814160. Setelah dilakukan normalisir, tidak terjadi perubahan distribusi pada $\phi$, hanya nilainya saja yang berubah dengan rasio 1/1814160 (Gambar \ref{rho_phi_GS_1814160}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/rho_phi_GS_1814160.png}
+    \caption{Gambar ke-3 dari Gambar \ref{rho_phi_GS} yang sudah dinormalisir dengan cara dibagi dengan 1814160.}
+    \label{rho_phi_GS_1814160}
+\end{figure}
+
+\section{Pelatihan Jaringan Saraf \textit{Neural Network}}
+
+\subsection{Arsitektur U-Net}
+Arsitektur yang digunakan pada penelitian ini adalah U-Net (Subbagian \ref{sub_unet}) yang terlampir pada Lampiran \ref{unies_og}. Penggambaran grafis mengenai arsitektur yang digunakan digambarkan pada Gambar \ref{arsitektur_unies}.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=14cm]{gambar/unies_og.png}
+    \caption{Grafik arsitektur yang digunakan. Angka di atas filter adalah jumlah filter yang digunakan, dan angka di bawah filter merupakan ukuran filter yang digunakan.}
+    \label{arsitektur_unies}
+\end{figure}
+
+Ukuran filter atau medan penerimaan (\textit{receptive field}) serta jumlah filter yang digunakan adalah bagian dari penelitian yang mencoba-coba hingga didapatkan hasil terbaik sesuai yang diharapkan. Untuk bentuk arsitektur, tidak seperti U-Net yang awalnya dicetuskan oleh \cite{DBLP:journals/corr/RonnebergerFB15}, ada modifikasi pada bagian \textit{crop and copy} yang berfungsi untuk membuang dan menyalin bagian tepi dari medan \citep{siddique_paheding_elkin_devabhaktuni_2021}. Hal ini sesuai dengan percobaan yang dilakukan \cite{alom2018recurrent} yang memodifikasi U-Net menjadi \textit{Recurrent U-Net} (RU-Net) yang menghasilkan arsitektur yang lebih mutakhir dan memiliki peforma yang lebih baik.
+
+\subsection{Pelatihan}
+
+Pelatihan dilakukan menggunakan Google Colab Pro dengan menggunakan GPU T4. Untuk melatih 1.698.177 parameter dengan 200 \textit{epoch}, dibutuhkan waktu 2 jam 30 menit (45 detik per \textit{epoch}). Untuk mengevaluasi model, dibutuhkan sampel data validasi yang dapat digunakan untuk memberikan evaluasi kesesuaian model yang tidak bias pada set data pelatihan sambil menyetel \textit{hyperparameter} model \citep{elgendy_2020}. Set data validasi yang digunakan pada pelatihan ini menggunakan 25\% dari total set data latih (5050 data).
+
+Dalam rangka mengupayakan agar model jaringan saraf atau algoritma pembelajaran dapat berkembang atau lebih cepat beradaptasi pada bobot model terhadap set data latih, maka dilakukan konfigurasi laju pemelajaran (\textit{learning rate}). Laju pemelajaran dapat dikatakan sebagai jumlah perubahan pada model selama setiap langkah proses pencarian solusi (titik optimal global), atau bisa disebut juga sebagai ukuran langkah \citep{brownlee_2019a}. 
+
+Dalam pelatihan jaringan saraf, dapat dilakukan penurunan laju pemelajaran (\textit{learning rate decay}) selama proses pelatihan. Salah satu langkah yang dapat dilakukan adalah dengan jadwal laju pemelajaran (\textit{learning rate schedule}). Dalam penelitian ini, digunakan laju penurunan eksponensial (\textit{exponential learning rate decay}) (Gambar \ref{exp_lr}) yang memiliki bentuk $lr = lr_0 \times exp(-kt)$, dengan $lr_0$ dan $k$ adalah \textit{hyperparameter} dan $t$ adalah bilangan iterasi \citep{suki_lau_2017}. Laju penurunan eksponensial ini digunakan pada pengoptimasi ADAM \citep{kingma2017adam} dengan laju awal = 0,001.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/exp.png}
+    \caption{\textit{Exponential Learning Rate Decay.} \textit{Sumber: \citep{suki_lau_2017}}.}
+    \label{exp_lr}
+\end{figure}
+
+Model ini akan dilatih sebanyak 200 epoch dan model dari tiap epoch akan disimpan dalam format file \texttt{h5} agar dapat dipilih model dengan \texttt{val\_loss} (ralat dari set data validasi) terendah dan tidak ada indikasi \textit{overfitting}.
+
+\subsection{Hasil Pelatihan}
+Salah satu cara untuk mendiagnosa \textit{overfitting} dan \textit{underfitting} adalah dengan me-\textit{plot} ralat pelatihan dan ralat validasi \citep{elgendy_2020} atau yang disebut dengan kurva pelatihan (\textit{learning curve}). Kurva pelatihan untuk pelatihan model ini terdapat pada Gambar \ref{learning_curve}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/learning_curve.png}
+    \caption{Kurva pemelajaran model. Jumlah ralat pada set data pelatihan dan validasi terhadap jumlah \textit{epoch}}
+    \label{learning_curve}
+\end{figure}
+
+Secara umum, pelatihan ini menghasilkan diagnosa \textit{overfitting} karena model mempelajari set data latih terlalu baik dibandingkan set data validasi \citep{brownlee_2019a}. Hal ini terlihat dari kurva validasi yang berada di atas kurva latih, yang artinya, pada pelatihan terakhir, model menghasilkan ralat validasi yang lebih besar dari pada ralat latih. Walaupun perbedaan ralat di akhir pelatihan relatif kecil, namun munculnya indikasi \textit{overfitting} tidak bisa dinafikan.
+
+Hasil pelatihan ini tetap dapat digunakan dengan cara mencari model terbaik dari \textit{epochs} pelatihan. Salah satu indikasi model tersebut \textit{goodfit} adalah antara kurva validasi dan pelatihan tidak ada jarak (berhimpit) atau kurva validasi berada di bawah kurva latih. Berdasarkan hasil pengamatan, model terbaik adalah model dari \textit{epoch} ke-57 dengan ralat latih : 2.1185e-04 dan ralat validasi: 2.1775e-04.
+
+\section{Hasil Prediksi Jaringan Saraf}
+Prediksi dilakukan menggunakan dua model. Yaitu model dari \textit{epoch} ke-57 dan model dari \textit{epoch} ke-200. Kedua model akan memprediksi dua set data, yaitu set data acak sebanyak 100 data dan set data Gaussian (Persamaan \eqref{gaussian}) sebanyak 18 data.
+
+Setelah melakukan prediksi, hasil prediksi yang sudah dinormalisasi dengan nilai tertinggi dari set data latih (1814160), akan akan diperiksa \textit{mean squared error} (MSE) dan \textit{mean absolute error} (MAE) dari keseluruhan set data dan beberapa medan yang dipilih secara acak dari masing-masing set data uji.
+
+Selain MSE dan MAE, akan diperiksa pula MAPE (Persamaan \eqref{mape}) dari $>1000$ piksel yang nilainya lebih dari 0,1 yang dipilih secara acak. Pemilihan jumlah sampel sebanyak 1000 adalah sesuai dengan rekomendasi dari \cite{israel1992determining} untuk jumlah populasi data 100 $\times$ 100 = 10.000, dibutuhkan setidaknya 1.000 data untuk mendapatkan \textit{margin of error} $\pm 3\%$. Dan untuk pengambilan data di atas 0,1, hal ini karena menurut \cite{DEMYTTENAERE201638}, MAPE lebih cocok untuk mengukur ralat dengan nilai yang jauh dari nol. Salah satu penyebabnya adalah adanya pembagian dengan nilai sebenarnya, yang apabila nilai tersebut nol atau sangat kecil, ralat yang dihasilkan bisa sangat besar, atau intinya, MAPE sangat sensitif terhadap nilai nol atau yang sangat kecil.
+
+\subsection{Hasil Prediksi data Acak 100 Data}
+Dengan menggunakan \textit{solver} Gauss-Seidel C++, waktu yang dibutuhkan untuk menghitung potensial listrik dari 100 data dengan distribusi acak adalah sebesar 325 detik.
+
+\subsubsection{Hasil Prediksi Dengan Model dari \textit{Epoch} ke-200}
+Akan ditinjau terlebih dahulu hasil prediksi menggunakan model dari \textit{epoch} ke-200. Hasil umum dari prediksi 100 data acak dapat dilihat pada Tabel \ref{200acak}.
+
+\begin{table}[h!]
+\centering
+\caption{Hasil keseluruhan prediksi dengan model epoch ke-200 untuk 100 data acak.}
+\label{200acak}
+\begin{tabular}{ll}
+\hline
+\textbf{Metrik}        & \textbf{Nilai}         \\ \hline
+Waktu prediksi (detik) & 3                      \\ \hline
+MSE                    & 0.00023130870479720733 \\ \hline
+MAE                    & 0.0105920327822764     \\ \hline
+\end{tabular}
+\end{table}
+
+Kemudian disajikan hasil visual dari 3 medan yang dipilih secara acak beserta dengan rerata ralatnya
+\begin{enumerate}
+    \item Data ke-0
+    
+    mean absolute error medan =  0.011185391142800172\\
+    mean squared error medan = 0.0002198482412056808\\
+    mape sampling =  6.652328247576015
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/0_200_acak.png}
+    \caption{Hasil visual prediksi dengan model dari epoch ke-200 untuk set data acak, indeks ke-0}
+    \label{0_200_acak}
+    \end{figure}
+
+    \item Data ke-40
+
+    mean absolute error medan =  0.013264649605893237\\
+    mean squared error medan =  0.00027769889839297595\\
+    mape sampling =  -7.139269391922416
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/40_200_acak.png}
+    \caption{Hasil visual prediksi dengan model dari epoch ke-200 untuk set data acak, indeks ke-40}
+    \label{40_200_acak}
+    \end{figure}
+
+    \item Data ke-42
+    mean absolute error medan =  0.009555791057188687\\
+    mean squared error medan = 0.0001709383632965548\\
+    mape sampling =  15.947304897803454
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/42_200_acak.png}
+    \caption{Hasil visual prediksi dengan model dari epoch ke-200 untuk set data acak, indeks ke-42}
+    \label{42_200_acak}
+    \end{figure}
+    
+\end{enumerate}
+
+\subsubsection{Hasil Prediksi Dengan Model dari \textit{Epoch} ke-57}
+Akan ditinjau terlebih dahulu hasil prediksi menggunakan model dari \textit{epoch} ke-57. Hasil umum dari prediksi 100 data acak dapat dilihat pada Tabel \ref{57acak}.
+
+\begin{table}[h!]
+\centering
+\caption{Hasil keseluruhan prediksi dengan model epoch ke-57 untuk 100 data acak.}
+\label{57acak}
+\begin{tabular}{ll}
+\hline
+\textbf{Metrik}        & \textbf{Nilai}         \\ \hline
+Waktu prediksi (detik) & 2                      \\ \hline
+MSE                    & 0.0002451981196005638 \\ \hline
+MAE                    & 0.011251571534445289     \\ \hline
+\end{tabular}
+\end{table}
+
+Kemudian disajikan hasil visual dari 3 medan yang dipilih secara acak beserta dengan rerata ralatnya
+\begin{enumerate}
+    \item Data ke-0
+    
+    mean absolute error medan =  0.013908464504802816\\
+    mean squared error medan =  0.000344087854795096\\
+    mape sampling =  -8.33244489614455
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/0_57_acak.png}
+    \caption{Hasil visual prediksi dengan model dari epoch ke-57 untuk set data acak, indeks ke-0}
+    \label{0_57_acak}
+    \end{figure}
+
+    \item Data ke-40
+
+    mean absolute error medan =  0.014362610343673214\\
+    mean squared error medan =  0.00030545219599322355\\
+    mape sampling =  -7.8525725979344605
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/40_57_acak.png}
+    \caption{Hasil visual prediksi dengan model dari epoch ke-57 untuk set data acak, indeks ke-40}
+    \label{40_57_acak}
+    \end{figure}
+
+    \item Data ke-42
+    mean absolute error medan =  0.01258524854440124\\
+    mean squared error medan =  0.0002786093680182126\\
+    mape sampling =  21.275292145676676
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/42_57_acak.png}
+    \caption{Hasil visual prediksi dengan model dari epoch ke-57 untuk set data acak, indeks ke-42}
+    \label{42_57_acak}
+    \end{figure}
+    
+\end{enumerate}
+
+\subsection{Hasil Prediksi data Gaussian 18 Data}
+Dengan menggunakan \textit{solver} Gauss-Seidel C++, waktu yang dibutuhkan untuk menghitung potensial listrik dari 18 data dengan distribusi Gaussian adalah sebesar 45 detik.
+
+\subsubsection{Hasil Prediksi Dengan Model dari \textit{Epoch} ke-200}
+Akan ditinjau terlebih dahulu hasil prediksi menggunakan model dari \textit{epoch} ke-200. Hasil umum dari prediksi 18 data Gaussian dapat dilihat pada Tabel \ref{200acak}.
+
+\begin{table}[h!]
+\centering
+\caption{Hasil keseluruhan prediksi dengan model epoch ke-200 untuk 18 data Gaussian.}
+\label{200gaussian}
+\begin{tabular}{ll}
+\hline
+\textbf{Metrik}        & \textbf{Nilai}         \\ \hline
+Waktu prediksi (detik) & 0                      \\ \hline
+MSE                    & 0.0004893961671139401 \\ \hline
+MAE                    & 0.014389271830866605  \\ \hline
+\end{tabular}
+\end{table}
+
+Kemudian disajikan hasil visual dari 3 medan yang dipilih secara acak beserta dengan rerata ralatnya
+\begin{enumerate}
+    \item Data ke-6
+    mean absolute error medan = 0.009043942980161843\\
+    mean squared error medan = 0.00017162983257671422\\
+    mape sampling = 4.7754985462483495
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/6_200_gaussian.png}
+    \caption{Hasil visual prediksi dengan model dari epoch ke-200 untuk set data Gaussian, indeks ke-6}
+    \label{6_200_Gaussian}
+    \end{figure}
+
+    \item Data ke-10
+    mean absolute error medan = 0.021639103274408242\\
+    mean squared error medan = 0.0007739544987668907\\
+    mape sampling = 15.772617188907128
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/10_200_gaussian.png}
+    \caption{Hasil visual prediksi dengan model dari epoch ke-200 untuk set data Gaussian, indeks ke-10}
+    \label{10_200_Gaussian}
+    \end{figure}
+
+    \item Data ke-4
+    mean absolute error medan =  0.025968039199870924\\
+    mean squared error medan = 0.0011480142622138615\\
+    mape sampling =  29.026637482792307
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/4_200_gaussian.png}
+    \caption{Hasil visual prediksi dengan model dari epoch ke-200 untuk set data Gaussian, indeks ke-4}
+    \label{4_200_gaussian}
+    \end{figure}
+    
+\end{enumerate}
+
+\subsubsection{Hasil Prediksi Dengan Model dari \textit{Epoch} ke-57}
+Akan ditinjau terlebih dahulu hasil prediksi menggunakan model dari \textit{epoch} ke-57. Hasil umum dari prediksi 18 data Gaussian dapat dilihat pada Tabel \ref{57gaussian}.
+
+\begin{table}[h!]
+\centering
+\caption{Hasil keseluruhan prediksi dengan model epoch ke-57 untuk 18 data Gaussian.}
+\label{57gaussian}
+\begin{tabular}{ll}
+\hline
+\textbf{Metrik}        & \textbf{Nilai}         \\ \hline
+Waktu prediksi (detik) & 0                      \\ \hline
+MSE                    & 0.0004993306540695422 \\ \hline
+MAE                    & 0.014593957448582126     \\ \hline
+\end{tabular}
+\end{table}
+
+Kemudian disajikan hasil visual dari 3 medan yang dipilih secara acak beserta dengan rerata ralatnya
+\begin{enumerate}
+    \item Data ke-6
+    
+    mean absolute error medan =  0.011164339060049471\\
+    mean squared error medan =  0.0003275269746363096\\
+    mape sampling =  4.860758654485836
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/6_57_gaussian.png}
+    \caption{Hasil visual prediksi dengan model dari epoch ke-57 untuk set data Gaussian, indeks ke-6}
+    \label{0_57_acak}
+    \end{figure}
+
+    \item Data ke-10
+    mean absolute error medan = 0.020210462134109868\\
+    mean squared error medan = 0.0006902836080606566\\
+    mape sampling =  17.241594270499036
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/10_57_gaussian.png}
+    \caption{Hasil visual prediksi dengan model dari epoch ke-57 untuk set data Gaussian, indeks ke-10}
+    \label{10_57_acak}
+    \end{figure}
+
+    \item Data ke-4
+    mean absolute error medan =  0.02386963821168969\\
+    mean squared error medan =  0.0010337360801227914\\
+    mape sampling =  25.63144233512775
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/4_57_gaussian.png}
+    \caption{Hasil visual prediksi dengan model dari epoch ke-57 untuk set data Gaussian, indeks ke-4}
+    \label{4_57_Gaussian}
+    \end{figure}
+    
+\end{enumerate}
+
+\section{Pembahasan Secara Umum}
+
+Dari pengamatan visual, dapat diklaim bahwa model yang telah dilatih dapat memberikan gambaran umum yang sesuai dengan visual \textit{ground truth} yang didapat dari metode Gauss-Seidel, terutama pada set data dari data acak. Hal ini sangat masuk akal, mengingat model ini dilatih menggunakan set data latih acak. Untuk kemampuan model memprediksi data distribusi lain, perlu adanya penambahan jenis distribusi lain ke set data latih atau membangun model lain dengan set data latih yang spesifik.
+
+Untuk waktu perhitungan, misalnya waktu perhitungan yang paling tinggi, menggunakan model dari \textit{epoch} ke-200 untuk 100 data distribusi acak memakan waktu 3 detik yang berarti sama dengan perhitungan untuk 1 medan menggunakan \textit{solver} Gauss-Seidel yang digunakan untuk membuat set data latih. Secara keseluruhan, model ini 162,5 $\times$ lebih cepat dalam hal waktu perhitungan.
+
+Dari segi ralat, rerata ralat mutlak dan rerata ralat absolut sudah relatif kecil. Dari visual ralatpun sudah terlihat mayoritas berkonsentrasi rendah, dan hanya meninggi pada distribusi di syarat batas Neumann, misalnya Gambar \ref{0_57_acak}. Untuk MAPE, meski dapat diperdebatkan relativitas besar kecilnya, penulis memiliki pandangan bahwa model dapat menghasilkan MAPE yang relatif kecil. Hal ini karena, pertama, MAPE memang ralat yag tepat digunakan untuk model regresi. Namun, MAPE memang memiliki beberapa kelemahan, beberapa diantaranya adalah MAPE bergantung pada situasi, derajat variabilitas data, rentang nilai sebenarnya, serta \textit{outliers}. Data uji dan data latih yang digunakan masih memiliki beberapa kelemahan, salah satunya adalah bilangan pernormalisir yang jumlahnya tidak mewakili jumlah data yang memiliki nilai tertinggi di sekitar nilai penormalisir. Sehingga sangat memungkinkan ada pergeseran distribusi. Akan lebih memungkinkan apabila ada upaya \textit{data cleaning} seperti misalnya membuang beberapa \textit{tail} data yang nilai ekstrimnya berada jauh dari pusat distribusi sehingga bilangan penormalisirnya bisa lebih mewakili keseluruhan data. Hal tersebut tidak dilakukan karena penulis melihat pada upaya pertama, hasil yang diperoleh sudah cukup bagus dari metrik ralat yang lain dan dari pengamatan visual.
+
+Masih mengenai kelemahan MAPE, MAPE memiliki bias pada hasil prediksi yang berada di bawah nilai \textit{ground truth} \citep{roberts_2023b}. Namun meski begitu, MAPE memberikan gambaran proporsi mengenai ralat dari prediksi terhadap nilai sebenarnya. Sehingga masih relevan untuk digunakan untuk mengukur kemampuan model yang dibangun. Hanya saja memang harus ada upaya untuk memilih data yang akan dijadikan komponen pengukuran, seperti upaya sampling $>1000$ data pada medan yang diukur. 
+
+Beberapa medan hasil yang tidak ditampilkan di sini, ada beberapa medan yang memiliki nilai MAPE dari hasil sampling sebesar kira-kira 3--5\%. Memang hal ini tidak dapat sepenuhnya mengatakan bahwa model ini dapat digunakan sebagai pengganti metode numerik yang sudah mapan, namun dapat mengatakan bahwa model yang dibangun dan dilatih ini dapat mendekati hasil aslinya. Sebagai perbandingan, \cite{Ozbay2021} dapat membangun model untuk 2D dan 3D pada koordinat kartesian yang menghasilkan MAPE di bawah 3\%.
+
+Pada penelitian ini, disajikan 2 model. Berdasarkan pengamatan MSE dari 10 medan yang dihitung menggunakan masing-masing model (Gambar \ref{mse2model}, menunjukkan bahwa kedua model dapat menghasilkan dapat unggul dengan jumlah yang berimbang, artinya, model 57 unggul di 5 kali percobaan, dan model 200 unggul di 5 percobaan juga. Hal ini dapat menggiring pada kesimpulan bahwa meski model 200 memiliki indikasi \textit{overfitting}, namun karena ralat latihnya relatif lebih kecil, model 200 tetap dapat diandalkan. 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=12cm]{gambar/mse dari dua model.png}
+    \caption{MSE dari dua model dari 10 medan yang dihitung}
+    \label{mse2model}
+\end{figure}
+
+Akhirnya, dari hasil yang didapat, tetap harus dicatat bahwa metode yang diajukan tidak dapat dipandang sebagai pengganti metode numerik klasik dalam pemecahan permasalahan PDE. Metode tersebut sudah sangat matang dan mapan setelah penggunaan oleh berbagai teknisi dan ilmuwan selama lebih dari 50 tahun dan telah teruji berbagai standar ketahanan dan efisiensi komputasi yang disyaratkan \citep{DBLP:journals/corr/abs-1711-10561}.
+
+Penulis pribadi berpendapat bahwa hasil dari perhitungan metode CNN ini belum dapat diguankan sebagai pengganti murni perhitungan PDE. Namun sangat bisa sebagai tebakan awal dalam perhitungan iteratif seperti Gauss-Seidel yang harapannya berfungsi sebagai akselerator dalam konvergensi.

@@ -1,0 +1,254 @@
+\chapter{PROGRAM \textit{SOLVER} GAUSS-SEIDEL}
+\section{Potential.cpp}\label{kode_potential_cpp}
+\begin{lampirancppcode}
+#include "Potential.h"
+#include "Field.h"
+
+#include <cmath>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
+using namespace std;
+
+Solver::Solver(int nz, int nr)
+    : nz{nz},
+      nr{nr},
+      phi(nz, nr),
+      rho(nz, nr),
+      object_id(nz, nr)
+{
+}
+
+void Solver::setextents(double zmax, double zmin, double rmax, double rmin)
+{
+    this->x0[0] = zmin;
+    this->x0[1] = rmin;
+
+    this->xm[0] = zmax;
+    this->xm[1] = rmax;
+
+    this->dh[0] = (zmax - zmin) / 100;
+    this->dh[1] = (rmax - rmin) / 100;
+
+    this->L[0] = zmax - zmin;
+    this->L[1] = rmax - rmin;
+}
+
+void Solver::setParam(int iter, double tol)
+{
+    this->max_solver_it = iter;
+    this->tolerance = tol;
+}
+
+
+void Solver::writeSolveGS(const std::string& filename, int reshape_rows, int reshape_cols) {
+    std::ofstream out(filename);
+
+    double idz = 1 / this->dh[0];
+    double idr = 1 / this->dh[1];
+    double idz2 = idz * idz;
+    double idr2 = idr * idr;
+
+    double L2 = 0;
+    bool converged = false;
+
+    double crz = 0.5 / (idz2 + idr2);
+    for (unsigned it = 0; it < this->max_solver_it; it++)
+    {
+        for (int i = 0; i < this->nz; i++)
+        {
+            for (int j = 0; j < this->nr; j++)
+            {
+                if (i == 0 || i % reshape_rows == 0) 
+                {
+                    continue;
+                }
+                else if (i % reshape_rows == 99) 
+                {
+
+                    phi[i][j] = phi[i-1][j];
+                }
+                else if (j == 0) 
+                {
+                    continue; 
+
+                }
+                else if (j == (this->nr) - 1) 
+                {
+                    continue; 
+                }
+                else // selain di syarat batas
+                {
+                    double crj = 0.5 / ((this->x0[1] + j * this->dh[1]) * this->dh[1]);
+                    double phi_baru = crz * ((this->rho_ndArr(i, j) / Const::EPS_0) + (idz2 * (this->phi[i + 1][j] + this->phi[i - 1][j])) + (this->phi[i][j + 1] * (idr2 + crj)) + (this->phi[i][j - 1] * (idr2 - crj)));
+                    // lanjutkan dengan SOR
+                    phi[i][j] += 1.4 * (phi_baru - this->phi[i][j]);
+                }
+
+            }
+        }
+        if (it % 100 == 0)
+        {
+            double sum = 0;
+            for (int i = 1; i < reshape_rows - 1; i++)
+            {
+                for (int j = 1; j < reshape_cols - 1; j++)
+                {
+                    double crj = 0.5 / ((this->x0[1] + j * this->dh[1]) * this->dh[1]);
+                    double R = -2 * this->phi[i][j] * (idr2 + idz2) + ((this->rho_ndArr(i, j) / Const::EPS_0)
+                            + idz2 * (this->phi[i + 1][j]
+                            + this->phi[i - 1][j]) + this->phi[i][j + 1] * (idr2 + crj)
+                            + this->phi[i][j - 1] * (idr2 - crj));
+                    sum += R * R;
+                }
+            }
+            L2 = sqrt(sum / (reshape_cols * reshape_rows));
+            if (L2 < tolerance)
+            {
+                converged = true;
+                break;
+            }
+        }
+    }
+    if (!converged)
+    {
+        cerr << "Gauss seidel standar gagal konvergen, L2=" << L2 << endl;
+    }
+    for(int i=0; i<nz; i++)
+    {
+        for(int j=0; j<nr; j++)
+        {
+            if(j==this->nr-1)
+            {
+                out<<phi[i][j]<<'\n';
+            }
+            else
+            {
+                out<<phi[i][j]<<',';
+            }
+        }
+    }
+    out.close();
+}
+\end{lampirancppcode}
+
+\section{main.cpp}\label{kode_main_cpp}
+\begin{lampirancppcode}
+#include "NumCpp.hpp"
+#include "Potential.h"
+
+#include <cstdlib>
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    time_t start, end;
+    time(&start);
+    ios_base::sync_with_stdio(false);
+
+    const int nz = 200'000;
+    const int nr = 100;
+    const int batch = nz / nr;
+
+    const int totalData = 20'000'000;
+
+    assert(nr * nz == totalData);
+
+    auto rho = nc::fromfile<double>("lokasi/file_rho.csv", ',');
+
+    rho.reshape(nz, nr);
+    Solver solver(nz, nr);
+    solver.rho_ndArr = rho;
+    solver.setextents(0.025, 0.0, 0.050, 0.035);
+    solver.setParam(100'000, 0.01);
+
+    solver.writeSolveGS("phi_gaussian_pred_GS.csv", nr, nr);
+
+    time(&end);
+    double time_taken = double(end-start);
+    cout << "Time taken by program is: " << fixed << time_taken << setprecision(5);
+    cout << "sec" << endl;
+
+    return EXIT_SUCCESS;
+}
+\end{lampirancppcode}
+
+\chapter{Program Prediksi Nilai $\phi$ Menggunakan Convolutional Neural Network}
+\section{Arsitektur U-Net}\label{unies_og}
+\begin{lampiranpythoncode}
+def modified_unet_model(input_shape):
+  inputs = layers.Input(shape=input_shape)
+
+  # Encoder
+  enc1 = layers.Conv2D(64, (3, 3), activation='relu', padding='same')(inputs)
+  enc1 = layers.Conv2D(64, (3, 3), activation='relu', padding='same')(enc1)
+  enc1 = layers.MaxPooling2D((2, 2), padding='same')(enc1)
+
+  enc2 = layers.Conv2D(128, (3, 3), activation='relu', padding='same')(enc1)
+  enc2 = layers.Conv2D(128, (3, 3), activation='relu', padding='same')(enc2)
+  enc2 = layers.MaxPooling2D((2, 2), padding='same')(enc2)
+
+  # Bottleneck
+  bottleneck = layers.Conv2D(256, (3, 3), activation='relu', padding='same')(enc2)
+  bottleneck = layers.Conv2D(256, (3, 3), activation='relu', padding='same')(bottleneck)
+
+  # Decoder
+  dec1 = layers.Conv2DTranspose(128, (3, 3), activation='relu', padding='same')(bottleneck)
+  dec1 = layers.Conv2DTranspose(128, (3, 3), activation='relu', padding='same')(dec1)
+  dec1 = layers.UpSampling2D((2, 2))(dec1)
+
+  dec2 = layers.Conv2DTranspose(64, (3, 3), activation='relu', padding='same')(dec1)
+  dec2 = layers.Conv2DTranspose(64, (3, 3), activation='relu', padding='same')(dec2)
+  dec2 = layers.UpSampling2D((2, 2))(dec2)
+
+  outputs = layers.Conv2D(1, (3, 3), activation='tanh', padding='same')(dec2)
+
+  model = tf.keras.Model(inputs, outputs)
+  return model
+
+input_shape = (100,100,1)
+model = modified_unet_model(input_shape)
+model.summary()
+\end{lampiranpythoncode}
+
+\section{\textit{Compile and Fit} Model}\label{training model}
+\begin{lampiranpythoncode}
+#Callback untuk menyimpan model dari setiap epoch
+checkpoint_callback = ModelCheckpoint(
+    filepath="lokasi/penyimpanan/model.h5",  # Lokasi penyimpanan model dari tiap epoch, model disimpan dalam format h5
+    save_best_only=False,  # setel ke True apabila ingin menyimpan hanya model dengan val_loss terendah
+    save_weights_only=False,  # set ke True apabila ingin hanya menyimpan bobot dari model
+    monitor='val_loss',  # pilih metrik apa yang dijadikan patokan untuk disimpan
+    save_freq='epoch'  # simpan model per epoch
+)
+
+# Loss Function and Metrics
+loss_function = tf.keras.losses.MeanSquaredError()
+mape = tf.keras.losses.MeanAbsolutePercentageError()
+metrics = [mean_absolute_percentage_error]
+
+# Hyperparameters
+batch_size = 32
+epochs = 100
+initial_learning_rate = 0.001
+
+# Learning rate schedule
+lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(
+    initial_learning_rate,
+    decay_steps=10000,
+    decay_rate=0.9)
+
+optimizer = tf.keras.optimizers.Adam(learning_rate=lr_schedule)
+
+# Model Compilation
+model.compile(optimizer=optimizer, loss=loss_function, metrics=metrics)
+
+# Assuming `x_train` and `y_train` are your actual training datasets
+history = model.fit(rho_train, phi_train, validation_data=(rho_val, phi_val), epochs=epochs, batch_size=batch_size, callbacks=[checkpoint_callback])
+\end{lampiranpythoncode}
+
+
+
