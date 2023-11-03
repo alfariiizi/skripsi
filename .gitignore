@@ -29,3 +29,7 @@
 # Ignore generated directories
 _build/
 latex.out/
+
+build
+node_modules
+yarn.lock

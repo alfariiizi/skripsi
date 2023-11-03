@@ -1,46 +1,141 @@
 \chapter{PENDAHULUAN}
-\pagenumbering{arabic}\setcounter{page}{1}
-\section{Latar Belakang Masalah}\label{latarbelakang}
-Dalam kehidupan kita sehari-hari, perubahan adalah sebuah keniscayaan. Perubahan yang terjadi bisa sangat beragam bentuknya, mulai dari perubahan yang terjadi sangat lambat dan dapat diamati, misalnya perubahan tinggi badan manusia dari tahun ke tahun; perubahan yang terjadi secara cepat yang masih dapat diamati, seperti halnya perubahan kecepatan kendaraan; hingga perubahan yang sangat cepat, dan sulit untuk diamati, seperti perubahan properti dari partikel.
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\section{Latar Belakang Masalah}
+\label{latarbelakang}
 
-Dalam ilmu terapan (misalnya Ilmu ekonomi \citep{norberg_1995}) dan ilmu alam (misalnya Biologi \citep{culshaw_ruan_2000}, perubahan dimodelkan secara matematis dengan menggunakan persamaan diferensial. Persamaan diferensial menggambarkan perubahan yang terjadi dari suatu persamaan terhadap suatu variabel (biasanya variabel waktu). Melalui persamaan diferensial, sebuah perubahan dapat digambarkan secara akurat. Maka dari itu, persamaan diferensial sangat jamak digunakan di berbagai bidang keilmuan dan teknologi. 
+Dalam kehidupan kita sehari-hari, perubahan adalah sebuah keniscayaan. Perubahan
+yang terjadi bisa sangat beragam bentuknya, mulai dari perubahan yang terjadi sangat
+lambat dan dapat diamati, misalnya perubahan tinggi badan manusia dari tahun ke
+tahun; perubahan yang terjadi secara cepat yang masih dapat diamati, seperti
+halnya perubahan kecepatan kendaraan; hingga perubahan yang sangat cepat, dan
+sulit untuk diamati, seperti perubahan properti dari partikel.
 
-Dalam bidang Fisika, persamaan diferensial memiliki kedudukan yang sangat penting. \cite{strogatz_2020_infinite} dalam Infinite Powers menyatakan bahwa sejak (penemuan Kalkulus oleh) Newton, umat manusia sadar bahwa seluruh hukum fisika dinyatakan dalam bahasa persamaan diferensial. Pernyataan Strogatz ini bukanlah suatu hal yang berlebihan. Karena nyatanya kebanyakan konsep pada dalam bidang Fisika menggunakan persamaan diferensial.
+Test test \cite{alfarizi_2023_powerranger}, and others.
 
-Mayoritas fenomena Fisika, entah dalam domain dinamika fluida, kelistrikan, magnetik, mekanika, optik, ataupun aliran panas, dapat dideskripsikan secara umum menggunakan persamaan diferensial parsial (\emph{partial differential equation}(PDE)), dan sesungguhnya, sebagian besar dari matematika fisika adalah PDE \citep{farlow_2012_partial}.
+Dalam ilmu terapan (misalnya Ilmu ekonomi \citep{norberg_1995}) dan ilmu alam (misalnya
+Biologi \citep{culshaw_ruan_2000}), perubahan dimodelkan secara matematis dengan
+menggunakan persamaan diferensial. Persamaan diferensial menggambarkan perubahan
+yang terjadi dari suatu persamaan terhadap suatu variabel (biasanya variabel waktu).
+Melalui persamaan diferensial, sebuah perubahan dapat digambarkan secara akurat.
+Maka dari itu, persamaan diferensial sangat jamak digunakan di berbagai bidang
+keilmuan dan teknologi.
 
-Jika suatu keadaan yang akan dimodelkan memiliki lebih dari satu faktor, maka digunakan persamaan diferensial parsial. Persamaan diferensial parsial merupakan suatu relasi/persamaan yang melibatkan satu atau dua derivatif dan suatu fungsi. Biasanya, fungsinya menggambarkan kuantitas dan derivatif menggambarkan rasio dari perubahan, dan persamaan diferensial adalah hubungan dari kedua komponen tersebut.  
+Dalam bidang Fisika, persamaan diferensial memiliki kedudukan yang sangat penting.
+\cite{strogatz_2020_infinite} dalam Infinite Powers menyatakan bahwa sejak (penemuan
+Kalkulus oleh) Newton, umat manusia sadar bahwa seluruh hukum fisika dinyatakan dalam
+bahasa persamaan diferensial. Pernyataan Strogatz ini bukanlah suatu hal yang
+berlebihan. Karena nyatanya kebanyakan konsep pada dalam bidang Fisika menggunakan
+persamaan diferensial.
 
-Persamaan Poisson adalah salah satu bentuk PDP yang umum digunakan. Persamaan Poisson digunakan untuk menjelaskan berbagai perubahan pada berbagai kuantitas fisika, seperti misalnya potensial gravitasi, potensial elektrostatis, dan sebagainya pada daerah yang memiliki muatan, massa, atau sumber lain seperti panas atau fluida \citep{boas_2006_mathematical}. Dalam bidang komputasi dinamika fluida, persamaan Poisson digunakan untuk menghitung koreksi dari tekanan medan untuk memastikan inkompresibilitas medan kecepatan \citep{Ozbay2021}.
+Mayoritas fenomena Fisika, entah dalam domain dinamika fluida, kelistrikan,
+magnetik, mekanika, optik, ataupun aliran panas, dapat dideskripsikan secara
+umum menggunakan persamaan diferensial parsial (\emph{partial differential
+equation}(PDE)), dan sesungguhnya, sebagian besar dari matematika fisika adalah
+PDE \citep{farlow_2012_partial}.
 
-Pada koordinat kartesian, telah ada usaha yang berhasil dalam mencari solusi yang cukup akurat dan metode paralel untuk persamaan Poisson, misalnya menggunakan metode Fourier \citep{cohl_1999}. Situasi demikian menjadi tidak mudah pada koordinat silinder, sebab variasi yang tidak konstan pada elemen matriks yang dihasilkan dari diskretisasi terbatas pada persamaan Poisson silinder. Hal ini yang membuat metode langsung Fourier pada koordinat silinder menjadi tidak mungkin \citep{cohl_1999}.
+Jika suatu keadaan yang akan dimodelkan memiliki lebih dari satu faktor, maka
+digunakan persamaan diferensial parsial. Persamaan diferensial parsial merupakan
+suatu relasi/persamaan yang melibatkan satu atau dua derivatif dan suatu fungsi.
+Biasanya, fungsinya menggambarkan kuantitas dan derivatif menggambarkan rasio dari
+perubahan, dan persamaan diferensial adalah hubungan dari kedua komponen
+tersebut.
 
-Karena pentingnya persamaan diferensial, timbul banyak metode untuk solusi persamaan diferensial, contohnya metode Runge-Kutta, metode Predictor- Corrector, metode Beda-Hingga, metode Elemen-Batas, metode Splines, dan metode lainnya. Metode-metode tersebut membutuhkan diskretisasi dari domain yang ada ke dalam sejumlah elemen hingga sehingga fungsi tersebut didekati secara lokal \citep{kumar_yadav_2011}. Walaupun metode-metode ini memberikan perkiraan yang baik pada solusi, metode-metode tersebut membutuhkan diskretisasi domain melalui \emph{meshing} yang merupakan tantangan untuk permasalahan pada dua atau lebih dimensi \citep{kumar_yadav_2011}. Selain itu, turunan solusi perkiraan bersifat diskontinu dan dapat berdampak serius pada stabilitas solusi. Lebih jauh lagi, untuk mendapatkan akurasi solusi yang memuaskan, mungkin perlu untuk mengubah \emph{mesh} yang secara signifikan meningkatkan upaya komputasi \citep{kumar_yadav_2011}. Perkiraan solusi PDP dengan metode-metode tersebut dapat dilakukan secara lebih menguntungkan dengan menggunakan pendekatan pemelajaran mendalam (\emph{deep learning}).
+Persamaan Poisson adalah salah satu bentuk PDP yang umum digunakan. Persamaan Poisson
+digunakan untuk menjelaskan berbagai perubahan pada berbagai kuantitas fisika,
+seperti misalnya potensial gravitasi, potensial elektrostatis, dan sebagainya
+pada daerah yang memiliki muatan, massa, atau sumber lain seperti panas atau
+fluida \citep{boas_2006_mathematical}. Dalam bidang komputasi dinamika fluida, persamaan
+Poisson digunakan untuk menghitung koreksi dari tekanan medan untuk memastikan inkompresibilitas
+medan kecepatan \citep{Ozbay2021}.
 
-Dalam penelitian ini akan diperkenalkan metode penyelesaian persamaan Poisson dalam koordinat silinder 2 dimensi pada syarat batas Dirichlet dengan paradigma pemrograman pembelajaran mesin dengan metode pemelajaran mendalam yaitu jaringan saraf tiruan konvolusi (\emph{convolutional neural network} (CNN)). Hipotesis yang dibangun untuk melakukan penelitian ini dibangun dari pernyataan \cite{moroney_2022} bahwa pemelajaran mesin adalah paradigma pemrograman yang akan menghasilkan aturan (\emph{rules}) setelah belajar dari jawaban (\emph{answer}) dan data. Program yang sudah melakukan pemelajaran ini akan dapat melakukan prediksi dengan relatif lebih cepat secara signifikan dibandingkan dengan metode numerik iteratif lainnya yang memberikan \emph{answer} lewat \emph{rules} dan data yang diberikan oleh pemrogram. Lebih khusus mengenai CNN, menurut \cite{Li_Li_Gao}, CNN lebih baik dalam hal menangani masukan gambar daripada jaringan saraf (\emph{neural network}) reguler.
+Pada koordinat kartesian, telah ada usaha yang berhasil dalam mencari solusi yang
+cukup akurat dan metode paralel untuk persamaan Poisson, misalnya menggunakan
+metode Fourier \citep{cohl_1999}. Situasi demikian menjadi tidak mudah pada
+koordinat silinder, sebab variasi yang tidak konstan pada elemen matriks yang dihasilkan
+dari diskretisasi terbatas pada persamaan Poisson silinder. Hal ini yang membuat
+metode langsung Fourier pada koordinat silinder menjadi tidak mungkin \citep{cohl_1999}.
 
-Koordinat silinder digunakan pada penelitian ini dikarenakan penulis melihat peluang pada penerapan perhitungan potensial listrik pada bagian penggerak wahana luar angkasa berbasis plasma, yaitu \emph{Hall thruster}. Menurut \cite{cohl_1999}, dari sudut pandang matematika, ada dua metode untuk menghitung potensial listrik: dengan menyelesaikan persamaan diferensial parsial (contohnya persamaan Poisson), atau menyelesaikan permasalahan persamaan integral (contohnya metode Green). Sebagai perwakilan sistem fisis dari pendorong Hall, akan digunakan referensi dimensi domain pendorong Hall dengan model SPT-100 (\emph{Stationary Plasma Thruster-100)}. Pemilihan SPT-100 menjadi model referensi karena model SPT-100 sudah cukup mapan dan memiliki sejarah penggunaan yang cukup banyak di berbagai proyek ruang angkasa, sehingga model ini menjadi patokan (\emph{benchmark}) bagi pendorong \emph{Hall} yang sedang dibangun \citep{braga_miranda_2019}.
+Karena pentingnya persamaan diferensial, timbul banyak metode untuk solusi
+persamaan diferensial, contohnya metode Runge-Kutta, metode Predictor- Corrector,
+metode Beda-Hingga, metode Elemen-Batas, metode Splines, dan metode lainnya.
+Metode-metode tersebut membutuhkan diskretisasi dari domain yang ada ke dalam
+sejumlah elemen hingga sehingga fungsi tersebut didekati secara lokal \citep{kumar_yadav_2011}.
+Walaupun metode-metode ini memberikan perkiraan yang baik pada solusi, metode-metode
+tersebut membutuhkan diskretisasi domain melalui \emph{meshing} yang merupakan
+tantangan untuk permasalahan pada dua atau lebih dimensi \citep{kumar_yadav_2011}.
+Selain itu, turunan solusi perkiraan bersifat diskontinu dan dapat berdampak serius
+pada stabilitas solusi. Lebih jauh lagi, untuk mendapatkan akurasi solusi yang memuaskan,
+mungkin perlu untuk mengubah \emph{mesh} yang secara signifikan meningkatkan upaya
+komputasi \citep{kumar_yadav_2011}. Perkiraan solusi PDP dengan metode-metode tersebut
+dapat dilakukan secara lebih menguntungkan dengan menggunakan pendekatan pemelajaran
+mendalam (\emph{deep learning}).
 
-Model penyelesaian persamaan Poisson menggunakan pemelajaran mendalam di koordinat silinder 2 dimensi yang ditawarkan pada penelitian ini juga akan menginvestigasi manfaat dan keuntungan yang dihasilkan dari model ini dibandingkan dengan metode numerik Gauss-Seidel yang juga merupakan metode untuk pengambilan data latih dan data uji untuk model ini. 
+Dalam penelitian ini akan diperkenalkan metode penyelesaian persamaan Poisson
+dalam koordinat silinder 2 dimensi pada syarat batas Dirichlet dengan paradigma
+pemrograman pembelajaran mesin dengan metode pemelajaran mendalam yaitu jaringan
+saraf tiruan konvolusi (\emph{convolutional neural network} (CNN)). Hipotesis
+yang dibangun untuk melakukan penelitian ini dibangun dari pernyataan
+\cite{moroney_2022} bahwa pemelajaran mesin adalah paradigma pemrograman yang
+akan menghasilkan aturan (\emph{rules}) setelah belajar dari jawaban (\emph{answer})
+dan data. Program yang sudah melakukan pemelajaran ini akan dapat melakukan prediksi
+dengan relatif lebih cepat secara signifikan dibandingkan dengan metode numerik iteratif
+lainnya yang memberikan \emph{answer} lewat \emph{rules} dan data yang diberikan
+oleh pemrogram. Lebih khusus mengenai CNN, menurut \cite{Li_Li_Gao}, CNN lebih
+baik dalam hal menangani masukan gambar daripada jaringan saraf (\emph{neural
+network}) reguler.
+
+Koordinat silinder digunakan pada penelitian ini dikarenakan penulis melihat peluang
+pada penerapan perhitungan potensial listrik pada bagian penggerak wahana luar angkasa
+berbasis plasma, yaitu \emph{Hall thruster}. Menurut \cite{cohl_1999}, dari sudut
+pandang matematika, ada dua metode untuk menghitung potensial listrik: dengan menyelesaikan
+persamaan diferensial parsial (contohnya persamaan Poisson), atau menyelesaikan
+permasalahan persamaan integral (contohnya metode Green). Sebagai perwakilan sistem
+fisis dari pendorong Hall, akan digunakan referensi dimensi domain pendorong
+Hall dengan model SPT-100 (\emph{Stationary Plasma Thruster-100)}. Pemilihan SPT-100
+menjadi model referensi karena model SPT-100 sudah cukup mapan dan memiliki sejarah
+penggunaan yang cukup banyak di berbagai proyek ruang angkasa, sehingga model
+ini menjadi patokan (\emph{benchmark}) bagi pendorong \emph{Hall} yang sedang
+dibangun \citep{braga_miranda_2019}.
+
+Model penyelesaian persamaan Poisson menggunakan pemelajaran mendalam di koordinat
+silinder 2 dimensi yang ditawarkan pada penelitian ini juga akan menginvestigasi
+manfaat dan keuntungan yang dihasilkan dari model ini dibandingkan dengan metode
+numerik Gauss-Seidel yang juga merupakan metode untuk pengambilan data latih dan
+data uji untuk model ini.
 
 \section{Rumusan masalah}
-Berdasarkan latar belakang yang telah dipaparkan pada subbab \ref{latarbelakang}, maka rumusan masalah yang diangkat pada penelitian ini adalah:
+Berdasarkan latar belakang yang telah dipaparkan pada subbab \ref{latarbelakang},
+maka rumusan masalah yang diangkat pada penelitian ini adalah:
 \begin{enumerate}
-    \item Bagaimana cara kerja algoritma CNN dalam perhitungan persamaan Poisson dalam koordinat silinder dua dimensi?
-    \item Bagaimana unjuk kerja algoritma CNN dibandingkan metode numerik Gauss-Seidel dalam penyelesaian persamaan Poisson dalam koordinat silinder 2 dimensi?
+  \item Bagaimana cara kerja algoritma CNN dalam perhitungan persamaan Poisson dalam
+    koordinat silinder dua dimensi?
+
+  \item Bagaimana unjuk kerja algoritma CNN dibandingkan metode numerik Gauss-Seidel
+    dalam penyelesaian persamaan Poisson dalam koordinat silinder 2 dimensi?
 \end{enumerate}
 
 \section{Tujuan dan Manfaat Penelitian}
 \subsection{Tujuan Penelitian}
 \begin{enumerate}
-    \item Mempelajari cara kerja algoritma CNN dalam pemecahan masalah regresi serta variabel yang dapat mengoptimasi pada perhitungan permasalahan Poisson
-    \item Mengetahui peforma algoritma CNN dalam penyelesaian permasalahan Poisson pada koordinat silinder 2 dimensi
+  \item Mempelajari cara kerja algoritma CNN dalam pemecahan masalah regresi serta
+    variabel yang dapat mengoptimasi pada perhitungan permasalahan Poisson
+
+  \item Mengetahui peforma algoritma CNN dalam penyelesaian permasalahan Poisson
+    pada koordinat silinder 2 dimensi
 \end{enumerate}
 
 \subsection{Manfaat Penelitian}
 \begin{enumerate}
-    \item Diharapkan penelitian ini dapat digunakan pada perhitungan potensial listrik pada koordinat silinder, utamanya model koaksial seperti \emph{hall thruster}
-    \item Diharapkan hasil penelitian ini dapat menjadi nilai tebakan awal bagi metode iteratif seperti Gauss-Seidel untuk mempercepat metode tersebut
-    \item Diharapkan penelitian ini dapat menambah wawasan metode perhitungan pada dunia Fisika dengan menggunakan metode pembelajaran mendalam
-    \item Diharapkan penelitian ini dapat menjadi acuan awal dalam penelitian dan pengembangan model CNN pada koordinat silinder 2 dimensi
+  \item Diharapkan penelitian ini dapat digunakan pada perhitungan potensial listrik
+    pada koordinat silinder, utamanya model koaksial seperti \emph{hall thruster}
+
+  \item Diharapkan hasil penelitian ini dapat menjadi nilai tebakan awal bagi metode
+    iteratif seperti Gauss-Seidel untuk mempercepat metode tersebut
+
+  \item Diharapkan penelitian ini dapat menambah wawasan metode perhitungan pada
+    dunia Fisika dengan menggunakan metode pembelajaran mendalam
+
+  \item Diharapkan penelitian ini dapat menjadi acuan awal dalam penelitian dan pengembangan
+    model CNN pada koordinat silinder 2 dimensi
 \end{enumerate}
