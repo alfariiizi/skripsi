@@ -1,0 +1,388 @@
+\(\pagebreak\)
+
+\hypertarget{pendahuluan}{%
+\section{Pendahuluan}\label{pendahuluan}}
+
+\hypertarget{latar-belakang-dan-rumusan-masalah}{%
+\subsection{Latar Belakang dan Rumusan
+Masalah}\label{latar-belakang-dan-rumusan-masalah}}
+
+   Di era saat ini, hampir semua hal berupa data dapat dibuat maupun
+dimanipulasi dengan menggunakan komputer. Hal hal seperti menulis paper,
+menganalisis suatu data, dan bermain game, dapat dilakukan secara
+langsung pada komputer. Kemampuannya tersebut berasal dari komponen
+\emph{Central Processing Unit} (CPU) yang mana dapat memproses berbagai
+macam tugas yang diinginkan oleh pengguna. CPU menjadi inti dari
+kecepatan proses penanganan tugas yang diberikan. Meskipun sebenarnya
+ada peluang terjadi \emph{bottleneck} pada komponen lain, namun secara
+umum, CPU yang berkecepatan cepat akan dapat menangani banyak tugas
+dalam waktu yang singkat. Kecepatan CPU itu sendiri didasari oleh
+kecepatan komputasi pada \emph{core} didalam CPU yang cukup cepat.
+Sehingga, karena proses penanganan komputasi yang cukup baik inilah yang
+membuat Komputer juga digunakan sebagai alat untuk komputasi, tidak
+hanya komputasi secara umum, tapi juga komputasi dalam bentuk metode
+komputasi.
+
+   Pada penggunaan metode komputasi, kerap kali muncul
+\emph{computational cost}, yakni jika ingin hasil dari komputasi
+merupakan hasil yang mempunyai akurasi tinggi, maka secara umum,
+diperlukan perhitungan yang banyak dalam proses pencapaian akurasi
+tinggi tersebut. Hal ini tentunya dengan asumsi bahwa metode yang
+digunakan telah teruji efektifitas nya, sehingga perhitungan yang banyak
+pun bukan merupakan perhitungan yang sia sia. Hal ini tentunya secara
+umum sejalan dengan faktor koreksi yang diberikan, yakni, semakin banyak
+faktor koreksi yang diberikan, maka akan semakin tinggi kemungkinan
+hasil tersebut akan mempunyai hasil yang akurat. Metode seperti
+Runge-Kutta orde 4 akan dianggap mempunyai akurasi yang lebih tinggi
+daripada Metode Runge-Kutta orde 2 ataupun Metode Euler pada proses
+diferensiasi.
+
+   \emph{Computational cost} inilah yang menghambat akurasi data jika
+data yang digunakan sangatlah banyak. Misalnya saja, jika diinginkan
+iterasi sebanyak 1 juta iterasi, maka agar proses kalkulasi tidak
+memakan waktu sangat lama, digunakanlah metode diferensiasi yang lebih
+sederhana seperti Metode Euler ataupun Metode Runge-Kutta orde 2.
+
+   Hambatan dari penggunaan metode komputasi akibat \emph{computational
+cost} ini tidak serta merta dikarenakan oleh penggunaan metode komputasi
+yang digunakan, tapi juga penggunaan hardware yang digunakan. Secara
+umum, proses komputasi dilakukan pada komputer dengan menggunakan
+bantuan dari CPU. Akan tetapi, CPU pada dasarnya didesain untuk
+mengerjakan tugas yang kompleks, bukan untuk mengerjakan komputasi yang
+berat. Akibatnya, sering terjadi keterlambatan dalam perhitungan
+komputasi yang berat, dan penggunaan metode sering menjadi alasan dari
+keterlambatan ini.
+
+   Jika melihat pada industri game, banyak sekali game saat ini yang
+mempunyai grafis yang sangatlah bagus. Padahal, dibelakang proses
+rendering game tersebut, terdapat berbagai macam kalkulasi yang
+diperlukan, seperti kalulasi refleksi cahaya, kalkulasi model dalam
+sudut pandang tertentu, dsb. Proses kalkulasi tersebut tentunya tidak
+menggunakan CPU untuk mengerjakannya, melainkan menggunakan
+\emph{Graphics Processing Unit} (GPU). GPU digunakan dalam proses
+rendering game dikarenakan GPU mempunyai banyak sekali \emph{core}
+ketimbang \emph{core} yang dimiliki oleh CPU. Meskipun begitu,
+masing-masing \emph{core} pada GPU berkinerja cukup lambat, sehingga
+lebih cocok untuk digunakan dalam proses yang membutuhkan \emph{1 tugas
+yang berat} daripada \emph{berbagai macam tugas yang ringan}.
+
+\hypertarget{tujuan}{%
+\subsection{Tujuan}\label{tujuan}}
+
+   Tujuan dari penelitian ini adalah agar menunjukkan bahwa penggunaan
+jenis metode yang digunakan bukanlah suatu hal yang perlu diperdebatkan
+agar \emph{computational cost} dapat dikurangi. Melainkan penggunaan
+hardware lah yang menjadi tolak ukur kecepatan komputasi suatu metode.
+Hardware yang dimaksud adalah hardware yang umum dijumpai pada pasar
+komputer.
+
+   Karena \emph{Graphics Processing Unit} (GPU) adalah salah satu
+hardware yang juga sering dijumpai pada komputer, maka digunakanlah
+Vulkan API agar GPU bisa digunakan untuk proses komputasi, dengan tujuan
+untuk membuktikan bahwa penggunaan metode Runge-Kutta orde 4 dan
+Runge-Kutta orde 2 akan mempunyai kecepatan yang hampir sama pada
+iterasi sebanyak 1 juta dan dengan langkah per iterasi sebesar
+\(h = 0.0000001\).
+
+   Karena terkadang terdapat penurunan kinerja dari GPU akibat daya
+baterai yang rendah, maka proses komputasi metode Runge-Kutta orde 4 dan
+orde 2 tersebut dilakukan dengan daya baterai penuh + dilakukan
+\emph{charging}, daya baterai berkisar 50\% hingga 60\% tanpa dilakukan
+charging, dan daya baterai berkisar 20\% hingga 25\% tanpa dilakukan
+charging.
+
+\hypertarget{manfaat}{%
+\subsection{Manfaat}\label{manfaat}}
+
+   Dari penelitian ini, diharapkan \emph{barrier} mengenai
+\emph{computational cost} dalam menggunakan metode komputasi tertentu
+(pada mesin komputer biasa) dapat dikurangi.
+
+\(\pagebreak\)
+
+\hypertarget{tinjauan-pustaka}{%
+\section{Tinjauan Pustaka}\label{tinjauan-pustaka}}
+
+\hypertarget{metode-runge-kutta}{%
+\subsection{Metode Runge-Kutta}\label{metode-runge-kutta}}
+
+   Dengan menggunakan notasi bahwa
+
+\[
+\begin{aligned}
+y' &= f(y) = f_y\\
+y'' &= f'(y) y' = f'_y f\\
+y(x_n) &= y_n\\
+f_n &= f(y_n) = f(x_n, y_n)
+\end{aligned}
+\]
+
+Suryaningrat, dkk. {[}-@suryaningratOrderRungeKuttaExtended2020{]}
+menyatakan bahwa metode runge-kutta orde 3, orde 4, dan orde 5, yang
+telah diformulasikan oleh Geoken dan Johnson
+{[}-@goekenFifthorderRungeKuttaHigher1999{]}, secara umum dapat
+dinyatakan sebagai berikut:
+
+\[
+\tag{2.1}
+y_{n+1} = y_n + h\sum_{i=1}^s b_i k_i
+\]
+
+dimana
+
+\[
+\begin{aligned}
+k_i &= f\left( y_n + c_i h, y_n + h \sum_{j}^{i-1} a_{ij}k_i \right )\\
+c_i &= \sum_{j=1}^N a_{ij}\\
+\sum_{i=1}^N b_i &= 1
+\end{aligned}
+\]
+
+dimana koefisien \(a_{ij}\) mempunyai batasan iterasi
+\(1 \leqslant j < i \leqslant s\); dan koefisien \(b_i\) dan \(c_i\)
+mempunyai batasan iterasi untuk \(i = 1, 2, 3, \dotsc, s\).
+
+\hypertarget{metode-runge-kutta-orde-2-rk-2}{%
+\subsubsection{Metode Runge-Kutta Orde 2 (RK
+2)}\label{metode-runge-kutta-orde-2-rk-2}}
+
+   Untuk kasus khusus, yakni pada Runge-Kutta orde 2, atau disebut juga
+dengan Goeken-Johnson orde 3 (GJ3)
+{[}@goekenFifthorderRungeKuttaHigher1999{]} dapat diformulasikan sebagai
+berikut:
+
+\[
+\tag{2.2}
+y_{n+1} = y_n + h \frac{1}{4} (k_1 + 3k_2)
+\]
+
+dimana nilai \(k_1\) dan \(k_2\) adalah
+
+\[
+\begin{aligned}
+k_1 &= f(y_n)\\
+k_2 &= f \left (y_n + \frac{2}{3}k_1 + \frac{2}{9}h^2 y''\right )
+\end{aligned}
+\]
+
+\hypertarget{metode-runge-kutta-orde-4-rk-4}{%
+\subsubsection{Metode Runge-Kutta Orde 4 (RK
+4)}\label{metode-runge-kutta-orde-4-rk-4}}
+
+   Untuk kasus Runge-Kutta orde 4 ini dilakukan pendekatan oleh Goeken
+dan Johnson {[}-@goekenFifthorderRungeKuttaHigher1999{]} yang
+menghasilkan Persamaan (2.3), yang mana Persamaan (2.3) ini juga disebut
+dengan Goeken-Johnson orde-5 (GJ 5)
+
+\[
+\tag{2.3}
+y_{n+1} = y_n + h \left ( \frac{5}{48} k_1 + \frac{27}{56} k_2 + \frac{125}{336}k_3 + \frac{1}{24}k_4 \right )
+\]
+
+dimana nilai \(k_1\), \(k_2\), \(k_3\), dan \(k_4\) nya adalah
+
+\[
+\begin{aligned}
+k_1 &= f(y_n)\\
+k_2 &= f \left ( y_n + \frac{1}{3}k_1 + \frac{1}{18}h f_y k_1 \right ) \\
+k_3 &= f \left ( y_n - \frac{152}{125}k_1 + \frac{252}{125}k_2 - \frac{44}{125}h f_y k_1 \right ) \\
+k_4 &= f \left ( y_n + \frac{19}{2}k_1 - \frac{72}{7}k_2 + \frac{25}{14}k_3 + \frac{5}{2} h f_y k_1 \right ) 
+\end{aligned}
+\]
+
+\hypertarget{vulkan-api}{%
+\subsection{Vulkan API}\label{vulkan-api}}
+
+   Application Programming Interface (API) merupakan suatu standarisasi
+yang dibuat agar kode yang dituliskan dapat secara umum dipahami oleh
+pengembang lain dan juga dapat mempermudah pengembang dalam membuat
+suatu aplikasi. Dengan adanya API, pengembang tidak perlu tahu bagaimana
+API tersebut diimplementasikan, yang perlu diketahui adalah bagaimana
+cara menggunakan API tersebut {[}@ibmWhatApplicationProgramming2021{]}.
+Misalnya saja, pada Windows terdapat \emph{Win32 API} yang mana
+ditujukan agar pengembang yang ingin membuat aplikasi di Windows dengan
+Bahasa C/C++ dapat secara langsung membuat aplikasi di Windows tanpa
+diperlukannya pengetahuan mengenai kode-kode penyusun Windows itu
+sendiri. API yang dapat mengontrol GPU disebut dengan \emph{Graphics
+API} {[}@armGraphicsAPIs{]}. Beberapa contoh Graphics API adalah OpenGL,
+Vulkan, Directx 3D, dll.
+
+   Vulkan merupakan graphics Application Programming Interface (API)
+dari hasil kerjasama AMD dan Khronos Group. Vulkan pertama kali
+diperkenalkan secara publik pada penghelatan \emph{Game Developers
+Conference} (GDC) pada tahun 2015 {[}@khronosMoreVulkanSPIRV2015{]}.
+Vulkan didesain agar \emph{low overhead}, yakni pengembang mampu untuk
+mengontrol berbagai macam hal mengenai GPU, seperti performa dan
+efisiensi pada GPU {[}@amdVulkan{]}. Disisi lain, \emph{low overhead}
+merupakan suatu kelebihan, disisi lain \emph{low overhead} menuntut
+eksiplisitas dalam menulis kode API nya, sehingga pengembang dituntut
+untuk mampu memahami kompleksitas arsitektur API ini.
+
+   Vulkan tersusun dari beberapa prosesor dan \emph{fixed-function} yang
+berguna untuk mempercepat proses rendering maupun komputasi pada suatu
+device. Prosesor pada device/GPU yang terdapat vulkan nya, pada umumnya,
+mempunyai jumlah prosesor atau core yang cukuplah banyak. Hal ini lah
+yang membuat Vulkan menyelesaikan suatu tugas dengan menggunakan
+komputasi parallel {[}@sellersVulkanProgrammingGuide2017{]}.
+
+\hypertarget{general-purpose-gpu-gpgpu}{%
+\subsection{General Purpose GPU
+(GPGPU)}\label{general-purpose-gpu-gpgpu}}
+
+   Fungsi dari \emph{Graphics Processing Unit} (GPU) pada awalnya hanya
+sebatas untuk meningkatkan bagian-bagian tertentu pada \emph{graphics
+pipeline}\footnote{Proses - proses tertentu untuk merender suatu scene
+  atau model.} pada saat merender scene atau model suatu game. Hal ini
+dikarenakan pada era awal GPU, tidak terlalu banyak model maupun scene
+yang membutuhkan kinerja tinggi dari GPU, sehingga pada umumnya yang
+menggunakan GPU hanya digunakan untuk bermain game maupun untuk
+pengembangan game. Seiring berjalannya waktu, muncul bidang bidang yang
+membutuhkan perhitungan dan komputasi yang cukup tinggi, seperti pada
+bidang Film, yakni muncul Computer-Generated Imagery (CGI) yang mana
+diawali dengan munculnya film Toy Story; kemudian pada bidang Machine
+Learning juga muncul berbagai macam pemodelan yang membutuhkan
+perhitungan yang berat, dsb. Bidang - bidang baru yang muncul tersebut
+tidak semuanya membutuhkan rendering scene maupun model, namun bisa
+hanya sebatas kalkulasi berat. Penggunaan GPU untuk memproses
+\emph{non-graphical entities}\footnote{Seperti scene maupun model.},
+dikenal dengan \emph{General Purpose GPU} (GPGPU)
+{[}@ghorpadeGPGPUProcessingCUDA2012{]}.
+
+   Pada dasarnya, tidak semua \emph{Application Programming Interface}
+(API) yang mampu untuk melakukan GPGPU. Hal ini dikarenakan penggunaan
+GPU untuk GPGPU ini muncul hanya beberapa tahun kebelakang, sehingga
+untuk API yang dibuat dari awal tahun 2000an atau akhir abad 20an.
+Vulkan dipublikasikan pada tahun 2015, sehingga tentunya Vulkan dapat
+digunakan untuk GPGPU.
+
+\(\pagebreak\)
+
+\hypertarget{dasar-teori}{%
+\section{Dasar Teori}\label{dasar-teori}}
+
+   Keterbatasan core pada \emph{Central Processing Unit} (CPU), dapat
+membuat pemilihan metode suatu penelitian, khusus nya metode
+diferensiasi, menjadi terbatas seiring peningkatan iterasi yang
+digunakan. Untuk mengatasi hal itu, digunakanlah \emph{Graphics
+Processing Unit} (GPU) dengan menggunakan \emph{Application Programming
+Interface} (API) yang mendukung penggunaan GPGPU agar proses iterasi
+yang tinggi pada metode komputasi yang lebih kompleks, seperti metode
+diferensiasi Runge-Kutta orde-2 dan Runge-Kutta orde 4, dapat dilakukan
+dengan cepat dan akurat.
+
+   Untuk mempermudah penggunaan Vulkan pada GPGPU, terdapat Module Vuh
+{[}@savenkoVuhVulkanbasedGPGPU2021{]}, yang mana dapat digunakan untuk
+mengimplementasikan suatu model agar dapat dikalkulasi oleh GPU.
+
+\(\pagebreak\)
+
+\hypertarget{metode-penelitian}{%
+\section{Metode Penelitian}\label{metode-penelitian}}
+
+\hypertarget{waktu-dan-tempat}{%
+\subsection{Waktu dan Tempat}\label{waktu-dan-tempat}}
+
+   Penilitian ini bisa dilakukan di berbagai tempat, dengan waktu yang
+sudah dijelaskan seperti yang tertuliskan pada Tabel 5.1.
+
+\hypertarget{alat-dan-bahan}{%
+\subsection{Alat dan Bahan}\label{alat-dan-bahan}}
+
+Berikut merupakan alat dan bahan yang akan digunakan pada penelitian
+ini:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Sebuah Laptop, dengan spesifikasi:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Operating System (OS): \textbf{Manjaro} Linux
+  \item
+    RAM: \textbf{8 gb}
+  \item
+    Processor: \textbf{Intel i7 gen-10th}
+  \item
+    GPU: \textbf{Nvidia GeForce MX250}
+  \end{itemize}
+\item
+  \emph{Text editor}: \textbf{VS Code}
+\item
+  \emph{Build system} dan \emph{generator}: \textbf{CMake}
+\item
+  Module \textbf{Vulkan-tools} dan Module \textbf{Vuh}.
+\end{enumerate}
+
+\hypertarget{prosedur-kerja}{%
+\subsection{Prosedur Kerja}\label{prosedur-kerja}}
+
+Berikut merupakan prosedur kerja yang dilakukan pada penelitian ini:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Dilakukan penulisan kode Vulkan API berdasarkan module Vuh.
+\item
+  Memastikan bahwa baterai device dalam kondisi penuh dan sedang
+  dilakukan charging.
+\item
+  Iterasi sebanyak 1 juta dengan \(h = 0.0000001\) dijalankan dengan
+  menggunakan metode Runge-Kutta orde 2 dan orde 4 pada kode yang sudah
+  ditulis.
+\item
+  Mencatat hasil dari Runge-Kutta orde 2 dan orde 4, serta mencatat juga
+  waktu yang diperlukan untuk melakukan proses komputasi tersebut.
+\item
+  Mengulangi langkah 3 dan 4 dengan kondisi daya baterai 50\%-60\% tanpa
+  dilakukan charging, dan kondisi daya baterai 20\%-25\% yang juga tanpa
+  dilakukan charging.
+\end{enumerate}
+
+   Jika muncul banyak masalah ketika melakukan komputasi dengan
+menggunakan module Vuh, maka langkah pertama pada prosedur kerja diatas
+diganti menjadi penulisan secara langsung kode Vulkan API tanpa
+penggunaan module Vuh.
+
+\(\pagebreak\)
+
+\hypertarget{jadwal-penelitian}{%
+\section{Jadwal Penelitian}\label{jadwal-penelitian}}
+
+   Penelitian ini dilakukan pada Tahun 2022 dengan jadwal seperti yang
+tertera pada Tabel 5.1.
+
+Table 5.1: Rencana Jadwal Penelitian
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.1984}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.8016}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\centering
+Tanggal
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Kegiatan yang Dilakukan
+\end{minipage} \\
+\midrule
+\endhead
+1 Januari - 7 Januari & Menuliskan kode vulkan dengan menggunakan
+Vuh. \\
+10 Januari - 12 Januari & Mencoba untuk melakukan komputasi dengan
+kondisi daya baterai penuh \\
+13 Januari - 20 Januari & Dilakukan penulisan kode Vulkan API secara
+langsung tanpa menggunakan module Vuh (jika diperlukan). \\
+22 Januari - 24 Januari & Mencoba untuk melakukan komputasi dengan
+kondisi daya baterai 50\%-60\% \\
+26 Januari - 28 Januari & Mencoba untuk melakukan komputasi dengan
+kondisi daya baterai 20\%-25\% \\
+\bottomrule
+\end{longtable}
+
+\(\pagebreak\)
+
+\hypertarget{daftar-pustaka}{%
+\section*{Daftar Pustaka}\label{daftar-pustaka}}
+\addcontentsline{toc}{section}{Daftar Pustaka}

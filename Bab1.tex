@@ -4,138 +4,133 @@
 \section{Latar Belakang Masalah}
 \label{latarbelakang}
 
-Dalam kehidupan kita sehari-hari, perubahan adalah sebuah keniscayaan. Perubahan
-yang terjadi bisa sangat beragam bentuknya, mulai dari perubahan yang terjadi sangat
-lambat dan dapat diamati, misalnya perubahan tinggi badan manusia dari tahun ke
-tahun; perubahan yang terjadi secara cepat yang masih dapat diamati, seperti
-halnya perubahan kecepatan kendaraan; hingga perubahan yang sangat cepat, dan
-sulit untuk diamati, seperti perubahan properti dari partikel.
+% [Komputer]
 
-Test test \cite{alfarizi_2023_powerranger}, and others.
+Penggunaan komputer tidak bisa lepas dari kehidupan manusia saat ini. Hampir
+semua manusia mempunyai komputer. Komputer berbentuk smartphone, laptop, hingga komputer
+berbentuk \emph{microcontroller} seperti Arduino atau \emph{microprocessor} seperti
+Raspberry Pi. Kebergantungan manusia akan komputer ini disebabkan karena
+tingginya kecepatan komputer dalam melakukan komputasi. Dari yang komputasi sederhana
+seperti pada aplikasi kalkulator, hingga komputasi kompleks seperti event
+handler pada aplikasi mobile.
 
-Dalam ilmu terapan (misalnya Ilmu ekonomi \citep{norberg_1995}) dan ilmu alam (misalnya
-Biologi \citep{culshaw_ruan_2000}), perubahan dimodelkan secara matematis dengan
-menggunakan persamaan diferensial. Persamaan diferensial menggambarkan perubahan
-yang terjadi dari suatu persamaan terhadap suatu variabel (biasanya variabel waktu).
-Melalui persamaan diferensial, sebuah perubahan dapat digambarkan secara akurat.
-Maka dari itu, persamaan diferensial sangat jamak digunakan di berbagai bidang
-keilmuan dan teknologi.
+% [CPU]
 
-Dalam bidang Fisika, persamaan diferensial memiliki kedudukan yang sangat penting.
-\cite{strogatz_2020_infinite} dalam Infinite Powers menyatakan bahwa sejak (penemuan
-Kalkulus oleh) Newton, umat manusia sadar bahwa seluruh hukum fisika dinyatakan dalam
-bahasa persamaan diferensial. Pernyataan Strogatz ini bukanlah suatu hal yang
-berlebihan. Karena nyatanya kebanyakan konsep pada dalam bidang Fisika menggunakan
-persamaan diferensial.
+Kecepatan komputer dalam melakukan proses komputasi Tingginya kecepatan komputasi
+komputer disebabkan karena \emph{architecture} dari komputer sendiri yang
+mempunyai komponen utama bernama \emph{Central Processing Unit} atau \emph{CPU}.
+CPU ini bertindak sebagai \emph{"Control Center"} yang mana menginterpretasi, memproses,
+dan mengeksekusi instruksi dari software dan hardware \citep{armWhatCentralProcessing2023}.
+Hal ini menyebabkan pemilihan CPU menjadi hal yang krusial ketika ingin
+mendapatkan proses komputasi yang cepat.
 
-Mayoritas fenomena Fisika, entah dalam domain dinamika fluida, kelistrikan,
-magnetik, mekanika, optik, ataupun aliran panas, dapat dideskripsikan secara
-umum menggunakan persamaan diferensial parsial (\emph{partial differential
-equation}(PDE)), dan sesungguhnya, sebagian besar dari matematika fisika adalah
-PDE \citep{farlow_2012_partial}.
+% [Komputasi Numerik]
 
-Jika suatu keadaan yang akan dimodelkan memiliki lebih dari satu faktor, maka
-digunakan persamaan diferensial parsial. Persamaan diferensial parsial merupakan
-suatu relasi/persamaan yang melibatkan satu atau dua derivatif dan suatu fungsi.
-Biasanya, fungsinya menggambarkan kuantitas dan derivatif menggambarkan rasio dari
-perubahan, dan persamaan diferensial adalah hubungan dari kedua komponen
-tersebut.
+Manfaat dari munculnya komputer tidak hanya dirasakan oleh masyarakat umum,
+namun juga dirasakan oleh akademisi, peneliti, maupun pekerja di suatu industri.
+Banyak aplikasi yang jauh lebih mudah dikerjakan jika dilakukan menggunakan komputer.
+Bahkan saat ini muncul bidang bidang baru yang menggunakan komputer sebagai
+dasar dari suatu komputasi, seperti \emph{Data Science}, \emph{Data Analyst}, \emph{Machine
+Learning Engineering}, dan masih banyak lagi. Bidang - bidang tersebut sangat
+bergantung pada proses komputasi yang cepat, sehingga memerlukan tinggi kecepatan
+CPU dalam melakukan kalkulasi.
 
-Persamaan Poisson adalah salah satu bentuk PDP yang umum digunakan. Persamaan Poisson
-digunakan untuk menjelaskan berbagai perubahan pada berbagai kuantitas fisika,
-seperti misalnya potensial gravitasi, potensial elektrostatis, dan sebagainya
-pada daerah yang memiliki muatan, massa, atau sumber lain seperti panas atau
-fluida \citep{boas_2006_mathematical}. Dalam bidang komputasi dinamika fluida, persamaan
-Poisson digunakan untuk menghitung koreksi dari tekanan medan untuk memastikan inkompresibilitas
-medan kecepatan \citep{Ozbay2021}.
+Dalam lingkup penelitian, khusus nya penelitian di bidang metode numerik, proses
+kalkulasi yang cepat dapat memudahkan para peneliti untuk mendapatkan hasil yang
+diinginkan. Untuk itu, dengan adanya komputer, para peneliti dapat menghasilkan
+metode numerik baru yang lebih berat dalam proses komputasi, namun memiliki nilai
+yang lebih akurat. Proses komputasi ini juga pastinya sangat bergantung pada CPU
+yang digunakan. Sehingga secara tidak langsung penggunaan CPU juga mempengaruhi akurasi
+suatu kalkulasi berdasarkan suatu metode yang digunakan.
 
-Pada koordinat kartesian, telah ada usaha yang berhasil dalam mencari solusi yang
-cukup akurat dan metode paralel untuk persamaan Poisson, misalnya menggunakan
-metode Fourier \citep{cohl_1999}. Situasi demikian menjadi tidak mudah pada
-koordinat silinder, sebab variasi yang tidak konstan pada elemen matriks yang dihasilkan
-dari diskretisasi terbatas pada persamaan Poisson silinder. Hal ini yang membuat
-metode langsung Fourier pada koordinat silinder menjadi tidak mungkin \citep{cohl_1999}.
+% [CPU]
 
-Karena pentingnya persamaan diferensial, timbul banyak metode untuk solusi
-persamaan diferensial, contohnya metode Runge-Kutta, metode Predictor- Corrector,
-metode Beda-Hingga, metode Elemen-Batas, metode Splines, dan metode lainnya.
-Metode-metode tersebut membutuhkan diskretisasi dari domain yang ada ke dalam
-sejumlah elemen hingga sehingga fungsi tersebut didekati secara lokal \citep{kumar_yadav_2011}.
-Walaupun metode-metode ini memberikan perkiraan yang baik pada solusi, metode-metode
-tersebut membutuhkan diskretisasi domain melalui \emph{meshing} yang merupakan
-tantangan untuk permasalahan pada dua atau lebih dimensi \citep{kumar_yadav_2011}.
-Selain itu, turunan solusi perkiraan bersifat diskontinu dan dapat berdampak serius
-pada stabilitas solusi. Lebih jauh lagi, untuk mendapatkan akurasi solusi yang memuaskan,
-mungkin perlu untuk mengubah \emph{mesh} yang secara signifikan meningkatkan upaya
-komputasi \citep{kumar_yadav_2011}. Perkiraan solusi PDP dengan metode-metode tersebut
-dapat dilakukan secara lebih menguntungkan dengan menggunakan pendekatan pemelajaran
-mendalam (\emph{deep learning}).
+Pada komponen CPU, terdapat inti atau \emph{core} yang mana umumnya berjumlah
+kurang dari 10. Umumnya, kecepatan komputasi CPU bergantung pada banyak nya inti
+yang ada di dalamnya. Namun, CPU sendiri juga memiliki aturan dalam banyak nya inti
+yang digunakan. CPU didesain untuk menyelesaikan permasalahan komputasi dari
+yang mudah hingga kompleks. Berdasarkan \cite{kukunasChapterIntelPentium2015},
+CPU sendiri mempunyai desain arsitektur \emph{Complex Instruction Set Computer} atau
+CISC untuk menyelesaikan komputasi yang kompleks. Kemudahan dalam pemberian
+instruksi ini yang menjadi alasan mengapa CPU sengaja menggunakan inti yang
+sedikit.
 
-Dalam penelitian ini akan diperkenalkan metode penyelesaian persamaan Poisson
-dalam koordinat silinder 2 dimensi pada syarat batas Dirichlet dengan paradigma
-pemrograman pembelajaran mesin dengan metode pemelajaran mendalam yaitu jaringan
-saraf tiruan konvolusi (\emph{convolutional neural network} (CNN)). Hipotesis
-yang dibangun untuk melakukan penelitian ini dibangun dari pernyataan
-\cite{moroney_2022} bahwa pemelajaran mesin adalah paradigma pemrograman yang
-akan menghasilkan aturan (\emph{rules}) setelah belajar dari jawaban (\emph{answer})
-dan data. Program yang sudah melakukan pemelajaran ini akan dapat melakukan prediksi
-dengan relatif lebih cepat secara signifikan dibandingkan dengan metode numerik iteratif
-lainnya yang memberikan \emph{answer} lewat \emph{rules} dan data yang diberikan
-oleh pemrogram. Lebih khusus mengenai CNN, menurut \cite{Li_Li_Gao}, CNN lebih
-baik dalam hal menangani masukan gambar daripada jaringan saraf (\emph{neural
-network}) reguler.
+Proses kalkulasi yang memuat banyak data atau perhitungan, umumnya membutuhkan inti
+CPU yang banyak agar hasil lebih cepat diperoleh. Namun, dikarenakan inti CPU berjumlah
+sedikit, kecepatan kalkulasi ini tidak dapat dimaksimalkan lagi pada suatu
+perangkat. Beberapa solusi lain agar kalkulasi dijalankan pada inti yang lebih banyak,
+diantara nya adalah dengan menyewa penyedia server kalkulasi seperti \emph{Google
+Colab}. Kekurangan menyewa penyedia server kalkulasi ini yang pasti adalah perlu
+nya biaya tambahan ketika ingin menambah inti yang akan digunakan. Alternatif lain
+yang dapat dilakukan supaya mendapat inti yang banyak dengan biaya yang gratis adalah
+dengan menggunakan komponen lain dari perangkat komputer yang bernama GPU.
 
-Koordinat silinder digunakan pada penelitian ini dikarenakan penulis melihat peluang
-pada penerapan perhitungan potensial listrik pada bagian penggerak wahana luar angkasa
-berbasis plasma, yaitu \emph{Hall thruster}. Menurut \cite{cohl_1999}, dari sudut
-pandang matematika, ada dua metode untuk menghitung potensial listrik: dengan menyelesaikan
-persamaan diferensial parsial (contohnya persamaan Poisson), atau menyelesaikan
-permasalahan persamaan integral (contohnya metode Green). Sebagai perwakilan sistem
-fisis dari pendorong Hall, akan digunakan referensi dimensi domain pendorong
-Hall dengan model SPT-100 (\emph{Stationary Plasma Thruster-100)}. Pemilihan SPT-100
-menjadi model referensi karena model SPT-100 sudah cukup mapan dan memiliki sejarah
-penggunaan yang cukup banyak di berbagai proyek ruang angkasa, sehingga model
-ini menjadi patokan (\emph{benchmark}) bagi pendorong \emph{Hall} yang sedang
-dibangun \citep{braga_miranda_2019}.
+% [GPU]
 
-Model penyelesaian persamaan Poisson menggunakan pemelajaran mendalam di koordinat
-silinder 2 dimensi yang ditawarkan pada penelitian ini juga akan menginvestigasi
-manfaat dan keuntungan yang dihasilkan dari model ini dibandingkan dengan metode
-numerik Gauss-Seidel yang juga merupakan metode untuk pengambilan data latih dan
-data uji untuk model ini.
+GPU atau \emph{Graphics Processing Unit} merupakan pemrosesan kalkulasi yang ditujukan
+untuk me-\emph{render} suatu gambar atau \emph{3D computer graphics} ke layar perangkat
+komputer \citep{armWhatGraphicsProcessing2023}. Pada kebanyakan kasus,
+penggunaan GPU ini akan sangat berpengaruh ketika memainkan game yang mempunyai
+tampilan yang baik, seperti model di gamenya mempunyai jumlah \emph{mesh} yang
+banyak atau juga bahkan pencahayaan di game mempunyai metode yang membutuhkan
+kalkulasi yang tinggi. Mampunya GPU untuk melakukan kalkulasi yang berat ini disebabkan
+karena banyaknya inti yang ada di GPU. Beda nya jumlah inti pada CPU dan GPU
+disebabkan karena perbedaan fungsi antara kedua komponen tersebut. CPU lebih ditujukan
+pada kalkulasi yang kompleks dengan jumlah kalkulasi yang lebih sedikit,
+sedangkan GPU lebih ditujukan untuk kalkulasi yang tidak kompleks dengan jumlah
+kalkulasi yang banyak \citep{intelCPUVsGPU2023}. Meskipun GPU mempunyai fungsi
+dasar untuk melakukan \emph{rendering} ke layar perangkat komputer, namun GPU
+sendiri juga bisa digunakan untuk melakukan kalkulasi tanpa perlu nya melakukan
+\emph{rendering} ke layar komputer. Penggunaan GPU untuk melakukan komputasi
+umum ini biasaya disebut dengan \emph{General Purpose GPU} atau GPGPU \citep{gigabyteWhatGPGPUWhy2023}.
+Penggunaan GPGPU ini ditujukan agar tercapai nya \emph{High Performance
+Computing} atau HPC yang mana merupakan komputasi yang mampu melakukan
+perhitungan pada kecepatan tinggi \citep{gigabyteHPCHighPerformance2023}.
+
+% [Julia]
+
+Penggunaan GPGPU pada dasarnya mempunyai kekurangan yang membuat banyak pengguna
+memilih alternatif lain daripada GPGPU. Yakni, kompleks nya implementasi ketika
+ingin menggunakan GPGPU. Implementasi yang kompleks ini muncul karena GPU mempunyai
+jumlah inti yang banyak. Beberapa \emph{Application Programming Interface} atau API
+\citep{evansonExplainerWhatAPI2021} yang dapat membuat penggunaan GPGPU lebih
+mudah, diantara nya adalah \emph{Vulkan API}, \emph{Direct3D}, dan \emph{OpenGL}
+\citep{khairySurveyArchitecturalApproaches2019}. Namun, kedua API tersebut pada dasarnya
+merupakan \emph{Graphics API} yang dituliskan dalam bahasa C/C++ yang mana
+membutuhkan penyesuaian lagi jika ingin digunakan untuk proses kalkulasi tanpa
+\emph{rendering}. Ditambah lagi, bahasa C/C++ mempunyai syntax dan paradigma yang
+relatif lebih susah jika dibandingkan dengan bahasa lain seperti Python. Salah
+satu alternatif bahasa pemrograman yang dapat digunakan adalah Julia. Julia mempunyai
+syntax dan paradigma yang tidak terlalu kompleks seperti Python, dan memiliki
+performa yang baik seperti C++ \cite{bezansonJuliaMicroBenchmarks2023}. Kombinasi
+syntax dan performa inilah yang membuat Julia menjadi bahasa pemrograman paling cocok
+untuk implementasi GPGPU pada saat ini.
 
 \section{Rumusan masalah}
-Berdasarkan latar belakang yang telah dipaparkan pada subbab \ref{latarbelakang},
-maka rumusan masalah yang diangkat pada penelitian ini adalah:
+Berdasarkan latar belakang yang telah dipaparkan, maka rumusan masalah yang
+diangkat pada penelitian ini adalah sebagai berikut:
 \begin{enumerate}
-  \item Bagaimana cara kerja algoritma CNN dalam perhitungan persamaan Poisson dalam
-    koordinat silinder dua dimensi?
+  \item Bagaimana cara kerja komputasi paralel dengan menggunakan Bahasa Julia
 
-  \item Bagaimana unjuk kerja algoritma CNN dibandingkan metode numerik Gauss-Seidel
-    dalam penyelesaian persamaan Poisson dalam koordinat silinder 2 dimensi?
+  \item Bagaimana performa yang dihasilkan dari komputasi secara \emph{parallel}
+    dibandingkan dengan komputasi secara \emph{series}
 \end{enumerate}
 
 \section{Tujuan dan Manfaat Penelitian}
 \subsection{Tujuan Penelitian}
 \begin{enumerate}
-  \item Mempelajari cara kerja algoritma CNN dalam pemecahan masalah regresi serta
-    variabel yang dapat mengoptimasi pada perhitungan permasalahan Poisson
+  \item Mempelajari cara kerja komputasi secara paralel dengan menggunakan Bahasa
+    Julia untuk menyelesaikan permasalahan pada metode komputasi
 
-  \item Mengetahui peforma algoritma CNN dalam penyelesaian permasalahan Poisson
-    pada koordinat silinder 2 dimensi
+  \item Membandingkan performa komputasi paralel dengan komputasi series
 \end{enumerate}
 
 \subsection{Manfaat Penelitian}
 \begin{enumerate}
-  \item Diharapkan penelitian ini dapat digunakan pada perhitungan potensial listrik
-    pada koordinat silinder, utamanya model koaksial seperti \emph{hall thruster}
+  \item Diharapkan penelitian ini dapat membawa pandangan baru bahwa komputasi paralel
+    dengan menggunakan Bahasa Julia mempunyai kompleksitas yang tidak terlalu tinggi
 
-  \item Diharapkan hasil penelitian ini dapat menjadi nilai tebakan awal bagi metode
-    iteratif seperti Gauss-Seidel untuk mempercepat metode tersebut
-
-  \item Diharapkan penelitian ini dapat menambah wawasan metode perhitungan pada
-    dunia Fisika dengan menggunakan metode pembelajaran mendalam
-
-  \item Diharapkan penelitian ini dapat menjadi acuan awal dalam penelitian dan pengembangan
-    model CNN pada koordinat silinder 2 dimensi
+  \item Diharapkan hasil penelitian ini dapat menunjukkan bahwa komputasi paralel
+    dengan menggunakan Bahasa Julia mempunyai performa yang jauh lebih baik seiring
+    meningkatnya ukuran data komputasi
 \end{enumerate}
