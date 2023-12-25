@@ -1,657 +1,656 @@
 \chapter{DASAR TEORI}
 
-\section{Persamaan Diferensial Parsial}
-\subsection{Persamaan Diferensial}
-Suatu sistem yang cenderung berubah-ubah terhadap waktu akan lebih mudah untuk digambarkan perubahan yang terjadi ketimbang keadaan mutlak pada saat tertentu. Dalam berbagai bidang keilmuan, persamaan diferensial digunakan untuk menggambarkan perubahan yang terjadi pada suatu sistem. Persamaan diferensial mengandung fungsi yang tidak diketahui (yang merupakan solusi dari persamaan diferensial tersebut) dan beberapa turunannya. Namun, pencarian solusi yang eksplisit seringkali sulit didapat, sehingga dilakukan penyelesaian menggunakan grafik dan pendekatan numerik untuk mendapatkan informasi yang dibutuhkan \citep{stewart_2020_calculus}.  Apabila persamaan tersebut mengandung dua atau lebih variabel bebas, maka persamaan diferensial tersebut merupakan persamaan diferensial parsial (PDP) yang dihitung menggunakan derivatif parsial.
-\subsection{Derivatif Parsial}
-Derivatif parsial dalam sebuah fungsi dengan beberapa variabel adalah derivatif terhadap salah satu variabel, dengan menganggap variabel lainnya konstan \citep{robertalexanderadams_2014_calculus}. Dalam PDP dua variabel $f(x,y)$, misalnya, turunan (derivatif) terhadap $x$ didapat dengan menganggap persamaan tersebut adalah satu variabel dengan menganggap $y$ adalah tetap dan diperlakukan sebagai konstanta \citep{riley_2006_mathematical}. Secara formal, derifatif parsial dari persamaan $f(x,y)$ terhadap $x$ dapat dinyatakan sebagai berikut (dengan menganggap bahwa limitnya ada):
-\begin{equation} \label{partial_limit}
-\frac{\partial f}{\partial x} = \lim_{\Delta x\to\infty} \frac{f(x+\Delta x,y)-f(x,y)}{\Delta x}.
-\end{equation}
-\subsection{Persamaan Diferensial Parsial}
-Berikut akan disajikan sebuah contoh persamaan diferensial parsial:
-\begin{equation} \label{partial_orde_dua}
-    A \frac{\partial^2 u}{\partial x ^2} + B\frac{\partial^2 u}{\partial x \partial y} + C\frac{\partial^2u}{\partial y ^2} = f(x,y),
-\end{equation}
-dengan $x$ dan $y$ merupakan variabel bebas, dan $u$ merupakan solusi yang akan dicari, dan $A, B, C$ merupakan fungsi yang diketahui dari $x$ dan $y$.
-
-Secara umum, persamaan \eqref{partial_limit} dapat ditulis menjadi persamaan diferensial parsial yang lebih umum menjadi:
-\begin{equation}\label{partial_umum}
-    Lu = f,
-\end{equation}
-dengan $L$ merupakan operator diferensial, $u$ merupakan fungsi yang tidak diketahui (\emph{unknown}) atau solusi yang akan dicari, dan $f$ adalah fungsi yang diketahui. Apabila nilai $f$ pada persamaan \eqref{partial_umum} bernilai  $= 0$, maka persamaan tersebut disebut dengan persamaan diferensial parsial homogen. Sedangkan apabila nilai $f \neq 0$, maka persamaan tersebut disebut dengan persamaan diferensial parsial nonhomogen.
-
-\subsection{PDP Orde Dua}\label{PDP_orde_dua}
-Pada persamaan diferensial parsial, dikenal istilah orde yang merupakan turunan tertinggi dari fungsi yang ada pada PDP tersebut \citep{riley_2006_mathematical}. Dalam permasalahan fisika, jamak ditemukan pelibatan solusi dari PDP orde dua (yang bentuk umumnya ditampilkan pada Persamaan \eqref{partial_orde_dua})\citep{arfken_2013_mathematical}. Persamaan-persamaan diferensial parsial tersebut menggunakan operator diferensial berupa operator Laplacian: $\nabla ^ 2$. Salah satu contoh dari PDP orde dua yang cukup terkenal dan digunakan adalah persamaan Laplace:
-\begin{equation}\label{laplace_umum}
-    \nabla ^2 u = 0.
-\end{equation}
-
-Pada persamaan \eqref{laplace_umum} fungsi $u$ dapat berupa potensial gravitasi pada daerah yang tidak mengandung massa, potensial elektrostatis pada daerah tanpa muatan, temperatur keadaan tunak, atau potensial kecepatan untuk fluida mampat tanpa vortisitas dan tanpa sumber atau tenggelam \citep{riley_2006_mathematical}. Intinya, sisi kanan pada persamaan ini menggambarkan keadaan tanpa sumber atau gangguan. Solusi dari persamaan Laplace disebut fungsi harmonik \citep{stewart_2020_calculus}.
-
-
-Sejalan dengan persamaan Laplace, persamaan Poisson juga menggambarkan kuantitas fisis yang sama pada persamaan Laplace pada ruas kanannya, hanya saja pada daerah yang mengandung massa, arus listrik, atau sumber panas atau fluida \citep{boas_2006_mathematical}. Persamaan Poisson yang penyelesaiannya akan menjadi bahasan utama di penulisan ini akan dijelaskan pada subbab yang lain.
-
-Dalam PDP orde dua, persamaan-persamaan yang ada dapat diklasifikasikan menjadi beberapa jenis. Pengklasifikasian ini memberikan panduan mengenai syarat batas dan syarat awal yang tepat dan kehalusan dari solusi analitik. Sama seperti halnya pengklasifikasian irisan kerucut dan bentuk kuadrat ke dalam parabolik, hiperbolik, dan eliptik berdasarkan diskriminan, PDP orde dua juga dapat diklasifikasikan ke kelompok tersebut dengan nilai diskriminan $B^2 - AC$ pada bentuk persamaan \eqref{partial_orde_dua} \citep{yehudapinchover_2013_an}:
-\begin{enumerate}
-    \item $B^2 - 4AC < 0$: Persamaan diferensial parsial eliptik
-    \item $B^2 - 4AC = 0$: Persamaan diferensial parsial parabolik
-    \item $B^2 - 4AC > 0$: Persamaan diferensial parsial hiperbolik
-\end{enumerate}
-
-Persamaan Laplace dan persamaan Poisson merupakan jenis persamaan diferensial parsial eliptik dengan bentuk:
-\begin{equation}\label{pdp_eliptik}
-    \frac{\partial^2u}{\partial x^2} + \frac{\partial^2u}{\partial y^2}
-\end{equation}
-dengan $A = 1, B = 0, C = 1$, sehingga nilai diskriminannya adalah $0-4(1)(1) = -4 <0$
-
-\section{Persamaan Poisson}
-Persamaan Poisson adalah sebuah PDP yang menghubungkan antara persamaan Laplace persamaan \eqref{laplace_umum} dengan suku sumber tertentu, seperti yang sudah dibahas pada bagian \ref{PDP_orde_dua}.
-\begin{equation}
-    \nabla^2 u = \rho(\textbf{r})
-\end{equation}
-Fungsi $\rho(\textbf{r})$ inilah yang disebut sebagai suku sumber atau kepadatan sumber. Dalam aplikasi fisiknya, fungsi ini terdiri dari banyak konstanta fisika. Contohnya, jika $u$ adalah potensial elektrostatis pada sebuah ruang, maka $\rho$ adalah kepadatan muatan listrik, sehingga $\nabla^2 u = -\rho(\textbf{r})/\epsilon_{0}$, dengan $\epsilon_0$ adalah permitivitas ruang hampa. Dalam konteks lain, $u$ merupakan potensial gravitasi pada suatu ruang dengan kepadatan materinya diwakili oleh $\rho$; sehingga $\nabla^2 u = 4\pi G \rho (\textbf{r})$ \citep{riley_2006_mathematical}.
-
-\subsection{Penurunan Persamaan Poisson}
-Bentuk dari Hukum Gauss dapat ditampilkan dalam dua cara: hubungan antara medan listrik $\textbf{E}$ dan muatan listrik total, maupun dalam hubungan antara medan listrik perpindahan $\textbf{D}$ dengan muatan listrik bebas\citep{grant_1990_electromagnetism}. Hubungan antara medan listrik perpindahan $\textbf{D}$ dan muatan bebas digambarkan dengan hubungan sebagai berikut:
-\begin{equation}\label{medan_perpindaha}
-    \nabla \cdot \textbf{D} = \rho_{V}
-\end{equation}
-Seperti diketahui, bahwa $\textbf{D} = \epsilon \textbf{E}$. Sehingga persamaan \eqref{medan_perpindaha} dapat kita tuliskan kembali dengan:
-\begin{equation}\label{epsilon_dot_e}
-    \nabla \cdot (\epsilon \textbf{E}) = {\rho_V}
-\end{equation}
-Dengan asumsi medannya homogen pada ruang hampa, maka $\epsilon$ adalah konsntanta permitivitas ruang hampa:
-\begin{equation}\label{epsilonpindahruas}
-    \nabla \cdot \textbf{E} = \frac{\rho_V}{\epsilon}
-\end{equation}
-Hubungan antara medan listrik $E$ dan potensial listrik $V$ dapat digambarkan dengan persamaan \eqref{medan_listrik}:
-\begin{equation}\label{medan_listrik}
-    \textbf{E} = -\nabla V.
-\end{equation}
-Dalam persamaan tersebut dikatakan bahwa medan listrik merupakan gradien dari potensial skalar \citep{davidjeffreygriffiths_2018_introduction}. Maka persamaan \eqref{epsilonpindahruas} dapat kita tulis ulang menjadi:
-\begin{equation}
-    \nabla \cdot (\nabla V) = - \frac{\rho_V}{\epsilon}
-\end{equation}
-\begin{equation}\label{poisson umum}
-    \nabla ^2 V = - \frac{\rho_V}{\epsilon}
-\end{equation}
-Persamaan \eqref{poisson umum} merupakan persamaan Poisson.
-
-\section{Metode Numerik}
-\subsection{Motivasi}
-Dalam penyelesaian PDP, secara umum terdapat dua metode: metode analitikal dan metode numerik. Metode analitikal merupakan metode perhitungan langsung untuk mendapatkan perhitungan yang eksak. Namun, seringkali metode analitik tidak dapat menjangkau solusi dari PDP. Sehingga dibutuhkan pendekatan numerikal untuk mencari pendekatan numerik pada solusi PDP.
-
-Berbagai penyelesaian dengan metode numerik membutuhkan metode iteratif, bahkan kadang rekursif, sehingga dibutuhkan teknologi yang dapat melakukan metode numerik secara cepat. Kini perhitungan metode numerik dapat dilakukan secara komputasional lewat berbagai aplikasi maupun pemrograman. Fokus pada metode ini adalah memodelkan PDP secara numerik sehingga dapar didiskritisasi melalui simulasi komputer \citep{wick_2022_numerical}.
-
-Mengembangkan dan menganalisa algoritma untuk memecahkan masalah PDP dengan komputer adalah bagian dari metode numerik, yang merupakan bagian dari komputasi saintifik. Komputasi saintifik terbagi menjadi tiga bidang \citep{wick_2022_numerical}:
-\begin{enumerate}
-    \item Pemodelan matematika dan analisis objek 
-    \item Pengembangan metode numerik dan algoritma yang efisien dan dapat diandalkan, serta analisanya
-    \item Pengembangan menggunakan perangkat lunak riset (implementasi dari algoritma yang ada)
-\end{enumerate}
-Yang menjadi tugas kunci (\emph{key task}) dari bidang tersebut adalah perancangan dan analisa algoritma. Tujuan utama dari algoritma adalah meformulasi sebuah skema sehingga dapat diimplementasikan ke komputer untuk menjalankan simulasi numerikal. Ada skema yang langsung yang memecahkan masalah hingga ke pembulatan kesalahannya (\emph{error}) seperti halnya eliminasi Gaussian, ada juga skema yang iteratif yang memberikan perkiraan pada solusi sampai pada akurasi tertentu, seperti halnya iterasi Richardson untuk memecahkan sistem persamaan linear. Algoritma dapat dianalisa pada akurasi, efisiensi, dan ketahanannya.
-
-Dalam perhitungan numerik PDP secara umum, akan ditemukan ralat (\emph{error}) yang merupakan selisih dari hasil pendekatan numerik dengan hasil yang eksak. Misal sebuah PDP diajukan dalam ruang fungsi dan dianalisa:
-\begin{itemize}
-    \item Ruang fungsi $V$ dari solusi eksak $u$ (mungkin tidak diketahui). Maka $u \in V$.
-    \item Ruang fungsi $\Tilde{V}$ dari solusi pendekatan $\Tilde{u}$. Maka $\Tilde{u} \in \Tilde{V}$
-\end{itemize}
-Diskretisasi numerik pada ruang dan waktu menghasilkan parameter $h$ dan $k$ untuk menghitung solusi pendekatan, yaitu $\Tilde{u}:=u_{hk}$. Kemudian dapat digambarkan diskretisasi ralat adalah
-\begin{equation}
-    \left \lvert u - u_{kh} \right \rvert \rightarrow  0 \quad untuk \quad  h \rightarrow 0, k \rightarrow 0
-\end{equation}
-Diskretisasi ralat ini adalah salah satu sumbanngan ralat pada hasil perhitungan PDP dengan metode numerik. Sumbangan ralat lainnya masih sangat mungkin akan terjadi sehingga harus dapat diterima bahwa kita tidak bisa menghindari ralat. Namun yang terpenting adalah mengontrol ralat dan menemukan pembahasan yang tepat apabila ralat yang dihasilkan terlalu besat sehingga memengaruhi interpretasi terhadap simulasi numerik, atau bahkan pembahasan yang tepat saat ralat dapat diabaikan.
-
-Dalam \cite{richter_2017_einfhrung} (via \cite{wick_2022_numerical}), disimpulkan bahwa ada tujuh aspek yang merupakan karakteristik pemodelan numerik:
-\begin{enumerate}
-    \item Aproksimasi
-    \item Konvergen
-    \item Orde kekonvergenan
-    \item Ralat
-    \item Estimasi ralat
-    \item Efisiensi
-    \item Stabilitas
-\end{enumerate}
-
-Selanjutnya, akan disebutkan beberapa metode numerik yang lazim digunakan pada penyelesaian PDP:
-\begin{enumerate}
-    \item Metode beda hingga
-    \item Metode garis
-    \item Metode elemen terbatas
-    \item Metode diskretisasi gradien
-    \item Metode volume hingga
-    \item Metode spektral
-    \item Metode tanpa \emph{mesh}
-    \item Metode dekomposisi domain
-    \item Metode \emph{multigrid}
-    \item Metode Gauss-Seidel
-\end{enumerate}
-Metode beda hingga merupakan metode yang paling mudah dan sering digunakan. Metode elemen hingga dan volume hingga sering digunakan pada bidang keteknikan dan komputasi fluida dinamik, dan cocok untuk permasalahan geometri yang rumit. Metode spektral secara umum paling akurat, dan hasilnya cukup halus.
-
-Pada tulisan ini, akan digunakan metode Gauss-Seidel sebagai penghasil data latih dan data uji, serta sebagai pembanding dari metode \emph{machine learning} yang akan digunakan.
-
-\section{Metode Gauss-Seidel}
-\subsection{Skema Numerik}
-Sebagai metode iteratif, metode Gauss-Seidel memiliki karakteristik umum untuk mereformulasi bentuk 
-\begin{equation}\label{linear}
-   A\textbf{X} = \textbf{B}
-\end{equation}
- menjadi
-\begin{equation}
-    \textbf{x}^{(n+1)} = M\textbf{x}^{(n)} + \textbf{c}
-\end{equation}
-dengan $n$ merupakan jumlah iterasi dan $M$ merupakan matriks iterasi dan $c$ merupakan vektor baru yang terbentuk dari proses reformulasi \citep{Blackledge2006}.
-
-Pada persamaan \eqref{linear}, $A$ merupakan matriks persegi nonlinear dengan orde $N$, $X = (x_1, x_2, ..., x_N)^T$ adalah vektor yang tidak diketahui, dan $B$ merupakan matriks yang diketahui. Persamaan \eqref{linear} terdiri dari $N$ persamaan aljabar linear:
-\begin{equation}\label{linear_matriks}
-    \begin{split}
-        a_{11}x_1 + a_{12}x_2 +        ...       + a_{1N}x_N = b_1,\\
-        a_{21}x_1 + a_{22}x_2 +        ...       + a_{2N}x_N = b_2,\\
-        a_{i1}x_1 + a_{i2}x_2 +    a_{ii}x_i     + a_{iN}x_N = b_i,\\
-        a_{N1}x_1 + a_{N2}x_2 +        ...       + a_{NN}x_N = b_N.\\
-    \end{split}
-\end{equation}
-Diasumsikan akan di selesaikan permasalahan \eqref{linear_matriks} secara iteratif. Dimulai dengan menginisialisasi dengan vektor aproksimasi $X^0 = (x_1^0, x_2^0, ..., x_N^0)^T$ yang berikutnya akan dijadikan solusi aproksimasi pada iterasi ke-$r$, $X^r = (x_1^r, x_2^r, ..., x_N^r)^T$. Dari nilai $X^r$ akan dicari aproksimasi yang lebih baik untuk nilai $X^{r+1}$.
-
-Dalam metode Gauss-Seidel, terdapat pengembangan dari nilai konvergensi dibandingkan metode iteratif serupa, metode Jacobi. Pada metode Gauss-Seidel (atau metode perpindahan berturut), nilai yang ditemukan sebelumnya $x_1^{r+1}, x_2^{r+1}, ..., x_{i-1}^{r+1}$ digunakan untuk menyelesaikan persamaan ke-$i$ untuk $x_i^{r+1}$. Sehingga bentuk umum solusinya menjadi: 
-
-\begin{equation}\label{konfigurasi gauss seidel}
-    \begin{split}
-        x_i^{r+1} = \frac{1}{a_{ii}} \left(b_i-\sum_{j=1}^{i-1}a_{ij}x_j^{r+1} - \sum_{j=i+1}^N a_{ij}x_j^r \right)\\
-        x_N^{r+1} = \frac{1}{a_{NN}} \left(b_N-\sum_{j=1}^{N-1}a_{Nj}x_j^{r+1}\right)
-    \end{split}
-\end{equation}
-
-\subsection{Formalisme Umum}
-
-Pada persamaan \eqref{linear}, matriks $A$ dapat dibagi menjadi diagonal bawah $L$, diagonal $D$ dan diagonal atas $U$:
-
-\begin{equation}
-    A = L + D + U.
-\end{equation}
-
-Kemudian,
-
-\begin{equation}
-    \begin{split}
-        (L+D+U)x=b,\\
-        Dx=-Lx-Ux+b,
-    \end{split}
-\end{equation}
-
-dan
-
-\begin{equation}
-    x = -D^{-1}Lx - D^{-1} Ux+D^{-1}b
-\end{equation}
-dengan
-\begin{equation}
-    D^{-1} = diagonal(a_{11}^{-1}, a_{22}^{-1},...,a_{nn}^{-1}).
-\end{equation}
-Kemudian metode Gauss-Seidel dapat ditulis sebagai berikut:
-
-\begin{equation}
-    x^{n+1} = -D^{-1}Lx^{n+1}-D^{-1}Ux^n+D^{-1}b,
-\end{equation}
-
-dan setelah disusun ulang menjadi
-
-\begin{equation}
-    x^{n+1} = -(D+L)^{-1}Ux^{n}+(D+L)^{-1}b = Mx^n+c
-\end{equation}
-
-\subsection{Penambahan Parameter Relaksasi}
-Secara umum, metode Gauss-Seidel dapat dikembangkan dengan menambahkan parameter \emph{sucessiver over-relaxation} (SOR) \citep{Bottoni2022}. Vektor $X^{r+1}$ yang diperoleh dari persamaan \eqref{konfigurasi gauss seidel} dianggap sebagai nilai sementara, misalkan $X^*$, dan nilai yang lebih baik dicari menggunakan persamaan:
-
-\begin{equation}\label{gauss seidel with provisional value}
-    X^{r+1} = X^r + \omega(X^* - X^r).
-\end{equation}
-
-yang merupakan bentuk simplikasi dari persamaan:
-\begin{equation}\label{metode relaksasi}
-    x_i^{r+1} = x_i^k+\frac{\omega}{a_{ii}} \left(b_i-\sum_{j=1}^{i-1}a_{ij}x_j^{r+1} - \sum_{j=i+1}^N a_{ij}x_j^r \right)
-\end{equation}
-
-Persamaan \eqref{gauss seidel with provisional value} menunjukkan bahwa nilai yang lebih baik $X^{r+1}$ dicari dengan menambahkan solusi sebelumnya $X^r$ dengan kenaikan ($X^* - X^r)$ kemudian dikali dengan parameter $\omega$, yang disebut dengan parameter relaksasi. Metode relaksasi menggunakan parameter relaksasi $\omega$ untuk 'menyetel' sistem agar jumlah iterasi yang dibutuhkan berkurang. Untuk alasan stabilitas, $\omega$ harus berada pada rentang ($0 \le \omega \le 2).$ Skema \eqref{gauss seidel with provisional value} disebut \emph{successive under-relaxation} (SUR) apabila $\omega \le 1$ dan \emph{successive over-relaxation} apabila $1 < \omega \le 2$. Saat $\omega$ = 1, $X^{r+1} = X^*$, yang artinya persamaan Gauss-Seidel. 
-
-Konvergensi persamaan Gauss-Seidel dapat diperiksa dengan kriteria toleransi larat yang diinginkan $\varepsilon_s$ \citep{chapra2015}:
-\begin{equation}
-    |\varepsilon_{ij}| = \left|\frac{x_{ij}^n-x_{ij}^{n-1}}{x_{ij}^n}\right| 100\% < \varepsilon_s,
-\end{equation}
-dengan $\varepsilon_{ij}$ merupakan ralat dari sebuah titik pada koordinat yang dihitung dengan mengoperasikan dengan titik yang sama pada iterasi ke-$n$ dan ke-$n-1$.     
-
-\subsection{Metode Gauss-Seidel untuk Penyelesaian Persamaan Poisson di Koordinat Kartesian Dua Dimensi}
-Persamaan Poisson dua dimensi pada koordinat kartesian ($x,y$) diberikan oleh persamaan berikut:
-\begin{equation}\label{poisson_kartesian}
-    \left(\frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2}\right) \phi_{ij} = \frac{-\rho_{ij}}{\epsilon_{0}}
-\end{equation}
-
-Potensial listrik yang akan dicari yang berada pada titik $i$ dan $j$ pada bidang kartesian diwakili oleh simbol $\phi$. Distribusi partikel direpresentasikan oleh $\rho$ dan permitivitas bahan oleh $\epsilon_0$. Pembaruan langkah dari $x$ dan $y$ diwakili oleh simbol $\Delta x$ dan $\Delta y$. Kemudian $\phi(x,y)$ didiskretisasi pada titik ($x_i, y_j$). Titik ($x_i, y_j$) akan ditulis sebagai indeks ($i,j$) dan komponen $\phi(x,y)$ ditulis sebagai $\phi_{i,j}$. Dengan diasumsikan bahwa ada sebanyak $M$ titik sepanjang arah $x$ dan $N$ titik sepanjang arah $y$ yang membentuk \emph{mesh}, maka $i = 1, 2, ..., M$ dan $j = 1,2, ...,N$. Ukuran langkah sepanjang arah $x$ diwakili oleh $\Delta x$ dan arah $y$ oleh $\Delta y$. Untuk $x,y \neq 0$, digunakan skema \emph{central difference} untuk tiap suku pada persamaan \eqref{poisson_kartesian}:
-
-\begin{equation}\label{diskrit kartesian}
-    \begin{split}
-        \frac{\partial^2}{\partial x^2} \phi=\frac{\phi_{i+1,j}-2 \phi_{ij}+\phi_{i-1, j}}{\Delta x^2}\\
-        \frac{\partial^2}{\partial y^2} \phi = \frac{\phi_{i,j+1}-2 \phi_{ij}+\phi_{i, j-1}}{\Delta y^2}.
-    \end{split}
-\end{equation}.
-
-Subtitusi persamaan \eqref{diskrit kartesian} ke \eqref{poisson_kartesian} menghasilkan:
-
-\begin{equation}
-    \frac{\phi_{i+1,j}-2 \phi_{ij}+\phi_{i-1, j}}{\Delta x^2}+\frac{\phi_{i,j+1}-2 \phi_{ij}+\phi_{i, j-1}}{\Delta y^2} = \frac{-\rho_{ij}}{\epsilon_{0}}.
-\end{equation}
-
-Dengan mempertimbangkan persamaan \eqref{konfigurasi gauss seidel} untuk iterasi, maka dihasilkan konfigurasi sebagai berikut:
-
-\begin{equation}
-    -2\left(\frac{1}{\Delta x^2} + \frac{1}{\Delta y^2}\right) \phi_{ij}^{n+1} = -\left(\frac{\phi^{n}_{i+1,j}+\phi^{n}_{i-1,j}}{\Delta x^2}-\frac{\phi^{n}_{i,j+1}+\phi^{n}_{i,j-1}}{\Delta y^2}\right),\\
-\end{equation}
-
-Disusun ulang menjadi:
-
-\begin{equation}
-    \phi^{n+1}_{ij} \left(\frac{\Delta y^2 + \Delta x^2}{\Delta x^2 \Delta y^2} \right) = \frac{\left(\frac{\phi^{n}_{i+1,\ j}+\phi^{n}_{i-1,\ j}}{\Delta x^2}\right)+\left(\frac{\phi^{n}_{i,\ j+1}+\phi^{n}_{i,\ j-1}}{\Delta y^2}+\frac{\rho_{ij}}{\epsilon_0}\right)}{2}
-\end{equation}
-
-\begin{equation}\label{GS_cartesian}
-    \phi_{ij}^{n+1}=\frac{\left(\frac{\phi^n_{i+1,\ j}+\phi^n_{i-1,\ j}}{\Delta x^2}\right)+\left(\frac{\phi^n_{i,\ j+1}+\phi^n_{i,\ j-1}}{\Delta y^2}\right)+\frac{\rho_{i,j}}{\epsilon_0}}{2} \cdot \frac{\Delta x^2 \Delta y^2}{\Delta y^2 + \Delta x^2}
-\end{equation}
-Persamaan \eqref{GS_cartesian} merupakan persamaan penyelesaian Persamaan Poisson dua dimensi pada koordinat kartesian. 
-
-\subsection{Metode Gauss-Seidel untuk Penyelesaian Persamaan Poisson di Koordinat Silinder Dua Dimensi}\label{gauss_seidel_silinder}
-Pada penelitian ini akan digunakan koordinat silinder pada sumbu $r$ dan $z$ (simetri aksial). Persamaan Poisson dua dimensi pada koordinat silinder ($r, z$) diberikan oleh persamaan \eqref{Poisson silinder awal} \citep{Shiferaw2013}:
-\begin{equation}\label{Poisson silinder awal}
-    \nabla ^2 \phi = \frac{\partial^2\phi}{\partial r^2} + \frac{1}{r}\frac{\partial \phi}{\partial r}+\frac{\partial^2\phi}{\partial z^2}=\frac{\rho_{ij}}{\epsilon_0}
-\end{equation}
-
-Potensial listrik yang akan dicari yang berada pada titik $i$ dan $j$ pada koordinat silinder diwakili oleh simbol $\phi$. Distribusi partikel direpresentasikan oleh $\rho$ dan permitivitas bahan oleh $\epsilon_0$. Pembaruan langkah dari $r$ dan $z$ diwakili oleh simbol $\Delta x$ dan $\Delta y$, Kemudian $\phi(r,z)$ didiskretisasi pada titik ($r_i, z_j$). Titik ($r_i, z_j$) akan ditulis dengan indeks ($i,j$) dan $\phi(r,z)$ ditulis sebagai $\phi_{i,j}$. Dengan diasumsikan bahwa ada sebanyak $M$ titik sepanjang arah $r$, dan $N$ titik sepanjang arah $z$ yang membentuk \emph{mesh}, maka $i = 1,2,...,M, j=1,2,...,N$. Ukuran langkah sepanjang arah $r$ diwakili oleh $\Delta r$ dan arah $z$ oleh $\Delta z$. Untuk $r \neq 0$, digunakan skema \emph{central difference} untuk tiap suku pada persamaan \eqref{Poisson silinder awal}:
-
-\begin{equation}\label{diskretisasi_poisson_silinder}
-\begin{split}
-    \frac{\partial \phi}{\partial r} = \frac{\phi_{i+1,j}-\phi_{i-1,j}}{2\Delta r}\\
-    \frac{\partial^2 \phi}{\partial r^2} = \frac{\phi_{i+1,j}-2\phi_{i,j}+\phi_{i-1,j}}{(\Delta r)^2}\\
-    \frac{\partial^2 \phi}{\partial z^2} = \frac{\phi_{i,j+1}-2\phi_{i,j}+\phi_{i,j-1}}{(\Delta z)^2}
-\end{split}
-\end{equation}
-
-Dengan subtitusi persamaan \eqref{diskretisasi_poisson_silinder} ke persamaan \eqref{Poisson silinder awal}, didapat persamaan:
-
-\begin{equation}
-    \frac{\phi_{i+1,j}-2\phi_{i,j}+\phi_{i-1,j}}{(\Delta r)^2} + \frac{\phi_{i+1,j}-\phi_{i-1,j}}{r_i 2 \Delta r} + \frac{\phi_{i,j+1}-2\phi_{ij}+\phi_{i-1,j}}{(\Delta z)^2}=\frac{-\rho_{ij}}{\epsilon_0}.
-\end{equation}
-
-Kemudian dilakukan perhitungan menghasilkan:
-\begin{equation}
-    \begin{split}
-        \phi_{ij} &= \frac{\frac{\rho_{ij}}{\epsilon_0}+\left(\frac{\phi_{i+1,j}-\phi{1-1,j}}{r_i2\Delta r}\right)(\Delta r)^2 (\Delta z)^2 + \phi_{i-1,j}\left((\Delta z)^2+(\Delta r)^2\right)}{-2\left((\Delta r)^2 + (\Delta z)^2\right)}\\
-        &+\frac{(\Delta z)^2 \phi_{i+1,j} + \phi_{i,j+1}(\Delta r)^2}{-2\left((\Delta r)^2 + (\Delta z)^2\right)}
-    \end{split}
-\end{equation}
-Dengan mempertimbangkan persamaan \eqref{konfigurasi gauss seidel} untuk iterasi, maka dihasilkan konfigurasi persamaan iterasi Gauss-Seidel untuk persamaan Poisson 2 dimensi di koordinat silinder ($r,z$):
-
-\begin{equation}\label{GS_silinder}
-    \begin{split}
-        \phi^{n+1}_{ij} = \frac{\frac{\rho_{ij}}{\epsilon_0}+\left(\frac{\phi^n_{i+1,j}-\phi^n_{i-1,j}}{r_i 2 \Delta r}\right)(\Delta r)^2(\Delta z)^2 + \phi^n_{i-1,j}((\Delta z)^2 + (\Delta r)^2) + (\Delta z)^2 \phi^n_{i+1,j} + \phi^n_{i,j+1}(\Delta r)^2}{-2((\Delta r)^2 + (\Delta z)^2)}
-    \end{split}
-\end{equation}
-
-\section{Syarat Batas}
-
-Dalam bidang persamaan diferensial, permasalahan nilai batas merupakan persamaan diferensial dengan sekumpulan pembatas tambahan yang disebut syarat batas \citep{zwilinger2022}. Solusi dari persamaan diferensial parsial umumnya tidak unik. Agar unik, persamaan diferensial parsial harus menggunakan syarat batas dan syarat awal \citep{waletPartial}. Syarat batas numerik muncul dalam proses implementasi numerik pada syarat batas fisis tertentu pada keadaan fisis sesungguhnya ataupun cuplikan domain (karena keterbatasan sumber daya komputasi)\citep{Brio2010}. Syarat batas menunjukkan perilaku dari sebuah fungsi pada batas area yang didefinisikan.
-
-Untuk dapat digunakan, permasalahan nilai batas harus didefinisikan secara jelas. Artinya, bahwa dengan memberikan masukan untuk masalah tertentu, terdapat solusi yang unik yang bergantung terus menerus pada masukan tersebut. Masalah nilai batas memiliki kondisi yang ditentukan pada kondisi ekstrim (batas) dari variabel independen pada persamaan.
- 
-\subsection{Syarat Batas Dirichlet}
-Syarat batas Dirichlet merupakan syarat batas yang menemukan nilai dari fungsi tersebut di syarat batas (syarat batas tipe pertama). Dalam persamaan diferensial parsial, syarat batas Dirichlet digambarkan secara matematis dengan contoh berikut:
-\begin{equation*}
-    \nabla^2 u = f(x),
-\end{equation*}
-dengan $\nabla$ merupakan operator laplace dan $f$ merupakan fungsi yang diketahui, maka syarat batas Dirichlet pada domain $\Omega \subset \textbf{R}^n$ memiliki bentuk:
-\begin{equation}
-    u(x) = f(x)\quad \quad \forall x \in \partial \Omega
-\end{equation}
-
-Dalam konteks persamaan Poisson, syarat batas Dirichlet dan interiornya diilustrasikan dalam Gambar \ref{gambar dirichlet}.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=10cm]{gambar/dirichlet.png}
-    \caption{Contoh geometri syarat batas Dirichlet pada persamaan Poisson di koordinat kartesian 2 dimensi ($x,y$) pada domain $\Omega$.\ \emph{Sumber: Penulis}}
-    \label{gambar dirichlet}
-\end{figure}
-
-\subsection{Syarat Batas Neumann}
-Syarat batas Neumann merupakan syarat batas yang menemukan nilai dari derivatif normal dari fungsi tersebut (syarat batas kedua). Dalam persamaan diferensial parsial, syarat batas Neumann digambarkan secara matematis dengan contoh berikut:
-\begin{equation*}
-    \nabla^2 y + y = f(x),
-\end{equation*}
-
-dengan $\nabla^2$ melambangkan operator Laplace, maka syarat bentuk syarat batas Neumannya pada domain $\Omega \subset \mathbf{R}^n$ menjadi:
-\begin{equation}\label{NeumannBC}
-    \frac{\partial y}{\partial \textbf{n}}(x) = f(x)\quad \forall x \in \partial \Omega,
-\end{equation}
-dengan $\mathbf{n}$ menunjukkan vektor normal eksterior ataupun interior pada batas $\partial\Omega$, dan $f$ adalah fungsi skalar yang diberikan.
-
-Derivatif normal yang ditunjukkan pada sisi kiri persamaan \eqref{NeumannBC} didefinisikan sebagai berikut:
-\begin{equation}
-    \frac{\partial y}{\partial\mathbf{n}}(x) = \nabla y (x) \cdot \hat{\mathbf{n}}(x),
-\end{equation}
-dengan $\nabla y (x)$ mewakili gradien dari vektor $y(x)$, $\hat{\mathbf{n}}$ adalah unit normal, dan $\cdot$ sebagai operator \emph{inner product}.
-
-\section{Pemelajaranan Mesin (\emph{Machine Learning})}
-\subsection{Konsep Umum}
-pemelajaranan mesin (US: \emph{machine learning}) adalah sekumpulan algoritma yang mencoba mengaktifkan kemampuan pemelajaranan komputer, sehingga mereka dapat belajar dari data atau pengalaman masa lalu \citep{bayen_2020_python}.
-Tom Mitchell dapat menggambarkan konsep umum pemelajaranan mesin dengan singkat dan mudah dimengerti pada kata pengantar bukunya: bidang pemelajaranan mesin berkaitan dengan pertanyaan tentang bagaimana membuat program komputer yang secara otomatis meningkat seiring dengan meningkatnya pengalaman \citep{Mitchell1997}.
-
-Mitchell memberikan sedikit formalisme mengenai pendapatnya tentang konsep umum pemelajaranan mesin tersebut: sebuah program komputer dikatakan belajar dari pengalaman \textbf{E} (\emph{experience}) sehubungan dengan beberapa kelas tugas \textbf{T} (\emph{task}) dan ukuran kinerja \textbf{P} (\emph{performance}), jika kinerjanya pada tugas \textbf{T}, yang diukur dengan \textbf{P}, meningkat dengan pengalaman \textbf{E}.
-
-Istilah pemelajaran mesin digunakan dalam hal yang sangat umum dan merujuk pada teknik yang umum untuk mengekstrapolasi pola dari kumpulan yang besar atau kemampuan untuk membuat prediksi pada basis data yang baru tentang hal yang dipelajari melalui analisa yang tersedia dari data yang diketahui sebelumnya \citep{zocca_spacagna_slater_roelants_2017}
-
-\subsection{Tipe-tipe pemelajaranan Mesin}
-Biasanya, pemelajaranan mesin dibagi ke dalam dua kategori: pemelajaranan dengan pengawasan (\emph{supervised learning}) dan pemelajaranan tanpa pengawasan (\emph{unsupervised learning})\citep{zocca_spacagna_slater_roelants_2017}. Pengawasan dalam hal ini adalah pemberian label yang benar atau jawaban dari permasalahan yang akan dipecahkan. Informasi tersebut akan digunakan selama pelatihan (\emph{training}).
-
-Dalam pemelajaranan dengan pengawasan, berdasarkan pada sifat luarannya, dapat dibagi ke dalam 2 algoritma: klasifikasi (\emph{classification}) dan regresi (\emph{regression}). Klasifikasi adalah algoritma yang mengeluarkan hasil berupa data kategori hasil pemelajaranan mengenai data latih yang diberikan. Sedangkan regresi merupakan algoritma yang menghasilkan data kuantitas dari sebuah data keadaan.
-
-Dalam pemelajaranan tanpa pengawasan, yang merupakan algoritma tanpa label, dapat dibagi menjadi dua algoritma, yaitu pengklasteran (\emph{clustering}) dan pengurangan dimensi (\emph{dimensionality reduction}). Dalam algoritma pengklasteran, dibutuhkan ciri-ciri tersembunyi dari objek yang digunakan untuk dilakukan pengelompokkan. Algoritma pengurangan dimensi adalah sekelompok algoritma pemelajaranan tanpa pengawasan untuk mengurangi masalah dimensi yang lebih tinggi menjadi dimensi yang lebih rendah \citep{bayen_2020_python}.
-
-Masih ada banyak tipe-tipe algoritma pemelajaranan mesin yang tidak dibahas karena tidak relevan dengan penelitian ini. Pada penelitian ini sendiri akan menggunakan tipe algoritma \emph{deep learning} untuk regresi, yaitu \emph{convolutional neural network} (CNN).
-
-\subsection{Analisis Regresi}
-Algoritma regresi merupakan jenis algoritma \emph{supervised learning} yang menggunakan fitur dari data masukan untuk memprediksi sebuah nilai (biasanya nilai kontinyu), seperti harga rumah yang diberi nilai masukan ukuran, usia, jumlah kamar mandi, jumlah lantai, lokasi, dan sebagainya \citep{zocca_spacagna_slater_roelants_2017}. Analisis regresi berusaha untuk mencari nilai dari parameter fungsi yang paling cocok pada dataset masukan. Tujuan utama dari analisis regresi adalah meminimalkan fungsi kerugian dengan mencari parameter yang pantas untuk fungsi pada data masukan yang mendekati data target dengan sangat baik \citep{zocca_spacagna_slater_roelants_2017}.
-
-Regresi linear pada dasarnya adalah model linear. Misalnya, sebuah model yang mengasumsikan hubungan linear antara variabel masukan ($x$) dan variabel luaran tunggal ($y$). Lebih spesifik, $y$ dapat dihitung dari kombinasi linear dari variabel masukan $x$ \citep{brownlee_2016}. 
-
-Analisis regresi memiliki variabel respon berupa numerik, misalnya seperti memprediksi usia seseorang dari karakteristik orang tersebut. Ada dua langkah dalam membangun model regresi, yaitu:
-\begin{enumerate}
-    \item Langkah pemelajaranan
-    \item Langkah regresi
-\end{enumerate}
-
-\section{Jaringan Saraf Buatan/ \emph{Neural Network} (NN)}
-\emph{Neural network} merupakan algoritma \emph{deep learning} (pemelajaran dalam) yang merupakan metode yang bersifat hierarkis dan berlapis. Istilah berlapis ini yang kemudian memberi makna pada kata '\emph{deep}'. Disebut demikian karena model ini menggunakan banyak lapisan proses pemrosesan data (\emph{layers}). Setiap lapisan berisi \emph{node} yang melakukan serangkaian kalkulasi matematis dan masing-masing lapisan belajar untuk mengenali fitur yang berbeda dari masukan yang diberikan. 
-
-\emph{Deep learning} khususnya jaringan saraf buatan dapat dipahami sebagai proses pengektrakan otomatis fitur dari data dan menggunakannya untuk melakukan prediksi atau keputusan. Hal ini sangat berbeda dari metode pemelajaran mesin tradisional, yang pendefinisian fitur harus dilakukan secara manual dan kemudian diaplikasikan pada model pemelajaran mesin (Gambar \ref{deepflow})\citep{Li_Li_Gao}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=10cm]{gambar/alur_deep_learning.png}
-    \caption{Pemelajaran mesin tradisional membutuhkan ekstraksi fitur secara manual. Pemelajaran dalam (\emph{deep learning}) mengekstrak fitur secara otomatis dengan memberikan input pada lapisannya}
-    \label{deepflow}
-\end{figure}
-
-Kemudian muncul pertanyaan mengenai awal inspirasi terbentuknya ide dasar mengenai pembentukan jaringan saraf buatan. Seperti halnya banyak penemuan yang diilhami oleh alam, begitupun dalam pembentukan model dari pemelajaran mesin yang cerdas, para ilmuwan berusaha untuk mencari inspirasi ke alam, dan didapatkanlah sebuah pemikiran bahwa algoritma dari sebuah mesin yang cerdas dapat diilhami pula dari sebuah mekanisme yang kompleks dan cerdas, yaitu arsitektur otak manusia \citep{aurélien_géron_2022}. Logika inilah yang menghasilkan jaringan saraf buatan, sebuah model pemelajaran mesin yang diilhami dari jaringan saraf manusia. 
-
-Satuan komputasional paling mendasar pada otak manusia adalah neuron yang saling terkoneksi dengan sinapsis. Setiap neuron menerima sinyal masukan dari dendrit dan menghasilkan sinyal luaran yang ditransmisikan sepanjang akson. Akson tersebut kemudian bercabang dan tersambung melalui sinapsis ke dendrit neuron lain. 
-
-Dalam model komputasional sebuah neuron, sinyal (misalnya $x_0$) yang dihantarkan melalui akson, berinteraksi berkali-kali (misalnya $w_0 x_0$) dengan dendrit lain berdasarkan kekuatan atau bobot sinaptik pada sinapsis yang bersangkutan (misalnya $w_0$). Bobot $w$ ini merupakan parameter yang dapat belajar dan mengontrol kekuatan pengaruh dari suatu neuron ke neuron lainnya.
-
-Pada model yang sangat standar, dendrit membawa sinyal ke sel tubuh dan semuanya dijumlahkan. Apabila hasil penjumlahan akhir di atas ambang batas, neuron aktif dan meneruskan sinyal melalui akson. Dalam model komputasionalnya, pewaktuan (\emph{timing}) bukanlah hal yang penting, melainkan frekuensi penyampaian informasi. Dari interpretasi ini, kita memodelkan laju aktif dari neuron sebagai fungsi aktifasi $f$ yang merepresentasikan frekuensi lonjakan di sepanjang akson.
-
-\begin{figure}[ht]
-  \centering
-  \begin{minipage}{0.45\textwidth}
-    \centering
-    \includegraphics[width=1\linewidth]{gambar/neuron.png} % Adjust the width as necessary
-  \end{minipage}\hfill
-  \begin{minipage}{0.45\textwidth}
-    \centering
-    \includegraphics[width=1\linewidth]{gambar/neuron_model.jpeg} % Adjust the width as necessary
-  \end{minipage}
-  \label{neuron_model}
-  \caption{Kiri: Gambaran skema saraf biologis. Kanan: skema model matematis jaringan saraf buatan. \emph{Sumber: CS231n}}
-\end{figure}
-
-\subsection{Struktur Neural Network}
-Disadur dari \cite{aurélien_géron_2022}, terdiri dari 4 bagian utama:
-\begin{enumerate}
-    \item \emph{Input layer}: Lapisan yang menerima data masukan. Setiap neuron dalam lapisan ini mewakili satu fitur data.
-    \item \emph{Hidden layaer(s)}: Lapisan ini berada di antara lapisan masukan dan luaran. Jumlah lapisan dan neuron dalam bagian ini dapat bervariasi sesuai kompleksitas masalah.
-    \item \emph{Weight connection}: \emph{Weights} atau bobot diterapkan pada tiap sambungan antara node untuk merepresentasikan seberapa penting pengaruh node tersebut pada hasil luaran.
-    \item \emph{Output layer}: Lapisan ini memberikan hasil akhir dari jaringan saraf (selanjutnya, padanan kata \emph{neural network} akan ditulis sebagai jaringan saraf, tanpa kata buatan). Jumlah neuron dalam lapisan ini biasanya sama dengan jumlah kelas dalam masalah klasifikasi atau berjumlah satu neuron dalam masalah regresi.
-\end{enumerate}
-
-\subsection{\emph{Forward Propagation} (Perambatan Maju)}
-Tahap ini merupakan langkah awal dalam proses belajar sebuah jaringan saraf. Dalam tahap ini, masukan $x$ dikirimkan melalui jaringan dari lapisan masukan ke lapisan luaran. Setiap neuron mengambil $x$ kemudian mengalikan dengan bobot $w$, menambahkan bias $b$ dan kemudian meneruskan hasil melalui fungsi aktivasi \citep{goodfellow_bengio_courville_2016}:
-\begin{equation}
-    s_i = w_i^T x_i +b_i
-\end{equation}
-
-yang kemudian diikuti oleh fungsi aktivasi nonlinear seperti pada Gambar \ref{feedforward}:
-\begin{equation}
-    y_i = h(s_i)
-\end{equation}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=12cm]{gambar/feedforward.png}
-    \caption{Perkalian input dengan bobot pada unit neuron yang kemudian diteruskan dengan operasi dengan fungsi aktivasi. \emph{Sumber: \cite{szeliski_2011}}}
-    \label{feedforward}
-\end{figure}
-
-$x_i$ merupakan masukan dari unit ke-$i$, $w_i$ dan $b_i$ berturut-turut adalah bobot dan bias yang dapat belajar, $s_i$ adalah luaran dari penjumlahan linear berbobot, dan $y_i$ adalah luaran final setelah $s_i$ masuk pada fungsi aktivasi $h$. Luaran dari tiap tahap lapisan akan menjadi input untuk lapisan selanjutnya. Lapisan pada jaringan saraf terhubung secara berurutan dengan lapisan saraf berikutnya seperti pada Gambar \ref{fully_connected}. 
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=10cm]{gambar/fully_connected.png}
-    \caption{\emph{Fully connected layer} \emph{Sumber: \cite{szeliski_2011}}}
-    \label{fully_connected}
-\end{figure}
-
-Kita dapat menganggap semua unit dalam lapisan adalah sebuah vektor dengan kombinasi perhitungan linear sebagai berikut:
-
-\begin{equation}
-    s_l = W_lx_l
-\end{equation}
-
-dengan $x_l$ adalah masukan pada layer $l$, $W_l$ adalah matriks bobot, dan $s_l$ adalah penjumlahan berbobot. Kemudian kenonlinearan diterapkan berdasarkan elemen untuk dijadikan masukan untuk layer selanjutnya ($l+1$) dengan rumusan:
-
-\begin{equation}
-    x_{l+1} = y_l = h(s_l)
-\end{equation}
-
-Lapisan yang menggunakan matriks bobot penuh (padat) untuk kombinasi linier disebut lapisan terhubung penuh (\emph{fully connected layer} (FC)). Jaringan yang hanya berisi FC disebut dengan \emph{multi-layer perceptron} (MLP).
-
-\subsection{Fungsi Aktivasi}
-Secara biologis, jaringan saraf memiliki neuron yang memiliki fungsi tertentu untuk mengolah impuls tertentu. Begitupun dengan jaringan saraf buatan yang menggunakan fungsi aktivasi, yaitu fungsi yang mendefinisikan keadaan internal neuron untuk menghitung masukkan dari neuron lain \citep{zocca_spacagna_slater_roelants_2017}. Fungsi aktivasi bertugas mengubah masukan neuron menjadi luaran yang akan diteruskan ke neuron selanjutnya. Fungsi aktivasi disebut juga dengan fungsi transfer atau kenonlinearan karena mengubah kombinasi linear dari penjumlahan bobot menjadi model nonlinear dan terletak pada ujung tiap unit atau perceptron untuk memutuskan apakah akan mengaktifkan neuron tersebut \citep{elgendy_2020}. Tujuan dari fungsi aktivasi adalah untuk memperkenalkan nonlinearitas pada jaringan. Tanpa fungsi aktivasi, MLP akan berkelakuan mirip dengan perceptron tunggal, entah berapapun jumlah lapisannya. Fungsi aktivasi dibutuhkan untuk membatasi nilai luaran pada batas tertentu. Ada beberapa fungsi aktivasi, seperti ReLU (Rectified Linear Unit) dan tanh (Gambar \ref{fungsi_aktivasi}). 
-
-Pilihan fungsi aktivasi tergantung pada masalah yang sedang dihadapi dan arsitektur dari jaringan saraf yang digunakan. Pada penelitian ini, akan digunakan dua macam fungsi aktivasi, yaitu ReLU pada \emph{hidden layer} dan tanh pada \emph{output layer}.
-
-\begin{figure}[ht]
-  \centering
-  \begin{minipage}{0.45\textwidth}
-    \centering
-    \includegraphics[width=1\linewidth]{gambar/relu1.png} % Adjust the width as necessary
-  \end{minipage}\hfill
-  \begin{minipage}{0.45\textwidth}
-    \centering
-    \includegraphics[width=1\linewidth]{gambar/tanh.png} % Adjust the width as necessary
-  \end{minipage}
-  \caption{Kiri: Fungsi aktivasi ReLU mengeliminasi semua nilai negatif dari masukan dengan metransformasi menjadi nilai nol. Kanan: Fungsi aktivasi tanh: apabila nilai masukan sangat besar atau sangat kecil, maka nilai gradien akan sangat kecil; mendekati nol. \emph{Sumber: \citep{elgendy_2020}}}
-  \label{fungsi_aktivasi}
-\end{figure}
-
-\subsubsection{Fungsi Aktivasi \emph{Rectified Linear Unit} (ReLU)}
-Fungsi aktivasi ReLU adalah fungsi bagian-positif (\emph{positive-part function}) yaitu menghasilkan fungsi identitas untuk argumen (masukkan) positif dan menghasilkan nol untuk masukkan lainnya \citep{Lederer2021}. Fungsi bagian-positif membiarkan masukan positif lewat tanpa diubah, tapi memotong masukan negatif (mengubah masukan negatif menjadi luaran nonnegatif). Secara matematis dapat digambarkan dengan persamaan \eqref{relu} dengan $z$ adalah elemen masukan:
-\begin{equation}\label{relu}
-    ReLU(z) =
-    \begin{dcases}
-        z & \text{jika } z \leq 0 \\
-        0 & \text{jika } z < 0
-    \end{dcases}
-\end{equation}
-Fungsi aktivasi ReLU sering digunakan pada berbagai model jaringan saraf tiruan karena sifat linearitasnya sehingga lebih mudah untuk dilatih dan menghasilkan performa yang lebih baik \citep{elgendy_2020}.
-
-\subsubsection{Fungsi Aktifasi Tanh (\emph{Hyperbolic Tangent)}}
-Fungsi aktivasi tanh adalah versi pergeseran dari fungsi sigmoid. Singkatnya, pada fungsi sigmoid membatasi nilai luaran pada rentang nilai 0 hingga 1, sedangkan pada tanh, membatasi nilai pada rentang nilai -1 hingga 1. Tanh bekerja dengan lebih baik daripada sigmoid pada karena memliki efek pemusatan data, sehingga memiliki rata-rata data mendekati 0, bukannya 0,5 seperti sigmoid, sehingga membuat pemelajaran untuk lapisan selanjutnya lebih mudah \citep*{elgendy_2020}. Fungsi tanh dirumuskan sebagai berikut untuk nilai masukan $z$:
-\begin{equation}
-    tanh(z) = \frac{sinh(z)}{cosh(z)} = \frac{e^x-e^{-x}}{e^x + e^{-x}}
-\end{equation}
-
-\subsection{\emph{Backward Propagation} (Perambatan Mundur)}
-Konsep umum yang perlu kita pahami adalah bahwa setiap jaringan saraf adalah pendekatan pada sebuah fungsi. Sehingga hasil yang dihasilkan akan memiliki perbedaan nilai dari fungsi yang didekati. Nilai inilah yang kita sebut dengan kesalahan/ralat (\emph{error}) yang berusaha untuk kita minimalkan nilainya. Karena ralat yang muncul merupakan fungsi bobot (\emph{weights}), maka kita akan mengecilkan ralat terhadap nilai bobot. Secara matematis, himpunan titik-titik yang fungsinya nol mewakili suatu permukaan hiper (\emph{hypersurface}) dan untuk mencari titik minimum pada permukaan ini kita ingin memilih sebuah titik dan kemudian mengikuti kurva ke arah minimum \citep{zocca_spacagna_slater_roelants_2017}. Kesalahan ini kemudian dipropagasi mundur melalui jaringan, yang kemudian bobot antar neuron akan disesuaikan berdasarkan kesalahan tersebut. Proses ini dilakukan berulang-ulang hingga kesalahan mencapai nilai minimum atau setelah jumlah iterasi tertentu \citep{szeliski_2011}. Isitilah yang lebih matematis untuk mendefinisikan tentang perambatan mundur adalah menghitung gradien dari sebuah ekspresi melalui penerapan rekursif dari aturan rantai \citep{Li_Li_Gao}; menghitung gradien dari fungsi $f(\textbf{x})$ di $\textbf{x}$ ($\nabla f(\textbf{x})$) dengan $\textbf{x}$ adalah vektor masukan.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=10cm]{gambar/backprop2.png}
-    \caption{Perambatan maju (\emph{forward propagation}. \emph{Sumber: penulis}}
-    \label{backprop}
-\end{figure}
-
-Sebagai contoh, akan digunakan 2 lapisan, satu sebagai lapisan masukan (\emph{input layer}) dan lapisan lainnya sebagai lapisan luaran (\emph{output layer}) pada Gambar \ref{backprop}. Misal kita notasikan $J$ sebagai galat (error) antara nilai $Layer 2$ dan $Layer 1$, dengan $y$ adalah fungsi aktivasi dengan input dari niai bobot $w_{i,j}$ dan nilai masukan dari \emph{Layer 1} $y_i$ dan luaran adalah nilai $y_j$. 
-
-Tujuan dari perambatan mundur adalah mencari nilai bobot dari nilai galat yang dihasilkan $\frac{\partial J}{\partial w_{i,j}}$. Dengan menggunakan aturan rantai, didapat rumusan:
-\begin{equation}
-    \frac{\partial J}{\partial w_{i,j}} = \frac{\partial J}{\partial y_j} \frac{\partial y_j}{\partial y_i} \frac{\partial y_i}{\partial w_{i,j}}
-\end{equation}
-
-\subsection{Fungsi Kerugian (\emph{Loss Function})}
-Jaringan saraf dilatih menggunakan \emph{stochastic gradient descent} dan bobot diperbarui menggunakan algoritma perambatan mundur ralat \citep{brownlee_2019}. Dalam rangka mengoptimasi bobot, harus didefinisikan fungsi kerugian (\emph{loss function}) yang diminimalkan selama proses pelatihan \citep{szeliski_2011}. 
-
-Fungsi kerugian mengkuantifikasi jarak antara nilai sesungguhnya dan nilai hasil prediksi dari data target. Kerugian (\emph{loss}) biasanya merupakan angka nonnegatif yang semakin kecil, berarti nilainya semakin bagus \citep{goodfellow_bengio_courville_2016}.
-
-Dalam optimisasi matematis dan teori keputusan, fungsi kerugian adalah fungsi yang memetakan kejadian atau nilai dari satu atau lebih variabel terhadap nilai kebenaran yang secara intuitif merepresentasikan harga yang terasosiasi dengan kejadian tersebut. Secara sederhana, fungsi kerugian adalah metode untuk mengevaluasi seberapa baik algoritma memodelkan set data \citep{shankar_2022}.
-
-\subsubsection{Rerata Ralat Kuadrat (\emph{Mean Squared Error}/ MSE)/ \emph{L2 Loss}}\label{mse}
-Untuk permasalahan regresi, fungsi kerugian yang paling umum digunakan adalah MSE atau fungsi kerugian L2 \citep{szeliski_2011}:
-
-\begin{equation}
-   MSE = \frac{1}{n} \sum\limits_n E_n(\textbf{w}) = \frac{1}{n}\sum\limits_n ||\textbf{y}_n - \textbf{t}_n||^2
-\end{equation}
-
-dengan $\textbf{y}_n$ merupakan prediksi dari jaringan untuk sampel sejumlah $n$ dan $\textbf{t}_n$ merupakan nilai target dari data latih. 
-
-\subsubsection{Rerata Presentasi Ralat Absolut (\emph{Mean Average Percentage Error}/ MAPE) }
-Contoh lain untuk mengukur kualitas regresi adalah dengan MAPE. MAPE seringkali digunakan karena sangat intuitif diinterpretasikan sebagai ralat relatif \citep{DEMYTTENAERE201638}. Untuk $x$ sebagai masukan dari model regresi, $g$ merupakan model regresi, dan $y$ adalah nilai target dari data latih, maka MAPE dirumuskan dengan:
-\begin{equation}\label{mape}
-    MAPE = \frac{1}{n} \sum \limits_n \left(\frac{|g(\textbf{x})-\textbf{y}|}{|\textbf{y}|}\right)
-\end{equation}
-
-\section{Jaringan Saraf Konvolusional/ \emph{Convolutional Neural Network} (CNN)}
-\subsection{CNN pada \emph{Deep Learning}}
-\emph{Convolutional Neural Network} (selanjutnya akan disebut dengan CNN) merupakan pengembangan dari jaringan saraf buatan (\emph{artificial neural network (ANN)/ neural network (NN)}). Pada dasarnya, CNN masih sama dengan jaringan saraf reguler. Perbedaan utamanya adalah bahwa arsitektur CNN membuat asumsi secara gamblang bahwa masukannya adalah gambar. Hal ini membuat perambatan maju lebih efisien serta mengurangi jumlah parameter pada jaringan secara signifikan \citep{Li_Li_Gao}.
-
-Lebih lanjut lagi, meskipun jaringan saraf reguler dapat memecahkan masalah dengan gambar, namun tidak dapat menskala-ulang (\emph{rescale}) keseluruhan gambar. Hal ini menimbulkan masalah karena gambar yang dijadikan masukan tetap pada ukuran asli, sehingga membutuhkan banyak parameter, dan terlalu banyak parameter dapat menyebabkan \emph{overfitting} \citep{Li_Li_Gao}. 
-
-Ide utama dari CNN adalah menggunakan lapisan (\emph{layer}) (biasa disebut dengan filter) yang mempunyai tugas spesifik masing-masing untuk memanipulasi gambar untuk mendapatkan fitur tertentu pada gambar \citep{zocca_spacagna_slater_roelants_2017}. Filter yang telah berisi berbagai macam fitur tersebut akan diteruskan kepada node-node pada \emph{layer} yang lainnya untuk digabungkan dan dikenali berdasarkan hasil latihan yang dilakukan.
-
-Dalam jaringan saraf reguler, gambar diperlakukan sebagai vektor kolom dengan cara me-\emph{flatten} tanpa memperhatikan hubungan spasial antar piksel \citep{zhang2023dive}. Idealnya, jaringan dapat memanfaatkan pengetahuan bahwa piksel yang berdekatan biasanya terkait satu sama lain, untuk membangun model yang efisien untuk belajar dari data gambar \citep*{zhang2023dive}
-
-Dari keuntungan mengenai wawasan spasial dari jaringan, dibanding NN, CNN dapat memebentuk model yang lebih akurat dengan cara yang efisien. Hal tersebut dikarenakan CNN membutuhkan parameter yang lebih sedikit dan pada CNN juga lebih mudah untuk diterapkan perhitungan paralel menggunakan \emph{graphic processing unit} (GPU) \citep{chetlur2014cudnn}.
-
-\subsection{Lapisan Konvolusi (\emph{convolution layer})}
-Setelah kita hijrah dari jaringan saraf reguler ke jaringan saraf konvolusi, kita dikenalkan dengan berbagai keuntungan yang sekaligus menjadi prinsip dalam jaringan saraf konvolusi. Salah satu prinsip tersebut adalah translasi invarian \citep{1992SPIE.1709..257Z}. Hal ini berarti pergeseran pada masukan $\textbf{X}$ membuat pergeseran pada lapisan tersembunyi (\emph{hidden layer}) $\textbf{H}$ (keduanya merupakan matriks 2 dimensi dengan ukuran yang sama). Agar setiap unit/neuron pada lapisan tersembunyi menerima masukan dari tiap unit masukan, penggunaan bobot seperti pada jaringan saraf reguler akan diubha menjadi penggunaan parameter $\textbf{V}$.Dengan $u$ adalah bias (konstan), maka lapisan tersembunyi pada CNN didefinisikan sebagai:
-
-\begin{equation}\label{konvolusi_real}
-    [\textbf{H}]_{i,j} = u + \sum\limits_a \sum\limits_b [\textbf{V}]_{a,b} [\textbf{X}]_{i+a,j+b}
-\end{equation}
-
-Persamaan \eqref{konvolusi_real} merupakan persamaan konvolusi. Pada persmaan tersebut, masukan $\textbf{X}$ pada indeks $(i+a, j+b)$ diberikan bobot secara efektif dengan koefisien $[\textbf{V}]_{a,b}$ untuk mendapatkan nilai $[\textbf{H}]_{i,j}$ \citep{zhang2023dive}. Dalam komunitas penelitian pemelajaran mendalam (\emph{deep learning}), \textbf{$V$} dikenal sebagai lapisan konvolusi (\emph{convolution layer}), filter, atau lapisan bobot yang merupakan parameter yang dapat belajar \citep{zhang2023dive}.
-
-Berdasarkan deskripsi tersebut, pada tiap lapisan, matriks masukan dan matriks konvolusi (\emph{kernel}) memproduksi matriks luaran melalui operasi korelasi silang (\emph{cross-correlation}).
-
-Operasi korelasi silang ditemukan pada filter atau \emph{kernel} konvolusional yang beroperasi pada  gambar dan melakukan perhitungan \emph{dot product}. Setiap filter akan mengekstrak fitur-fitur yang berbeda dari gambar \citep{patel_2020}. 
-
-Sebagai contoh, akan digunakan \emph{kernel} dengan ukuran $3\times 3$ dan ukuran gambar masukan $5\times 5$. Akan dilakukan perkalian berdasarkan elemen (\emph{element-wise}) antara nilai warna piksel dari gambar yang cocok dengan ukuran filter dengan filter itu sendiri, dan kemudian dijumlahkan untuk mendapatkan nilai tunggal.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=10cm]{gambar/convolution-operation1.png}
-    \caption{Operasi konvolusi pertama. \emph{Sumber: \citep{patel_2020}}}
-    \label{convolution_operation}
-\end{figure}
-
-Pada Gambar \ref{convolution_operation}, operasi yang dilakukan adalah sebagai berikut:
-$(2 \times 1) + (4 \times 2) + (9 \times 3) + (2 \times (-4)) + (1 \times 7) + (4 \times 4) + (1 \times 2) + (1 \times (-5)) + (2 \times 1) = 51  $
-
-Kemudian filter konvolusional melanjutkan operasinya dengan bergeser satu sel ke kanan:
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=10cm]{gambar/convolution-operation.png}
-    \caption{Operasi konvolusi kedua. \emph{Sumber: \citep{patel_2020}}}
-    \label{operasi_konvolusi_kedua}
-\end{figure}
-
-Operasi konvolusi dari filter tersebut adalah: $(4 \times 1) + (9 \times 2) + (1 \times 3) + (1 \times (-4)) + (4 \times 7) + (4 \times 4) + (1 \times 2) + (2 \times (-5)) + (9 \times 1) = 66 $
-
-Filter tersebut akan terus berjalan dari kiri ke kanan, menuju bawah, hingga tiba pada bagian pojok kanan bawah dengan bergeser 1 piksel. Jumlah pergeseran filter ini dinamakan \emph{stride}. Ukuran \emph{stride} berpengaruh terhadap ukuran fitur (\emph{feature}) yang dihasilkan. Sehingga ukuran fitur secara lengkap yang dihasilkan adalah:
-
-\begin{equation}\label{ukuran_fitur}
-    ukuran\ fitur = \left(\frac{ukuran\ gambar - ukuran\ filter}{\emph{stride}}\right) + 1
-\end{equation}
-
-Neuron pada lapisan konvolusi pertama tidak terkoneksi pada tiap piksel pada gambar masukan, melainkan hanya piksel pada bidang reseptif (\emph{receptive fields}) (Gambar \ref{receptive_fields}). Selanjutnya, tiap neuron pada lapisan konvolusi kedua hanya terhubung pada neuron yang terletak di dalam persegi kecil pada lapisan pertama. Struktur arsitektur demikian membuat jaringan tersebut berkonsentrasi pada fitur kecil tingkat rendah pada lapisan konvolusi pertama, dan kemudian menyusun fitur-fitur tersebut pada tingkat yang lebih besar di lapisan selanjutnya, dan seterusnya \citep{aurélien_géron_2022}.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=10cm]{gambar/snapedit_1694621260840.png}
-    \caption{Lapisan konvolusi dengan bidang reseptif persegi . \emph{Sumber: \citep{aurélien_géron_2022}}}
-    \label{receptive_fields}
-\end{figure}
-
-\subsection{\emph{Padding}}
-Dalam persamaan \eqref{ukuran_fitur}, apabila kita aplikasikan pada $240 \times 240$ piksel gambar dengan $10$ layer matriks konvolusi $5 \times 5$, maka akan dihasilkan luaran matriks $200 \times 200$, yang artinya, layer konvolusi mereduksi $30\%$ informasi tentang batas-batas gambar aslinya. Isu demikian dapat diatasi dengan \emph{Padding} \citep{zhang2020dive}.
-
-\emph{Padding} adalah proses penambahan piksel pada pinggiran gambar asli agar hasil luaran yang diinginkan menjadi lebih besar. Ide awal dari \emph{padding} adalah bahwa piksel di sudut gambar sangat jarang terkena operasi konvolusi sehingga piksel tersebut kurang berkontribusi pada luaran dari operasi konvolusi. Maka ditambahkanlah \emph{padding} pada tepi batas dari matriks masukan agar peran dari piksel tepi digantikan oleh piksel \emph{padding} sehingga luaran yang dihasilkan dapat sama dari masukan. Biasanya digunakan nilai $0$ pada piksel \emph{padding} (disebut dengan istilah (\emph{zero-padding}) \citep{Li_Li_Gao}.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=10cm]{gambar/padding.png}
-    \caption{Contoh penggunaan \emph{padding} pada gambar asli ukuran $3 \times 3$.\\ \emph{Sumber: dokumen penulis}}
-    \label{padding}
-\end{figure}
-
-Secara umum, suatu matriks masukan sebesar $n_h \times n_w$ yang dioperasikan pada kernel konvolusi $k_h \times k_w$ dan kemudian ditambah jumlah baris \emph{padding} $p_h$ (di atas dan di bawah) dan jumlah kolom \emph{padding} $p_w$ (di kiri dan di kanan), maka akan menghasilkan luaran dengan bentuk:
-\begin{equation}
-    \left(n_h - k_h + p_h +1\right) \times \left(n_w - k_w + p_w + 1\right)
-\end{equation}
-
-\subsection{Lapisan Penyatuan (\emph{Pooling Layer})}
-\emph{Pooling layer} atau lapisan penyatuan berfungsi untuk mengurangi ukuran spasial dari fitur hasil operasi konvolusi dan membantu mengurangi \emph{overfitting} \citep{zocca_spacagna_slater_roelants_2017}. Operasi \emph{pooling} yang paling jamak digunakan adalah \emph{max-pooling}, yang membuat kisi (\emph{grid}) pada tiap potongan fitur dan kemudian mengambil nilai piksel yang paling besar pada tiap kisi dan mengabaikan yang lain. \emph{Pooling layer} tidak menambahkan parameter baru, karena hanya mengekstraksi nilai (yang tertinggi, misalnya) tanpa membutuhkan tambahan bobot atau bias.
-\begin{figure}[h]
-    \centering
-    \includesvg[width=5cm]{max_pooling}
-    \caption{Ilustrasi \emph{max pooling layer} dengan ukuran $2 \times 2$ dan \emph{stride} = 2 dikenakan pada fitur dengan ukuran $4 \times 4$. \emph{Sumber: penulis.} }
-    \label{max_pooling}
-\end{figure}
-
-\emph{Pooling layer} memiliki dua parameter yaitu ukuran sel dan \emph{stride}. Dapat dirumuskan bentuk luaran dari hasil operasi \emph{pooling layer}. $I$ merupakan masukkan (\emph{input}) atau layer fitur hasil konvolusional, $F$ merupakan ukuran \emph{pooling layer} dan $S$ merupakan \emph{stride} dari \emph{pooling layer}. Indeks $w$ dan $h$ merupakan representasi dari lebar (\emph{width}) dan tinggi (\emph{height}) secara berturut-turut.
-
-\begin{equation}\label{max_pooling}
-\begin{split}
-    O_w = \frac{(I_w - F_w)}{S_w} + 1\\
-    O_h = \frac{(I_h - F_h)}{S_h} + 1
-\end{split}
-\end{equation}
-
-Operasi \emph{max pooling} bukanlah satu-satunya operasi penyatuan (\emph{pooling}). Ada beberapa operasi penyatuan lain, misalnya \emph{average pool} yang mengambil nilai rata-rata dari piksel yang dikenai oleh \emph{pooling layer}, atau $L^2$ yang merupakan akar pangkat dari jumlah nilai piksel. Dibandingkan dengan operasi penyatuan yang lain, \emph{max pooling} memiliki peforma yang paling baik karena mereduksi \emph{noise} dengan mengabaikan piksel \emph{noisy} yang nilainya kecil \citep{patel_2020}.
-
-\subsection{Arsitektur CNN}
-Telah ditinjau bahwa CNN umumnya terdiri dari tiga tipe lapisan: konvolusional, \emph{pooling}, \emph{fully conected} (FC). Bentuk paling umum dari arsitektur CNN adalah tumpukkan dari beberapa pasangan konvolusional-ReLU yang diikuti oleh \emph{pooling layer}, dan kemudian pola ini terus berulang hingga gambar input dipadatkan secara spasial menjadi ukuran yang lebih kecil. Lapisan akhir \emph{fully-connected} menghasilkan luaran yang dikehendaki, misalnya kategori untuk klasifikasi ataupun hasil pada regresi. Dengan kata lain, arsitektur paling umum dari CNN adalah sebagai berikut:
-
-\begin{equation*}
-    \begin{split}
-        MASUKAN \rightarrow &[[KONVOLUSIONAL \rightarrow RELU]*N \rightarrow POOL]\\
-        &*M \rightarrow [FC \rightarrow RELU]*K \rightarrow FC
-    \end{split}
-\end{equation*}
-
-dengan $*$ mengindikasikan perulangan (repetisi), dan $POOL$ merupakan langkah \emph{pooling} yang opsional. Jumlah perulangan $N, M, K$ masing-masing lebih dari sama dengan $0$. Biasanya, $N \leq 3$ dan $K < 3$ \citep{zhang2020dive}.
-
-\subsection{U-Net}\label{sub_unet}
-U-Net pertama kali diperkenalkan oleh Olaf Ronneberger, Philipp Fischer, dan Thomas Brox untuk segmentasi biomedis \citep{DBLP:journals/corr/RonnebergerFB15}, dan kemudian mulai banyak digunakan pada komunitas ML-CFD (\emph{Machine Learning - Computation Fluid Dynamics}) \citep{DBLP:journals/corr/abs-2109-13076}.
-
-Arsitektur ini menggunakan lapisan konvolusi pada semua lapisannya (\emph{fully convolutional layer}). \cite{DBLP:journals/corr/LongSD14} menunjukkan bahwa \emph{fully convolutional layer} pada segmentasi gambar dapat bekerja dengan lebih efisien dan lebih canggih dari arsitektur lainnya tanpa permesinan (\emph{machinery}) lebih lanjut.
-
-Model U-Net merupakan modifikasi dari model \emph{fully connected layer} yang awalnya dicetuskan oleh \cite{DBLP:journals/corr/LongSD14}. \cite{DBLP:journals/corr/RonnebergerFB15} memodifikasi dan memperpanjang arsitektur yang ada sehingga dapat bekerja dengan beberapa gambar latih dan menghasilkan segmentasi yang lebih presisi (Gambar \ref{unet}).
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=10cm]{gambar/snapedit_1694701272217.png}
-    \caption{Arsitektur U-Net. Tiap kotak biru menunjukkan peta fitur multi kanal. Jumlah kanal ditunjukkan di atas kotak. Ukuran $x-y$ ditunjukkan di tepi kiri bawah kotak. Kotak putih menunjukkan peta fitur yang disalin. Panah menunjukkan operasi-operasi yang terjadi. \emph{Sumber: \citep{DBLP:journals/corr/RonnebergerFB15}}}
-    \label{unet}
-\end{figure}
-
-Modifikasi yang cukup signifikan terletak pada bagian \emph{upsampling}. Pada bagian ini, masukan yang ukuran spasialnya sudah lebih kecil dari matriks masukan dinaikkan lagi ukurannya (\emph{upsampling}). Pada bagian ini, sejumlah besar kanal fitur memungkinkan jaringan untuk menyebarkan informasi konteks ke lapisan resolusi yang lebih tinggi. Sebagai konsekuensinya, jalur ekspansif (sebelah kanan) kurang lebih simetris dengan jalur kontraksi (sebelah kiri) dan menghasilkan arsitektur berbentuk huruf U. Jaringan ini tidak memiliki \emph{fully connected layer} dan hanya menggunakan bagian yang valid dari setiap luaran konvolusi, yaitu peta segmentasi yang hanya berisi piksel, yang konteks lengkapnya tersedia di dalam gambar masukan. Untuk memprediksi piksel di wilayah perbatasan gambar, konteks yang hilang diekstrapolasi dengan mencerminkan gambar masukan (\emph{crop and copy}).
-
-Pada arsitektur Gambar \ref{unet}, jalur kontraksi mengikuti arsitektur jaringan konvolusi seperti biasanya. Isinya aplikasi dari lapisan konvolusi $3 \times 3$ (\emph{unpadded convolution}), yang masing-masingnya diikuti oleh fungsi aktivasi ReLU dan operasi \emph{maxpooling} $2 \times 2$ dengan jumlah \emph{stride} 2 untuk \emph{downsampling}. Pada tiap langkah \emph{downsampling}, jumlah kanal fitur diperbanyak 2 kali lipat. Setiap langkah pada jalur ekspansi terdiri dari \emph{upsampling} peta fitur yang diikuti oleh konvolusi $2 \times 2$ (\emph{up-convolution}) yang membagi 2 jumlah kanal fiturnya . Kemudian penggabungan dengan peta fitur terkait yang dipotong dari jalur kontraksi, dan konvolusi $3 \times 3$ yang diikuti oleh fungsi aktivasi ReLU. Penggabungan peta fitur yang terpotong merupakan hal yang perlu dilakukan karena hilangnya batas piksel pada tiap konvolusi \citep{DBLP:journals/corr/RonnebergerFB15}. 
+% \section{Persamaan Diferensial Parsial}
+% \subsection{Persamaan Diferensial}
+% Suatu sistem yang cenderung berubah-ubah terhadap waktu akan lebih mudah untuk digambarkan perubahan yang terjadi ketimbang keadaan mutlak pada saat tertentu. Dalam berbagai bidang keilmuan, persamaan diferensial digunakan untuk menggambarkan perubahan yang terjadi pada suatu sistem. Persamaan diferensial mengandung fungsi yang tidak diketahui (yang merupakan solusi dari persamaan diferensial tersebut) dan beberapa turunannya. Namun, pencarian solusi yang eksplisit seringkali sulit didapat, sehingga dilakukan penyelesaian menggunakan grafik dan pendekatan numerik untuk mendapatkan informasi yang dibutuhkan \citep{stewart_2020_calculus}.  Apabila persamaan tersebut mengandung dua atau lebih variabel bebas, maka persamaan diferensial tersebut merupakan persamaan diferensial parsial (PDP) yang dihitung menggunakan derivatif parsial.
+% \subsection{Derivatif Parsial}
+% Derivatif parsial dalam sebuah fungsi dengan beberapa variabel adalah derivatif terhadap salah satu variabel, dengan menganggap variabel lainnya konstan \citep{robertalexanderadams_2014_calculus}. Dalam PDP dua variabel $f(x,y)$, misalnya, turunan (derivatif) terhadap $x$ didapat dengan menganggap persamaan tersebut adalah satu variabel dengan menganggap $y$ adalah tetap dan diperlakukan sebagai konstanta \citep{riley_2006_mathematical}. Secara formal, derifatif parsial dari persamaan $f(x,y)$ terhadap $x$ dapat dinyatakan sebagai berikut (dengan menganggap bahwa limitnya ada):
+% \begin{equation} \label{partial_limit}
+% \frac{\partial f}{\partial x} = \lim_{\Delta x\to\infty} \frac{f(x+\Delta x,y)-f(x,y)}{\Delta x}.
+% \end{equation}
+% \subsection{Persamaan Diferensial Parsial}
+% Berikut akan disajikan sebuah contoh persamaan diferensial parsial:
+% \begin{equation} \label{partial_orde_dua}
+%     A \frac{\partial^2 u}{\partial x ^2} + B\frac{\partial^2 u}{\partial x \partial y} + C\frac{\partial^2u}{\partial y ^2} = f(x,y),
+% \end{equation}
+% dengan $x$ dan $y$ merupakan variabel bebas, dan $u$ merupakan solusi yang akan dicari, dan $A, B, C$ merupakan fungsi yang diketahui dari $x$ dan $y$.
+
+% Secara umum, persamaan \eqref{partial_limit} dapat ditulis menjadi persamaan diferensial parsial yang lebih umum menjadi:
+% \begin{equation}\label{partial_umum}
+%     Lu = f,
+% \end{equation}
+% dengan $L$ merupakan operator diferensial, $u$ merupakan fungsi yang tidak diketahui (\emph{unknown}) atau solusi yang akan dicari, dan $f$ adalah fungsi yang diketahui. Apabila nilai $f$ pada persamaan \eqref{partial_umum} bernilai  $= 0$, maka persamaan tersebut disebut dengan persamaan diferensial parsial homogen. Sedangkan apabila nilai $f \neq 0$, maka persamaan tersebut disebut dengan persamaan diferensial parsial nonhomogen.
+
+% \subsection{PDP Orde Dua}\label{PDP_orde_dua}
+% Pada persamaan diferensial parsial, dikenal istilah orde yang merupakan turunan tertinggi dari fungsi yang ada pada PDP tersebut \citep{riley_2006_mathematical}. Dalam permasalahan fisika, jamak ditemukan pelibatan solusi dari PDP orde dua (yang bentuk umumnya ditampilkan pada Persamaan \eqref{partial_orde_dua})\citep{arfken_2013_mathematical}. Persamaan-persamaan diferensial parsial tersebut menggunakan operator diferensial berupa operator Laplacian: $\nabla ^ 2$. Salah satu contoh dari PDP orde dua yang cukup terkenal dan digunakan adalah persamaan Laplace:
+% \begin{equation}\label{laplace_umum}
+%     \nabla ^2 u = 0.
+% \end{equation}
+
+% Pada persamaan \eqref{laplace_umum} fungsi $u$ dapat berupa potensial gravitasi pada daerah yang tidak mengandung massa, potensial elektrostatis pada daerah tanpa muatan, temperatur keadaan tunak, atau potensial kecepatan untuk fluida mampat tanpa vortisitas dan tanpa sumber atau tenggelam \citep{riley_2006_mathematical}. Intinya, sisi kanan pada persamaan ini menggambarkan keadaan tanpa sumber atau gangguan. Solusi dari persamaan Laplace disebut fungsi harmonik \citep{stewart_2020_calculus}.
+
+% Sejalan dengan persamaan Laplace, persamaan Poisson juga menggambarkan kuantitas fisis yang sama pada persamaan Laplace pada ruas kanannya, hanya saja pada daerah yang mengandung massa, arus listrik, atau sumber panas atau fluida \citep{boas_2006_mathematical}. Persamaan Poisson yang penyelesaiannya akan menjadi bahasan utama di penulisan ini akan dijelaskan pada subbab yang lain.
+
+% Dalam PDP orde dua, persamaan-persamaan yang ada dapat diklasifikasikan menjadi beberapa jenis. Pengklasifikasian ini memberikan panduan mengenai syarat batas dan syarat awal yang tepat dan kehalusan dari solusi analitik. Sama seperti halnya pengklasifikasian irisan kerucut dan bentuk kuadrat ke dalam parabolik, hiperbolik, dan eliptik berdasarkan diskriminan, PDP orde dua juga dapat diklasifikasikan ke kelompok tersebut dengan nilai diskriminan $B^2 - AC$ pada bentuk persamaan \eqref{partial_orde_dua} \citep{yehudapinchover_2013_an}:
+% \begin{enumerate}
+%     \item $B^2 - 4AC < 0$: Persamaan diferensial parsial eliptik
+%     \item $B^2 - 4AC = 0$: Persamaan diferensial parsial parabolik
+%     \item $B^2 - 4AC > 0$: Persamaan diferensial parsial hiperbolik
+% \end{enumerate}
+
+% Persamaan Laplace dan persamaan Poisson merupakan jenis persamaan diferensial parsial eliptik dengan bentuk:
+% \begin{equation}\label{pdp_eliptik}
+%     \frac{\partial^2u}{\partial x^2} + \frac{\partial^2u}{\partial y^2}
+% \end{equation}
+% dengan $A = 1, B = 0, C = 1$, sehingga nilai diskriminannya adalah $0-4(1)(1) = -4 <0$
+
+% \section{Persamaan Poisson}
+% Persamaan Poisson adalah sebuah PDP yang menghubungkan antara persamaan Laplace persamaan \eqref{laplace_umum} dengan suku sumber tertentu, seperti yang sudah dibahas pada bagian \ref{PDP_orde_dua}.
+% \begin{equation}
+%     \nabla^2 u = \rho(\textbf{r})
+% \end{equation}
+% Fungsi $\rho(\textbf{r})$ inilah yang disebut sebagai suku sumber atau kepadatan sumber. Dalam aplikasi fisiknya, fungsi ini terdiri dari banyak konstanta fisika. Contohnya, jika $u$ adalah potensial elektrostatis pada sebuah ruang, maka $\rho$ adalah kepadatan muatan listrik, sehingga $\nabla^2 u = -\rho(\textbf{r})/\epsilon_{0}$, dengan $\epsilon_0$ adalah permitivitas ruang hampa. Dalam konteks lain, $u$ merupakan potensial gravitasi pada suatu ruang dengan kepadatan materinya diwakili oleh $\rho$; sehingga $\nabla^2 u = 4\pi G \rho (\textbf{r})$ \citep{riley_2006_mathematical}.
+
+% \subsection{Penurunan Persamaan Poisson}
+% Bentuk dari Hukum Gauss dapat ditampilkan dalam dua cara: hubungan antara medan listrik $\textbf{E}$ dan muatan listrik total, maupun dalam hubungan antara medan listrik perpindahan $\textbf{D}$ dengan muatan listrik bebas\citep{grant_1990_electromagnetism}. Hubungan antara medan listrik perpindahan $\textbf{D}$ dan muatan bebas digambarkan dengan hubungan sebagai berikut:
+% \begin{equation}\label{medan_perpindaha}
+%     \nabla \cdot \textbf{D} = \rho_{V}
+% \end{equation}
+% Seperti diketahui, bahwa $\textbf{D} = \epsilon \textbf{E}$. Sehingga persamaan \eqref{medan_perpindaha} dapat kita tuliskan kembali dengan:
+% \begin{equation}\label{epsilon_dot_e}
+%     \nabla \cdot (\epsilon \textbf{E}) = {\rho_V}
+% \end{equation}
+% Dengan asumsi medannya homogen pada ruang hampa, maka $\epsilon$ adalah konsntanta permitivitas ruang hampa:
+% \begin{equation}\label{epsilonpindahruas}
+%     \nabla \cdot \textbf{E} = \frac{\rho_V}{\epsilon}
+% \end{equation}
+% Hubungan antara medan listrik $E$ dan potensial listrik $V$ dapat digambarkan dengan persamaan \eqref{medan_listrik}:
+% \begin{equation}\label{medan_listrik}
+%     \textbf{E} = -\nabla V.
+% \end{equation}
+% Dalam persamaan tersebut dikatakan bahwa medan listrik merupakan gradien dari potensial skalar \citep{davidjeffreygriffiths_2018_introduction}. Maka persamaan \eqref{epsilonpindahruas} dapat kita tulis ulang menjadi:
+% \begin{equation}
+%     \nabla \cdot (\nabla V) = - \frac{\rho_V}{\epsilon}
+% \end{equation}
+% \begin{equation}\label{poisson umum}
+%     \nabla ^2 V = - \frac{\rho_V}{\epsilon}
+% \end{equation}
+% Persamaan \eqref{poisson umum} merupakan persamaan Poisson.
+
+% \section{Metode Numerik}
+% \subsection{Motivasi}
+% Dalam penyelesaian PDP, secara umum terdapat dua metode: metode analitikal dan metode numerik. Metode analitikal merupakan metode perhitungan langsung untuk mendapatkan perhitungan yang eksak. Namun, seringkali metode analitik tidak dapat menjangkau solusi dari PDP. Sehingga dibutuhkan pendekatan numerikal untuk mencari pendekatan numerik pada solusi PDP.
+
+% Berbagai penyelesaian dengan metode numerik membutuhkan metode iteratif, bahkan kadang rekursif, sehingga dibutuhkan teknologi yang dapat melakukan metode numerik secara cepat. Kini perhitungan metode numerik dapat dilakukan secara komputasional lewat berbagai aplikasi maupun pemrograman. Fokus pada metode ini adalah memodelkan PDP secara numerik sehingga dapar didiskritisasi melalui simulasi komputer \citep{wick_2022_numerical}.
+
+% Mengembangkan dan menganalisa algoritma untuk memecahkan masalah PDP dengan komputer adalah bagian dari metode numerik, yang merupakan bagian dari komputasi saintifik. Komputasi saintifik terbagi menjadi tiga bidang \citep{wick_2022_numerical}:
+% \begin{enumerate}
+%     \item Pemodelan matematika dan analisis objek
+%     \item Pengembangan metode numerik dan algoritma yang efisien dan dapat diandalkan, serta analisanya
+%     \item Pengembangan menggunakan perangkat lunak riset (implementasi dari algoritma yang ada)
+% \end{enumerate}
+% Yang menjadi tugas kunci (\emph{key task}) dari bidang tersebut adalah perancangan dan analisa algoritma. Tujuan utama dari algoritma adalah meformulasi sebuah skema sehingga dapat diimplementasikan ke komputer untuk menjalankan simulasi numerikal. Ada skema yang langsung yang memecahkan masalah hingga ke pembulatan kesalahannya (\emph{error}) seperti halnya eliminasi Gaussian, ada juga skema yang iteratif yang memberikan perkiraan pada solusi sampai pada akurasi tertentu, seperti halnya iterasi Richardson untuk memecahkan sistem persamaan linear. Algoritma dapat dianalisa pada akurasi, efisiensi, dan ketahanannya.
+
+% Dalam perhitungan numerik PDP secara umum, akan ditemukan ralat (\emph{error}) yang merupakan selisih dari hasil pendekatan numerik dengan hasil yang eksak. Misal sebuah PDP diajukan dalam ruang fungsi dan dianalisa:
+% \begin{itemize}
+%     \item Ruang fungsi $V$ dari solusi eksak $u$ (mungkin tidak diketahui). Maka $u \in V$.
+%     \item Ruang fungsi $\Tilde{V}$ dari solusi pendekatan $\Tilde{u}$. Maka $\Tilde{u} \in \Tilde{V}$
+% \end{itemize}
+% Diskretisasi numerik pada ruang dan waktu menghasilkan parameter $h$ dan $k$ untuk menghitung solusi pendekatan, yaitu $\Tilde{u}:=u_{hk}$. Kemudian dapat digambarkan diskretisasi ralat adalah
+% \begin{equation}
+%     \left \lvert u - u_{kh} \right \rvert \rightarrow  0 \quad untuk \quad  h \rightarrow 0, k \rightarrow 0
+% \end{equation}
+% Diskretisasi ralat ini adalah salah satu sumbanngan ralat pada hasil perhitungan PDP dengan metode numerik. Sumbangan ralat lainnya masih sangat mungkin akan terjadi sehingga harus dapat diterima bahwa kita tidak bisa menghindari ralat. Namun yang terpenting adalah mengontrol ralat dan menemukan pembahasan yang tepat apabila ralat yang dihasilkan terlalu besat sehingga memengaruhi interpretasi terhadap simulasi numerik, atau bahkan pembahasan yang tepat saat ralat dapat diabaikan.
+
+% Dalam \cite{richter_2017_einfhrung} (via \cite{wick_2022_numerical}), disimpulkan bahwa ada tujuh aspek yang merupakan karakteristik pemodelan numerik:
+% \begin{enumerate}
+%     \item Aproksimasi
+%     \item Konvergen
+%     \item Orde kekonvergenan
+%     \item Ralat
+%     \item Estimasi ralat
+%     \item Efisiensi
+%     \item Stabilitas
+% \end{enumerate}
+
+% Selanjutnya, akan disebutkan beberapa metode numerik yang lazim digunakan pada penyelesaian PDP:
+% \begin{enumerate}
+%     \item Metode beda hingga
+%     \item Metode garis
+%     \item Metode elemen terbatas
+%     \item Metode diskretisasi gradien
+%     \item Metode volume hingga
+%     \item Metode spektral
+%     \item Metode tanpa \emph{mesh}
+%     \item Metode dekomposisi domain
+%     \item Metode \emph{multigrid}
+%     \item Metode Gauss-Seidel
+% \end{enumerate}
+% Metode beda hingga merupakan metode yang paling mudah dan sering digunakan. Metode elemen hingga dan volume hingga sering digunakan pada bidang keteknikan dan komputasi fluida dinamik, dan cocok untuk permasalahan geometri yang rumit. Metode spektral secara umum paling akurat, dan hasilnya cukup halus.
+
+% Pada tulisan ini, akan digunakan metode Gauss-Seidel sebagai penghasil data latih dan data uji, serta sebagai pembanding dari metode \emph{machine learning} yang akan digunakan.
+
+% \section{Metode Gauss-Seidel}
+% \subsection{Skema Numerik}
+% Sebagai metode iteratif, metode Gauss-Seidel memiliki karakteristik umum untuk mereformulasi bentuk
+% \begin{equation}\label{linear}
+%    A\textbf{X} = \textbf{B}
+% \end{equation}
+%  menjadi
+% \begin{equation}
+%     \textbf{x}^{(n+1)} = M\textbf{x}^{(n)} + \textbf{c}
+% \end{equation}
+% dengan $n$ merupakan jumlah iterasi dan $M$ merupakan matriks iterasi dan $c$ merupakan vektor baru yang terbentuk dari proses reformulasi \citep{Blackledge2006}.
+
+% Pada persamaan \eqref{linear}, $A$ merupakan matriks persegi nonlinear dengan orde $N$, $X = (x_1, x_2, ..., x_N)^T$ adalah vektor yang tidak diketahui, dan $B$ merupakan matriks yang diketahui. Persamaan \eqref{linear} terdiri dari $N$ persamaan aljabar linear:
+% \begin{equation}\label{linear_matriks}
+%     \begin{split}
+%         a_{11}x_1 + a_{12}x_2 +        ...       + a_{1N}x_N = b_1,\\
+%         a_{21}x_1 + a_{22}x_2 +        ...       + a_{2N}x_N = b_2,\\
+%         a_{i1}x_1 + a_{i2}x_2 +    a_{ii}x_i     + a_{iN}x_N = b_i,\\
+%         a_{N1}x_1 + a_{N2}x_2 +        ...       + a_{NN}x_N = b_N.\\
+%     \end{split}
+% \end{equation}
+% Diasumsikan akan di selesaikan permasalahan \eqref{linear_matriks} secara iteratif. Dimulai dengan menginisialisasi dengan vektor aproksimasi $X^0 = (x_1^0, x_2^0, ..., x_N^0)^T$ yang berikutnya akan dijadikan solusi aproksimasi pada iterasi ke-$r$, $X^r = (x_1^r, x_2^r, ..., x_N^r)^T$. Dari nilai $X^r$ akan dicari aproksimasi yang lebih baik untuk nilai $X^{r+1}$.
+
+% Dalam metode Gauss-Seidel, terdapat pengembangan dari nilai konvergensi dibandingkan metode iteratif serupa, metode Jacobi. Pada metode Gauss-Seidel (atau metode perpindahan berturut), nilai yang ditemukan sebelumnya $x_1^{r+1}, x_2^{r+1}, ..., x_{i-1}^{r+1}$ digunakan untuk menyelesaikan persamaan ke-$i$ untuk $x_i^{r+1}$. Sehingga bentuk umum solusinya menjadi:
+
+% \begin{equation}\label{konfigurasi gauss seidel}
+%     \begin{split}
+%         x_i^{r+1} = \frac{1}{a_{ii}} \left(b_i-\sum_{j=1}^{i-1}a_{ij}x_j^{r+1} - \sum_{j=i+1}^N a_{ij}x_j^r \right)\\
+%         x_N^{r+1} = \frac{1}{a_{NN}} \left(b_N-\sum_{j=1}^{N-1}a_{Nj}x_j^{r+1}\right)
+%     \end{split}
+% \end{equation}
+
+% \subsection{Formalisme Umum}
+
+% Pada persamaan \eqref{linear}, matriks $A$ dapat dibagi menjadi diagonal bawah $L$, diagonal $D$ dan diagonal atas $U$:
+
+% \begin{equation}
+%     A = L + D + U.
+% \end{equation}
+
+% Kemudian,
+
+% \begin{equation}
+%     \begin{split}
+%         (L+D+U)x=b,\\
+%         Dx=-Lx-Ux+b,
+%     \end{split}
+% \end{equation}
+
+% dan
+
+% \begin{equation}
+%     x = -D^{-1}Lx - D^{-1} Ux+D^{-1}b
+% \end{equation}
+% dengan
+% \begin{equation}
+%     D^{-1} = diagonal(a_{11}^{-1}, a_{22}^{-1},...,a_{nn}^{-1}).
+% \end{equation}
+% Kemudian metode Gauss-Seidel dapat ditulis sebagai berikut:
+
+% \begin{equation}
+%     x^{n+1} = -D^{-1}Lx^{n+1}-D^{-1}Ux^n+D^{-1}b,
+% \end{equation}
+
+% dan setelah disusun ulang menjadi
+
+% \begin{equation}
+%     x^{n+1} = -(D+L)^{-1}Ux^{n}+(D+L)^{-1}b = Mx^n+c
+% \end{equation}
+
+% \subsection{Penambahan Parameter Relaksasi}
+% Secara umum, metode Gauss-Seidel dapat dikembangkan dengan menambahkan parameter \emph{sucessiver over-relaxation} (SOR) \citep{Bottoni2022}. Vektor $X^{r+1}$ yang diperoleh dari persamaan \eqref{konfigurasi gauss seidel} dianggap sebagai nilai sementara, misalkan $X^*$, dan nilai yang lebih baik dicari menggunakan persamaan:
+
+% \begin{equation}\label{gauss seidel with provisional value}
+%     X^{r+1} = X^r + \omega(X^* - X^r).
+% \end{equation}
+
+% yang merupakan bentuk simplikasi dari persamaan:
+% \begin{equation}\label{metode relaksasi}
+%     x_i^{r+1} = x_i^k+\frac{\omega}{a_{ii}} \left(b_i-\sum_{j=1}^{i-1}a_{ij}x_j^{r+1} - \sum_{j=i+1}^N a_{ij}x_j^r \right)
+% \end{equation}
+
+% Persamaan \eqref{gauss seidel with provisional value} menunjukkan bahwa nilai yang lebih baik $X^{r+1}$ dicari dengan menambahkan solusi sebelumnya $X^r$ dengan kenaikan ($X^* - X^r)$ kemudian dikali dengan parameter $\omega$, yang disebut dengan parameter relaksasi. Metode relaksasi menggunakan parameter relaksasi $\omega$ untuk 'menyetel' sistem agar jumlah iterasi yang dibutuhkan berkurang. Untuk alasan stabilitas, $\omega$ harus berada pada rentang ($0 \le \omega \le 2).$ Skema \eqref{gauss seidel with provisional value} disebut \emph{successive under-relaxation} (SUR) apabila $\omega \le 1$ dan \emph{successive over-relaxation} apabila $1 < \omega \le 2$. Saat $\omega$ = 1, $X^{r+1} = X^*$, yang artinya persamaan Gauss-Seidel.
+
+% Konvergensi persamaan Gauss-Seidel dapat diperiksa dengan kriteria toleransi larat yang diinginkan $\varepsilon_s$ \citep{chapra2015}:
+% \begin{equation}
+%     |\varepsilon_{ij}| = \left|\frac{x_{ij}^n-x_{ij}^{n-1}}{x_{ij}^n}\right| 100\% < \varepsilon_s,
+% \end{equation}
+% dengan $\varepsilon_{ij}$ merupakan ralat dari sebuah titik pada koordinat yang dihitung dengan mengoperasikan dengan titik yang sama pada iterasi ke-$n$ dan ke-$n-1$.
+
+% \subsection{Metode Gauss-Seidel untuk Penyelesaian Persamaan Poisson di Koordinat Kartesian Dua Dimensi}
+% Persamaan Poisson dua dimensi pada koordinat kartesian ($x,y$) diberikan oleh persamaan berikut:
+% \begin{equation}\label{poisson_kartesian}
+%     \left(\frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2}\right) \phi_{ij} = \frac{-\rho_{ij}}{\epsilon_{0}}
+% \end{equation}
+
+% Potensial listrik yang akan dicari yang berada pada titik $i$ dan $j$ pada bidang kartesian diwakili oleh simbol $\phi$. Distribusi partikel direpresentasikan oleh $\rho$ dan permitivitas bahan oleh $\epsilon_0$. Pembaruan langkah dari $x$ dan $y$ diwakili oleh simbol $\Delta x$ dan $\Delta y$. Kemudian $\phi(x,y)$ didiskretisasi pada titik ($x_i, y_j$). Titik ($x_i, y_j$) akan ditulis sebagai indeks ($i,j$) dan komponen $\phi(x,y)$ ditulis sebagai $\phi_{i,j}$. Dengan diasumsikan bahwa ada sebanyak $M$ titik sepanjang arah $x$ dan $N$ titik sepanjang arah $y$ yang membentuk \emph{mesh}, maka $i = 1, 2, ..., M$ dan $j = 1,2, ...,N$. Ukuran langkah sepanjang arah $x$ diwakili oleh $\Delta x$ dan arah $y$ oleh $\Delta y$. Untuk $x,y \neq 0$, digunakan skema \emph{central difference} untuk tiap suku pada persamaan \eqref{poisson_kartesian}:
+
+% \begin{equation}\label{diskrit kartesian}
+%     \begin{split}
+%         \frac{\partial^2}{\partial x^2} \phi=\frac{\phi_{i+1,j}-2 \phi_{ij}+\phi_{i-1, j}}{\Delta x^2}\\
+%         \frac{\partial^2}{\partial y^2} \phi = \frac{\phi_{i,j+1}-2 \phi_{ij}+\phi_{i, j-1}}{\Delta y^2}.
+%     \end{split}
+% \end{equation}.
+
+% Subtitusi persamaan \eqref{diskrit kartesian} ke \eqref{poisson_kartesian} menghasilkan:
+
+% \begin{equation}
+%     \frac{\phi_{i+1,j}-2 \phi_{ij}+\phi_{i-1, j}}{\Delta x^2}+\frac{\phi_{i,j+1}-2 \phi_{ij}+\phi_{i, j-1}}{\Delta y^2} = \frac{-\rho_{ij}}{\epsilon_{0}}.
+% \end{equation}
+
+% Dengan mempertimbangkan persamaan \eqref{konfigurasi gauss seidel} untuk iterasi, maka dihasilkan konfigurasi sebagai berikut:
+
+% \begin{equation}
+%     -2\left(\frac{1}{\Delta x^2} + \frac{1}{\Delta y^2}\right) \phi_{ij}^{n+1} = -\left(\frac{\phi^{n}_{i+1,j}+\phi^{n}_{i-1,j}}{\Delta x^2}-\frac{\phi^{n}_{i,j+1}+\phi^{n}_{i,j-1}}{\Delta y^2}\right),\\
+% \end{equation}
+
+% Disusun ulang menjadi:
+
+% \begin{equation}
+%     \phi^{n+1}_{ij} \left(\frac{\Delta y^2 + \Delta x^2}{\Delta x^2 \Delta y^2} \right) = \frac{\left(\frac{\phi^{n}_{i+1,\ j}+\phi^{n}_{i-1,\ j}}{\Delta x^2}\right)+\left(\frac{\phi^{n}_{i,\ j+1}+\phi^{n}_{i,\ j-1}}{\Delta y^2}+\frac{\rho_{ij}}{\epsilon_0}\right)}{2}
+% \end{equation}
+
+% \begin{equation}\label{GS_cartesian}
+%     \phi_{ij}^{n+1}=\frac{\left(\frac{\phi^n_{i+1,\ j}+\phi^n_{i-1,\ j}}{\Delta x^2}\right)+\left(\frac{\phi^n_{i,\ j+1}+\phi^n_{i,\ j-1}}{\Delta y^2}\right)+\frac{\rho_{i,j}}{\epsilon_0}}{2} \cdot \frac{\Delta x^2 \Delta y^2}{\Delta y^2 + \Delta x^2}
+% \end{equation}
+% Persamaan \eqref{GS_cartesian} merupakan persamaan penyelesaian Persamaan Poisson dua dimensi pada koordinat kartesian.
+
+% \subsection{Metode Gauss-Seidel untuk Penyelesaian Persamaan Poisson di Koordinat Silinder Dua Dimensi}\label{gauss_seidel_silinder}
+% Pada penelitian ini akan digunakan koordinat silinder pada sumbu $r$ dan $z$ (simetri aksial). Persamaan Poisson dua dimensi pada koordinat silinder ($r, z$) diberikan oleh persamaan \eqref{Poisson silinder awal} \citep{Shiferaw2013}:
+% \begin{equation}\label{Poisson silinder awal}
+%     \nabla ^2 \phi = \frac{\partial^2\phi}{\partial r^2} + \frac{1}{r}\frac{\partial \phi}{\partial r}+\frac{\partial^2\phi}{\partial z^2}=\frac{\rho_{ij}}{\epsilon_0}
+% \end{equation}
+
+% Potensial listrik yang akan dicari yang berada pada titik $i$ dan $j$ pada koordinat silinder diwakili oleh simbol $\phi$. Distribusi partikel direpresentasikan oleh $\rho$ dan permitivitas bahan oleh $\epsilon_0$. Pembaruan langkah dari $r$ dan $z$ diwakili oleh simbol $\Delta x$ dan $\Delta y$, Kemudian $\phi(r,z)$ didiskretisasi pada titik ($r_i, z_j$). Titik ($r_i, z_j$) akan ditulis dengan indeks ($i,j$) dan $\phi(r,z)$ ditulis sebagai $\phi_{i,j}$. Dengan diasumsikan bahwa ada sebanyak $M$ titik sepanjang arah $r$, dan $N$ titik sepanjang arah $z$ yang membentuk \emph{mesh}, maka $i = 1,2,...,M, j=1,2,...,N$. Ukuran langkah sepanjang arah $r$ diwakili oleh $\Delta r$ dan arah $z$ oleh $\Delta z$. Untuk $r \neq 0$, digunakan skema \emph{central difference} untuk tiap suku pada persamaan \eqref{Poisson silinder awal}:
+
+% \begin{equation}\label{diskretisasi_poisson_silinder}
+% \begin{split}
+%     \frac{\partial \phi}{\partial r} = \frac{\phi_{i+1,j}-\phi_{i-1,j}}{2\Delta r}\\
+%     \frac{\partial^2 \phi}{\partial r^2} = \frac{\phi_{i+1,j}-2\phi_{i,j}+\phi_{i-1,j}}{(\Delta r)^2}\\
+%     \frac{\partial^2 \phi}{\partial z^2} = \frac{\phi_{i,j+1}-2\phi_{i,j}+\phi_{i,j-1}}{(\Delta z)^2}
+% \end{split}
+% \end{equation}
+
+% Dengan subtitusi persamaan \eqref{diskretisasi_poisson_silinder} ke persamaan \eqref{Poisson silinder awal}, didapat persamaan:
+
+% \begin{equation}
+%     \frac{\phi_{i+1,j}-2\phi_{i,j}+\phi_{i-1,j}}{(\Delta r)^2} + \frac{\phi_{i+1,j}-\phi_{i-1,j}}{r_i 2 \Delta r} + \frac{\phi_{i,j+1}-2\phi_{ij}+\phi_{i-1,j}}{(\Delta z)^2}=\frac{-\rho_{ij}}{\epsilon_0}.
+% \end{equation}
+
+% Kemudian dilakukan perhitungan menghasilkan:
+% \begin{equation}
+%     \begin{split}
+%         \phi_{ij} &= \frac{\frac{\rho_{ij}}{\epsilon_0}+\left(\frac{\phi_{i+1,j}-\phi{1-1,j}}{r_i2\Delta r}\right)(\Delta r)^2 (\Delta z)^2 + \phi_{i-1,j}\left((\Delta z)^2+(\Delta r)^2\right)}{-2\left((\Delta r)^2 + (\Delta z)^2\right)}\\
+%         &+\frac{(\Delta z)^2 \phi_{i+1,j} + \phi_{i,j+1}(\Delta r)^2}{-2\left((\Delta r)^2 + (\Delta z)^2\right)}
+%     \end{split}
+% \end{equation}
+% Dengan mempertimbangkan persamaan \eqref{konfigurasi gauss seidel} untuk iterasi, maka dihasilkan konfigurasi persamaan iterasi Gauss-Seidel untuk persamaan Poisson 2 dimensi di koordinat silinder ($r,z$):
+
+% \begin{equation}\label{GS_silinder}
+%     \begin{split}
+%         \phi^{n+1}_{ij} = \frac{\frac{\rho_{ij}}{\epsilon_0}+\left(\frac{\phi^n_{i+1,j}-\phi^n_{i-1,j}}{r_i 2 \Delta r}\right)(\Delta r)^2(\Delta z)^2 + \phi^n_{i-1,j}((\Delta z)^2 + (\Delta r)^2) + (\Delta z)^2 \phi^n_{i+1,j} + \phi^n_{i,j+1}(\Delta r)^2}{-2((\Delta r)^2 + (\Delta z)^2)}
+%     \end{split}
+% \end{equation}
+
+% \section{Syarat Batas}
+
+% Dalam bidang persamaan diferensial, permasalahan nilai batas merupakan persamaan diferensial dengan sekumpulan pembatas tambahan yang disebut syarat batas \citep{zwilinger2022}. Solusi dari persamaan diferensial parsial umumnya tidak unik. Agar unik, persamaan diferensial parsial harus menggunakan syarat batas dan syarat awal \citep{waletPartial}. Syarat batas numerik muncul dalam proses implementasi numerik pada syarat batas fisis tertentu pada keadaan fisis sesungguhnya ataupun cuplikan domain (karena keterbatasan sumber daya komputasi)\citep{Brio2010}. Syarat batas menunjukkan perilaku dari sebuah fungsi pada batas area yang didefinisikan.
+
+% Untuk dapat digunakan, permasalahan nilai batas harus didefinisikan secara jelas. Artinya, bahwa dengan memberikan masukan untuk masalah tertentu, terdapat solusi yang unik yang bergantung terus menerus pada masukan tersebut. Masalah nilai batas memiliki kondisi yang ditentukan pada kondisi ekstrim (batas) dari variabel independen pada persamaan.
+
+% \subsection{Syarat Batas Dirichlet}
+% Syarat batas Dirichlet merupakan syarat batas yang menemukan nilai dari fungsi tersebut di syarat batas (syarat batas tipe pertama). Dalam persamaan diferensial parsial, syarat batas Dirichlet digambarkan secara matematis dengan contoh berikut:
+% \begin{equation*}
+%     \nabla^2 u = f(x),
+% \end{equation*}
+% dengan $\nabla$ merupakan operator laplace dan $f$ merupakan fungsi yang diketahui, maka syarat batas Dirichlet pada domain $\Omega \subset \textbf{R}^n$ memiliki bentuk:
+% \begin{equation}
+%     u(x) = f(x)\quad \quad \forall x \in \partial \Omega
+% \end{equation}
+
+% Dalam konteks persamaan Poisson, syarat batas Dirichlet dan interiornya diilustrasikan dalam Gambar \ref{gambar dirichlet}.
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=10cm]{gambar/dirichlet.png}
+%     \caption{Contoh geometri syarat batas Dirichlet pada persamaan Poisson di koordinat kartesian 2 dimensi ($x,y$) pada domain $\Omega$.\ \emph{Sumber: Penulis}}
+%     \label{gambar dirichlet}
+% \end{figure}
+
+% \subsection{Syarat Batas Neumann}
+% Syarat batas Neumann merupakan syarat batas yang menemukan nilai dari derivatif normal dari fungsi tersebut (syarat batas kedua). Dalam persamaan diferensial parsial, syarat batas Neumann digambarkan secara matematis dengan contoh berikut:
+% \begin{equation*}
+%     \nabla^2 y + y = f(x),
+% \end{equation*}
+
+% dengan $\nabla^2$ melambangkan operator Laplace, maka syarat bentuk syarat batas Neumannya pada domain $\Omega \subset \mathbf{R}^n$ menjadi:
+% \begin{equation}\label{NeumannBC}
+%     \frac{\partial y}{\partial \textbf{n}}(x) = f(x)\quad \forall x \in \partial \Omega,
+% \end{equation}
+% dengan $\mathbf{n}$ menunjukkan vektor normal eksterior ataupun interior pada batas $\partial\Omega$, dan $f$ adalah fungsi skalar yang diberikan.
+
+% Derivatif normal yang ditunjukkan pada sisi kiri persamaan \eqref{NeumannBC} didefinisikan sebagai berikut:
+% \begin{equation}
+%     \frac{\partial y}{\partial\mathbf{n}}(x) = \nabla y (x) \cdot \hat{\mathbf{n}}(x),
+% \end{equation}
+% dengan $\nabla y (x)$ mewakili gradien dari vektor $y(x)$, $\hat{\mathbf{n}}$ adalah unit normal, dan $\cdot$ sebagai operator \emph{inner product}.
+
+% \section{Pemelajaranan Mesin (\emph{Machine Learning})}
+% \subsection{Konsep Umum}
+% pemelajaranan mesin (US: \emph{machine learning}) adalah sekumpulan algoritma yang mencoba mengaktifkan kemampuan pemelajaranan komputer, sehingga mereka dapat belajar dari data atau pengalaman masa lalu \citep{bayen_2020_python}.
+% Tom Mitchell dapat menggambarkan konsep umum pemelajaranan mesin dengan singkat dan mudah dimengerti pada kata pengantar bukunya: bidang pemelajaranan mesin berkaitan dengan pertanyaan tentang bagaimana membuat program komputer yang secara otomatis meningkat seiring dengan meningkatnya pengalaman \citep{Mitchell1997}.
+
+% Mitchell memberikan sedikit formalisme mengenai pendapatnya tentang konsep umum pemelajaranan mesin tersebut: sebuah program komputer dikatakan belajar dari pengalaman \textbf{E} (\emph{experience}) sehubungan dengan beberapa kelas tugas \textbf{T} (\emph{task}) dan ukuran kinerja \textbf{P} (\emph{performance}), jika kinerjanya pada tugas \textbf{T}, yang diukur dengan \textbf{P}, meningkat dengan pengalaman \textbf{E}.
+
+% Istilah pemelajaran mesin digunakan dalam hal yang sangat umum dan merujuk pada teknik yang umum untuk mengekstrapolasi pola dari kumpulan yang besar atau kemampuan untuk membuat prediksi pada basis data yang baru tentang hal yang dipelajari melalui analisa yang tersedia dari data yang diketahui sebelumnya \citep{zocca_spacagna_slater_roelants_2017}
+
+% \subsection{Tipe-tipe pemelajaranan Mesin}
+% Biasanya, pemelajaranan mesin dibagi ke dalam dua kategori: pemelajaranan dengan pengawasan (\emph{supervised learning}) dan pemelajaranan tanpa pengawasan (\emph{unsupervised learning})\citep{zocca_spacagna_slater_roelants_2017}. Pengawasan dalam hal ini adalah pemberian label yang benar atau jawaban dari permasalahan yang akan dipecahkan. Informasi tersebut akan digunakan selama pelatihan (\emph{training}).
+
+% Dalam pemelajaranan dengan pengawasan, berdasarkan pada sifat luarannya, dapat dibagi ke dalam 2 algoritma: klasifikasi (\emph{classification}) dan regresi (\emph{regression}). Klasifikasi adalah algoritma yang mengeluarkan hasil berupa data kategori hasil pemelajaranan mengenai data latih yang diberikan. Sedangkan regresi merupakan algoritma yang menghasilkan data kuantitas dari sebuah data keadaan.
+
+% Dalam pemelajaranan tanpa pengawasan, yang merupakan algoritma tanpa label, dapat dibagi menjadi dua algoritma, yaitu pengklasteran (\emph{clustering}) dan pengurangan dimensi (\emph{dimensionality reduction}). Dalam algoritma pengklasteran, dibutuhkan ciri-ciri tersembunyi dari objek yang digunakan untuk dilakukan pengelompokkan. Algoritma pengurangan dimensi adalah sekelompok algoritma pemelajaranan tanpa pengawasan untuk mengurangi masalah dimensi yang lebih tinggi menjadi dimensi yang lebih rendah \citep{bayen_2020_python}.
+
+% Masih ada banyak tipe-tipe algoritma pemelajaranan mesin yang tidak dibahas karena tidak relevan dengan penelitian ini. Pada penelitian ini sendiri akan menggunakan tipe algoritma \emph{deep learning} untuk regresi, yaitu \emph{convolutional neural network} (CNN).
+
+% \subsection{Analisis Regresi}
+% Algoritma regresi merupakan jenis algoritma \emph{supervised learning} yang menggunakan fitur dari data masukan untuk memprediksi sebuah nilai (biasanya nilai kontinyu), seperti harga rumah yang diberi nilai masukan ukuran, usia, jumlah kamar mandi, jumlah lantai, lokasi, dan sebagainya \citep{zocca_spacagna_slater_roelants_2017}. Analisis regresi berusaha untuk mencari nilai dari parameter fungsi yang paling cocok pada dataset masukan. Tujuan utama dari analisis regresi adalah meminimalkan fungsi kerugian dengan mencari parameter yang pantas untuk fungsi pada data masukan yang mendekati data target dengan sangat baik \citep{zocca_spacagna_slater_roelants_2017}.
+
+% Regresi linear pada dasarnya adalah model linear. Misalnya, sebuah model yang mengasumsikan hubungan linear antara variabel masukan ($x$) dan variabel luaran tunggal ($y$). Lebih spesifik, $y$ dapat dihitung dari kombinasi linear dari variabel masukan $x$ \citep{brownlee_2016}.
+
+% Analisis regresi memiliki variabel respon berupa numerik, misalnya seperti memprediksi usia seseorang dari karakteristik orang tersebut. Ada dua langkah dalam membangun model regresi, yaitu:
+% \begin{enumerate}
+%     \item Langkah pemelajaranan
+%     \item Langkah regresi
+% \end{enumerate}
+
+% \section{Jaringan Saraf Buatan/ \emph{Neural Network} (NN)}
+% \emph{Neural network} merupakan algoritma \emph{deep learning} (pemelajaran dalam) yang merupakan metode yang bersifat hierarkis dan berlapis. Istilah berlapis ini yang kemudian memberi makna pada kata '\emph{deep}'. Disebut demikian karena model ini menggunakan banyak lapisan proses pemrosesan data (\emph{layers}). Setiap lapisan berisi \emph{node} yang melakukan serangkaian kalkulasi matematis dan masing-masing lapisan belajar untuk mengenali fitur yang berbeda dari masukan yang diberikan.
+
+% \emph{Deep learning} khususnya jaringan saraf buatan dapat dipahami sebagai proses pengektrakan otomatis fitur dari data dan menggunakannya untuk melakukan prediksi atau keputusan. Hal ini sangat berbeda dari metode pemelajaran mesin tradisional, yang pendefinisian fitur harus dilakukan secara manual dan kemudian diaplikasikan pada model pemelajaran mesin (Gambar \ref{deepflow})\citep{Li_Li_Gao}
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=10cm]{gambar/alur_deep_learning.png}
+%     \caption{Pemelajaran mesin tradisional membutuhkan ekstraksi fitur secara manual. Pemelajaran dalam (\emph{deep learning}) mengekstrak fitur secara otomatis dengan memberikan input pada lapisannya}
+%     \label{deepflow}
+% \end{figure}
+
+% Kemudian muncul pertanyaan mengenai awal inspirasi terbentuknya ide dasar mengenai pembentukan jaringan saraf buatan. Seperti halnya banyak penemuan yang diilhami oleh alam, begitupun dalam pembentukan model dari pemelajaran mesin yang cerdas, para ilmuwan berusaha untuk mencari inspirasi ke alam, dan didapatkanlah sebuah pemikiran bahwa algoritma dari sebuah mesin yang cerdas dapat diilhami pula dari sebuah mekanisme yang kompleks dan cerdas, yaitu arsitektur otak manusia \citep{aurélien_géron_2022}. Logika inilah yang menghasilkan jaringan saraf buatan, sebuah model pemelajaran mesin yang diilhami dari jaringan saraf manusia.
+
+% Satuan komputasional paling mendasar pada otak manusia adalah neuron yang saling terkoneksi dengan sinapsis. Setiap neuron menerima sinyal masukan dari dendrit dan menghasilkan sinyal luaran yang ditransmisikan sepanjang akson. Akson tersebut kemudian bercabang dan tersambung melalui sinapsis ke dendrit neuron lain.
+
+% Dalam model komputasional sebuah neuron, sinyal (misalnya $x_0$) yang dihantarkan melalui akson, berinteraksi berkali-kali (misalnya $w_0 x_0$) dengan dendrit lain berdasarkan kekuatan atau bobot sinaptik pada sinapsis yang bersangkutan (misalnya $w_0$). Bobot $w$ ini merupakan parameter yang dapat belajar dan mengontrol kekuatan pengaruh dari suatu neuron ke neuron lainnya.
+
+% Pada model yang sangat standar, dendrit membawa sinyal ke sel tubuh dan semuanya dijumlahkan. Apabila hasil penjumlahan akhir di atas ambang batas, neuron aktif dan meneruskan sinyal melalui akson. Dalam model komputasionalnya, pewaktuan (\emph{timing}) bukanlah hal yang penting, melainkan frekuensi penyampaian informasi. Dari interpretasi ini, kita memodelkan laju aktif dari neuron sebagai fungsi aktifasi $f$ yang merepresentasikan frekuensi lonjakan di sepanjang akson.
+
+% \begin{figure}[ht]
+%   \centering
+%   \begin{minipage}{0.45\textwidth}
+%     \centering
+%     \includegraphics[width=1\linewidth]{gambar/neuron.png} % Adjust the width as necessary
+%   \end{minipage}\hfill
+%   \begin{minipage}{0.45\textwidth}
+%     \centering
+%     \includegraphics[width=1\linewidth]{gambar/neuron_model.jpeg} % Adjust the width as necessary
+%   \end{minipage}
+%   \label{neuron_model}
+%   \caption{Kiri: Gambaran skema saraf biologis. Kanan: skema model matematis jaringan saraf buatan. \emph{Sumber: CS231n}}
+% \end{figure}
+
+% \subsection{Struktur Neural Network}
+% Disadur dari \cite{aurélien_géron_2022}, terdiri dari 4 bagian utama:
+% \begin{enumerate}
+%     \item \emph{Input layer}: Lapisan yang menerima data masukan. Setiap neuron dalam lapisan ini mewakili satu fitur data.
+%     \item \emph{Hidden layaer(s)}: Lapisan ini berada di antara lapisan masukan dan luaran. Jumlah lapisan dan neuron dalam bagian ini dapat bervariasi sesuai kompleksitas masalah.
+%     \item \emph{Weight connection}: \emph{Weights} atau bobot diterapkan pada tiap sambungan antara node untuk merepresentasikan seberapa penting pengaruh node tersebut pada hasil luaran.
+%     \item \emph{Output layer}: Lapisan ini memberikan hasil akhir dari jaringan saraf (selanjutnya, padanan kata \emph{neural network} akan ditulis sebagai jaringan saraf, tanpa kata buatan). Jumlah neuron dalam lapisan ini biasanya sama dengan jumlah kelas dalam masalah klasifikasi atau berjumlah satu neuron dalam masalah regresi.
+% \end{enumerate}
+
+% \subsection{\emph{Forward Propagation} (Perambatan Maju)}
+% Tahap ini merupakan langkah awal dalam proses belajar sebuah jaringan saraf. Dalam tahap ini, masukan $x$ dikirimkan melalui jaringan dari lapisan masukan ke lapisan luaran. Setiap neuron mengambil $x$ kemudian mengalikan dengan bobot $w$, menambahkan bias $b$ dan kemudian meneruskan hasil melalui fungsi aktivasi \citep{goodfellow_bengio_courville_2016}:
+% \begin{equation}
+%     s_i = w_i^T x_i +b_i
+% \end{equation}
+
+% yang kemudian diikuti oleh fungsi aktivasi nonlinear seperti pada Gambar \ref{feedforward}:
+% \begin{equation}
+%     y_i = h(s_i)
+% \end{equation}
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=12cm]{gambar/feedforward.png}
+%     \caption{Perkalian input dengan bobot pada unit neuron yang kemudian diteruskan dengan operasi dengan fungsi aktivasi. \emph{Sumber: \cite{szeliski_2011}}}
+%     \label{feedforward}
+% \end{figure}
+
+% $x_i$ merupakan masukan dari unit ke-$i$, $w_i$ dan $b_i$ berturut-turut adalah bobot dan bias yang dapat belajar, $s_i$ adalah luaran dari penjumlahan linear berbobot, dan $y_i$ adalah luaran final setelah $s_i$ masuk pada fungsi aktivasi $h$. Luaran dari tiap tahap lapisan akan menjadi input untuk lapisan selanjutnya. Lapisan pada jaringan saraf terhubung secara berurutan dengan lapisan saraf berikutnya seperti pada Gambar \ref{fully_connected}.
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=10cm]{gambar/fully_connected.png}
+%     \caption{\emph{Fully connected layer} \emph{Sumber: \cite{szeliski_2011}}}
+%     \label{fully_connected}
+% \end{figure}
+
+% Kita dapat menganggap semua unit dalam lapisan adalah sebuah vektor dengan kombinasi perhitungan linear sebagai berikut:
+
+% \begin{equation}
+%     s_l = W_lx_l
+% \end{equation}
+
+% dengan $x_l$ adalah masukan pada layer $l$, $W_l$ adalah matriks bobot, dan $s_l$ adalah penjumlahan berbobot. Kemudian kenonlinearan diterapkan berdasarkan elemen untuk dijadikan masukan untuk layer selanjutnya ($l+1$) dengan rumusan:
+
+% \begin{equation}
+%     x_{l+1} = y_l = h(s_l)
+% \end{equation}
+
+% Lapisan yang menggunakan matriks bobot penuh (padat) untuk kombinasi linier disebut lapisan terhubung penuh (\emph{fully connected layer} (FC)). Jaringan yang hanya berisi FC disebut dengan \emph{multi-layer perceptron} (MLP).
+
+% \subsection{Fungsi Aktivasi}
+% Secara biologis, jaringan saraf memiliki neuron yang memiliki fungsi tertentu untuk mengolah impuls tertentu. Begitupun dengan jaringan saraf buatan yang menggunakan fungsi aktivasi, yaitu fungsi yang mendefinisikan keadaan internal neuron untuk menghitung masukkan dari neuron lain \citep{zocca_spacagna_slater_roelants_2017}. Fungsi aktivasi bertugas mengubah masukan neuron menjadi luaran yang akan diteruskan ke neuron selanjutnya. Fungsi aktivasi disebut juga dengan fungsi transfer atau kenonlinearan karena mengubah kombinasi linear dari penjumlahan bobot menjadi model nonlinear dan terletak pada ujung tiap unit atau perceptron untuk memutuskan apakah akan mengaktifkan neuron tersebut \citep{elgendy_2020}. Tujuan dari fungsi aktivasi adalah untuk memperkenalkan nonlinearitas pada jaringan. Tanpa fungsi aktivasi, MLP akan berkelakuan mirip dengan perceptron tunggal, entah berapapun jumlah lapisannya. Fungsi aktivasi dibutuhkan untuk membatasi nilai luaran pada batas tertentu. Ada beberapa fungsi aktivasi, seperti ReLU (Rectified Linear Unit) dan tanh (Gambar \ref{fungsi_aktivasi}).
+
+% Pilihan fungsi aktivasi tergantung pada masalah yang sedang dihadapi dan arsitektur dari jaringan saraf yang digunakan. Pada penelitian ini, akan digunakan dua macam fungsi aktivasi, yaitu ReLU pada \emph{hidden layer} dan tanh pada \emph{output layer}.
+
+% \begin{figure}[ht]
+%   \centering
+%   \begin{minipage}{0.45\textwidth}
+%     \centering
+%     \includegraphics[width=1\linewidth]{gambar/relu1.png} % Adjust the width as necessary
+%   \end{minipage}\hfill
+%   \begin{minipage}{0.45\textwidth}
+%     \centering
+%     \includegraphics[width=1\linewidth]{gambar/tanh.png} % Adjust the width as necessary
+%   \end{minipage}
+%   \caption{Kiri: Fungsi aktivasi ReLU mengeliminasi semua nilai negatif dari masukan dengan metransformasi menjadi nilai nol. Kanan: Fungsi aktivasi tanh: apabila nilai masukan sangat besar atau sangat kecil, maka nilai gradien akan sangat kecil; mendekati nol. \emph{Sumber: \citep{elgendy_2020}}}
+%   \label{fungsi_aktivasi}
+% \end{figure}
+
+% \subsubsection{Fungsi Aktivasi \emph{Rectified Linear Unit} (ReLU)}
+% Fungsi aktivasi ReLU adalah fungsi bagian-positif (\emph{positive-part function}) yaitu menghasilkan fungsi identitas untuk argumen (masukkan) positif dan menghasilkan nol untuk masukkan lainnya \citep{Lederer2021}. Fungsi bagian-positif membiarkan masukan positif lewat tanpa diubah, tapi memotong masukan negatif (mengubah masukan negatif menjadi luaran nonnegatif). Secara matematis dapat digambarkan dengan persamaan \eqref{relu} dengan $z$ adalah elemen masukan:
+% \begin{equation}\label{relu}
+%     ReLU(z) =
+%     \begin{dcases}
+%         z & \text{jika } z \leq 0 \\
+%         0 & \text{jika } z < 0
+%     \end{dcases}
+% \end{equation}
+% Fungsi aktivasi ReLU sering digunakan pada berbagai model jaringan saraf tiruan karena sifat linearitasnya sehingga lebih mudah untuk dilatih dan menghasilkan performa yang lebih baik \citep{elgendy_2020}.
+
+% \subsubsection{Fungsi Aktifasi Tanh (\emph{Hyperbolic Tangent)}}
+% Fungsi aktivasi tanh adalah versi pergeseran dari fungsi sigmoid. Singkatnya, pada fungsi sigmoid membatasi nilai luaran pada rentang nilai 0 hingga 1, sedangkan pada tanh, membatasi nilai pada rentang nilai -1 hingga 1. Tanh bekerja dengan lebih baik daripada sigmoid pada karena memliki efek pemusatan data, sehingga memiliki rata-rata data mendekati 0, bukannya 0,5 seperti sigmoid, sehingga membuat pemelajaran untuk lapisan selanjutnya lebih mudah \citep*{elgendy_2020}. Fungsi tanh dirumuskan sebagai berikut untuk nilai masukan $z$:
+% \begin{equation}
+%     tanh(z) = \frac{sinh(z)}{cosh(z)} = \frac{e^x-e^{-x}}{e^x + e^{-x}}
+% \end{equation}
+
+% \subsection{\emph{Backward Propagation} (Perambatan Mundur)}
+% Konsep umum yang perlu kita pahami adalah bahwa setiap jaringan saraf adalah pendekatan pada sebuah fungsi. Sehingga hasil yang dihasilkan akan memiliki perbedaan nilai dari fungsi yang didekati. Nilai inilah yang kita sebut dengan kesalahan/ralat (\emph{error}) yang berusaha untuk kita minimalkan nilainya. Karena ralat yang muncul merupakan fungsi bobot (\emph{weights}), maka kita akan mengecilkan ralat terhadap nilai bobot. Secara matematis, himpunan titik-titik yang fungsinya nol mewakili suatu permukaan hiper (\emph{hypersurface}) dan untuk mencari titik minimum pada permukaan ini kita ingin memilih sebuah titik dan kemudian mengikuti kurva ke arah minimum \citep{zocca_spacagna_slater_roelants_2017}. Kesalahan ini kemudian dipropagasi mundur melalui jaringan, yang kemudian bobot antar neuron akan disesuaikan berdasarkan kesalahan tersebut. Proses ini dilakukan berulang-ulang hingga kesalahan mencapai nilai minimum atau setelah jumlah iterasi tertentu \citep{szeliski_2011}. Isitilah yang lebih matematis untuk mendefinisikan tentang perambatan mundur adalah menghitung gradien dari sebuah ekspresi melalui penerapan rekursif dari aturan rantai \citep{Li_Li_Gao}; menghitung gradien dari fungsi $f(\textbf{x})$ di $\textbf{x}$ ($\nabla f(\textbf{x})$) dengan $\textbf{x}$ adalah vektor masukan.
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=10cm]{gambar/backprop2.png}
+%     \caption{Perambatan maju (\emph{forward propagation}. \emph{Sumber: penulis}}
+%     \label{backprop}
+% \end{figure}
+
+% Sebagai contoh, akan digunakan 2 lapisan, satu sebagai lapisan masukan (\emph{input layer}) dan lapisan lainnya sebagai lapisan luaran (\emph{output layer}) pada Gambar \ref{backprop}. Misal kita notasikan $J$ sebagai galat (error) antara nilai $Layer 2$ dan $Layer 1$, dengan $y$ adalah fungsi aktivasi dengan input dari niai bobot $w_{i,j}$ dan nilai masukan dari \emph{Layer 1} $y_i$ dan luaran adalah nilai $y_j$.
+
+% Tujuan dari perambatan mundur adalah mencari nilai bobot dari nilai galat yang dihasilkan $\frac{\partial J}{\partial w_{i,j}}$. Dengan menggunakan aturan rantai, didapat rumusan:
+% \begin{equation}
+%     \frac{\partial J}{\partial w_{i,j}} = \frac{\partial J}{\partial y_j} \frac{\partial y_j}{\partial y_i} \frac{\partial y_i}{\partial w_{i,j}}
+% \end{equation}
+
+% \subsection{Fungsi Kerugian (\emph{Loss Function})}
+% Jaringan saraf dilatih menggunakan \emph{stochastic gradient descent} dan bobot diperbarui menggunakan algoritma perambatan mundur ralat \citep{brownlee_2019}. Dalam rangka mengoptimasi bobot, harus didefinisikan fungsi kerugian (\emph{loss function}) yang diminimalkan selama proses pelatihan \citep{szeliski_2011}.
+
+% Fungsi kerugian mengkuantifikasi jarak antara nilai sesungguhnya dan nilai hasil prediksi dari data target. Kerugian (\emph{loss}) biasanya merupakan angka nonnegatif yang semakin kecil, berarti nilainya semakin bagus \citep{goodfellow_bengio_courville_2016}.
+
+% Dalam optimisasi matematis dan teori keputusan, fungsi kerugian adalah fungsi yang memetakan kejadian atau nilai dari satu atau lebih variabel terhadap nilai kebenaran yang secara intuitif merepresentasikan harga yang terasosiasi dengan kejadian tersebut. Secara sederhana, fungsi kerugian adalah metode untuk mengevaluasi seberapa baik algoritma memodelkan set data \citep{shankar_2022}.
+
+% \subsubsection{Rerata Ralat Kuadrat (\emph{Mean Squared Error}/ MSE)/ \emph{L2 Loss}}\label{mse}
+% Untuk permasalahan regresi, fungsi kerugian yang paling umum digunakan adalah MSE atau fungsi kerugian L2 \citep{szeliski_2011}:
+
+% \begin{equation}
+%    MSE = \frac{1}{n} \sum\limits_n E_n(\textbf{w}) = \frac{1}{n}\sum\limits_n ||\textbf{y}_n - \textbf{t}_n||^2
+% \end{equation}
+
+% dengan $\textbf{y}_n$ merupakan prediksi dari jaringan untuk sampel sejumlah $n$ dan $\textbf{t}_n$ merupakan nilai target dari data latih.
+
+% \subsubsection{Rerata Presentasi Ralat Absolut (\emph{Mean Average Percentage Error}/ MAPE) }
+% Contoh lain untuk mengukur kualitas regresi adalah dengan MAPE. MAPE seringkali digunakan karena sangat intuitif diinterpretasikan sebagai ralat relatif \citep{DEMYTTENAERE201638}. Untuk $x$ sebagai masukan dari model regresi, $g$ merupakan model regresi, dan $y$ adalah nilai target dari data latih, maka MAPE dirumuskan dengan:
+% \begin{equation}\label{mape}
+%     MAPE = \frac{1}{n} \sum \limits_n \left(\frac{|g(\textbf{x})-\textbf{y}|}{|\textbf{y}|}\right)
+% \end{equation}
+
+% \section{Jaringan Saraf Konvolusional/ \emph{Convolutional Neural Network} (CNN)}
+% \subsection{CNN pada \emph{Deep Learning}}
+% \emph{Convolutional Neural Network} (selanjutnya akan disebut dengan CNN) merupakan pengembangan dari jaringan saraf buatan (\emph{artificial neural network (ANN)/ neural network (NN)}). Pada dasarnya, CNN masih sama dengan jaringan saraf reguler. Perbedaan utamanya adalah bahwa arsitektur CNN membuat asumsi secara gamblang bahwa masukannya adalah gambar. Hal ini membuat perambatan maju lebih efisien serta mengurangi jumlah parameter pada jaringan secara signifikan \citep{Li_Li_Gao}.
+
+% Lebih lanjut lagi, meskipun jaringan saraf reguler dapat memecahkan masalah dengan gambar, namun tidak dapat menskala-ulang (\emph{rescale}) keseluruhan gambar. Hal ini menimbulkan masalah karena gambar yang dijadikan masukan tetap pada ukuran asli, sehingga membutuhkan banyak parameter, dan terlalu banyak parameter dapat menyebabkan \emph{overfitting} \citep{Li_Li_Gao}.
+
+% Ide utama dari CNN adalah menggunakan lapisan (\emph{layer}) (biasa disebut dengan filter) yang mempunyai tugas spesifik masing-masing untuk memanipulasi gambar untuk mendapatkan fitur tertentu pada gambar \citep{zocca_spacagna_slater_roelants_2017}. Filter yang telah berisi berbagai macam fitur tersebut akan diteruskan kepada node-node pada \emph{layer} yang lainnya untuk digabungkan dan dikenali berdasarkan hasil latihan yang dilakukan.
+
+% Dalam jaringan saraf reguler, gambar diperlakukan sebagai vektor kolom dengan cara me-\emph{flatten} tanpa memperhatikan hubungan spasial antar piksel \citep{zhang2023dive}. Idealnya, jaringan dapat memanfaatkan pengetahuan bahwa piksel yang berdekatan biasanya terkait satu sama lain, untuk membangun model yang efisien untuk belajar dari data gambar \citep*{zhang2023dive}
+
+% Dari keuntungan mengenai wawasan spasial dari jaringan, dibanding NN, CNN dapat memebentuk model yang lebih akurat dengan cara yang efisien. Hal tersebut dikarenakan CNN membutuhkan parameter yang lebih sedikit dan pada CNN juga lebih mudah untuk diterapkan perhitungan paralel menggunakan \emph{graphic processing unit} (GPU) \citep{chetlur2014cudnn}.
+
+% \subsection{Lapisan Konvolusi (\emph{convolution layer})}
+% Setelah kita hijrah dari jaringan saraf reguler ke jaringan saraf konvolusi, kita dikenalkan dengan berbagai keuntungan yang sekaligus menjadi prinsip dalam jaringan saraf konvolusi. Salah satu prinsip tersebut adalah translasi invarian \citep{1992SPIE.1709..257Z}. Hal ini berarti pergeseran pada masukan $\textbf{X}$ membuat pergeseran pada lapisan tersembunyi (\emph{hidden layer}) $\textbf{H}$ (keduanya merupakan matriks 2 dimensi dengan ukuran yang sama). Agar setiap unit/neuron pada lapisan tersembunyi menerima masukan dari tiap unit masukan, penggunaan bobot seperti pada jaringan saraf reguler akan diubha menjadi penggunaan parameter $\textbf{V}$.Dengan $u$ adalah bias (konstan), maka lapisan tersembunyi pada CNN didefinisikan sebagai:
+
+% \begin{equation}\label{konvolusi_real}
+%     [\textbf{H}]_{i,j} = u + \sum\limits_a \sum\limits_b [\textbf{V}]_{a,b} [\textbf{X}]_{i+a,j+b}
+% \end{equation}
+
+% Persamaan \eqref{konvolusi_real} merupakan persamaan konvolusi. Pada persmaan tersebut, masukan $\textbf{X}$ pada indeks $(i+a, j+b)$ diberikan bobot secara efektif dengan koefisien $[\textbf{V}]_{a,b}$ untuk mendapatkan nilai $[\textbf{H}]_{i,j}$ \citep{zhang2023dive}. Dalam komunitas penelitian pemelajaran mendalam (\emph{deep learning}), \textbf{$V$} dikenal sebagai lapisan konvolusi (\emph{convolution layer}), filter, atau lapisan bobot yang merupakan parameter yang dapat belajar \citep{zhang2023dive}.
+
+% Berdasarkan deskripsi tersebut, pada tiap lapisan, matriks masukan dan matriks konvolusi (\emph{kernel}) memproduksi matriks luaran melalui operasi korelasi silang (\emph{cross-correlation}).
+
+% Operasi korelasi silang ditemukan pada filter atau \emph{kernel} konvolusional yang beroperasi pada  gambar dan melakukan perhitungan \emph{dot product}. Setiap filter akan mengekstrak fitur-fitur yang berbeda dari gambar \citep{patel_2020}.
+
+% Sebagai contoh, akan digunakan \emph{kernel} dengan ukuran $3\times 3$ dan ukuran gambar masukan $5\times 5$. Akan dilakukan perkalian berdasarkan elemen (\emph{element-wise}) antara nilai warna piksel dari gambar yang cocok dengan ukuran filter dengan filter itu sendiri, dan kemudian dijumlahkan untuk mendapatkan nilai tunggal.
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=10cm]{gambar/convolution-operation1.png}
+%     \caption{Operasi konvolusi pertama. \emph{Sumber: \citep{patel_2020}}}
+%     \label{convolution_operation}
+% \end{figure}
+
+% Pada Gambar \ref{convolution_operation}, operasi yang dilakukan adalah sebagai berikut:
+% $(2 \times 1) + (4 \times 2) + (9 \times 3) + (2 \times (-4)) + (1 \times 7) + (4 \times 4) + (1 \times 2) + (1 \times (-5)) + (2 \times 1) = 51  $
+
+% Kemudian filter konvolusional melanjutkan operasinya dengan bergeser satu sel ke kanan:
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=10cm]{gambar/convolution-operation.png}
+%     \caption{Operasi konvolusi kedua. \emph{Sumber: \citep{patel_2020}}}
+%     \label{operasi_konvolusi_kedua}
+% \end{figure}
+
+% Operasi konvolusi dari filter tersebut adalah: $(4 \times 1) + (9 \times 2) + (1 \times 3) + (1 \times (-4)) + (4 \times 7) + (4 \times 4) + (1 \times 2) + (2 \times (-5)) + (9 \times 1) = 66 $
+
+% Filter tersebut akan terus berjalan dari kiri ke kanan, menuju bawah, hingga tiba pada bagian pojok kanan bawah dengan bergeser 1 piksel. Jumlah pergeseran filter ini dinamakan \emph{stride}. Ukuran \emph{stride} berpengaruh terhadap ukuran fitur (\emph{feature}) yang dihasilkan. Sehingga ukuran fitur secara lengkap yang dihasilkan adalah:
+
+% \begin{equation}\label{ukuran_fitur}
+%     ukuran\ fitur = \left(\frac{ukuran\ gambar - ukuran\ filter}{\emph{stride}}\right) + 1
+% \end{equation}
+
+% Neuron pada lapisan konvolusi pertama tidak terkoneksi pada tiap piksel pada gambar masukan, melainkan hanya piksel pada bidang reseptif (\emph{receptive fields}) (Gambar \ref{receptive_fields}). Selanjutnya, tiap neuron pada lapisan konvolusi kedua hanya terhubung pada neuron yang terletak di dalam persegi kecil pada lapisan pertama. Struktur arsitektur demikian membuat jaringan tersebut berkonsentrasi pada fitur kecil tingkat rendah pada lapisan konvolusi pertama, dan kemudian menyusun fitur-fitur tersebut pada tingkat yang lebih besar di lapisan selanjutnya, dan seterusnya \citep{aurélien_géron_2022}.
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=10cm]{gambar/snapedit_1694621260840.png}
+%     \caption{Lapisan konvolusi dengan bidang reseptif persegi . \emph{Sumber: \citep{aurélien_géron_2022}}}
+%     \label{receptive_fields}
+% \end{figure}
+
+% \subsection{\emph{Padding}}
+% Dalam persamaan \eqref{ukuran_fitur}, apabila kita aplikasikan pada $240 \times 240$ piksel gambar dengan $10$ layer matriks konvolusi $5 \times 5$, maka akan dihasilkan luaran matriks $200 \times 200$, yang artinya, layer konvolusi mereduksi $30\%$ informasi tentang batas-batas gambar aslinya. Isu demikian dapat diatasi dengan \emph{Padding} \citep{zhang2020dive}.
+
+% \emph{Padding} adalah proses penambahan piksel pada pinggiran gambar asli agar hasil luaran yang diinginkan menjadi lebih besar. Ide awal dari \emph{padding} adalah bahwa piksel di sudut gambar sangat jarang terkena operasi konvolusi sehingga piksel tersebut kurang berkontribusi pada luaran dari operasi konvolusi. Maka ditambahkanlah \emph{padding} pada tepi batas dari matriks masukan agar peran dari piksel tepi digantikan oleh piksel \emph{padding} sehingga luaran yang dihasilkan dapat sama dari masukan. Biasanya digunakan nilai $0$ pada piksel \emph{padding} (disebut dengan istilah (\emph{zero-padding}) \citep{Li_Li_Gao}.
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=10cm]{gambar/padding.png}
+%     \caption{Contoh penggunaan \emph{padding} pada gambar asli ukuran $3 \times 3$.\\ \emph{Sumber: dokumen penulis}}
+%     \label{padding}
+% \end{figure}
+
+% Secara umum, suatu matriks masukan sebesar $n_h \times n_w$ yang dioperasikan pada kernel konvolusi $k_h \times k_w$ dan kemudian ditambah jumlah baris \emph{padding} $p_h$ (di atas dan di bawah) dan jumlah kolom \emph{padding} $p_w$ (di kiri dan di kanan), maka akan menghasilkan luaran dengan bentuk:
+% \begin{equation}
+%     \left(n_h - k_h + p_h +1\right) \times \left(n_w - k_w + p_w + 1\right)
+% \end{equation}
+
+% \subsection{Lapisan Penyatuan (\emph{Pooling Layer})}
+% \emph{Pooling layer} atau lapisan penyatuan berfungsi untuk mengurangi ukuran spasial dari fitur hasil operasi konvolusi dan membantu mengurangi \emph{overfitting} \citep{zocca_spacagna_slater_roelants_2017}. Operasi \emph{pooling} yang paling jamak digunakan adalah \emph{max-pooling}, yang membuat kisi (\emph{grid}) pada tiap potongan fitur dan kemudian mengambil nilai piksel yang paling besar pada tiap kisi dan mengabaikan yang lain. \emph{Pooling layer} tidak menambahkan parameter baru, karena hanya mengekstraksi nilai (yang tertinggi, misalnya) tanpa membutuhkan tambahan bobot atau bias.
+% \begin{figure}[h]
+%     \centering
+%     \includesvg[width=5cm]{max_pooling}
+%     \caption{Ilustrasi \emph{max pooling layer} dengan ukuran $2 \times 2$ dan \emph{stride} = 2 dikenakan pada fitur dengan ukuran $4 \times 4$. \emph{Sumber: penulis.} }
+%     \label{max_pooling}
+% \end{figure}
+
+% \emph{Pooling layer} memiliki dua parameter yaitu ukuran sel dan \emph{stride}. Dapat dirumuskan bentuk luaran dari hasil operasi \emph{pooling layer}. $I$ merupakan masukkan (\emph{input}) atau layer fitur hasil konvolusional, $F$ merupakan ukuran \emph{pooling layer} dan $S$ merupakan \emph{stride} dari \emph{pooling layer}. Indeks $w$ dan $h$ merupakan representasi dari lebar (\emph{width}) dan tinggi (\emph{height}) secara berturut-turut.
+
+% \begin{equation}\label{max_pooling}
+% \begin{split}
+%     O_w = \frac{(I_w - F_w)}{S_w} + 1\\
+%     O_h = \frac{(I_h - F_h)}{S_h} + 1
+% \end{split}
+% \end{equation}
+
+% Operasi \emph{max pooling} bukanlah satu-satunya operasi penyatuan (\emph{pooling}). Ada beberapa operasi penyatuan lain, misalnya \emph{average pool} yang mengambil nilai rata-rata dari piksel yang dikenai oleh \emph{pooling layer}, atau $L^2$ yang merupakan akar pangkat dari jumlah nilai piksel. Dibandingkan dengan operasi penyatuan yang lain, \emph{max pooling} memiliki peforma yang paling baik karena mereduksi \emph{noise} dengan mengabaikan piksel \emph{noisy} yang nilainya kecil \citep{patel_2020}.
+
+% \subsection{Arsitektur CNN}
+% Telah ditinjau bahwa CNN umumnya terdiri dari tiga tipe lapisan: konvolusional, \emph{pooling}, \emph{fully conected} (FC). Bentuk paling umum dari arsitektur CNN adalah tumpukkan dari beberapa pasangan konvolusional-ReLU yang diikuti oleh \emph{pooling layer}, dan kemudian pola ini terus berulang hingga gambar input dipadatkan secara spasial menjadi ukuran yang lebih kecil. Lapisan akhir \emph{fully-connected} menghasilkan luaran yang dikehendaki, misalnya kategori untuk klasifikasi ataupun hasil pada regresi. Dengan kata lain, arsitektur paling umum dari CNN adalah sebagai berikut:
+
+% \begin{equation*}
+%     \begin{split}
+%         MASUKAN \rightarrow &[[KONVOLUSIONAL \rightarrow RELU]*N \rightarrow POOL]\\
+%         &*M \rightarrow [FC \rightarrow RELU]*K \rightarrow FC
+%     \end{split}
+% \end{equation*}
+
+% dengan $*$ mengindikasikan perulangan (repetisi), dan $POOL$ merupakan langkah \emph{pooling} yang opsional. Jumlah perulangan $N, M, K$ masing-masing lebih dari sama dengan $0$. Biasanya, $N \leq 3$ dan $K < 3$ \citep{zhang2020dive}.
+
+% \subsection{U-Net}\label{sub_unet}
+% U-Net pertama kali diperkenalkan oleh Olaf Ronneberger, Philipp Fischer, dan Thomas Brox untuk segmentasi biomedis \citep{DBLP:journals/corr/RonnebergerFB15}, dan kemudian mulai banyak digunakan pada komunitas ML-CFD (\emph{Machine Learning - Computation Fluid Dynamics}) \citep{DBLP:journals/corr/abs-2109-13076}.
+
+% Arsitektur ini menggunakan lapisan konvolusi pada semua lapisannya (\emph{fully convolutional layer}). \cite{DBLP:journals/corr/LongSD14} menunjukkan bahwa \emph{fully convolutional layer} pada segmentasi gambar dapat bekerja dengan lebih efisien dan lebih canggih dari arsitektur lainnya tanpa permesinan (\emph{machinery}) lebih lanjut.
+
+% Model U-Net merupakan modifikasi dari model \emph{fully connected layer} yang awalnya dicetuskan oleh \cite{DBLP:journals/corr/LongSD14}. \cite{DBLP:journals/corr/RonnebergerFB15} memodifikasi dan memperpanjang arsitektur yang ada sehingga dapat bekerja dengan beberapa gambar latih dan menghasilkan segmentasi yang lebih presisi (Gambar \ref{unet}).
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=10cm]{gambar/snapedit_1694701272217.png}
+%     \caption{Arsitektur U-Net. Tiap kotak biru menunjukkan peta fitur multi kanal. Jumlah kanal ditunjukkan di atas kotak. Ukuran $x-y$ ditunjukkan di tepi kiri bawah kotak. Kotak putih menunjukkan peta fitur yang disalin. Panah menunjukkan operasi-operasi yang terjadi. \emph{Sumber: \citep{DBLP:journals/corr/RonnebergerFB15}}}
+%     \label{unet}
+% \end{figure}
+
+% Modifikasi yang cukup signifikan terletak pada bagian \emph{upsampling}. Pada bagian ini, masukan yang ukuran spasialnya sudah lebih kecil dari matriks masukan dinaikkan lagi ukurannya (\emph{upsampling}). Pada bagian ini, sejumlah besar kanal fitur memungkinkan jaringan untuk menyebarkan informasi konteks ke lapisan resolusi yang lebih tinggi. Sebagai konsekuensinya, jalur ekspansif (sebelah kanan) kurang lebih simetris dengan jalur kontraksi (sebelah kiri) dan menghasilkan arsitektur berbentuk huruf U. Jaringan ini tidak memiliki \emph{fully connected layer} dan hanya menggunakan bagian yang valid dari setiap luaran konvolusi, yaitu peta segmentasi yang hanya berisi piksel, yang konteks lengkapnya tersedia di dalam gambar masukan. Untuk memprediksi piksel di wilayah perbatasan gambar, konteks yang hilang diekstrapolasi dengan mencerminkan gambar masukan (\emph{crop and copy}).
+
+% Pada arsitektur Gambar \ref{unet}, jalur kontraksi mengikuti arsitektur jaringan konvolusi seperti biasanya. Isinya aplikasi dari lapisan konvolusi $3 \times 3$ (\emph{unpadded convolution}), yang masing-masingnya diikuti oleh fungsi aktivasi ReLU dan operasi \emph{maxpooling} $2 \times 2$ dengan jumlah \emph{stride} 2 untuk \emph{downsampling}. Pada tiap langkah \emph{downsampling}, jumlah kanal fitur diperbanyak 2 kali lipat. Setiap langkah pada jalur ekspansi terdiri dari \emph{upsampling} peta fitur yang diikuti oleh konvolusi $2 \times 2$ (\emph{up-convolution}) yang membagi 2 jumlah kanal fiturnya . Kemudian penggabungan dengan peta fitur terkait yang dipotong dari jalur kontraksi, dan konvolusi $3 \times 3$ yang diikuti oleh fungsi aktivasi ReLU. Penggabungan peta fitur yang terpotong merupakan hal yang perlu dilakukan karena hilangnya batas piksel pada tiap konvolusi \citep{DBLP:journals/corr/RonnebergerFB15}. 
