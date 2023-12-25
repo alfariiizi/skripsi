@@ -1,5 +1,101 @@
 \chapter{DASAR TEORI}
 
+\section{Pengantar GPU dan \emph{General Purpose GPU} (GPGPU)}
+
+\subsection{Sejarah dan perkembangan GPU}
+
+% #### Awal Mula dan Evolusi Awal
+
+Dalam sejarahnya, \emph{Graphics Processing Unit} (GPU) awalnya dirancang untuk mempercepat
+pemrosesan gambar pada komputer. Pemrosesan gambar yang memerlukan GPU pada
+awalnya hanya dibutuhkan untuk permainan video game. Pada tahun 1970-an hingga 1980-an,
+beberapa perangkat yang mengadopsi sistem paralel seperti GPU diantara nya
+adalah Atari 2600 dan ARTC HD63484 \citep{wikipediaGraphicsProcessingUnit2023}.
+
+Perkembangan GPU untuk komputer pribadi dimulai pada tahun 1980-an. Pada awal
+tahun tersebut, terdapat produk NEC µPD7220 yang menjadi implementasi pertama dari
+GPU yang dapat digunakan pada komputer pribadi. Produk NEC µPD7220 ini mempunyai
+harga terjangkau dan kualitas grafis yang tinggi, sehingga membuat GPU ini terkenal
+hingga pertengahan tahun 1980-an. Pada tahun 1985, muncul produk baru bernama Amiga
+dengan menggunakan kustom chip grafis. Amiga ini dapat digunakan untuk
+menggambar garis, memanipulasi bitmap, dan melakukan isian warna pada suatu area
+\citep{wikipediaGraphicsProcessingUnit2023}.
+
+Dalam perkembangannya, NVIDIA memperkenalkan GPU pertama mereka yang bernama
+NVIDIA GeForce 256. GPU ini mampu melakukan pemrosesan grafis secara \emph{real-time},
+dan mampu melakukan banyak perhitungan floating-point dari tahan shading vertex
+hingga tahap shading fragment. NVIDIA GeForce 256 juga memiliki bandwidth memori
+yang tinggi \citep{dallyEvolutionGraphicsProcessing2021}. Pada tahun berikutnya,
+NVIDIA memperkenalkan NVIDIA GeForce 8 dengan unit pemrosesan stream generik
+yang baru. NVIDIA GeForce 8 menunjukkan kemajuan performa komputasi yang jauh lebih
+baik daripada CPU. Dari perbedaan performa inilah kemudian para peneliti
+menemukan cara untuk mengubah shader vertex dan shader fragment, menjadi suatu data
+yang dapat diolah oleh GPU secara paralel. Proses penggunaan GPU untuk melakukan
+komputasi umum secara paralel disebut dengan \emph{General Purpose GPU} atau GPGPU.
+Beberapa bidang yang menggunakan GPGPU ini diantara lain adalah bidang
+pembelajaran mesin, eksplorasi minyak, aljabar linear, statistik, rekonstruksi
+3D, dan penetapan harga opsi saham \citep{wikipediaGraphicsProcessingUnit2023}.
+
+Pada perkembangannya, GPU telah mengalami perubahan bentuk ukuran, daya, kinerja,
+dan harga. Hal ini membuat GPU membukakan jalan bagi inovasi lebih lanjut di berbagai
+bidang. Dari yang awalnya hanya digunakan untuk bermain video game saja, menjadi
+komponen yang diperlukan di smartphone, \emph{virtual reality}, pembelajaran
+mesin, mobil tanpa pengemudi, pesawat ruang angkasa, robot, perangkat rumah
+pintar, dan banyak bidang lainnya \citep{businesswireHistoryGPUInception2023}.
+
+\subsection{Transisi GPU dari pemrosesan grafis ke GPGPU}
+
+% #### Kemajuan Teknologi dan Penemuan GPGPU
+Perkembangan GPGPU menjadi lebih praktis dan populer setelah tahun 2001, dengan
+munculnya shader yang dapat diprogram dan mendukung \emph{floating point} pada prosesor
+grafis. Masalah yang melibatkan vektor dan matriks yang mempunyai n-dimensi
+dapat dengan mudah diterjemahkan dan diproses oleh GPU. Pada tahun 2003,
+ditemukan pendekatan berbasis GPU untuk solusi masalah aljabar linear umum. Pendekatan
+pada GPU ini berjalan lebih cepat daripada pendekatan yang menggunakan CPU.
+Perbedaan kecepatan ini merupakan tonggak awal GPGPU menjadi banyak digunakan
+untuk masalah komputasi umum \citep{wikipediaGeneralpurposeComputingGraphics2023}.
+\cite{pharrGPUGemsProgramming2005} menyatakan bahwa pada bidang ilmu komputer
+dan visualisasi, GPGPU juga menunjukkan hasil yang baik. Hasil yang baik ini
+dapat dicapai dengan menerapkan GPU pada masalah komputasi data-paralel.
+
+% #### Arsitektur GPU dan Pemrograman GPGPU
+Memaksimalkan kinerja dari GPU memerlukan pemahaman tentang arsitekturnya. GPU dirancang
+untuk grafis komputer yang memiliki gaya komputasi paralel tinggi dan menghasilkan
+output piksel berwarna dari elemen data yang independen. Desain ini adalah kunci
+saat memprogram GPU, baik untuk grafis maupun komputasi umum. Pemrograman GPU
+untuk masalah komputasi umum awalnya tertanam dalam API (\emph{Application
+Programming Interface}) dan bahasa pemrograman grafis komputer. Dalam
+perkembangannya, API dan bahasa pemrograman grafis disederhanakan, dimana
+menghasilkan API seperti CUDA dari NVIDIA, DirectCompute dari Microsoft, dan
+OpenCL dari Apple/Khronos Group. API tersebut memungkinkan penggunaan GPU tanpa memerlukan
+konversi data eksplisit ke bentuk grafis \citep{pharrGPUGemsProgramming2005}.
+
+% #### Kasus Penggunaan dan Contoh Aplikasi
+Aplikasi yang mendapat manfaat paling besar dari pemrosesan GPU adalah aplikasi
+yang memiliki intensitas aritmatika yang tinggi, seperti solusi sistem persamaan
+linear dan simulasi berbasis fisika. Contoh lain nya adalah simulasi aliran
+dengan batasan kompleks dan algoritma jarak terpendek untuk semua pasangan, seperti
+yang digunakan dalam prediksi struktur protein. Jenis komputasi ini berkinerja
+baik pada GPU karena sifatnya yang sangat data-paralel: mereka terdiri dari aliran
+besar elemen data, di mana kernel komputasi yang identik diterapkan \citep{pharrGPUGemsProgramming2005}.
+
+\subsection{Arsitektur dan karakteristik GPU yang relevan untuk komputasi umum}
+
+\section{Pemrograman GPU}
+\subsection{Dasar-dasar pemrograman GPU}
+\subsection{Perbandingan antara pemrograman CPU dan GPU}
+\subsection{Alat dan teknologi yang digunakan dalam pemrograman GPU}
+
+\section{Bahasa Pemrograman Julia}
+\subsection{Sejarah dan perkembangan Julia}
+\subsection{Fitur-fitur Julia}
+
+\section{Fisika Komputasi}
+
+\section{Integrasi GPU dalam Fisika Komputasi}
+
+\section{Penggunaan Julia untuk Komputasi Fisika pada GPU}
+
 % \section{Persamaan Diferensial Parsial}
 % \subsection{Persamaan Diferensial}
 % Suatu sistem yang cenderung berubah-ubah terhadap waktu akan lebih mudah untuk digambarkan perubahan yang terjadi ketimbang keadaan mutlak pada saat tertentu. Dalam berbagai bidang keilmuan, persamaan diferensial digunakan untuk menggambarkan perubahan yang terjadi pada suatu sistem. Persamaan diferensial mengandung fungsi yang tidak diketahui (yang merupakan solusi dari persamaan diferensial tersebut) dan beberapa turunannya. Namun, pencarian solusi yang eksplisit seringkali sulit didapat, sehingga dilakukan penyelesaian menggunakan grafik dan pendekatan numerik untuk mendapatkan informasi yang dibutuhkan \citep{stewart_2020_calculus}.  Apabila persamaan tersebut mengandung dua atau lebih variabel bebas, maka persamaan diferensial tersebut merupakan persamaan diferensial parsial (PDP) yang dihitung menggunakan derivatif parsial.
