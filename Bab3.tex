@@ -81,16 +81,364 @@ besar elemen data, di mana kernel komputasi yang identik diterapkan \citep{pharr
 
 \subsection{Arsitektur dan karakteristik GPU yang relevan untuk komputasi umum}
 
-\section{Pemrograman GPU}
-\subsection{Dasar-dasar pemrograman GPU}
-\subsection{Perbandingan antara pemrograman CPU dan GPU}
-\subsection{Alat dan teknologi yang digunakan dalam pemrograman GPU}
+% 2. Arsitektur GPU: Perbandingan dengan CPU
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{images/cpu-vs-gpu-cores.png}
+  \caption{Jumlah Inti CPU dan Inti GPU}
+  \label{gambar gpu-cpu cores}
+\end{figure}
+
+Secara arsitektur, GPU memiliki arsitektur yang hampir sama dengan CPU. Namun
+CPU berfokus pada kecepatan akses memori cache. Sedangkan GPU dirancang untuk melakukan
+komputasi data secara paralel, sehingga dibutuhkan sebanyak mungkin inti yang
+tersedia, seperti yang terlihat pada Gambar \ref{gambar gpu-cpu cores}.
+Arsitektur yang digunakan oleh GPU biasanya disebut dengan arsitektur stream
+SIMD (\emph{Single Instruction Multiple Data}) yang mana memanfaatkan banyak inti
+dengan pemrosesan ringan \citep{helenGPUArchitectureStructure2020}.
+
+% 4. Fitur Arsitektural Utama dan Implikasinya
+
+% Fitur arsitektural utama GPU mencakup penggunaan inti pemrosesan yang banyak dan
+% ringan, yang berbeda dari CPU yang menggunakan inti yang lebih sedikit tetapi lebih
+% kuat. Implikasi dari arsitektur ini terhadap pembuatan program untuk GPGPU
+% melibatkan pertimbangan khusus dalam hal bagaimana data dan tugas-tugas
+% diorganisir dan dijalankan, serta jenis perangkat lunak yang paling sesuai untuk
+% perangkat ini.
+
+% 3. Model Komputasi Streaming dan 'Gap' Memori
+
+Salah satu faktor penting dalam evolusi GPU adalah '\emph{gap}' memori, yaitu perbedaan
+antara kecepatan komputasi terhadap kecepatan akses memori. Model komputasi '\emph{streaming}'
+merupakan pendekatan yang paling cocok untuk GPU modern. Ini dikarenakan model
+ini mempunyai efisiensi yang tinggi dalam pemrosesan paralel \citep{pharrGPUGemsProgramming2005}.
+
+% 5. GPU dalam High Performance Computing (HPC)
+
+Dalam konteks High Performance Computing, GPU kini menjadi pilihan utama untuk mempercepat
+beban kerja komputasi. Penggunaan GPGPU telah meluas ke berbagai bidang, termasuk
+pemodelan 3D, infrastruktur VDI, dan lebih lanjut, menunjukkan fleksibilitas dan
+kekuatan GPU dalam berbagai skenario komputasi \citep{hagoortExploringGPUArchitecture2023}.
+
+% \section{Pemrograman GPU}
+% \subsection{Dasar-dasar pemrograman GPU}
+% \subsection{Perbandingan antara pemrograman CPU dan GPU}
+% \subsection{Alat dan teknologi yang digunakan dalam pemrograman GPU}
 
 \section{Bahasa Pemrograman Julia}
-\subsection{Sejarah dan perkembangan Julia}
-\subsection{Fitur-fitur Julia}
+
+\subsection{Pengenalan Julia}
+
+Julia dirilis pada tahun 2012 dan telah diterima secara luas di kalangan data
+scientist dan para penggiat matematika. Bahasa ini diciptakan karena adanya kebutuhan
+akan bahasa pemrograman yang ideal untuk pengkodean aritmatika \citep{ismiPentingUntukData2021}.
+Tujuan utama Julia adalah mengkombinasikan kemudahan dalam penggunaan, kecepatan,
+dan efisiensi dalam satu bahasa pemrograman. Julia memiliki sifat pengetikan
+opsional, mengadopsi berbagai bahasa pemrograman. Sehingga, dalam efisiensi dan kecepatan
+dan efisiensi sistem tingkat rendah, Julia dapat bersaing dengan pemrograman
+seperti C atau C++. Kemudian, dalam kemudahan penggunaan, Julia memiliki syntax yang
+mudah dipahami seperti halnya bahasa pemrograman Python.
+
+% \subsection{Sejarah dan perkembangan Julia}
+
+\subsection{Dasar - Dasar Julia}
+
+\subsubsection{Variable dan Tipe Data}
+
+Variabel dalam Julia dibuat dengan cara menetapkan nilai pada suatu nama
+menggunakan \emph{assignment operator} "\cw{=}". Misalnya, seperti yang terlihat
+pada kode berikut:
+
+\begin{lstlisting}
+my_name = "Alfarizi"
+my_favourite_number = 42
+my_favourite_pie = 3.1415
+\end{lstlisting}
+
+\noindent
+Julia merupakan bahasa yang bertipe dinamis, yang berarti tidak memerlukan
+deklarasi tipe variabel secara eksplisit. Tipe dari variabel secara otomatis diperoleh
+berdasarkan tipe datau \emph{value} nya. Selain itu, variabel dalam Julia dapat
+mengubah tipenya selama runtime. Misalnya saja seperti kode berikut:
+
+\begin{lstlisting}
+x = 20    # x adalah integer
+x = "abc" # x berubah menjadi string
+\end{lstlisting}
+
+\label{basic tipe data julia} Dalam menyimpan suatu data, Julia mendukung beberapa
+tipe data dasar seperti pada tipe data bahasa pemrograman pada umumnya. Berikut
+merupakan tipe data dasar yang dimiliki oleh Julia:
+
+\begin{itemize}
+  \item \textbf{Angka}: Ini termasuk beberapa subjenis seperti:
+    \begin{itemize}
+      \item Bilangan bulat (\cw{Int8}, \cw{Int16}, \cw{Int32}, \cw{Int64}, \cw{Int128})
+
+      \item Angka floating-point (\cw{Float16}, \cw{Float32}, \cw{Float64})
+
+      \item Angka kompleks (\cw{ComplexF32}, \cw{ComplexF64})
+    \end{itemize}
+
+  \item \textbf{Boolean}: \cw{Bool} mewakili nilai Boolean \cw{true} dan \cw{false}.
+
+  \item \textbf{Karakter} dan \textbf{String}:
+    \begin{itemize}
+      \item Karakter: \cw{Char} digunakan untuk karakter Unicode tunggal.
+
+      \item String: \cw{String} mewakili rangkaian karakter.
+    \end{itemize}
+
+  \item \textbf{Array}: \cw{Array{T,N}} menandakan array multidimensi dari
+    elemen tipe T.
+
+  \item \textbf{Tuple}: \cw{Tuple{T1,T2,...}} menunjukkan koleksi terurut dari
+    elemen dengan tipe berbeda T1, T2, dan lain-lain.
+
+  \item \textbf{Dictionaries}: \cw{Dict{K,V}} mewakili kumpulan pasangan kunci-nilai
+    di mana K dan V adalah tipe kunci dan nilai.
+\end{itemize}
+
+Dalam penamaan, nama variabel dalam Julia dapat mencakup subset simbol Unicode, yang
+memungkinkan berbagai macam kemungkinan penamaan, termasuk penggunaan simbol
+seperti huruf Yunani. Misalnya, untuk mewakili variabel dengan huruf Yunani
+dalam sebagian besar lingkungan pengembangan Julia, Anda dapat menggunakan sintaks
+seperti LaTeX (misalnya, \cw{\alpha} untuk $\alpha$). Sintaks ini juga mencakup
+penambahan subskrip, superskrip, dan lain-lain.
+
+% \markdownInput{markdowns/variable-dan-tipe-data.md}
+
+% Melakukan variable
+
+% \begin{lstlisting}[caption={Deklarasi variable}]{language=julia}
+% my_name = "Aurelio"
+% my_favourite_number = 42
+% my_favourite_pie = 3.1415
+% \end{lstlisting}
+
+\subsubsection{Deklarasi Fungsi}
+
+Fungsi merupakan deretan perintah yang dijalankan secara berurutan. Sama seperti
+pada Matematika, fungsi digunakan untuk menyederhanakan deretan perintah yang
+kemungkinan nanti nya akan dipanggi lagi. \cite{amerioFunctions2019} menjelaskan
+bahwa dalam Julia, fungsi dapat dideklarasikan dengan 3 cara. Deklarasi fungsi yang
+umumnya dilakukan pada Julia adalah seperti berikut
+
+\begin{lstlisting}[label={contoh deklarasi fungsi 1}]{language=Julia}
+function plus_two(x)
+  #perform some operations
+  return x + 2
+end
+\end{lstlisting}
+
+\noindent
+Jika dilakukan \emph{breakdown}, fungsi diatas bernama \cw{plus_two} yang mana
+mempunyai 1 parameter \cw{x} kemudian mengembalikan nilai \cw{x + 2}. Sehingga jika
+dilakukan pemanggilan fungsi \cw{plus_two(10)}, maka fungsi tersebut akan mengembalikan
+nilai \cw{12}.
+
+Pendeklarasian fungsi cara kedua disebut dengan \emph{inline-functions}, yang
+mana berarti suatu fungsi yang perintah nya bisa dituliskan dalam satu baris
+kode. Penulisan fungsi nya adalah seperti berikut:
+
+\begin{lstlisting}[label={contoh deklarasi fungsi 2}]
+plus_two(x) = x + 2
+\end{lstlisting}
+
+\noindent
+Fungsi diatas identik dengan contoh fungsi pertama, yang mana mempunyai nama \cw{plus_two},
+mempunyai 1 parameter \cw{x}, dan mengembalikan nilai \cw{x + 2}. Jika dilakukan
+pemanggilan fungsi \cw{plus_two(20)} akan mengembalikan nilai \cw{22}.
+
+Deklarasi fungsi ketiga disebut dengan \emph{anonymous-functions}, yang mana mempunyai
+penulisan seperti berikut:
+
+\begin{lstlisting}
+plus_two = x -> x+2
+\end{lstlisting}
+
+\noindent
+Fungsi diatas identik dengan contoh fungsi pertama dan kedua, yana mana mempunyai
+nama \cw{plus_two}. Parameter dan hasil pengembalian dari deklarasi ini dipisahkan
+dengan \cw{->} yang mana seperti simbol panah ke kanan. Deklarasi \emph{anonymous-functions}
+ini biasa digunakan ketika suatu fungsi mempunyai parameter yang memerlukan
+fungsi lain. Dalam bahasa C/C++, istilah fungsi yang memerlukan fungsi lain ini
+biasanya disebut dengan \emph{predicate}, sedangkan dalam bahasa Javascript
+disebut dengan \emph{callback function}.
+
+\subsubsection{Control Flow}
+
+Pada suatu kode, diperlukan suatu mekanisme tertentu yang dapat mengarahkan kode
+tergantung pada kondisi yang ada. Nama mekanisme ini adalah \emph{control flow}.
+\cite{amerioControlFlow2019} menjelaskan, dalam bahasa pemrograman umum nya,
+terdapat 2 macam \emph{control flow}, yakni \emph{decision} (keputusan), dan
+perulangan. Penulisan keputusan pada Julia bisa dilakukan seperti berikut:
+
+\begin{lstlisting}
+x = 1000
+
+if x<1
+    print("$x < 1")
+elseif x < 3
+    print("$x < 3")
+elseif x < 100
+    print("$x < 100")
+else
+    print("$x is really big!")
+end
+
+>> "1000 is really big!"
+\end{lstlisting}
+
+\noindent
+Terlihat pada \emph{listing} kode diatas bahwa penulisan keputusan dapat dilakukan
+dengan awalan \cw{if}, kemudian berisikan \cw{elseif} atau \cw{else}, dan
+diakhiri \cw{end}. Penulisan seperti ini pada dasarnya merupakan penulisan yang
+umum digunakan di bahasa pemrograman seperti C/C++, Javascript, ataupun Python.
+
+\emph{Control flow} lainnya adalah perulangan. Dalam Julia, terdapat 2 tipe perulangan.
+Perulangan pertama disebut dengan \emph{while loop} yang mana penulisannya adalah
+seperti berikut
+
+\begin{lstlisting}
+i = 0
+
+while(i < 5)
+    print("$i ")
+    i += 1
+end
+
+>> 0 1 2 3 4
+\end{lstlisting}
+
+\noindent
+Kemudian perulangan tipe kedua, disebut dengan \emph{for loop} yang mana penulisannya
+adalah seperti berikut
+
+\begin{lstlisting}
+for i in 1:5
+    print("$i ")
+end
+
+>> 1 2 3 4
+\end{lstlisting}
+
+\noindent
+Kedua tipe perulangan dapat digunakan dalam dua kasus yang berbeda. \emph{for
+loop} dapat digunakan untuk kasus dimana pengguna tahu kapan akan berhenti,
+misalnya akan berhenti ketika nilai nya nilai nya lebih dari 5. Sedangkan \emph{while
+loop} dapat digunakan ketika pengguna tidak tahu kapan akan berhenti, misalnya
+saja dalam program game umumnya digunakan \emph{while loop} ini untuk menetukan apakah
+pengguna masih berada di dalam game atau sudah keluar dari game.
+
+\subsubsection{Data Structures}
+
+Pada pengaplikasian suatu bahasa pemrograman, suatu masalah umumnya merupakan kumpulan
+dari beberapa variable dengan tipe data tertentu. Untuk mengatur beberapa
+variable ini diperlukan struktur khusus yang disebut dengan \emph{Data
+Structures} atau Struktur Data. Di dalam Julia, terdapat 4 \emph{data structures}
+yang umumnya digunakan, yakni \emph{arrays}, \emph{tuples}, \emph{named tuples},
+dan \emph{dictionaries}.
+
+\emph{Dictionaries} merupakan struktur data yang mempunyai \emph{keys} dan \emph{values}.
+\emph{keys} dan \emph{values} ini dipisahkan oleh simbol "\cw{=>}". Contoh
+penulisan dictionaries adalah seperti berikut
+
+\begin{lstlisting}
+person1 = Dict(
+  "name" => "Alfarizi",
+  "phone" => 123456789,
+  "shoe-size" => 43
+)
+person2 = Dict(
+  "name" => "Intan",
+  "phone" => 123456789,
+  "shoe-size" => 38
+)
+\end{lstlisting}
+
+\noindent
+Pengaksesan isi dari \emph{dictionaries} bisa dilakukan dengan penulisan seperti
+\cw{person1["name"]} yang mana akan mengembalikan nilai \cw{"Alfarizi"}.
+
+Struktur data berikutnya adalah \emph{tuples} yang mana mempunyai ukuran yang
+tetap. tuple bisa dituliska seperti berikut ini
+
+\begin{lstlisting}
+a = (1,2,3)
+b = 1, 2, 3
+
+>> length(a)
+3
+>> length(b)
+3
+\end{lstlisting}
+
+\noindent
+Untuk mengakses isi dari tuple, bisa menggunakan penomoran yang dimulai dari 1.
+Istilah penomoran ini disebut juga dengan \emph{indexing}. Misalnya, untuk mengakses
+index pertama bisa dituliskan dengan \cw{a[1]} atau \cw{a[begin]}. Untuk
+mengakses index terakhir bisa menggunakan \cw{a[end]}. Untuk mengakses index
+kedua bisa menggunakan \cw{a[2]}.
+
+Struktur data berikutnya adalah \emph{Named tuples} yang mana perpaduan antara
+\emph{Tuples} dan \emph{Dictionaries}. \emph{Named tuples} dapat dituliskan
+seperti berikut
+
+\begin{lstlisting}
+namedTuple = (a = 1, b = "hello")
+\end{lstlisting}
+
+\noindent
+Untuk mengakses isi dari \emph{named tuple}, dapat menggunakan penulisan \cw{namedTuple[:a]}
+yang mana akan mengembalikan nilai \cw{1}. Nama dari tuple tidak boleh menggunakan
+nama yang mengandung koma. Ukuran struktur data dari \emph{named tuple} akan selalu
+tetap dan tidak bisa bertambah banyak.
+
+Struktur data terakhir adalah \emph{Arrays}. Array ini merupakan struktur data yang
+paling banyak digunakan, dikarenakan array ini dapat membentuk vektor, matrik,
+maupun tensor. Array yang mempunyai 1 dimensi disebut dengan \emph{vektor}. Vektor
+dapat dituliskan seperti berikut
+
+\begin{lstlisting}
+a = [1,2,3,4,5]
+b = ["hello", "world", "julia"]
+\end{lstlisting}
+
+\noindent
+Untuk mengakses vektor, bisa menggunakan indexing seperti hal nya tuple. Misalnya,
+dari contoh diatas untuk mengakses index kedua dari vektor \cw{b} dapat dilakukan
+dengan \cw{b[2]} yang mana akan mengembalikan nilai \cw{"world"}.
+
+Array yang berisikan 2 dimensi disebut dengan \emph{matriks}. Atau bisa juga dikatakan
+bahwa Matrik merupakan kumpulan dari beberapa vektor. Matrik dapat dituliskan
+seperti berikut
+
+\begin{lstlisting}
+mat1 = [1 2 3; 4 5 6]
+\end{lstlisting}
+
+\noindent
+Pada matrik terdapat kolom dan baris. Isi dari baris dipisahkan dengan titik koma
+"\cw{;}", sedangkan isi dari kolom dipisahkan dengan spasi. Sehingga, jika contoh
+matrik diatas diubah ke notasi matematika, maka hasilnya adalah sebagai berikut
+
+\begin{equation*}
+  \text{mat1}\ =\left( \
+  \begin{matrix}
+    1 & 2 & 3 \\
+    4 & 5 & 6
+  \end{matrix}\right)
+\end{equation*}
+
+\noindent
+Untuk melakukan akses ke elemen dari matrik, bisa menggunakan notasi \cw{mat1[row, col]}.
+Misalnya jika ingin mengakses elemen pada baris pertama, kolom kedua, maka dapat dituliskan dengan \cw{mat1[1, 2]} yang mana akan mengembalikan nilai \cw{2}.
 
 \section{Fisika Komputasi}
+
+\section{Julia dalam Fisika Komputasi}
 
 \section{Integrasi GPU dalam Fisika Komputasi}
 

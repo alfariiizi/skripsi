@@ -13,11 +13,37 @@
 \usepackage{pdflscape}
 % \usepackage[table]{xcolor}
 \usepackage{mathtools}
+% \usepackage{minted}
 % \usepackage{listings}
 
 % \usepackage[table, xcdraw]{xcolor}
 \usepackage{lscape}
 \usepackage{longtable}
+
+\usepackage{markdown}
+\usepackage{listings}
+% \usepackage{inconsolata} % very nice fixed-width font included with texlive-full
+
+% \lstset{ basicstyle=\ttfamily, columns=fullflexible, % make sure to use fixed-width font, CM typewriter is NOT fixed width
+% numbers=left, numberstyle=\small\ttfamily
+% \color{Gray}
+% , stepnumber=1, numbersep=10pt, numberfirstline=true, numberblanklines=true,
+% tabsize=4, lineskip=-1.5pt, extendedchars=true, breaklines=true, keywordstyle=
+% \color{Blue}
+% \bfseries, identifierstyle=, % using emph or index keywords
+% commentstyle=\sffamily
+% \color{OliveGreen}
+% , stringstyle=
+% \color{Maroon}
+% , showstringspaces=false, showtabs=false, upquote=false, texcl=true % interpet comments as LaTeX
+% }
+
+% \lstdefinelanguage{julia}{ keywordsprefix=\@, morekeywords={ exit,whos,edit,load,is,isa,isequal,typeof,tuple,ntuple,uid,hash,finalizer,convert,promote, subtype,typemin,typemax,realmin,realmax,sizeof,eps,promote_type,method_exists,applicable, invoke,dlopen,dlsym,system,error,throw,assert,new,Inf,Nan,pi,im,begin,while,for,in,return, break,continue,macro,quote,let,if,elseif,else,try,catch,end,bitstype,ccall,do,using,module, import,export,importall,baremodule,immutable,local,global,const,Bool,Int,Int8,Int16,Int32, Int64,Uint,Uint8,Uint16,Uint32,Uint64,Float32,Float64,Complex64,Complex128,Any,Nothing,None, function,type,typealias,abstract },
+% sensitive=true, morecomment=[l]{\#}, morestring=[b]', morestring=[b]" }
+
+\NewDocumentCommand{\cw}{v}{%
+\textbf{\texttt{\textcolor{blue}{#1}}}%
+}
 
 %-----------------------------------------------------------------
 %Disini awal masukan untuk data Laporan TA (ISI SESUAI DENGAN DATA ANDA!)

@@ -1,5 +1,17 @@
 {
+  "printWidth": 80,
   "tabWidth": 2,
   "useTabs": false,
-  "plugins": ["prettier-plugin-latex"]
+  "proseWrap": "always",
+  "overrides": [
+    {
+      "files": "*.tex",
+      "options": {
+        "printWidth": 80,
+        "tabWidth": 2,
+        "useTabs": false,
+        "proseWrap": "preserve"
+      }
+    }
+  ]
 }
