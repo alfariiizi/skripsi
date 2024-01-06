@@ -1,5 +1,5 @@
 {
   "julia.environmentPath": "/home/alfarizi/dev/skripsi/skripsi",
   "prettier.configPath": ".prettierrc",
-  "latex-workshop.latex.outDir": "%DIR%/build"
+  "latex-workshop.latex.outDir": "%WORKSPACE_FOLDER%/build"
 }

@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "prettier": "prettier --check '**/**/*.tex'",
+    "prettier:fix": "prettier --write '**/**/*.tex'"
+  },
   "devDependencies": {
     "prettier": "^3.0.3",
     "prettier-plugin-latex": "^2.0.1"

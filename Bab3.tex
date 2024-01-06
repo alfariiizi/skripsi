@@ -424,19 +424,190 @@ Pada matrik terdapat kolom dan baris. Isi dari baris dipisahkan dengan titik kom
 "\cw{;}", sedangkan isi dari kolom dipisahkan dengan spasi. Sehingga, jika contoh
 matrik diatas diubah ke notasi matematika, maka hasilnya adalah sebagai berikut
 
-\begin{equation*}
-  \text{mat1}\ =\left( \
+\begin{equation}
+  \text{mat1}\ = \left(
   \begin{matrix}
     1 & 2 & 3 \\
     4 & 5 & 6
-  \end{matrix}\right)
-\end{equation*}
+  \end{matrix}
+  \right)
+\end{equation}
 
 \noindent
 Untuk melakukan akses ke elemen dari matrik, bisa menggunakan notasi \cw{mat1[row, col]}.
-Misalnya jika ingin mengakses elemen pada baris pertama, kolom kedua, maka dapat dituliskan dengan \cw{mat1[1, 2]} yang mana akan mengembalikan nilai \cw{2}.
+Misalnya jika ingin mengakses elemen pada baris pertama, kolom kedua, maka dapat
+dituliskan dengan \cw{mat1[1, 2]} yang mana akan mengembalikan nilai \cw{2}.
 
 \section{Fisika Komputasi}
+
+\subsection{Definisi dan Ruang Lingkup}
+
+\subsubsection{Definisi}
+
+Fisika Komputasi adalah cabang ilmu pengetahuan yang memadukan prinsip-prinsip
+fisika dengan teknik komputasi untuk menyelesaikan masalah yang kompleks dan
+sulit dipecahkan melalui eksperimen atau teori konvensional. Dalam prakteknya,
+Fisika Komputasi memanfaatkan algoritma komputer untuk mensimulasikan sistem
+fisika, dari skala atomik hingga skala astronomis, dan untuk mengolah data
+eksperimental yang besar[1].
+
+Bidang ini mengemuka seiring dengan kemajuan teknologi komputer, yang
+memungkinkan ilmuwan untuk mengatasi keterbatasan analitis dalam fisika
+tradisional. Dengan menggunakan model dan simulasi komputer, Fisika Komputasi
+mampu memberikan wawasan baru tentang fenomena fisika yang sebelumnya sulit atau
+bahkan tidak mungkin diamati[2].
+
+\subsubsection{Ruang Lingkup}
+
+Ruang lingkup Fisika Komputasi sangat luas dan mencakup berbagai sub-bidang
+dalam fisika. Beberapa di antaranya adalah:
+
+\begin{enumerate}
+  \item Mekanika Statistik dan Termodinamika: Penggunaan metode komputasi untuk
+    memahami perilaku sistem dengan banyak partikel, seperti gas, cairan, dan material
+    padat[3].
+
+  \item Mekanika Kuantum: Simulasi sistem pada skala atomik dan subatomik untuk
+    memahami perilaku partikel seperti elektron dan foton[1].
+
+  \item Astrofisika: Penggunaan model komputasi untuk mempelajari proses-proses
+    yang terjadi dalam bintang, galaksi, dan alam semesta[2].
+
+  \item Fisika Material: Pemodelan sifat-sifat material untuk memahami dan
+    merancang material baru dengan karakteristik khusus[2].
+
+  \item Fisika Partikel: Simulasi interaksi partikel subatomik untuk
+    mengeksplorasi aspek-aspek fundamental dari materi dan energi[1].
+
+  \item Dinamika Fluida Komputasi (CFD): Penggunaan teknik komputasi untuk
+    mengkaji aliran fluida dan fenomena terkait[3].
+
+  \item Biofisika dan Sistem Kompleks: Menerapkan metode fisika komputasi untuk
+    memahami sistem biologis dan perilaku kolektif dalam sistem yang kompleks[2].
+\end{enumerate}
+
+Bidang ini terus berkembang, mengikuti perkembangan teknologi komputasi dan algoritma.
+Peran penting Fisika Komputasi adalah dalam kemampuannya untuk menguji teori, menjelajahi
+parameter yang tidak dapat diakses oleh eksperimen, dan memberikan prediksi yang
+dapat diuji melalui eksperimen atau observasi[1].
+
+\subsection{Pengantar Metode Numerik}
+
+Metode numerik dalam Fisika Komputasi adalah teknik-teknik yang digunakan untuk
+mendekati solusi persamaan fisika yang sulit atau tidak mungkin diselesaikan
+secara analitis. Dalam prakteknya, metode numerik memungkinkan ilmuwan untuk
+mengubah persamaan fisika menjadi bentuk yang bisa dihitung dan diselesaikan
+dengan komputer. Ini menjadi sangat penting dalam menghadapi masalah fisika modern
+yang seringkali terlalu rumit untuk diselesaikan dengan metode matematika tradisional[1].
+
+% Metode Differensial Numerik
+
+Salah satu aplikasi metode numerik yang paling umum dalam fisika adalah dalam penyelesaian
+persamaan differensial, baik yang bersifat biasa maupun parsial. Persamaan ini sering
+muncul dalam banyak masalah fisika, dari dinamika fluida hingga fisika kuantum. Teknik
+seperti metode Euler, Runge-Kutta, dan metode finite difference digunakan untuk mendekati
+solusi dari persamaan-persamaan ini[2].
+
+\subsubsection{Metode Monte Carlo}
+
+% Metode Monte Carlo adalah teknik numerik yang menggunakan sampling acak untuk menyelesaikan
+% masalah fisika. Teknik ini sangat berguna dalam memodelkan sistem dengan banyak
+% derajat kebebasan dan dalam perhitungan integral yang sulit. Metode Monte Carlo telah
+% diterapkan dalam berbagai konteks, seperti simulasi dinamika molekuler, fisika statistik,
+% dan dalam perhitungan fisika nuklir[3].
+
+Metode Monte Carlo dinamai dari kasino di Monaco, mencerminkan unsur "acak" dalam
+metode ini. Metode ini bergantung pada sampel acak untuk menghasilkan nilai
+numerik. Metode ini sangat berguna dalam kasus di mana solusi analitis sulit diperoleh
+atau bahkan tidak mempunyai solusi analitis, seperti pada perhitungan integral
+berdimensi tinggi atau dalam simulasi sistem yang memiliki banyak variabel
+stokastik \citep{kalosMonteCarloMethods2008}.
+
+Konsep dasar Metode Monte Carlo dapat diilustrasikan melalui perhitungan integral.
+Misalnya, kita ingin menghitung integral dari sebuah fungsi $f(x)$ dalam interval
+$[a, b]$. Nilai dari integral tersebut dapat didekati sebagai berikut:
+
+\begin{equation}
+  \int_{a}^{b}f(x) dx \approx \frac{b-a}{N}\sum_{i=1}^{N}f(x_{i})
+\end{equation}
+
+\noindent
+di mana $x_{i}$ adalah sampel acak dari interval $[a, b]$ dan $N$ adalah jumlah sampel
+yang diambil. Jika $N$ bernilai besar, maka nilai pendekatan nya akan mendekati nilai
+integral nya.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{
+    images/visualization-of-the-sampled-points-by-the-Monte-Carlo-simulation-to-compute-pi.png
+  }
+  \caption{Contoh simulasi metode monte carlo pada pencarian luas lingkaran}
+  \label{gambar contoh pencarian luasan monte carlo}
+\end{figure}
+
+Sebagai contoh, metode ini dapat digunakan untuk menghitung area di bawah kurva dari
+seperempat lingkaran. Jika berdasarkan Gambar
+\ref{gambar contoh pencarian luasan monte carlo}, seperempat lingkaran nya kita tarik
+dari $x = 0$ hingga $x = 1$. Secara analitis, seperempat lingkaran tersebut mempunyai
+luasan $L = \frac{1}{4}\pi r^{2}$. Dalam metode monte carlo, nilai nya akan mendekati
+nilai analitis nya dengan cara menjumlahkan titik-titik yang masuk ke dalam seperempat
+lingkaran kemudian membaginya dengan total titik yang ada.
+
+% Aplikasi dalam Fisika
+
+Dalam fisika, Metode Monte Carlo digunakan dalam berbagai konteks, seperti dalam
+simulasi dinamika molekuler, fisika partikel, dan fisika statistik. Sebagai contoh,
+dalam dinamika molekuler, metode ini digunakan untuk memprediksi perilaku sistem
+partikel dengan mensimulasikan interaksi mereka selama periode waktu tertentu.
+
+% Variansi dan Pengurangan Kesalahan
+
+Salah satu aspek penting dalam Metode Monte Carlo adalah manajemen variansi. Karena
+metode ini bergantung pada sampel acak, hasilnya memiliki variansi yang terkait
+dengan jumlah sampel. Pengurangan kesalahan dapat dicapai dengan meningkatkan jumlah
+sampel atau menggunakan teknik seperti \emph{importance sampling} untuk memilih
+sampel yang lebih representatif \citep{casellaMonteCarloStatistical2004}.
+
+\subsubsection{Metode Elemen Hingga}
+
+\emph{Finite Element Method} (FEM) atau dalam bahasa indonesia disebut Metode Elemen
+Hingga (MEH) merupakan metode numerik yang digunakan untuk menyelesaikan permasalahan
+persamaan diferensial parsial. FEM melibatkan proses pemecahan suatu objek atau
+struktur menjadi serangkaian elemen yang lebih kecil. Setiap elemen ini dihubungkan
+melalui titik-titik yang dikenal dengan nama \emph{nodes}. Metode FEM memungkinkan
+penyelesaian masalah yang lebih kompleks dengan mengganti model kontinu dengan model
+diskrit \citep{etsworldsPengertianDanKonsep2018}.
+
+Berdasarkan \cite{ichrossofilmubarotPerancanganKonstruksiMesin2017}, matematika dasar
+dari FEM melibatkan beberapa langkah berikut:
+
+\begin{enumerate}
+  \item \textbf{Diskritisasi Struktur}: Struktur dibagi menjadi elemen-elemen hingga,
+    yang dapat berbentuk satu, dua, atau tiga dimensi tergantung kebutuhan.
+
+  \item \textbf{Pembuatan Persamaan Displacement}: Setiap elemen memiliki persamaan
+    \emph{displacement} yang didasarkan pada bentuknya.
+
+  \item \textbf{Hubungan \emph{Strain-Displacement} dan \emph{Stress-Strain}}: Hubungan
+    ini penting untuk menghasilkan persamaan pada setiap elemen. Hukum Hooke
+    sering digunakan untuk menghubungkan stress dengan strain.
+
+  \item \textbf{Matriks Kekakuan}: Persamaan matriks kekakuan dibuat menggunakan
+    metode seperti \emph{direct equilibrium}, \emph{energy method}, atau \emph{weight
+    residual method}.
+
+  \item \textbf{Persamaan Global dan Boundary Condition}: Persamaan matriks kekakuan
+    dari setiap elemen dikombinasikan untuk membentuk persamaan global. \emph{Boundary
+    condition} diterapkan untuk menyelesaikan permasalahan singular.
+
+  \item \textbf{Menyelesaikan Degree of Freedom yang Tidak Diketahui}: Ini melibatkan
+    penggunaan metode eliminasi atau iteratif seperti Gauss atau Gauss-Seidel untuk
+    menemukan nilai-nilai yang tidak diketahui.
+
+  \item \textbf{Analisis Strain dan Stress}: Terakhir, \emph{strain} dan \emph{stress}
+    pada setiap elemen dihitung untuk mendapatkan pemahaman tentang respons
+    struktur terhadap beban yang diterapkan.
+\end{enumerate}
 
 \section{Julia dalam Fisika Komputasi}
 
