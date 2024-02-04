@@ -79,7 +79,7 @@ yang digunakan dalam prediksi struktur protein. Jenis komputasi ini berkinerja
 baik pada GPU karena sifatnya yang sangat data-paralel: mereka terdiri dari aliran
 besar elemen data, di mana kernel komputasi yang identik diterapkan \citep{pharrGPUGemsProgramming2005}.
 
-\subsection{Arsitektur dan karakteristik GPU yang relevan untuk komputasi umum}
+\subsection{Arsitektur dan karakteristik GPU}
 
 % 2. Arsitektur GPU: Perbandingan dengan CPU
 
@@ -121,6 +121,109 @@ beban kerja komputasi. Penggunaan GPGPU telah meluas ke berbagai bidang, termasu
 pemodelan 3D, infrastruktur VDI, dan lebih lanjut, menunjukkan fleksibilitas dan
 kekuatan GPU dalam berbagai skenario komputasi \citep{hagoortExploringGPUArchitecture2023}.
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{images/cpu-gpu-architecture.png}
+  \caption{Arsitektur CPU dan GPU}
+  \label{gambar gpu-cpu architecture}
+\end{figure}
+
+Berdasarkan \cite{learningUnderstandingArchitectureGPU2023}, arsitektur CPU dan GPU
+dapat digambarkan skema nya seperti pada Gambar \ref{gambar gpu-cpu architecture}.
+Warna hijau menggambarkan unit komputasi atau \emph{cores} (inti), warna orange
+menggambarkan memori, dan warna kuning menggambarkan unit kontrol.
+
+\subsubsection{Unit Komputasi}
+\label{unit komputasi}
+
+Pada Gambar \ref{gambar gpu-cpu architecture}, terlihat bahwa inti dari CPU mempunyai
+ukuran yang lebih besar dari pada inti GPU. Beda ukuran ini menggambarkan bahwa
+inti CPU mempunyai kecerdasan yang lebih tinggi daripada inti GPU. Ini berarti inti
+CPU mampu mengatasi berbagai macam tugas kompleks yang diperlukan oleh komputer.
+Pada Gambar \ref{gambar gpu-cpu architecture} terlihat juga bahwa inti dari CPU
+mempunyai jumlah yang jauh lebih sedikit dari pada GPU. Perbedaan ini dikarenakan
+memang GPU memiliki inti dengan jumlah yang jauh lebih banyak daripada CPU.
+
+Seiring berjalan nya waktu, inti CPU mempunyai evolusi yang semakin baik dalam
+segi performa. Sebaliknya, inti GPU mempunyai perubahan yang semakin menurun. Penurunan
+inti GPU ini bertujuan agar penggunaan inti GPU dapat mengkonsumsi daya yang lebih
+rendah. Sehingga GPU akan bisa digunakan di berbagai perangkat, termasuk perangkat
+mobile.
+
+Dalam eksekusi nya, CPU menggunakan konsep \emph{out of order execution} (OOE),
+yang mana instruksi pada CPU dapat segera diproses setelah sumber daya yang
+diperlukan tersedia. Instruksi yang dijalankan inipun tidak perlu menunggu instruksi
+sebelumnya selesai. Model eksekusi ini bertujuan untuk meningkatkan pemanfaatan
+sumber daya dan mengurangi waktu tunggu eksekusi.
+
+Berbeda dengan CPU, GPU tidak menggunakan konsep OOE, dan hanya menjalankan
+instruksi saja. Tidak menggunakan OOE ini bertujuan untuk tetap menyederhanakan arsitektur
+unit komputasi pada GPU. Selain itu, GPU memang didesain untuk mengatasi tugas yang
+tidak kompleks. Pada dasarnya, semua tugas yang menggunakan GPU hanya menggunakan
+operasi penjumlahan dan perkalian.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{images/mad-and-fma.png}
+  \caption{MAD dan FMA pada operasi GPU}
+  \label{gambar mad-and-fma}
+\end{figure}
+
+Operasi penjumlahan dan perkalian pada GPU secara umum menggunakan dua metode, yakni
+\emph{Multiply-Add} (MAD) dan \emph{Fused Multiply-Add} (FMA). Pada Gambar
+\ref{gambar mad-and-fma}, terlihat bahwa perbedaan utama antara MAD dan FMA adalah
+ada di proses nya. Proses perkalian dan penjumlahan MAD dilakukan secara
+berurutan yang mana menyebabkan ketelitian dari hasilnya akan berkurang. Sedangkan
+pada FMA, setelah proses perkalian dan penjumlahan dilakukan sekaligus yang
+menyebabkan hasilnya memiliki ketelitian yang tinggi. Dalam kinerja nya, operasi
+FMA memungkinkan GPU untuk dapat meningkatkan kinerja yang signifikan. Namun pada
+implementasi nya, operasi FMA memerlukan hardware khusus untuk optimalisasi, sedangkan
+MAD bisa lebih umum dan tidak spesifik pada perangkat keras tertentu.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=5cm]{images/rt-setup2.png}
+  \includegraphics[width=5cm]{images/Reflections_02.png}
+  \caption{Teknik \emph{Ray Tracing} dan Hasil \emph{Render} dengan menggunakan
+  Teknik \emph{Ray Tracing}}
+  \label{gambar ray tracing technique}
+\end{figure}
+
+Meskipun GPU terlihat hanya bisa melakukan operasi sederhana, namun operasi sederhana
+ini dapat berupa operasi penjumlahan dan perkalian yang kompleks yang mana bisa membentuk
+operasi pada tensor dan operasi pada \emph{ray-tracing} seperti yang terlihat
+pada Gambar \ref{gambar ray tracing technique}. Kemampuan utama GPU dalam menghasilkan
+\emph{render} yang bagus seperti pada Gambar \ref{gambar ray tracing technique}
+pada dasarnya terletak pada kemampuan GPU untuk melakukan operasi secara paralel.
+Dalam melakukan operasi secara paralel ini, GPU menggunakan model \emph{Single
+Instruction Multiple Data} (SIMD) di mana semua inti nya semua core menjalankan operasi
+yang sama pada data yang berbeda.
+
+\subsubsection{Memori}
+
+Perbedaan model memori pada CPU dan GPU telah terlihat pada Gambar
+\ref{gambar gpu-cpu architecture} dengan blok yang berwarna orange. Sistem memori
+CPU menggunakan \emph{Dynamic Random Access Memory} (DRAM) dengan ukuran yang
+bervariasi. Komputer pribadi biasanya mempunyai ukuran DRAM berkisar 4GB hingga 128GB.
+
+Komponen kunci lainnya dari memori CPU adalah \emph{cache}, yang mana memiliki tujuan
+untuk mempercepat waktu akses antara CPU ke DRAM. Kecepatan akses ini disebabkan
+karena letak CPU yang sangat dekat dengan \emph{cache}. \emph{Cache} ini memiliki
+ukuran yang cukup kecil, biasanya berkisar puluhan KB per inti CPU. \emph{Cache}
+umumnya terdiri dari tiga level, yakni Level 1 (L1), Level 2 (L2), dan Level 3 (L3).
+L1 memiliki letak paling dekat dengan CPU namun memiliki ruang penyimpanan yang
+paling kecil (biasanya berkisar 64KB inti), sedangkan L3 memiliki letak yang paling
+jauh dengan CPU namun memiliki ruang penyimpanan yang paling besar daripada \emph{cache}
+lainnya (biasanya berkisar 4MB per inti). Proses CPU untuk mengambil data dari memori
+mempunyai urutan: pencarian pada L1, pencarian pada L2, pencarian pada L3, pencarian
+pada DRAM.
+
+Sementara itu, GPU menggunakan memori yang bertipe DRAM juga yang disebut dengan
+\emph{Global Memory} atau GMEM. Ukuran GMEM ini biasanya lebih kecil
+dibandingkan DRAM pada CPU. GMEM biasanya memiliki ukuran yang berkisar 2GB pada
+kartu grafis (GPU) ekonomis, hingga ukuran 40GB atau 80GB pada kartu grafis yang
+lebih mahal.
+
 % \section{Pemrograman GPU}
 % \subsection{Dasar-dasar pemrograman GPU}
 % \subsection{Perbandingan antara pemrograman CPU dan GPU}
@@ -130,14 +233,14 @@ kekuatan GPU dalam berbagai skenario komputasi \citep{hagoortExploringGPUArchite
 
 \subsection{Pengenalan Julia}
 
-Julia dirilis pada tahun 2012 dan telah diterima secara luas di kalangan data
-scientist dan para penggiat matematika. Bahasa ini diciptakan karena adanya kebutuhan
-akan bahasa pemrograman yang ideal untuk pengkodean aritmatika \citep{ismiPentingUntukData2021}.
+Bahasa Julia dirilis pada tahun 2012 dan telah diterima secara luas di kalangan data
+scientist dan para penggiat matematika. Bahasa ini diciptakan karena adanya
+kebutuhan akan bahasa pemrograman yang ideal untuk pengkodean aritmatika \citep{ismiPentingUntukData2021}.
 Tujuan utama Julia adalah mengkombinasikan kemudahan dalam penggunaan, kecepatan,
-dan efisiensi dalam satu bahasa pemrograman. Julia memiliki sifat pengetikan
-opsional, mengadopsi berbagai bahasa pemrograman. Sehingga, dalam efisiensi dan kecepatan
-dan efisiensi sistem tingkat rendah, Julia dapat bersaing dengan pemrograman
-seperti C atau C++. Kemudian, dalam kemudahan penggunaan, Julia memiliki syntax yang
+dan efisiensi dalam satu bahasa pemrograman. Julia memiliki sifat pengetikan opsional,
+mengadopsi berbagai bahasa pemrograman. Sehingga, dalam efisiensi dan kecepatan
+dan efisiensi sistem tingkat rendah, Julia dapat bersaing dengan pemrograman seperti
+C atau C++. Kemudian, dalam kemudahan penggunaan, Julia memiliki syntax yang
 mudah dipahami seperti halnya bahasa pemrograman Python.
 
 % \subsection{Sejarah dan perkembangan Julia}
@@ -146,9 +249,8 @@ mudah dipahami seperti halnya bahasa pemrograman Python.
 
 \subsubsection{Variable dan Tipe Data}
 
-Variabel dalam Julia dibuat dengan cara menetapkan nilai pada suatu nama
-menggunakan \emph{assignment operator} "\cw{=}". Misalnya, seperti yang terlihat
-pada kode berikut:
+Variabel dalam Julia dibuat dengan cara menetapkan nilai pada suatu nama menggunakan
+\emph{assignment operator} "\cw{=}". Misalnya, seperti yang terlihat pada kode berikut:
 
 \begin{lstlisting}
 my_name = "Alfarizi"
@@ -157,19 +259,19 @@ my_favourite_pie = 3.1415
 \end{lstlisting}
 
 \noindent
-Julia merupakan bahasa yang bertipe dinamis, yang berarti tidak memerlukan
-deklarasi tipe variabel secara eksplisit. Tipe dari variabel secara otomatis diperoleh
-berdasarkan tipe datau \emph{value} nya. Selain itu, variabel dalam Julia dapat
-mengubah tipenya selama runtime. Misalnya saja seperti kode berikut:
+Julia merupakan bahasa yang bertipe dinamis, yang berarti tidak memerlukan deklarasi
+tipe variabel secara eksplisit. Tipe dari variabel secara otomatis diperoleh
+berdasarkan tipe datau \emph{value} nya. Selain itu, variabel dalam Julia dapat mengubah
+tipenya selama runtime. Misalnya saja seperti kode berikut:
 
 \begin{lstlisting}
 x = 20    # x adalah integer
 x = "abc" # x berubah menjadi string
 \end{lstlisting}
 
-\label{basic tipe data julia} Dalam menyimpan suatu data, Julia mendukung beberapa
-tipe data dasar seperti pada tipe data bahasa pemrograman pada umumnya. Berikut
-merupakan tipe data dasar yang dimiliki oleh Julia:
+\label{basic tipe data julia} Dalam menyimpan suatu data, Julia mendukung
+beberapa tipe data dasar seperti pada tipe data bahasa pemrograman pada umumnya.
+Berikut merupakan tipe data dasar yang dimiliki oleh Julia:
 
 \begin{itemize}
   \item \textbf{Angka}: Ini termasuk beberapa subjenis seperti:
@@ -200,12 +302,12 @@ merupakan tipe data dasar yang dimiliki oleh Julia:
     di mana K dan V adalah tipe kunci dan nilai.
 \end{itemize}
 
-Dalam penamaan, nama variabel dalam Julia dapat mencakup subset simbol Unicode, yang
-memungkinkan berbagai macam kemungkinan penamaan, termasuk penggunaan simbol
-seperti huruf Yunani. Misalnya, untuk mewakili variabel dengan huruf Yunani
-dalam sebagian besar lingkungan pengembangan Julia, Anda dapat menggunakan sintaks
-seperti LaTeX (misalnya, \cw{\alpha} untuk $\alpha$). Sintaks ini juga mencakup
-penambahan subskrip, superskrip, dan lain-lain.
+Dalam penamaan, nama variabel dalam Julia dapat mencakup subset simbol Unicode,
+yang memungkinkan berbagai macam kemungkinan penamaan, termasuk penggunaan simbol
+seperti huruf Yunani. Misalnya, untuk mewakili variabel dengan huruf Yunani dalam
+sebagian besar lingkungan pengembangan Julia, Anda dapat menggunakan sintaks
+seperti LaTeX (misalnya, \cw{\alpha} untuk $\alpha$). Sintaks ini juga mencakup penambahan
+subskrip, superskrip, dan lain-lain.
 
 % \markdownInput{markdowns/variable-dan-tipe-data.md}
 
@@ -220,10 +322,10 @@ penambahan subskrip, superskrip, dan lain-lain.
 \subsubsection{Deklarasi Fungsi}
 
 Fungsi merupakan deretan perintah yang dijalankan secara berurutan. Sama seperti
-pada Matematika, fungsi digunakan untuk menyederhanakan deretan perintah yang
-kemungkinan nanti nya akan dipanggi lagi. \cite{amerioFunctions2019} menjelaskan
-bahwa dalam Julia, fungsi dapat dideklarasikan dengan 3 cara. Deklarasi fungsi yang
-umumnya dilakukan pada Julia adalah seperti berikut
+pada Matematika, fungsi digunakan untuk menyederhanakan deretan perintah yang kemungkinan
+nanti nya akan dipanggi lagi. \cite{amerioFunctions2019} menjelaskan bahwa dalam
+Julia, fungsi dapat dideklarasikan dengan 3 cara. Deklarasi fungsi yang umumnya
+dilakukan pada Julia adalah seperti berikut
 
 \begin{lstlisting}[label={contoh deklarasi fungsi 1}]{language=Julia}
 function plus_two(x)
@@ -233,14 +335,14 @@ end
 \end{lstlisting}
 
 \noindent
-Jika dilakukan \emph{breakdown}, fungsi diatas bernama \cw{plus_two} yang mana
-mempunyai 1 parameter \cw{x} kemudian mengembalikan nilai \cw{x + 2}. Sehingga jika
-dilakukan pemanggilan fungsi \cw{plus_two(10)}, maka fungsi tersebut akan mengembalikan
-nilai \cw{12}.
+Jika dilakukan \emph{breakdown}, fungsi diatas bernama \cw{plus_two} yang mana mempunyai
+1 parameter \cw{x} kemudian mengembalikan nilai \cw{x + 2}. Sehingga jika
+dilakukan pemanggilan fungsi \cw{plus_two(10)}, maka fungsi tersebut akan
+mengembalikan nilai \cw{12}.
 
-Pendeklarasian fungsi cara kedua disebut dengan \emph{inline-functions}, yang
-mana berarti suatu fungsi yang perintah nya bisa dituliskan dalam satu baris
-kode. Penulisan fungsi nya adalah seperti berikut:
+Pendeklarasian fungsi cara kedua disebut dengan \emph{inline-functions}, yang mana
+berarti suatu fungsi yang perintah nya bisa dituliskan dalam satu baris kode.
+Penulisan fungsi nya adalah seperti berikut:
 
 \begin{lstlisting}[label={contoh deklarasi fungsi 2}]
 plus_two(x) = x + 2
@@ -251,29 +353,29 @@ Fungsi diatas identik dengan contoh fungsi pertama, yang mana mempunyai nama \cw
 mempunyai 1 parameter \cw{x}, dan mengembalikan nilai \cw{x + 2}. Jika dilakukan
 pemanggilan fungsi \cw{plus_two(20)} akan mengembalikan nilai \cw{22}.
 
-Deklarasi fungsi ketiga disebut dengan \emph{anonymous-functions}, yang mana mempunyai
-penulisan seperti berikut:
+Deklarasi fungsi ketiga disebut dengan \emph{anonymous-functions}, yang mana
+mempunyai penulisan seperti berikut:
 
 \begin{lstlisting}
 plus_two = x -> x+2
 \end{lstlisting}
 
 \noindent
-Fungsi diatas identik dengan contoh fungsi pertama dan kedua, yana mana mempunyai
-nama \cw{plus_two}. Parameter dan hasil pengembalian dari deklarasi ini dipisahkan
-dengan \cw{->} yang mana seperti simbol panah ke kanan. Deklarasi \emph{anonymous-functions}
-ini biasa digunakan ketika suatu fungsi mempunyai parameter yang memerlukan
-fungsi lain. Dalam bahasa C/C++, istilah fungsi yang memerlukan fungsi lain ini
-biasanya disebut dengan \emph{predicate}, sedangkan dalam bahasa Javascript
+Fungsi diatas identik dengan contoh fungsi pertama dan kedua, yana mana
+mempunyai nama \cw{plus_two}. Parameter dan hasil pengembalian dari deklarasi
+ini dipisahkan dengan \cw{->} yang mana seperti simbol panah ke kanan. Deklarasi
+\emph{anonymous-functions} ini biasa digunakan ketika suatu fungsi mempunyai parameter
+yang memerlukan fungsi lain. Dalam bahasa C/C++, istilah fungsi yang memerlukan fungsi
+lain ini biasanya disebut dengan \emph{predicate}, sedangkan dalam bahasa Javascript
 disebut dengan \emph{callback function}.
 
 \subsubsection{Control Flow}
 
 Pada suatu kode, diperlukan suatu mekanisme tertentu yang dapat mengarahkan kode
 tergantung pada kondisi yang ada. Nama mekanisme ini adalah \emph{control flow}.
-\cite{amerioControlFlow2019} menjelaskan, dalam bahasa pemrograman umum nya,
-terdapat 2 macam \emph{control flow}, yakni \emph{decision} (keputusan), dan
-perulangan. Penulisan keputusan pada Julia bisa dilakukan seperti berikut:
+\cite{amerioControlFlow2019} menjelaskan, dalam bahasa pemrograman umum nya, terdapat
+2 macam \emph{control flow}, yakni \emph{decision} (keputusan), dan perulangan.
+Penulisan keputusan pada Julia bisa dilakukan seperti berikut:
 
 \begin{lstlisting}
 x = 1000
@@ -292,14 +394,14 @@ end
 \end{lstlisting}
 
 \noindent
-Terlihat pada \emph{listing} kode diatas bahwa penulisan keputusan dapat dilakukan
-dengan awalan \cw{if}, kemudian berisikan \cw{elseif} atau \cw{else}, dan
-diakhiri \cw{end}. Penulisan seperti ini pada dasarnya merupakan penulisan yang
-umum digunakan di bahasa pemrograman seperti C/C++, Javascript, ataupun Python.
+Terlihat pada \emph{listing} kode diatas bahwa penulisan keputusan dapat
+dilakukan dengan awalan \cw{if}, kemudian berisikan \cw{elseif} atau \cw{else}, dan
+diakhiri \cw{end}. Penulisan seperti ini pada dasarnya merupakan penulisan yang umum
+digunakan di bahasa pemrograman seperti C/C++, Javascript, ataupun Python.
 
-\emph{Control flow} lainnya adalah perulangan. Dalam Julia, terdapat 2 tipe perulangan.
-Perulangan pertama disebut dengan \emph{while loop} yang mana penulisannya adalah
-seperti berikut
+\emph{Control flow} lainnya adalah perulangan. Dalam Julia, terdapat 2 tipe
+perulangan. Perulangan pertama disebut dengan \emph{while loop} yang mana
+penulisannya adalah seperti berikut
 
 \begin{lstlisting}
 i = 0
@@ -313,8 +415,8 @@ end
 \end{lstlisting}
 
 \noindent
-Kemudian perulangan tipe kedua, disebut dengan \emph{for loop} yang mana penulisannya
-adalah seperti berikut
+Kemudian perulangan tipe kedua, disebut dengan \emph{for loop} yang mana
+penulisannya adalah seperti berikut
 
 \begin{lstlisting}
 for i in 1:5
@@ -326,24 +428,24 @@ end
 
 \noindent
 Kedua tipe perulangan dapat digunakan dalam dua kasus yang berbeda. \emph{for
-loop} dapat digunakan untuk kasus dimana pengguna tahu kapan akan berhenti,
-misalnya akan berhenti ketika nilai nya nilai nya lebih dari 5. Sedangkan \emph{while
-loop} dapat digunakan ketika pengguna tidak tahu kapan akan berhenti, misalnya
-saja dalam program game umumnya digunakan \emph{while loop} ini untuk menetukan apakah
-pengguna masih berada di dalam game atau sudah keluar dari game.
+loop} dapat digunakan untuk kasus dimana pengguna tahu kapan akan berhenti, misalnya
+akan berhenti ketika nilai nya nilai nya lebih dari 5. Sedangkan \emph{while
+loop} dapat digunakan ketika pengguna tidak tahu kapan akan berhenti, misalnya saja
+dalam program game umumnya digunakan \emph{while loop} ini untuk menetukan
+apakah pengguna masih berada di dalam game atau sudah keluar dari game.
 
 \subsubsection{Data Structures}
 
-Pada pengaplikasian suatu bahasa pemrograman, suatu masalah umumnya merupakan kumpulan
-dari beberapa variable dengan tipe data tertentu. Untuk mengatur beberapa
+Pada pengaplikasian suatu bahasa pemrograman, suatu masalah umumnya merupakan
+kumpulan dari beberapa variable dengan tipe data tertentu. Untuk mengatur beberapa
 variable ini diperlukan struktur khusus yang disebut dengan \emph{Data
 Structures} atau Struktur Data. Di dalam Julia, terdapat 4 \emph{data structures}
 yang umumnya digunakan, yakni \emph{arrays}, \emph{tuples}, \emph{named tuples},
 dan \emph{dictionaries}.
 
 \emph{Dictionaries} merupakan struktur data yang mempunyai \emph{keys} dan \emph{values}.
-\emph{keys} dan \emph{values} ini dipisahkan oleh simbol "\cw{=>}". Contoh
-penulisan dictionaries adalah seperti berikut
+\emph{keys} dan \emph{values} ini dipisahkan oleh simbol "\cw{=>}". Contoh penulisan
+dictionaries adalah seperti berikut
 
 \begin{lstlisting}
 person1 = Dict(
@@ -362,8 +464,8 @@ person2 = Dict(
 Pengaksesan isi dari \emph{dictionaries} bisa dilakukan dengan penulisan seperti
 \cw{person1["name"]} yang mana akan mengembalikan nilai \cw{"Alfarizi"}.
 
-Struktur data berikutnya adalah \emph{tuples} yang mana mempunyai ukuran yang
-tetap. tuple bisa dituliska seperti berikut ini
+Struktur data berikutnya adalah \emph{tuples} yang mana mempunyai ukuran yang tetap.
+tuple bisa dituliska seperti berikut ini
 
 \begin{lstlisting}
 a = (1,2,3)
@@ -376,15 +478,14 @@ b = 1, 2, 3
 \end{lstlisting}
 
 \noindent
-Untuk mengakses isi dari tuple, bisa menggunakan penomoran yang dimulai dari 1.
-Istilah penomoran ini disebut juga dengan \emph{indexing}. Misalnya, untuk mengakses
-index pertama bisa dituliskan dengan \cw{a[1]} atau \cw{a[begin]}. Untuk
-mengakses index terakhir bisa menggunakan \cw{a[end]}. Untuk mengakses index
-kedua bisa menggunakan \cw{a[2]}.
+Untuk mengakses isi dari tuple, bisa menggunakan penomoran yang dimulai dari 1. Istilah
+penomoran ini disebut juga dengan \emph{indexing}. Misalnya, untuk mengakses
+index pertama bisa dituliskan dengan \cw{a[1]} atau \cw{a[begin]}. Untuk mengakses
+index terakhir bisa menggunakan \cw{a[end]}. Untuk mengakses index kedua bisa menggunakan
+\cw{a[2]}.
 
-Struktur data berikutnya adalah \emph{Named tuples} yang mana perpaduan antara
-\emph{Tuples} dan \emph{Dictionaries}. \emph{Named tuples} dapat dituliskan
-seperti berikut
+Struktur data berikutnya adalah \emph{Named tuples} yang mana perpaduan antara \emph{Tuples}
+dan \emph{Dictionaries}. \emph{Named tuples} dapat dituliskan seperti berikut
 
 \begin{lstlisting}
 namedTuple = (a = 1, b = "hello")
@@ -392,14 +493,14 @@ namedTuple = (a = 1, b = "hello")
 
 \noindent
 Untuk mengakses isi dari \emph{named tuple}, dapat menggunakan penulisan \cw{namedTuple[:a]}
-yang mana akan mengembalikan nilai \cw{1}. Nama dari tuple tidak boleh menggunakan
-nama yang mengandung koma. Ukuran struktur data dari \emph{named tuple} akan selalu
-tetap dan tidak bisa bertambah banyak.
+yang mana akan mengembalikan nilai \cw{1}. Nama dari tuple tidak boleh
+menggunakan nama yang mengandung koma. Ukuran struktur data dari \emph{named
+tuple} akan selalu tetap dan tidak bisa bertambah banyak.
 
-Struktur data terakhir adalah \emph{Arrays}. Array ini merupakan struktur data yang
-paling banyak digunakan, dikarenakan array ini dapat membentuk vektor, matrik,
-maupun tensor. Array yang mempunyai 1 dimensi disebut dengan \emph{vektor}. Vektor
-dapat dituliskan seperti berikut
+Struktur data terakhir adalah \emph{Arrays}. Array ini merupakan struktur data
+yang paling banyak digunakan, dikarenakan array ini dapat membentuk vektor,
+matrik, maupun tensor. Array yang mempunyai 1 dimensi disebut dengan \emph{vektor}.
+Vektor dapat dituliskan seperti berikut
 
 \begin{lstlisting}
 a = [1,2,3,4,5]
@@ -407,12 +508,12 @@ b = ["hello", "world", "julia"]
 \end{lstlisting}
 
 \noindent
-Untuk mengakses vektor, bisa menggunakan indexing seperti hal nya tuple. Misalnya,
-dari contoh diatas untuk mengakses index kedua dari vektor \cw{b} dapat dilakukan
-dengan \cw{b[2]} yang mana akan mengembalikan nilai \cw{"world"}.
+Untuk mengakses vektor, bisa menggunakan indexing seperti hal nya tuple.
+Misalnya, dari contoh diatas untuk mengakses index kedua dari vektor \cw{b}
+dapat dilakukan dengan \cw{b[2]} yang mana akan mengembalikan nilai \cw{"world"}.
 
-Array yang berisikan 2 dimensi disebut dengan \emph{matriks}. Atau bisa juga dikatakan
-bahwa Matrik merupakan kumpulan dari beberapa vektor. Matrik dapat dituliskan
+Array yang berisikan 2 dimensi disebut dengan \emph{matriks}. Atau bisa juga
+dikatakan bahwa Matrik merupakan kumpulan dari beberapa vektor. Matrik dapat dituliskan
 seperti berikut
 
 \begin{lstlisting}
@@ -420,9 +521,9 @@ mat1 = [1 2 3; 4 5 6]
 \end{lstlisting}
 
 \noindent
-Pada matrik terdapat kolom dan baris. Isi dari baris dipisahkan dengan titik koma
-"\cw{;}", sedangkan isi dari kolom dipisahkan dengan spasi. Sehingga, jika contoh
-matrik diatas diubah ke notasi matematika, maka hasilnya adalah sebagai berikut
+Pada matrik terdapat kolom dan baris. Isi dari baris dipisahkan dengan titik
+koma "\cw{;}", sedangkan isi dari kolom dipisahkan dengan spasi. Sehingga, jika
+contoh matrik diatas diubah ke notasi matematika, maka hasilnya adalah sebagai berikut
 
 \begin{equation}
   \text{mat1}\ = \left(
@@ -438,182 +539,470 @@ Untuk melakukan akses ke elemen dari matrik, bisa menggunakan notasi \cw{mat1[ro
 Misalnya jika ingin mengakses elemen pada baris pertama, kolom kedua, maka dapat
 dituliskan dengan \cw{mat1[1, 2]} yang mana akan mengembalikan nilai \cw{2}.
 
-\section{Fisika Komputasi}
+\section{Fisika Komputasi dalam Operasi Matriks}
 
-\subsection{Definisi dan Ruang Lingkup}
+Fisika komputasi merupakan cabang interdisipliner yang memanfaatkan teknik komputasi
+untuk memecahkan masalah fisika yang kompleks dan sulit diselesaikan dengan metode
+analitis. Dengan perkembangan teknologi komputer yang semakin canggih, fisika komputasi
+telah menjadi alat penting dalam penelitian dan pengembangan di berbagai bidang,
+mulai dari astrofisika hingga ilmu material.
 
-\subsubsection{Definisi}
+Dalam fisika komputasi, matriks memainkan peran krusial dalam pemodelan dan analisis.
+Teori matriks, yang merupakan bagian dari matematika terapan, menyediakan
+kerangka kerja untuk menggambarkan dan menyelesaikan sistem persamaan linear
+yang sering muncul dalam perhitungan fisika. Misalnya, dalam mekanika kuantum, matriks
+digunakan untuk merumuskan dan memecahkan persamaan Schrödinger, sementara dalam
+dinamika fluida, matriks digunakan untuk menghitung perilaku aliran fluida.
 
-Fisika Komputasi adalah cabang ilmu pengetahuan yang memadukan prinsip-prinsip
-fisika dengan teknik komputasi untuk menyelesaikan masalah yang kompleks dan
-sulit dipecahkan melalui eksperimen atau teori konvensional. Dalam prakteknya,
-Fisika Komputasi memanfaatkan algoritma komputer untuk mensimulasikan sistem
-fisika, dari skala atomik hingga skala astronomis, dan untuk mengolah data
-eksperimental yang besar[1].
+Pada GPU, semua proses yang diproses akan dipetakan operasi penjumlahan seperti
+pada bagian \ref{unit komputasi}. Proses operasi penjumlahan merupakan proses operasi
+dasar yang mana proses operasi lainnya bisa diubah ke operasi penjumlahan ini.
+Misalnya saja, jika operasi pengurangan diubah ke bentuk operasi penjumlahan,
+maka akan menghasilkan bentuk seperti berikut
 
-Bidang ini mengemuka seiring dengan kemajuan teknologi komputer, yang
-memungkinkan ilmuwan untuk mengatasi keterbatasan analitis dalam fisika
-tradisional. Dengan menggunakan model dan simulasi komputer, Fisika Komputasi
-mampu memberikan wawasan baru tentang fenomena fisika yang sebelumnya sulit atau
-bahkan tidak mungkin diamati[2].
+\[
+  A - B = A + (-B)
+\]
 
-\subsubsection{Ruang Lingkup}
+\noindent
+dimana $A$ dan $B$ merupakan suatu skalar, vektor, ataupun matriks. Dan untuk operasi
+perkalian, jika diubah ke bentuk operasi penjumlahan, akan menghasilkan bentuk seperti
+berikut
 
-Ruang lingkup Fisika Komputasi sangat luas dan mencakup berbagai sub-bidang
-dalam fisika. Beberapa di antaranya adalah:
+\[
+  A \times n = \underbrace{A + A + A + A + ...}_{\text{berjumlah}\, n}
+\]
 
-\begin{enumerate}
-  \item Mekanika Statistik dan Termodinamika: Penggunaan metode komputasi untuk
-    memahami perilaku sistem dengan banyak partikel, seperti gas, cairan, dan material
-    padat[3].
+\noindent
+dimana $A$ adalah suatu skalar, vektor, ataupun matriks, dan $n$ adalah suatu
+skalar. Berdasarkan kedua pembuktian diatas, maka dapat diambil kesimpulan bahwa
+operasi pengurangan dan operasi perkalian dapat dilakukan di GPU. Sehingga,
+operasi lain yang dapat dipetakan ke bentuk penjumlahan, pengurangan, ataupun
+perkalian juga akan bisa diproses oleh GPU.
 
-  \item Mekanika Kuantum: Simulasi sistem pada skala atomik dan subatomik untuk
-    memahami perilaku partikel seperti elektron dan foton[1].
+\subsection{Operasi Penjumlahan}
 
-  \item Astrofisika: Penggunaan model komputasi untuk mempelajari proses-proses
-    yang terjadi dalam bintang, galaksi, dan alam semesta[2].
+Berdasarkan \cite{boydIntroductionAppliedLinear2018}, berikut merupakan contoh
+operasi penjumlahan matriks
 
-  \item Fisika Material: Pemodelan sifat-sifat material untuk memahami dan
-    merancang material baru dengan karakteristik khusus[2].
+\[
+  \begin{bmatrix}
+    0 & 4 \\
+    7 & 0 \\
+    3 & 1
+  \end{bmatrix}
+  +
+  \begin{bmatrix}
+    1 & 2 \\
+    2 & 3 \\
+    0 & 4
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    1 & 6 \\
+    9 & 3 \\
+    3 & 5
+  \end{bmatrix}
+\]
 
-  \item Fisika Partikel: Simulasi interaksi partikel subatomik untuk
-    mengeksplorasi aspek-aspek fundamental dari materi dan energi[1].
-
-  \item Dinamika Fluida Komputasi (CFD): Penggunaan teknik komputasi untuk
-    mengkaji aliran fluida dan fenomena terkait[3].
-
-  \item Biofisika dan Sistem Kompleks: Menerapkan metode fisika komputasi untuk
-    memahami sistem biologis dan perilaku kolektif dalam sistem yang kompleks[2].
-\end{enumerate}
-
-Bidang ini terus berkembang, mengikuti perkembangan teknologi komputasi dan algoritma.
-Peran penting Fisika Komputasi adalah dalam kemampuannya untuk menguji teori, menjelajahi
-parameter yang tidak dapat diakses oleh eksperimen, dan memberikan prediksi yang
-dapat diuji melalui eksperimen atau observasi[1].
-
-\subsection{Pengantar Metode Numerik}
-
-Metode numerik dalam Fisika Komputasi adalah teknik-teknik yang digunakan untuk
-mendekati solusi persamaan fisika yang sulit atau tidak mungkin diselesaikan
-secara analitis. Dalam prakteknya, metode numerik memungkinkan ilmuwan untuk
-mengubah persamaan fisika menjadi bentuk yang bisa dihitung dan diselesaikan
-dengan komputer. Ini menjadi sangat penting dalam menghadapi masalah fisika modern
-yang seringkali terlalu rumit untuk diselesaikan dengan metode matematika tradisional[1].
-
-% Metode Differensial Numerik
-
-Salah satu aplikasi metode numerik yang paling umum dalam fisika adalah dalam penyelesaian
-persamaan differensial, baik yang bersifat biasa maupun parsial. Persamaan ini sering
-muncul dalam banyak masalah fisika, dari dinamika fluida hingga fisika kuantum. Teknik
-seperti metode Euler, Runge-Kutta, dan metode finite difference digunakan untuk mendekati
-solusi dari persamaan-persamaan ini[2].
-
-\subsubsection{Metode Monte Carlo}
-
-% Metode Monte Carlo adalah teknik numerik yang menggunakan sampling acak untuk menyelesaikan
-% masalah fisika. Teknik ini sangat berguna dalam memodelkan sistem dengan banyak
-% derajat kebebasan dan dalam perhitungan integral yang sulit. Metode Monte Carlo telah
-% diterapkan dalam berbagai konteks, seperti simulasi dinamika molekuler, fisika statistik,
-% dan dalam perhitungan fisika nuklir[3].
-
-Metode Monte Carlo dinamai dari kasino di Monaco, mencerminkan unsur "acak" dalam
-metode ini. Metode ini bergantung pada sampel acak untuk menghasilkan nilai
-numerik. Metode ini sangat berguna dalam kasus di mana solusi analitis sulit diperoleh
-atau bahkan tidak mempunyai solusi analitis, seperti pada perhitungan integral
-berdimensi tinggi atau dalam simulasi sistem yang memiliki banyak variabel
-stokastik \citep{kalosMonteCarloMethods2008}.
-
-Konsep dasar Metode Monte Carlo dapat diilustrasikan melalui perhitungan integral.
-Misalnya, kita ingin menghitung integral dari sebuah fungsi $f(x)$ dalam interval
-$[a, b]$. Nilai dari integral tersebut dapat didekati sebagai berikut:
+\noindent
+Jika matriks diatas dilakukan generalisir, maka operasi penjumlahan matriks dapat
+dituliskan sebagai berikut
 
 \begin{equation}
-  \int_{a}^{b}f(x) dx \approx \frac{b-a}{N}\sum_{i=1}^{N}f(x_{i})
+  \label{eq:matrix_sum}
+  \begin{bmatrix}
+    a & b \\
+    c & d \\
+  \end{bmatrix}
+  +
+  \begin{bmatrix}
+    e & f \\
+    g & h \\
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    (a + e) & (b + f) \\
+    (c + g) & (d + h) \\
+  \end{bmatrix}
 \end{equation}
 
 \noindent
-di mana $x_{i}$ adalah sampel acak dari interval $[a, b]$ dan $N$ adalah jumlah sampel
-yang diambil. Jika $N$ bernilai besar, maka nilai pendekatan nya akan mendekati nilai
-integral nya.
+dimana $a$, $b$, $c$, $d$, $e$, $f$, $g$, dan $h$ adalah suatu skalar. Suatu penjumlahan
+dapat dikatakan operasi penjumlahan matriks jika memenuhi sifat - sifat operasi penjumlahan
+matriks:
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=10cm]{
-    images/visualization-of-the-sampled-points-by-the-Monte-Carlo-simulation-to-compute-pi.png
-  }
-  \caption{Contoh simulasi metode monte carlo pada pencarian luas lingkaran}
-  \label{gambar contoh pencarian luasan monte carlo}
-\end{figure}
+\begin{itemize}
+  \label{property_additional_matrix}
 
-Sebagai contoh, metode ini dapat digunakan untuk menghitung area di bawah kurva dari
-seperempat lingkaran. Jika berdasarkan Gambar
-\ref{gambar contoh pencarian luasan monte carlo}, seperempat lingkaran nya kita tarik
-dari $x = 0$ hingga $x = 1$. Secara analitis, seperempat lingkaran tersebut mempunyai
-luasan $L = \frac{1}{4}\pi r^{2}$. Dalam metode monte carlo, nilai nya akan mendekati
-nilai analitis nya dengan cara menjumlahkan titik-titik yang masuk ke dalam seperempat
-lingkaran kemudian membaginya dengan total titik yang ada.
+  \item \emph{Komuntatif}: $A + B = B + A$
 
-% Aplikasi dalam Fisika
+  \item \emph{Asosiatif}: $(A + B) + C = A + (B + C) = A + B + C$
 
-Dalam fisika, Metode Monte Carlo digunakan dalam berbagai konteks, seperti dalam
-simulasi dinamika molekuler, fisika partikel, dan fisika statistik. Sebagai contoh,
-dalam dinamika molekuler, metode ini digunakan untuk memprediksi perilaku sistem
-partikel dengan mensimulasikan interaksi mereka selama periode waktu tertentu.
+  \item \emph{Pertambahan dengan matriks nol}: $A + 0 = 0 + A = A$
 
-% Variansi dan Pengurangan Kesalahan
+  \item \emph{Penjumlahan transpose}: $(A + B)^{T}= A^{T}+ B^{T}$
+\end{itemize}
 
-Salah satu aspek penting dalam Metode Monte Carlo adalah manajemen variansi. Karena
-metode ini bergantung pada sampel acak, hasilnya memiliki variansi yang terkait
-dengan jumlah sampel. Pengurangan kesalahan dapat dicapai dengan meningkatkan jumlah
-sampel atau menggunakan teknik seperti \emph{importance sampling} untuk memilih
-sampel yang lebih representatif \citep{casellaMonteCarloStatistical2004}.
+\noindent
+dimana $A$, $B$, $C$ adalah matriks, dan $0$ adalah matriks nol.
 
-\subsubsection{Metode Elemen Hingga}
+\subsection{Operasi Pengurangan}
 
-\emph{Finite Element Method} (FEM) atau dalam bahasa indonesia disebut Metode Elemen
-Hingga (MEH) merupakan metode numerik yang digunakan untuk menyelesaikan permasalahan
-persamaan diferensial parsial. FEM melibatkan proses pemecahan suatu objek atau
-struktur menjadi serangkaian elemen yang lebih kecil. Setiap elemen ini dihubungkan
-melalui titik-titik yang dikenal dengan nama \emph{nodes}. Metode FEM memungkinkan
-penyelesaian masalah yang lebih kompleks dengan mengganti model kontinu dengan model
-diskrit \citep{etsworldsPengertianDanKonsep2018}.
+Operasi pengurangan matriks dapat diperoleh dari operasi penjumlahan matriks
+dengan penulisan sebagai berikut
 
-Berdasarkan \cite{ichrossofilmubarotPerancanganKonstruksiMesin2017}, matematika dasar
-dari FEM melibatkan beberapa langkah berikut:
+\begin{equation}
+  \label{eq:derivatif_additional_operand}A + (-B) = C\\ \Leftrightarrow A - B = C
+\end{equation}
 
-\begin{enumerate}
-  \item \textbf{Diskritisasi Struktur}: Struktur dibagi menjadi elemen-elemen hingga,
-    yang dapat berbentuk satu, dua, atau tiga dimensi tergantung kebutuhan.
+\noindent
+dimana $A$, $-B$, dan $C$ adalah suatu matriks. Dari pernyataan persamaan \ref{eq:derivatif_additional_operand}
+tersebut, maka bentuk operasi pengurangan matriks dapat dituliskan
 
-  \item \textbf{Pembuatan Persamaan Displacement}: Setiap elemen memiliki persamaan
-    \emph{displacement} yang didasarkan pada bentuknya.
+\begin{equation}
+  \label{eq:matrix_substraction}
+  \begin{bmatrix}
+    a & b \\
+    c & d \\
+  \end{bmatrix}
+  -
+  \begin{bmatrix}
+    e & f \\
+    g & h \\
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    (a - e) & (b - f) \\
+    (c - g) & (d - h) \\
+  \end{bmatrix}
+\end{equation}
 
-  \item \textbf{Hubungan \emph{Strain-Displacement} dan \emph{Stress-Strain}}: Hubungan
-    ini penting untuk menghasilkan persamaan pada setiap elemen. Hukum Hooke
-    sering digunakan untuk menghubungkan stress dengan strain.
+\noindent
+dimana $a$, $b$, $c$, $d$, $e$, $f$, $g$, dan $h$ adalah suatu skalar. Operasi
+pengurangan matriks mempunyai sifat - sifat yang hampir sama seperti operasi
+penjumlahan matriks. Berikut merupakan sifat - sifat operasi pengurangan matriks:
 
-  \item \textbf{Matriks Kekakuan}: Persamaan matriks kekakuan dibuat menggunakan
-    metode seperti \emph{direct equilibrium}, \emph{energy method}, atau \emph{weight
-    residual method}.
+\begin{itemize}
+  \label{property_substraction_matrix}
 
-  \item \textbf{Persamaan Global dan Boundary Condition}: Persamaan matriks kekakuan
-    dari setiap elemen dikombinasikan untuk membentuk persamaan global. \emph{Boundary
-    condition} diterapkan untuk menyelesaikan permasalahan singular.
+  \item \emph{Komuntatif}: $A - B = B - A$
 
-  \item \textbf{Menyelesaikan Degree of Freedom yang Tidak Diketahui}: Ini melibatkan
-    penggunaan metode eliminasi atau iteratif seperti Gauss atau Gauss-Seidel untuk
-    menemukan nilai-nilai yang tidak diketahui.
+  \item \emph{Asosiatif}: $(A - B) - C = A - (B - C) = A - B - C$
 
-  \item \textbf{Analisis Strain dan Stress}: Terakhir, \emph{strain} dan \emph{stress}
-    pada setiap elemen dihitung untuk mendapatkan pemahaman tentang respons
-    struktur terhadap beban yang diterapkan.
-\end{enumerate}
+  \item \emph{Pertambahan dengan matriks nol}: $A - 0 = 0 - A = A$
 
-\section{Julia dalam Fisika Komputasi}
+  \item \emph{Penjumlahan transpose}: $(A - B)^{T}= A^{T}- B^{T}$
+\end{itemize}
 
-\section{Integrasi GPU dalam Fisika Komputasi}
+\noindent
+dimana $A$, $B$, $C$ adalah matriks, dan $0$ adalah matriks nol.
 
-\section{Penggunaan Julia untuk Komputasi Fisika pada GPU}
+\subsection{Operasi Perkalian dengan Skalar}
+
+Berdasarkan \cite{boydIntroductionAppliedLinear2018}, contoh operasi perkalian matriks
+dengan skalar adalah
+
+\[
+  (-2) \times
+  \begin{bmatrix}
+    1 & 6 \\
+    9 & 3 \\
+    6 & 0
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    -2  & -12 \\
+    -18 & -6  \\
+    -12 & 0
+  \end{bmatrix}
+\]
+
+\noindent
+Jika contoh operasi perkalian matriks dengan skalar diatas dilakukan generalisir,
+maka secara umum operasi perkalian matriks dengan skalar dapat dituliskan
+
+\begin{equation}
+  \label{eq:matrix_mult_scalar}\gamma \times
+  \begin{bmatrix}
+    a & b \\
+    c & d \\
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    \gamma a & \gamma b \\
+    \gamma c & \gamma d \\
+  \end{bmatrix}
+\end{equation}
+
+\noindent
+dimana $a$, $b$, $c$, $d$, dan $\gamma$ adalah suatu skalar. Operasi perkalian matriks
+dengan skalar mempunyai sifat - sifat:
+
+\begin{itemize}
+  \item \emph{Asosiatif}: $(cd) A = c (dA)$
+
+  \item \emph{Distributif}: $c(A+B)=cA+cB$ dan $(c+d)A=cA+dA$
+
+  \item \emph{Identitas multiplikasi}: $1 A = A$
+
+  \item \emph{Multiplikasi nol}: $0\cdot A=O$ dan $c\cdot O= O$
+
+  \item \emph{Penutup perkalian}: $cA$ adalah matriks dengan dimensi yang sama dengan
+    $A$
+\end{itemize}
+
+\noindent
+dimana $c$, $d$ adalah skalar, $A$, $B$ adalah matriks, dan $O$ adalah matriks
+nol.
+
+\subsection{Operasi Perkalian Matriks dengan Matriks}
+
+Berdasarkan \cite{boydIntroductionAppliedLinear2018}, berikut adalah contoh
+operasi perkalian matriks dengan matriks
+
+\[
+  \begin{bmatrix}
+    -1.5 & 3  & 2 \\
+    1    & -1 & 0
+  \end{bmatrix}
+  \times
+  \begin{bmatrix}
+    -1 & -1 \\
+    0  & -2 \\
+    1  & 0
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    3.5 & -4.5 \\
+    -1  & 1
+  \end{bmatrix}
+\]
+
+\noindent
+Dari contoh diatas, jika dilakukan generalisir, maka akan diperoleh bentuk umum
+operasi perkalian matriks dengan matriks
+
+\begin{equation}
+  \label{eq:matrix_mult_matrix}C = AB \quad \text{dimana}\quad c_{ij}= \sum_{k=1}
+  ^{n}a_{ik}b_{kj}
+\end{equation}
+
+\text{dengan:}
+\begin{align*}
+  A & = \begin{bmatrix}a_{11}&a_{12}&\cdots&a_{1n}\\ a_{21}&a_{22}&\cdots&a_{2n}\\ \vdots&\vdots&\ddots&\vdots \\ a_{m1}&a_{m2}&\cdots&a_{mn}\end{bmatrix}, \\
+  B & = \begin{bmatrix}b_{11}&b_{12}&\cdots&b_{1p}\\ b_{21}&b_{22}&\cdots&b_{2p}\\ \vdots&\vdots&\ddots&\vdots \\ b_{n1}&b_{n2}&\cdots&b_{np}\end{bmatrix}, \\
+  C & = \begin{bmatrix}c_{11}&c_{12}&\cdots&c_{1p}\\ c_{21}&c_{22}&\cdots&c_{2p}\\ \vdots&\vdots&\ddots&\vdots \\ c_{m1}&c_{m2}&\cdots&c_{mp}\end{bmatrix}.
+\end{align*}
+
+\noindent
+dimana $A$ merupakan matriks berukuran $m \times n$, $B$ merupakan matriks
+berukuran $n \times p$, $C$ merupakan matriks berukuran $m \times p$, $c_{ij}$
+merupakan elemen matriks $C$ pada baris $i$ kolom $j$, $a_{ik}$ merupakan elemen
+matriks $A$ pada baris $i$ kolom $k$, dan $b_{kj}$ merupakan elemen matriks $B$
+pada baris $k$ kolom $j$.
+
+Berikut ini merupakan sifat - sifat yang dapat memastikan bahwa suatu operasi
+perkalian merupakan operasi perkalian matriks dengan matriks. Jika diasumsikan $A$,
+$B$, dan $C$ adalah suatu matriks, sedangkan $\gamma$ adalah sautu skalar, maka sifat-sifat
+dari operasi perkalian matriks dengan matriks adalah
+\begin{itemize}
+  \item \emph{Asosiatif}: $(AB)C = A(BC)$. Oleh karena itu kita dapat menulis
+    produk tersebut secara sederhana sebagai $ABC$.
+
+  \item \emph{Asosiatif dengan perkalian skalar}: $\gamma(AB) = (\gamma A)B$, di
+    mana $\gamma$ adalah skalar, dan $A$ dan $B$ adalah matriks (yang dapat
+    dikalikan). Produk $(\gamma A)B$ juga bisa dituliskan $A(\gamma B)$. (Perhatikan
+    bahwa produk $\gamma A$ dan $\gamma B$ didefinisikan sebagai produk matriks-skalar,
+    tetapi secara umum, kecuali $A$ dan $B$ memiliki satu baris, tidak sebagai produk
+    matriks-matriks.)
+
+  \item \emph{Distributif dengan penjumlahan}: $A(B + C) = AB + AC$ dan $(A + B)C
+    = AC + BC$. Pada sisi kanan dari persamaan ini kita menggunakan preseden
+    yang lebih tinggi dari perkalian matriks dibandingkan penjumlahan, jadi,
+    misalnya, $AC + BC$ diinterpretasikan sebagai $(AC) + (BC)$.
+
+  \item Transpose dari produk. Transpose dari suatu produk adalah produk dari
+    transpose-transpose, tetapi dalam urutan yang berlawanan:
+    $(AB)^{T}= B^{T}A^{T}$.
+\end{itemize}
+
+\subsection{Operasi Inverse}
+
+\subsection{Nilai Eigen}
+
+% \section{Fisika Komputasi}
+
+% Fisika Komputasi adalah cabang ilmu pengetahuan yang memadukan prinsip-prinsip
+% fisika dengan teknik komputasi untuk menyelesaikan masalah yang kompleks dan
+% sulit dipecahkan melalui eksperimen atau teori konvensional. Dalam prakteknya,
+% Fisika Komputasi memanfaatkan algoritma komputer untuk mensimulasikan sistem
+% fisika, dari skala atomik hingga skala astronomis, dan untuk mengolah data
+% eksperimental yang besar[1].
+
+% Bidang ini mengemuka seiring dengan kemajuan teknologi komputer, yang
+% memungkinkan ilmuwan untuk mengatasi keterbatasan analitis dalam fisika
+% tradisional. Dengan menggunakan model dan simulasi komputer, Fisika Komputasi
+% mampu memberikan wawasan baru tentang fenomena fisika yang sebelumnya sulit atau
+% bahkan tidak mungkin diamati[2].
+
+% Ruang lingkup Fisika Komputasi sangat luas dan mencakup berbagai sub-bidang dalam
+% fisika. Beberapa di antaranya adalah:
+
+% \begin{enumerate}
+%   \item Mekanika Statistik dan Termodinamika: Penggunaan metode komputasi untuk
+%     memahami perilaku sistem dengan banyak partikel, seperti gas, cairan, dan material
+%     padat[3].
+
+%   \item Mekanika Kuantum: Simulasi sistem pada skala atomik dan subatomik untuk
+%     memahami perilaku partikel seperti elektron dan foton[1].
+
+%   \item Astrofisika: Penggunaan model komputasi untuk mempelajari proses-proses
+%     yang terjadi dalam bintang, galaksi, dan alam semesta[2].
+
+%   \item Fisika Material: Pemodelan sifat-sifat material untuk memahami dan
+%     merancang material baru dengan karakteristik khusus[2].
+
+%   \item Fisika Partikel: Simulasi interaksi partikel subatomik untuk
+%     mengeksplorasi aspek-aspek fundamental dari materi dan energi[1].
+
+%   \item Dinamika Fluida Komputasi (CFD): Penggunaan teknik komputasi untuk
+%     mengkaji aliran fluida dan fenomena terkait[3].
+
+%   \item Biofisika dan Sistem Kompleks: Menerapkan metode fisika komputasi untuk
+%     memahami sistem biologis dan perilaku kolektif dalam sistem yang kompleks[2].
+% \end{enumerate}
+
+% Bidang ini terus berkembang, mengikuti perkembangan teknologi komputasi dan
+% algoritma. Peran penting Fisika Komputasi dalam kemampuannya untuk menguji teori,
+% mencari parameter yang tidak dapat diakses oleh eksperimen, dan memberikan prediksi
+% yang dapat diuji melalui eksperimen atau observasi.
+
+% \subsection{Pengantar Metode Numerik}
+
+% [Isi nya berdasarkan metode numerik yang digunakan]
+
+% Metode numerik dalam Fisika Komputasi adalah teknik-teknik yang digunakan untuk mendekati
+% solusi persamaan fisika yang sulit atau tidak mungkin diselesaikan secara analitis.
+% Dalam prakteknya, metode numerik memungkinkan ilmuwan untuk mengubah persamaan fisika
+% menjadi bentuk yang bisa dihitung dan diselesaikan dengan komputer. Ini menjadi
+% sangat penting dalam menghadapi masalah fisika modern yang seringkali terlalu
+% rumit untuk diselesaikan dengan metode matematika tradisional[1].
+
+% % Metode Differensial Numerik
+
+% Salah satu aplikasi metode numerik yang paling umum dalam fisika adalah dalam
+% penyelesaian persamaan differensial, baik yang bersifat biasa maupun parsial.
+% Persamaan ini sering muncul dalam banyak masalah fisika, dari dinamika fluida hingga
+% fisika kuantum. Teknik seperti metode Euler, Runge-Kutta, dan metode finite
+% difference digunakan untuk mendekati solusi dari persamaan-persamaan ini[2].
+
+% \subsubsection{Metode Monte Carlo}
+
+% Metode Monte Carlo dinamai dari kasino di Monaco, mencerminkan unsur "acak" dalam
+% metode ini. Metode ini bergantung pada sampel acak untuk menghasilkan nilai
+% numerik. Metode ini sangat berguna dalam kasus di mana solusi analitis sulit diperoleh
+% atau bahkan tidak mempunyai solusi analitis, seperti pada perhitungan integral
+% berdimensi tinggi atau dalam simulasi sistem yang memiliki banyak variabel
+% stokastik \citep{kalosMonteCarloMethods2008}.
+
+% Konsep dasar Metode Monte Carlo dapat diilustrasikan melalui perhitungan integral.
+% Misalnya, kita ingin menghitung integral dari sebuah fungsi $f(x)$ dalam interval
+% $[a, b]$. Nilai dari integral tersebut dapat didekati sebagai berikut:
+
+% \begin{equation}
+%   \int_{a}^{b}f(x) dx \approx \frac{b-a}{N}\sum_{i=1}^{N}f(x_{i})
+% \end{equation}
+
+% \noindent
+% di mana $x_{i}$ adalah sampel acak dari interval $[a, b]$ dan $N$ adalah jumlah sampel
+% yang diambil. Jika $N$ bernilai besar, maka nilai pendekatan nya akan mendekati nilai
+% integral nya.
+
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width=10cm]{
+%     images/visualization-of-the-sampled-points-by-the-Monte-Carlo-simulation-to-compute-pi.png
+%   }
+%   \caption{Contoh simulasi metode monte carlo pada pencarian luas lingkaran}
+%   \label{gambar contoh pencarian luasan monte carlo}
+% \end{figure}
+
+% Sebagai contoh, metode ini dapat digunakan untuk menghitung area di bawah kurva dari
+% seperempat lingkaran. Jika berdasarkan Gambar
+% \ref{gambar contoh pencarian luasan monte carlo}, seperempat lingkaran nya kita tarik
+% dari $x = 0$ hingga $x = 1$. Secara analitis, seperempat lingkaran tersebut mempunyai
+% luasan $L = \frac{1}{4}\pi r^{2}$. Dalam metode monte carlo, nilai nya akan mendekati
+% nilai analitis nya dengan cara menjumlahkan titik-titik yang masuk ke dalam seperempat
+% lingkaran kemudian membaginya dengan total titik yang ada.
+
+% % Aplikasi dalam Fisika
+
+% Dalam fisika, Metode Monte Carlo digunakan dalam berbagai konteks, seperti dalam
+% simulasi dinamika molekuler, fisika partikel, dan fisika statistik. Sebagai contoh,
+% dalam dinamika molekuler, metode ini digunakan untuk memprediksi perilaku sistem
+% partikel dengan mensimulasikan interaksi mereka selama periode waktu tertentu.
+
+% % Variansi dan Pengurangan Kesalahan
+
+% Salah satu aspek penting dalam Metode Monte Carlo adalah manajemen variansi. Karena
+% metode ini bergantung pada sampel acak, hasilnya memiliki variansi yang terkait
+% dengan jumlah sampel. Pengurangan kesalahan dapat dicapai dengan meningkatkan jumlah
+% sampel atau menggunakan teknik seperti \emph{importance sampling} untuk memilih
+% sampel yang lebih representatif \citep{casellaMonteCarloStatistical2004}.
+
+% \subsubsection{Metode Elemen Hingga}
+
+% \emph{Finite Element Method} (FEM) atau dalam bahasa indonesia disebut Metode Elemen
+% Hingga (MEH) merupakan metode numerik yang digunakan untuk menyelesaikan permasalahan
+% persamaan diferensial parsial. FEM melibatkan proses pemecahan suatu objek atau
+% struktur menjadi serangkaian elemen yang lebih kecil. Setiap elemen ini dihubungkan
+% melalui titik-titik yang dikenal dengan nama \emph{nodes}. Metode FEM memungkinkan
+% penyelesaian masalah yang lebih kompleks dengan mengganti model kontinu dengan model
+% diskrit \citep{etsworldsPengertianDanKonsep2018}.
+
+% Berdasarkan \cite{ichrossofilmubarotPerancanganKonstruksiMesin2017}, matematika dasar
+% dari FEM melibatkan beberapa langkah berikut:
+
+% \begin{enumerate}
+%   \item \textbf{Diskritisasi Struktur}: Struktur dibagi menjadi elemen-elemen hingga,
+%     yang dapat berbentuk satu, dua, atau tiga dimensi tergantung kebutuhan.
+
+%   \item \textbf{Pembuatan Persamaan Displacement}: Setiap elemen memiliki persamaan
+%     \emph{displacement} yang didasarkan pada bentuknya.
+
+%   \item \textbf{Hubungan \emph{Strain-Displacement} dan \emph{Stress-Strain}}: Hubungan
+%     ini penting untuk menghasilkan persamaan pada setiap elemen. Hukum Hooke
+%     sering digunakan untuk menghubungkan stress dengan strain.
+
+%   \item \textbf{Matriks Kekakuan}: Persamaan matriks kekakuan dibuat menggunakan
+%     metode seperti \emph{direct equilibrium}, \emph{energy method}, atau \emph{weight
+%     residual method}.
+
+%   \item \textbf{Persamaan Global dan Boundary Condition}: Persamaan matriks kekakuan
+%     dari setiap elemen dikombinasikan untuk membentuk persamaan global. \emph{Boundary
+%     condition} diterapkan untuk menyelesaikan permasalahan singular.
+
+%   \item \textbf{Menyelesaikan Degree of Freedom yang Tidak Diketahui}: Ini melibatkan
+%     penggunaan metode eliminasi atau iteratif seperti Gauss atau Gauss-Seidel untuk
+%     menemukan nilai-nilai yang tidak diketahui.
+
+%   \item \textbf{Analisis Strain dan Stress}: Terakhir, \emph{strain} dan \emph{stress}
+%     pada setiap elemen dihitung untuk mendapatkan pemahaman tentang respons
+%     struktur terhadap beban yang diterapkan.
+% \end{enumerate}
+
+% \section{Julia dalam Fisika Komputasi}
+
+% [Implementasi Julia dalam Fisika Komputasi]
+
+% % \section{Integrasi GPU dalam Fisika Komputasi}
+
+% \section{Penggunaan Julia untuk Komputasi Fisika pada GPU}
+
+% [Mungkin penjelasannya meliputi dasar dasar CUDA.jl dan library serupa]
+
+% =======================================================================
 
 % \section{Persamaan Diferensial Parsial}
 % \subsection{Persamaan Diferensial}
