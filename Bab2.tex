@@ -7,12 +7,12 @@
 
 \section{Kinerja GPU dan CPU}
 
-Dalam era komputasi modern, kinerja dan efisiensi pemrosesan data menjadi kunci utama
-dalam berbagai bidang ilmu dan teknologi. Penggunaan CPU (\emph{Central
-Processing Unit}) dan GPU (\emph{Graphics Processing Unit}) telah menjadi topik
-penelitian yang menarik, terutama dalam menghadapi tantangan komputasi paralel dan
-intensif. Berikut ini merupakan beberapa tinjauan terkait kinerja GPU dan CPU
-dalam menyelesaikan komputasi paralel dan intensif.
+Dalam era komputasi modern, kinerja dan efisiensi pemrosesan data menjadi kunci
+utama dalam berbagai bidang ilmu dan teknologi. Penggunaan CPU (\emph{Central
+  Processing Unit}) dan GPU (\emph{Graphics Processing Unit}) telah menjadi topik
+penelitian yang menarik, terutama dalam menghadapi tantangan komputasi paralel
+dan intensif. Berikut ini merupakan beberapa tinjauan terkait kinerja GPU dan
+CPU dalam menyelesaikan komputasi paralel dan intensif.
 
 \cite{tjandraParallelNumericalComputation2022} memberikan analisis komprehensif
 tentang efisiensi komputasi paralel GPU dibandingkan dengan komputasi serial CPU.
@@ -44,10 +44,11 @@ bahwa kolaborasi CPU-GPU merupakan tren masa depan untuk komputasi berkinerja
 tinggi. Penelitian ini menyoroti pentingnya pendekatan kolaboratif CPU-GPU dalam
 konteks peningkatan kinerja dan efisiensi energi dalam berbagai aplikasi elektronik.
 
-Kesimpulan yang dapat diambil adalah GPU menawarkan keunggulan signifikan dalam komputasi
-paralel dan intensif dibandingkan dengan CPU, terutama dalam aplikasi yang
-memerlukan pemrosesan data besar atau simulasi kompleks. Integrasi dan kolaborasi
-antara CPU dan GPU terbukti meningkatkan efisiensi dan kinerja komputasi secara keseluruhan.
+Kesimpulan yang dapat diambil adalah GPU menawarkan keunggulan signifikan dalam
+komputasi paralel dan intensif dibandingkan dengan CPU, terutama dalam aplikasi
+yang memerlukan pemrosesan data besar atau simulasi kompleks. Integrasi dan
+kolaborasi antara CPU dan GPU terbukti meningkatkan efisiensi dan kinerja
+komputasi secara keseluruhan.
 
 % \section{GPU dalam Komputasi Ilmiah}
 
@@ -86,13 +87,13 @@ antara CPU dan GPU terbukti meningkatkan efisiensi dan kinerja komputasi secara 
 \section{Bahasa Pemrograman Julia dan Bahasa Pemrograman Lainnya}
 
 Era digital saat ini diwarnai oleh inovasi yang tak henti-hentinya dalam
-teknologi pemrograman, di mana bahasa pemrograman menjadi salah satu aspek krusial.
-Julia, sebagai bahasa pemrograman yang relatif baru, telah menarik perhatian
-komunitas ilmiah dan teknologi karena keunikan dan keunggulannya. Bagian ini bertujuan
-untuk menyelidiki dan mengevaluasi Julia dalam konteks komparatifnya terhadap bahasa
-pemrograman lain seperti MATLAB, Python, dan C. Berikut ini merupakan beberapa
-tinjauan terkait perbandingan bahasa pemrograman Julia dengan bahasa pemrograman
-lainnya.
+teknologi pemrograman, di mana bahasa pemrograman menjadi salah satu aspek
+krusial. Julia, sebagai bahasa pemrograman yang relatif baru, telah menarik
+perhatian komunitas ilmiah dan teknologi karena keunikan dan keunggulannya.
+Bagian ini bertujuan untuk menyelidiki dan mengevaluasi Julia dalam konteks
+komparatifnya terhadap bahasa pemrograman lain seperti MATLAB, Python, dan C.
+Berikut ini merupakan beberapa tinjauan terkait perbandingan bahasa pemrograman
+Julia dengan bahasa pemrograman lainnya.
 
 \cite{thakurTextSummarizerUsing2022} telah mengeksplorasi aplikasi Julia dalam
 konteks Text Summarization. Studi ini tidak hanya menunjukkan keefektifan Julia dalam
@@ -127,11 +128,11 @@ menyoroti Julia sebagai bahasa pemrograman yang menawarkan keseimbangan antara
 produktivitas tinggi dan kinerja tinggi, menjadikannya pilihan yang menarik untuk
 algoritma yang memerlukan komputasi paralel dan intensif.
 
-Kesimpulan dari tinjauan pustaka ini adalah bahwa Julia menawarkan keunggulan yang
-signifikan dalam hal kecepatan komputasi dan produktivitas, menjadikannya
+Kesimpulan dari tinjauan pustaka ini adalah bahwa Julia menawarkan keunggulan
+yang signifikan dalam hal kecepatan komputasi dan produktivitas, menjadikannya
 alternatif yang kompetitif terhadap bahasa pemrograman tradisional seperti
-MATLAB dan Python, terutama dalam aplikasi yang memerlukan pemrosesan data besar
-atau komputasi intensif.
+MATLAB dan Python, terutama dalam aplikasi yang memerlukan pemrosesan data
+besar atau komputasi intensif.
 
 % == Tujuan bagian ini:
 % Menunjukkan bahwa Julia dapat menjadi sistem HPC
@@ -148,23 +149,24 @@ atau komputasi intensif.
   \label{gambar stream-2}
 \end{figure}
 
-Penggunaan Julia pada sistem HPC (\emph{High Performance Computation}) perlu diuji
-lebih lanjut. \cite{hunoldBenchmarkingJuliaCommunication2020} telah melakukan
-penelitian penggunaan Julia pada sistem HPC. \cite{hunoldBenchmarkingJuliaCommunication2020}
-menggunakan 2 metode pengukuran HPC, yakni dengan STREAM yang mana dapat
-menjelaskan bagaimana performa sistem untuk membaca/menulis pada \emph{Dynamic
-RAM} (DRAM), dan metode kedua adalah dengan menggunakan ReproMPI yang mana
-menjelaskan bagaimana performa sistem pada komunikasi data antar \emph{node}.
-Pada ReproMPI, terdapat 3 fungsi yang digunakan, yakni \texttt{MPI\_Bcast},
-\texttt{MPI\_Alltoall}, dan \texttt{MPI\_Allreduce}. Hasil performa menggunakan
-Julia ini dibandingkan dengan Bahasa C. Bahasa C ini memjadi acuan dikarenakan Bahasa
-C sudah terbukti mampu untuk bekerja pada sistem HPC.
+Penggunaan Julia pada sistem HPC (\emph{High Performance Computation}) perlu
+diuji lebih lanjut. \cite{hunoldBenchmarkingJuliaCommunication2020} telah
+melakukan penelitian penggunaan Julia pada sistem HPC.
+\cite{hunoldBenchmarkingJuliaCommunication2020} menggunakan 2 metode pengukuran
+HPC, yakni dengan STREAM yang mana dapat menjelaskan bagaimana performa sistem
+untuk membaca/menulis pada \emph{Dynamic RAM} (DRAM), dan metode kedua adalah
+dengan menggunakan ReproMPI yang mana menjelaskan bagaimana performa sistem
+pada komunikasi data antar \emph{node}. Pada ReproMPI, terdapat 3 fungsi yang
+digunakan, yakni \texttt{MPI\_Bcast}, \texttt{MPI\_Alltoall}, dan
+\texttt{MPI\_Allreduce}. Hasil performa menggunakan Julia ini dibandingkan
+dengan Bahasa C. Bahasa C ini memjadi acuan dikarenakan Bahasa C sudah terbukti
+mampu untuk bekerja pada sistem HPC.
 
 Pada Gambar \ref{gambar stream-1} dan \ref{gambar stream-2}, STREAM merupakan
-simulasi yang ditulis dengan Bahasa C, sedangkan STREAM.jl merupakan simulasi yang
-ditulis dengan Bahasa Julia. Dari kedua gambar tersebut, terlihat bahwa Bahasa Julia
-mempunyai performa untuk membaca/menulis DRAM yang hampir seimbang dengan Bahasa
-C.
+simulasi yang ditulis dengan Bahasa C, sedangkan STREAM.jl merupakan simulasi
+yang ditulis dengan Bahasa Julia. Dari kedua gambar tersebut, terlihat bahwa
+Bahasa Julia mempunyai performa untuk membaca/menulis DRAM yang hampir seimbang
+dengan Bahasa C.
 
 \begin{figure}[H]
   \centering
@@ -182,21 +184,23 @@ C.
 \end{figure}
 
 Pada Gambar \ref{gambar mpi-1 bcast}, \ref{gambar mpi-2 alltoall}, dan
-\ref{gambar mpi-3 allreduce}, terlihat bahwa performa Bahasa Julia untuk simulasi
-MPI umumnya memiliki nilai performa yang sama seperti Bahasa C. Bahkan, sebenarnya
-untuk beberapa percobaan, performa Julia lebih baik daripada C.
+\ref{gambar mpi-3 allreduce}, terlihat bahwa performa Bahasa Julia untuk
+simulasi MPI umumnya memiliki nilai performa yang sama seperti Bahasa C.
+Bahkan, sebenarnya untuk beberapa percobaan, performa Julia lebih baik daripada
+C.
 
-Dari kedua metode percobaan yang sudah dilakukan, dapat disimpulkan bahwa performa
-Julia umumnya sama seperti C. Sehingga dapat dikatakan bahwa Julia sudah bisa
-digunakan untuk sistem HPC.
+Dari kedua metode percobaan yang sudah dilakukan, dapat disimpulkan bahwa
+performa Julia umumnya sama seperti C. Sehingga dapat dikatakan bahwa Julia
+sudah bisa digunakan untuk sistem HPC.
 
 \section{Pemrograman Julia dalam Komputasi Ilmiah}
 
-Penggunaan Julia dalam komputasi ilmiah telah menjadi subjek penelitian yang signifikan
-dalam beberapa tahun terakhir. Kemampuan Julia dalam menyeimbangkan kinerja
-tinggi dan kemudahan pemrograman telah menjadikannya pilihan yang menarik dalam
-berbagai bidang ilmiah. Berikut adalah tinjauan beberapa literatur penting yang membahas
-aspek-aspek kunci dari penggunaan Julia dalam komputasi ilmiah.
+Penggunaan Julia dalam komputasi ilmiah telah menjadi subjek penelitian yang
+signifikan dalam beberapa tahun terakhir. Kemampuan Julia dalam menyeimbangkan
+kinerja tinggi dan kemudahan pemrograman telah menjadikannya pilihan yang
+menarik dalam berbagai bidang ilmiah. Berikut adalah tinjauan beberapa
+literatur penting yang membahas aspek-aspek kunci dari penggunaan Julia dalam
+komputasi ilmiah.
 
 \cite{kulyabovComputerAlgebraJULIA2021} mengeksplorasi kemampuan Julia dalam aljabar
 komputer. Hasil studi ini menunjukkan bagaimana Julia dapat digunakan untuk
@@ -234,15 +238,17 @@ MATLAB atau Python dalam bidang ini. Studi ini menunjukkan bahwa Julia tidak han
 efektif dalam hal kinerja tetapi juga dalam memberikan pendekatan yang lebih intuitif
 untuk pemodelan dan simulasi dalam mekanika komputasi.
 
-Kesimpulannya, Julia mempunyai kemampuan yang baik dalam komputasi ilmiah. Julia
-menawarkan keseimbangan antara produktivitas dan kinerja. Dengan kemampuan
-komputasi simbolik dan numeriknya, Julia tidak hanya meningkatkan efisiensi dalam
-pemodelan dan analisis, tetapi juga mendukung inovasi dan kemajuan dalam
-berbagai disiplin ilmiah.
+Kesimpulannya, Julia mempunyai kemampuan yang baik dalam komputasi ilmiah.
+Julia menawarkan keseimbangan antara produktivitas dan kinerja. Dengan
+kemampuan komputasi simbolik dan numeriknya, Julia tidak hanya meningkatkan
+efisiensi dalam pemodelan dan analisis, tetapi juga mendukung inovasi dan
+kemajuan dalam berbagai disiplin ilmiah.
 
-\section{Integrasi GPU dalam Fisika Komputasi}
+% \section{Integrasi GPU dalam Fisika Komputasi}
 
-[Isinya berdasarkan metode]
+% [Isinya berdasarkan metode]
+
+% ==================================================
 
 % \section{Komputasi Paralel dalam Fisika}
 

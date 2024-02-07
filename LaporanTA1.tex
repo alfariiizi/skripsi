@@ -14,7 +14,7 @@
 % \usepackage[table]{xcolor}
 \usepackage{mathtools}
 % \usepackage{minted}
-% \usepackage{listings}
+\usepackage{jlcode}
 
 % \usepackage[table, xcdraw]{xcolor}
 \usepackage{lscape}
@@ -22,6 +22,10 @@
 
 \usepackage{markdown}
 \usepackage{listings}
+
+\usepackage{xcolor}
+\definecolor{codeblue}{HTML}{0B60B0}
+
 % \usepackage{inconsolata} % very nice fixed-width font included with texlive-full
 
 % \lstset{ basicstyle=\ttfamily, columns=fullflexible, % make sure to use fixed-width font, CM typewriter is NOT fixed width
@@ -41,8 +45,7 @@
 % \lstdefinelanguage{julia}{ keywordsprefix=\@, morekeywords={ exit,whos,edit,load,is,isa,isequal,typeof,tuple,ntuple,uid,hash,finalizer,convert,promote, subtype,typemin,typemax,realmin,realmax,sizeof,eps,promote_type,method_exists,applicable, invoke,dlopen,dlsym,system,error,throw,assert,new,Inf,Nan,pi,im,begin,while,for,in,return, break,continue,macro,quote,let,if,elseif,else,try,catch,end,bitstype,ccall,do,using,module, import,export,importall,baremodule,immutable,local,global,const,Bool,Int,Int8,Int16,Int32, Int64,Uint,Uint8,Uint16,Uint32,Uint64,Float32,Float64,Complex64,Complex128,Any,Nothing,None, function,type,typealias,abstract },
 % sensitive=true, morecomment=[l]{\#}, morestring=[b]', morestring=[b]" }
 
-\NewDocumentCommand{\cw}{v}{%
-\textbf{\texttt{\textcolor{blue}{#1}}}%
+\NewDocumentCommand{\cw}{O{\footnotesize}v}{ \textbf{\texttt{\textcolor{codeblue}{#1#2}}}
 }
 
 %-----------------------------------------------------------------
@@ -58,81 +61,83 @@
 % \secondsupervisor{Ahsani Hafizhu Shali, S.Si., M.Sc.}
 
 \begin{document}
-  \cover
+\cover
 
-  %-----------------------------------------------------------------
-  %Daftar Isi (TIDAK PERLU DIUBAH)
-  %-----------------------------------------------------------------
-  \newpage
-  \phantomsection
-  \addcontentsline{toc}{chapter}{DAFTAR ISI}
-  \tableofcontents
-  %-----------------------------------------------------------------
-  %-----------------------------------------------------------------
-  %-----------------------------------------------------------------
-  %Disini awal masukan Intisari (ISI SESUAI DENGAN DATA ANDA!)
-  %-----------------------------------------------------------------
-  %   \begin{abstractind}
-  %     Akan dilakukan penelitian berupa implementasi pendekatan perhitungan persamaan
-  %     diferensial parsial (PDP) (\emph{partial differential equation} (PDE)) pada
-  %     persamaan Poisson di domain 2 dimensi menggunakan bantuan pemelajaran
-  %     mendalam (\emph{deep learning}) yang diimplementasikan menggunakan arsitektur
-  %     U-Net. Perhitungan menggunakan pemelejaran mendalam akan memiliki
-  %     perkembangan kecepatan yang signifikan karena model yang dilatih akan
-  %     menyesuaikan hiperparameter yang ada untuk pehitungan dengan masukan data
-  %     distribus $\rho$ dan keluaran potensial listrik $\phi$. Sebagai domain fisis,
-  %     akan digunakan model pendorong Hall model SPT-100 dengan syarat batas
-  %     Neumann pada \emph{outlet} dan syarat batas nol Dirichlet pada tiga sisi lainnya.
-  %     Data latih masukan yang berupa pesebaran elektron dan ion didapatkan dari
-  %     program PlasmaNet dan kemudian digunakan untuk mendapatkan pasanagan data
-  %     latih target berupa potensial listrik dengan \emph{solver} Gauss-Seidel.
-  %     Pasangan data $\rho$ dan $\phi$ kemudian dilatih pada model U-Net dan
-  %     didapatkan model terbaik dari sepanjang \emph{epoch} untuk kemudian dipakai untuk
-  %     prediksi nilai distribusi dari set data yang lain.
+%-----------------------------------------------------------------
+%Daftar Isi (TIDAK PERLU DIUBAH)
+%-----------------------------------------------------------------
+\newpage
+\phantomsection
+\addcontentsline{toc}{chapter}{DAFTAR ISI}
+\tableofcontents
+%-----------------------------------------------------------------
+%-----------------------------------------------------------------
+%-----------------------------------------------------------------
+%Disini awal masukan Intisari (ISI SESUAI DENGAN DATA ANDA!)
+%-----------------------------------------------------------------
+%   \begin{abstractind}
+%     Akan dilakukan penelitian berupa implementasi pendekatan perhitungan persamaan
+%     diferensial parsial (PDP) (\emph{partial differential equation} (PDE)) pada
+%     persamaan Poisson di domain 2 dimensi menggunakan bantuan pemelajaran
+%     mendalam (\emph{deep learning}) yang diimplementasikan menggunakan arsitektur
+%     U-Net. Perhitungan menggunakan pemelejaran mendalam akan memiliki
+%     perkembangan kecepatan yang signifikan karena model yang dilatih akan
+%     menyesuaikan hiperparameter yang ada untuk pehitungan dengan masukan data
+%     distribus $\rho$ dan keluaran potensial listrik $\phi$. Sebagai domain fisis,
+%     akan digunakan model pendorong Hall model SPT-100 dengan syarat batas
+%     Neumann pada \emph{outlet} dan syarat batas nol Dirichlet pada tiga sisi lainnya.
+%     Data latih masukan yang berupa pesebaran elektron dan ion didapatkan dari
+%     program PlasmaNet dan kemudian digunakan untuk mendapatkan pasanagan data
+%     latih target berupa potensial listrik dengan \emph{solver} Gauss-Seidel.
+%     Pasangan data $\rho$ dan $\phi$ kemudian dilatih pada model U-Net dan
+%     didapatkan model terbaik dari sepanjang \emph{epoch} untuk kemudian dipakai untuk
+%     prediksi nilai distribusi dari set data yang lain.
 
-  %     Katakunci: PDP, Poisson, \emph{deep learning}, \emph{convolutional neural
-  %     network}
-  %   \end{abstractind}
-  %-----------------------------------------------------------------
-  %-----------------------------------------------------------------
+%     Katakunci: PDP, Poisson, \emph{deep learning}, \emph{convolutional neural
+%     network}
+%   \end{abstractind}
+%-----------------------------------------------------------------
+%-----------------------------------------------------------------
 
-  %-----------------------------------------------------------------
+%-----------------------------------------------------------------
 
-  %Disini awal masukan untuk Bab (ISI BAB I DAPAT DIEDIT DI FILE Bab1.tex,
-  %ISI BAB II DAPAT DIEDIT DI FILE Bab2.tex, dst...)
-  %-----------------------------------------------------------------
-  \input{Bab1.tex}
-  \input{Bab2.tex}
-  \input{Bab3.tex}
-  \input{Bab4.tex}
-  \input{DaftarPustaka}
-  %-----------------------------------------------------------------
-  %Disini akhir masukan Bab
-  %-----------------------------------------------------------------
+%Disini awal masukan untuk Bab (ISI BAB I DAPAT DIEDIT DI FILE Bab1.tex,
+%ISI BAB II DAPAT DIEDIT DI FILE Bab2.tex, dst...)
+%-----------------------------------------------------------------
+\input{Bab1.tex}
+\input{Bab2.tex}
+\input{Bab3.tex}
+\input{Bab4.tex}
 
-  %-----------------------------------------------------------------
-  %Disini awal masukan untuk Daftar Pustaka (ISI SESUAI DENGAN DATA ANDA!)
-  %-----------------------------------------------------------------
-  %-----------------------------------------------------------------
-  %-----------------------------------------------------------------
+\addcontentsline{toc}{chapter}{DAFTAR PUSTAKA}
+\input{DaftarPustaka}
+%-----------------------------------------------------------------
+%Disini akhir masukan Bab
+%-----------------------------------------------------------------
 
-  %-----------------------------------------------------------------
-  %Disini awal masukan untuk Lampiran (JIKA DIPERLUKAN)
-  %-----------------------------------------------------------------
-  %\appendix
-  %\chapter{SKRIP PROGRAM JAVA}
-  %\lstset{language=java, frame=single}
-  %\lstset{numbers=left, numberstyle=\tiny, stepnumber=1, numbersep=5pt, basicstyle=\footnotesize}
-  %\lstset{frame=shadowbox, xleftmargin=6pt, xrightmargin=8pt, rulesepcolor=\color{black}}
-  %\lstset{keywordstyle=\color{blue},breaklines=true, breakindent=27pt}
-  %\lstinputlisting{Main.java}
-  %
-  %
-  %\chapter{TABEL KODE ASCII}
-  %\begin{figure}[H]
-  %\centering
-  %\includegraphics[width=14cm]{ASCIIreguler}
-  %\end{figure}
-  %%-----------------------------------------------------------------
-  %%-----------------------------------------------------------------
+%-----------------------------------------------------------------
+%Disini awal masukan untuk Daftar Pustaka (ISI SESUAI DENGAN DATA ANDA!)
+%-----------------------------------------------------------------
+%-----------------------------------------------------------------
+%-----------------------------------------------------------------
+
+%-----------------------------------------------------------------
+%Disini awal masukan untuk Lampiran (JIKA DIPERLUKAN)
+%-----------------------------------------------------------------
+%\appendix
+%\chapter{SKRIP PROGRAM JAVA}
+%\lstset{language=java, frame=single}
+%\lstset{numbers=left, numberstyle=\tiny, stepnumber=1, numbersep=5pt, basicstyle=\footnotesize}
+%\lstset{frame=shadowbox, xleftmargin=6pt, xrightmargin=8pt, rulesepcolor=\color{black}}
+%\lstset{keywordstyle=\color{blue},breaklines=true, breakindent=27pt}
+%\lstinputlisting{Main.java}
+%
+%
+%\chapter{TABEL KODE ASCII}
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=14cm]{ASCIIreguler}
+%\end{figure}
+%%-----------------------------------------------------------------
+%%-----------------------------------------------------------------
 \end{document}

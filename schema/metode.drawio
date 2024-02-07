@@ -1,0 +1,31 @@
+<mxfile host="app.diagrams.net" modified="2024-02-07T04:27:49.440Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="Um1w3IET-b6wDkXPm50W" version="23.1.1" type="device">
+  <diagram name="Page-1" id="U-ZShhSu1U-RhR-5BEi-">
+    <mxGraphModel dx="986" dy="530" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="9_YP-h_hDfiLGkgDJx35-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="9_YP-h_hDfiLGkgDJx35-1" target="9_YP-h_hDfiLGkgDJx35-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9_YP-h_hDfiLGkgDJx35-1" value="Penulisan&lt;br&gt;Kode" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="9_YP-h_hDfiLGkgDJx35-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="9_YP-h_hDfiLGkgDJx35-2" target="9_YP-h_hDfiLGkgDJx35-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9_YP-h_hDfiLGkgDJx35-2" value="Melakukan eksekusi pada masing masing operasi matriks&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="9_YP-h_hDfiLGkgDJx35-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="9_YP-h_hDfiLGkgDJx35-3" target="9_YP-h_hDfiLGkgDJx35-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9_YP-h_hDfiLGkgDJx35-3" value="Menganalisis data hasil" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="340" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="9_YP-h_hDfiLGkgDJx35-4" value="Menampilkan hasil &lt;i&gt;benchmarking&lt;/i&gt;&amp;nbsp;ke bentuk plot grafik" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,8 +1,16 @@
 \chapter{Metode Penelitian}
 
-\section{Alat dan Bahan}
+\section{Bahan}
 
-Perangkat keras yang digunakan dalam penelitian ini adalah berupa komputer dengan bentuk komputer jinjing (\emph{laptop}) dengan spesifikasi sebagai berikut:
+Data yang digunakan untuk melakukan operasi matriks pada penelitian ini adalah
+data random yang di-\emph{generate} oleh Julia menggunakan fungsi \cw{rand()}
+dengan mengatur \emph{seed} \cw{101}.
+
+\section{Alat}
+
+Perangkat keras yang digunakan dalam penelitian ini adalah berupa komputer
+dengan bentuk komputer jinjing (\emph{laptop}) dengan spesifikasi sebagai
+berikut:
 
 \begin{table}[ht]
   \centering
@@ -24,13 +32,18 @@ Perangkat keras yang digunakan dalam penelitian ini adalah berupa komputer denga
   \end{tabular}
 \end{table}
 
-Kemudian, dalam menjalankan penelitian, penulis menggunakan berbagai perangkat lunak untuk melakukan \emph{benchmarking}. Adapun perangkat-perangkat lunak tersebut adalah:
+Kemudian, dalam menjalankan penelitian, penulis menggunakan berbagai perangkat
+lunak untuk melakukan \emph{benchmarking}. Adapun perangkat-perangkat lunak
+tersebut adalah:
 \begin{itemize}
   \item Pluto.jl: sebagai \emph{interactive} editor untuk Julia
 
+  \item CUDA.jl: sebagai \emph{library} utama untuk menjalankan paralelisasi pada
+        perangkat GPU NVIDIA
+
   \item Bahasa pemrograman Julia: untuk menjalankan metode fisika komputasi
 
-  \item Bahas pemgoraman Python: untuk menjalankan metode fisika komputasi
+        % \item Bahasa pemgoraman Python: untuk menjalankan metode fisika komputasi
 \end{itemize}
 
 % \section{Bahan}
@@ -80,23 +93,87 @@ Kemudian, dalam menjalankan penelitian, penulis menggunakan berbagai perangkat l
 %     learning}
 % \end{itemize}
 
-% \section{Prosedur Kerja dan Pengambilan Data}
-% Secara garis besar, alur penelitian ini berawal dari pembuatan data latih pasangan
-% $\rho$ dan $\phi$, yaitu dengan cara menghitung $\phi$ menggunakan metode Gauss-Seidel
-% dari data $\rho$ yang didapatkan dari PlasmaNet, kemudian pemrosesan data agar siap
-% untuk jadi data latih, dilanjutkan ke pelatihan model CNN, dan kemudian pengujian
-% model CNN. Pada Gambar \ref{flowchart} disajikan alur penelitian dengan model
-% diagram alir (\emph{flowchart}).
+\section{Prosedur Kerja dan Pengambilan Data}
 
-% \begin{figure}[h!]
-%   \label{flowchart}
-%   \centering
-%   \includegraphics[width=3cm, scale=0.5]{gambar/flowchart2.jpg}
-%   \caption{Diagram alir penelitian}
-%   \label{flowchart}
-% \end{figure}
+Secara garis besar, penelitian ini mencari waktu kecepatan eksekusi pada sistem
+linear (CPU) dan sistem paralel (GPU). Pada masing - masing sistem, alur
+penelitian berawal dari pembuatan kode pada masing masing operasi matriks
+setelah itu dilanjutkan dengan pengeksekusian kode di skenario - skenario
+tertentu pada masing - masing operasi matriks, kemudian setiap hasil dari
+eksekusi tersebut akan dianalisis perbedaan kecepatan eksekusi nya. Pada Gambar
+\ref{img:methods} disajikan alur penelitian dengan model diagram alir atau
+\emph{flowchart}.
 
-% \subsection{Pengambilan Data Latih}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=3cm, scale=1]{schema/metode.drawio.png}
+  \caption{Diagram alir penelitian}
+  \label{img:methods}
+\end{figure}
+
+\subsection{Proses Eksekusi Operasi Matriks}
+
+Proses eksekusi diawali dengan penghasilan data sample yang mana cara
+mendapatkan data sample ini sudah dijelaskan pada bagian bahan, yakni dengan
+menggunakan \cw{rand()} yang merupakan fungsi \emph{random generator} dari
+Julia. Setelah proses penghasilan data sudah selesai, langkah selanjutnya
+adalah melakukan proses operasi matriks menggunakan CPU kemudian dilanjutkan
+dengan melakukan proses operasi matriks menggunakan GPU. Proses penghasilan
+data hingga proses kalkulasi menggunakan CPU dan GPU dilakukan sebanyak sepuluh
+kali untuk memastikan bahwa dalam kalkulasi nya, tidak terdapat hambatan
+eksternal pada GPU dan CPU. Hambatan yang dimaksud antara lain seperti hambatan
+kapasitas DRAM maupun VRAM yang sedang sedikit dan hambatan keterbatasan
+software Pluto dalam mengeksekusi operasi yang ada. Pada Gambar
+\ref{img:methods_execution}, telah disajikan diagram alir dalam proses eksekusi
+operasi matriks.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=6cm, scale=1]{schema/langkah-2.drawio.png}
+  \caption{Diagram alir dalam Proses Eksekusi Setiap Metode}
+  \label{img:methods_execution}
+\end{figure}
+
+Pada langkah terakhir dari Gambar \ref{img:methods_execution} terdapat
+pengecekan variasi percobaan. Setiap operasi matriks terdapat 5 variasi
+pengukuran berdasarkan ukuran matriks nya. Berikut merupakan 5 variasi
+pengukuran nya:
+
+\begin{itemize}
+  \item Variasi 1: Matriks berukuran $100 \times 100$
+  \item Variasi 2: Matriks berukuran $1000 \times 1000$
+  \item Variasi 3: Matriks berukuran $10^4 \times 10^4$
+  \item Variasi 4: Matriks berukuran $10^5 \times 10^5$
+  \item Variasi 5: Matriks berukuran $10^6 \times 10^6$
+\end{itemize}
+
+\subsubsection{Analisis Data dan Penampilan Grafik}
+
+Proses analisis data meliputi pencatatan hasil eksekusi, kemudian dilanjutkan
+dengan pengumpulan semua data yang telah dicatat, kemudian yang terakhir adalah
+pencarian nilai rata-rata dari sepuluh kali pengulangan. Pada Gambar
+\ref{img:methods_analysist} telah disajikan diagram alir dari proses analisis
+ini.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=4cm, scale=1]{schema/langkah-3.drawio.png}
+  \caption{Diagram alir dalam Proses Analisis Data}
+  \label{img:methods_analysist}
+\end{figure}
+
+Setelah proses analisis data selesai, langkah selanjutnya adalah penampilan
+grafik berdasarkan data dari hasil analisis data. Jenis grafik yang dipilih
+adalah grafik batang grup atau \emph{grouped bar chart}. Alasan dipilihnya
+jenis grafik ini dikarenakan penelitian dari
+\cite{hunoldBenchmarkingJuliaCommunication2020} juga menggunakan grafik batang
+grup untuk menampilkan perbandingan kecepatan eksekusi Bahasa Julia dengan
+Bahasa C yang mana telah dijelaskan pada Bagian Tinjauan Pustaka. Hasil grafik
+akan ditampilkan dengan sumbu-x untuk perubahan variasi ukuran matriks,
+sedangkan sumbu-y untuk waktu kecepatan eksekusi pada setiap operasi.
+
+% ================================================
+
 % \label{data_latih} Dalam konteks pemelajaran mendalam (\emph{deep learning}),
 % data latih berarti pasangan data antara data masukan dan data target. Dan data hasil
 % prediksi adalah data uji dan data hasil prediksi. Tahap pertama penelitian ini

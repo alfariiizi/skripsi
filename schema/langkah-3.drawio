@@ -1,0 +1,25 @@
+<mxfile host="app.diagrams.net" modified="2024-02-07T04:49:11.594Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="dJ9fdDAyXmE9bH5mBnMi" version="23.1.1" type="device">
+  <diagram name="Page-1" id="38gDuyszOwZVr5iJp7kP">
+    <mxGraphModel dx="986" dy="530" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="5-ACf9vD3P9UZy8GpB-g-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="5-ACf9vD3P9UZy8GpB-g-1" target="5-ACf9vD3P9UZy8GpB-g-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5-ACf9vD3P9UZy8GpB-g-1" value="Mengumpulkan semua data hasil eksekusi" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5-ACf9vD3P9UZy8GpB-g-2" value="Mencari nilai rata-rata dari sepuluh kali pengulangan" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="240" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5-ACf9vD3P9UZy8GpB-g-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="5-ACf9vD3P9UZy8GpB-g-4" target="5-ACf9vD3P9UZy8GpB-g-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5-ACf9vD3P9UZy8GpB-g-4" value="Mencatat hasil eksekusi" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -6,78 +6,85 @@
 
 % #### Awal Mula dan Evolusi Awal
 
-Dalam sejarahnya, \emph{Graphics Processing Unit} (GPU) awalnya dirancang untuk mempercepat
-pemrosesan gambar pada komputer. Pemrosesan gambar yang memerlukan GPU pada
-awalnya hanya dibutuhkan untuk permainan video game. Pada tahun 1970-an hingga 1980-an,
-beberapa perangkat yang mengadopsi sistem paralel seperti GPU diantara nya
-adalah Atari 2600 dan ARTC HD63484 \citep{wikipediaGraphicsProcessingUnit2023}.
-
-Perkembangan GPU untuk komputer pribadi dimulai pada tahun 1980-an. Pada awal
-tahun tersebut, terdapat produk NEC µPD7220 yang menjadi implementasi pertama dari
-GPU yang dapat digunakan pada komputer pribadi. Produk NEC µPD7220 ini mempunyai
-harga terjangkau dan kualitas grafis yang tinggi, sehingga membuat GPU ini terkenal
-hingga pertengahan tahun 1980-an. Pada tahun 1985, muncul produk baru bernama Amiga
-dengan menggunakan kustom chip grafis. Amiga ini dapat digunakan untuk
-menggambar garis, memanipulasi bitmap, dan melakukan isian warna pada suatu area
+Dalam sejarahnya, \emph{Graphics Processing Unit} (GPU) awalnya dirancang untuk
+mempercepat pemrosesan gambar pada komputer. Pemrosesan gambar yang memerlukan
+GPU pada awalnya hanya dibutuhkan untuk permainan video game. Pada tahun
+1970-an hingga 1980-an, beberapa perangkat yang mengadopsi sistem paralel
+seperti GPU diantara nya adalah Atari 2600 dan ARTC HD63484
 \citep{wikipediaGraphicsProcessingUnit2023}.
 
-Dalam perkembangannya, NVIDIA memperkenalkan GPU pertama mereka yang bernama
-NVIDIA GeForce 256. GPU ini mampu melakukan pemrosesan grafis secara \emph{real-time},
-dan mampu melakukan banyak perhitungan floating-point dari tahan shading vertex
-hingga tahap shading fragment. NVIDIA GeForce 256 juga memiliki bandwidth memori
-yang tinggi \citep{dallyEvolutionGraphicsProcessing2021}. Pada tahun berikutnya,
-NVIDIA memperkenalkan NVIDIA GeForce 8 dengan unit pemrosesan stream generik
-yang baru. NVIDIA GeForce 8 menunjukkan kemajuan performa komputasi yang jauh lebih
-baik daripada CPU. Dari perbedaan performa inilah kemudian para peneliti
-menemukan cara untuk mengubah shader vertex dan shader fragment, menjadi suatu data
-yang dapat diolah oleh GPU secara paralel. Proses penggunaan GPU untuk melakukan
-komputasi umum secara paralel disebut dengan \emph{General Purpose GPU} atau GPGPU.
-Beberapa bidang yang menggunakan GPGPU ini diantara lain adalah bidang
-pembelajaran mesin, eksplorasi minyak, aljabar linear, statistik, rekonstruksi
-3D, dan penetapan harga opsi saham \citep{wikipediaGraphicsProcessingUnit2023}.
+Perkembangan GPU untuk komputer pribadi dimulai pada tahun 1980-an. Pada awal
+tahun tersebut, terdapat produk NEC µPD7220 yang menjadi implementasi pertama
+dari GPU yang dapat digunakan pada komputer pribadi. Produk NEC µPD7220 ini
+mempunyai harga terjangkau dan kualitas grafis yang tinggi, sehingga membuat
+GPU ini terkenal hingga pertengahan tahun 1980-an. Pada tahun 1985, muncul
+produk baru bernama Amiga dengan menggunakan kustom chip grafis. Amiga ini
+dapat digunakan untuk menggambar garis, memanipulasi bitmap, dan melakukan
+isian warna pada suatu area \citep{wikipediaGraphicsProcessingUnit2023}.
 
-Pada perkembangannya, GPU telah mengalami perubahan bentuk ukuran, daya, kinerja,
-dan harga. Hal ini membuat GPU membukakan jalan bagi inovasi lebih lanjut di berbagai
-bidang. Dari yang awalnya hanya digunakan untuk bermain video game saja, menjadi
-komponen yang diperlukan di smartphone, \emph{virtual reality}, pembelajaran
-mesin, mobil tanpa pengemudi, pesawat ruang angkasa, robot, perangkat rumah
-pintar, dan banyak bidang lainnya \citep{businesswireHistoryGPUInception2023}.
+Dalam perkembangannya, NVIDIA memperkenalkan GPU pertama mereka yang bernama
+NVIDIA GeForce 256. GPU ini mampu melakukan pemrosesan grafis secara
+\emph{real-time}, dan mampu melakukan banyak perhitungan floating-point dari
+tahan shading vertex hingga tahap shading fragment. NVIDIA GeForce 256 juga
+memiliki bandwidth memori yang tinggi
+\citep{dallyEvolutionGraphicsProcessing2021}. Pada tahun berikutnya, NVIDIA
+memperkenalkan NVIDIA GeForce 8 dengan unit pemrosesan stream generik yang
+baru. NVIDIA GeForce 8 menunjukkan kemajuan performa komputasi yang jauh lebih
+baik daripada CPU. Dari perbedaan performa inilah kemudian para peneliti
+menemukan cara untuk mengubah shader vertex dan shader fragment, menjadi suatu
+data yang dapat diolah oleh GPU secara paralel. Proses penggunaan GPU untuk
+melakukan komputasi umum secara paralel disebut dengan \emph{General Purpose
+  GPU} atau GPGPU. Beberapa bidang yang menggunakan GPGPU ini diantara lain
+adalah bidang pembelajaran mesin, eksplorasi minyak, aljabar linear, statistik,
+rekonstruksi 3D, dan penetapan harga opsi saham
+\citep{wikipediaGraphicsProcessingUnit2023}.
+
+Pada perkembangannya, GPU telah mengalami perubahan bentuk ukuran, daya,
+kinerja, dan harga. Hal ini membuat GPU membukakan jalan bagi inovasi lebih
+lanjut di berbagai bidang. Dari yang awalnya hanya digunakan untuk bermain
+video game saja, menjadi komponen yang diperlukan di smartphone, \emph{virtual
+  reality}, pembelajaran mesin, mobil tanpa pengemudi, pesawat ruang angkasa,
+robot, perangkat rumah pintar, dan banyak bidang lainnya
+\citep{businesswireHistoryGPUInception2023}.
 
 \subsection{Transisi GPU dari pemrosesan grafis ke GPGPU}
 
 % #### Kemajuan Teknologi dan Penemuan GPGPU
 Perkembangan GPGPU menjadi lebih praktis dan populer setelah tahun 2001, dengan
-munculnya shader yang dapat diprogram dan mendukung \emph{floating point} pada prosesor
-grafis. Masalah yang melibatkan vektor dan matriks yang mempunyai n-dimensi
-dapat dengan mudah diterjemahkan dan diproses oleh GPU. Pada tahun 2003,
-ditemukan pendekatan berbasis GPU untuk solusi masalah aljabar linear umum. Pendekatan
-pada GPU ini berjalan lebih cepat daripada pendekatan yang menggunakan CPU.
-Perbedaan kecepatan ini merupakan tonggak awal GPGPU menjadi banyak digunakan
-untuk masalah komputasi umum \citep{wikipediaGeneralpurposeComputingGraphics2023}.
+munculnya shader yang dapat diprogram dan mendukung \emph{floating point} pada
+prosesor grafis. Masalah yang melibatkan vektor dan matriks yang mempunyai
+n-dimensi dapat dengan mudah diterjemahkan dan diproses oleh GPU. Pada tahun
+2003, ditemukan pendekatan berbasis GPU untuk solusi masalah aljabar linear
+umum. Pendekatan pada GPU ini berjalan lebih cepat daripada pendekatan yang
+menggunakan CPU. Perbedaan kecepatan ini merupakan tonggak awal GPGPU menjadi
+banyak digunakan untuk masalah komputasi umum
+\citep{wikipediaGeneralpurposeComputingGraphics2023}.
 \cite{pharrGPUGemsProgramming2005} menyatakan bahwa pada bidang ilmu komputer
 dan visualisasi, GPGPU juga menunjukkan hasil yang baik. Hasil yang baik ini
 dapat dicapai dengan menerapkan GPU pada masalah komputasi data-paralel.
 
 % #### Arsitektur GPU dan Pemrograman GPGPU
-Memaksimalkan kinerja dari GPU memerlukan pemahaman tentang arsitekturnya. GPU dirancang
-untuk grafis komputer yang memiliki gaya komputasi paralel tinggi dan menghasilkan
-output piksel berwarna dari elemen data yang independen. Desain ini adalah kunci
-saat memprogram GPU, baik untuk grafis maupun komputasi umum. Pemrograman GPU
-untuk masalah komputasi umum awalnya tertanam dalam API (\emph{Application
-Programming Interface}) dan bahasa pemrograman grafis komputer. Dalam
-perkembangannya, API dan bahasa pemrograman grafis disederhanakan, dimana
-menghasilkan API seperti CUDA dari NVIDIA, DirectCompute dari Microsoft, dan
-OpenCL dari Apple/Khronos Group. API tersebut memungkinkan penggunaan GPU tanpa memerlukan
-konversi data eksplisit ke bentuk grafis \citep{pharrGPUGemsProgramming2005}.
+Memaksimalkan kinerja dari GPU memerlukan pemahaman tentang arsitekturnya. GPU
+dirancang untuk grafis komputer yang memiliki gaya komputasi paralel tinggi dan
+menghasilkan output piksel berwarna dari elemen data yang independen. Desain
+ini adalah kunci saat memprogram GPU, baik untuk grafis maupun komputasi umum.
+Pemrograman GPU untuk masalah komputasi umum awalnya tertanam dalam API
+(\emph{Application Programming Interface}) dan bahasa pemrograman grafis
+komputer. Dalam perkembangannya, API dan bahasa pemrograman grafis
+disederhanakan, dimana menghasilkan API seperti CUDA dari NVIDIA, DirectCompute
+dari Microsoft, dan OpenCL dari Apple/Khronos Group. API tersebut memungkinkan
+penggunaan GPU tanpa memerlukan konversi data eksplisit ke bentuk grafis
+\citep{pharrGPUGemsProgramming2005}.
 
 % #### Kasus Penggunaan dan Contoh Aplikasi
 Aplikasi yang mendapat manfaat paling besar dari pemrosesan GPU adalah aplikasi
-yang memiliki intensitas aritmatika yang tinggi, seperti solusi sistem persamaan
-linear dan simulasi berbasis fisika. Contoh lain nya adalah simulasi aliran
-dengan batasan kompleks dan algoritma jarak terpendek untuk semua pasangan, seperti
-yang digunakan dalam prediksi struktur protein. Jenis komputasi ini berkinerja
-baik pada GPU karena sifatnya yang sangat data-paralel: mereka terdiri dari aliran
-besar elemen data, di mana kernel komputasi yang identik diterapkan \citep{pharrGPUGemsProgramming2005}.
+yang memiliki intensitas aritmatika yang tinggi, seperti solusi sistem
+persamaan linear dan simulasi berbasis fisika. Contoh lain nya adalah simulasi
+aliran dengan batasan kompleks dan algoritma jarak terpendek untuk semua
+pasangan, seperti yang digunakan dalam prediksi struktur protein. Jenis
+komputasi ini berkinerja baik pada GPU karena sifatnya yang sangat
+data-paralel: mereka terdiri dari aliran besar elemen data, di mana kernel
+komputasi yang identik diterapkan \citep{pharrGPUGemsProgramming2005}.
 
 \subsection{Arsitektur dan karakteristik GPU}
 
@@ -91,12 +98,12 @@ besar elemen data, di mana kernel komputasi yang identik diterapkan \citep{pharr
 \end{figure}
 
 Secara arsitektur, GPU memiliki arsitektur yang hampir sama dengan CPU. Namun
-CPU berfokus pada kecepatan akses memori cache. Sedangkan GPU dirancang untuk melakukan
-komputasi data secara paralel, sehingga dibutuhkan sebanyak mungkin inti yang
-tersedia, seperti yang terlihat pada Gambar \ref{gambar gpu-cpu cores}.
-Arsitektur yang digunakan oleh GPU biasanya disebut dengan arsitektur stream
-SIMD (\emph{Single Instruction Multiple Data}) yang mana memanfaatkan banyak inti
-dengan pemrosesan ringan \citep{helenGPUArchitectureStructure2020}.
+CPU berfokus pada kecepatan akses memori cache. Sedangkan GPU dirancang untuk
+melakukan komputasi data secara paralel, sehingga dibutuhkan sebanyak mungkin
+inti yang tersedia, seperti yang terlihat pada Gambar \ref{gambar gpu-cpu
+  cores}. Arsitektur yang digunakan oleh GPU biasanya disebut dengan arsitektur
+stream SIMD (\emph{Single Instruction Multiple Data}) yang mana memanfaatkan
+banyak inti dengan pemrosesan ringan \citep{helenGPUArchitectureStructure2020}.
 
 % 4. Fitur Arsitektural Utama dan Implikasinya
 
@@ -109,17 +116,19 @@ dengan pemrosesan ringan \citep{helenGPUArchitectureStructure2020}.
 
 % 3. Model Komputasi Streaming dan 'Gap' Memori
 
-Salah satu faktor penting dalam evolusi GPU adalah '\emph{gap}' memori, yaitu perbedaan
-antara kecepatan komputasi terhadap kecepatan akses memori. Model komputasi '\emph{streaming}'
-merupakan pendekatan yang paling cocok untuk GPU modern. Ini dikarenakan model
-ini mempunyai efisiensi yang tinggi dalam pemrosesan paralel \citep{pharrGPUGemsProgramming2005}.
+Salah satu faktor penting dalam evolusi GPU adalah '\emph{gap}' memori, yaitu
+perbedaan antara kecepatan komputasi terhadap kecepatan akses memori. Model
+komputasi '\emph{streaming}' merupakan pendekatan yang paling cocok untuk GPU
+modern. Ini dikarenakan model ini mempunyai efisiensi yang tinggi dalam
+pemrosesan paralel \citep{pharrGPUGemsProgramming2005}.
 
 % 5. GPU dalam High Performance Computing (HPC)
 
-Dalam konteks High Performance Computing, GPU kini menjadi pilihan utama untuk mempercepat
-beban kerja komputasi. Penggunaan GPGPU telah meluas ke berbagai bidang, termasuk
-pemodelan 3D, infrastruktur VDI, dan lebih lanjut, menunjukkan fleksibilitas dan
-kekuatan GPU dalam berbagai skenario komputasi \citep{hagoortExploringGPUArchitecture2023}.
+Dalam konteks High Performance Computing, GPU kini menjadi pilihan utama untuk
+mempercepat beban kerja komputasi. Penggunaan GPGPU telah meluas ke berbagai
+bidang, termasuk pemodelan 3D, infrastruktur VDI, dan lebih lanjut, menunjukkan
+fleksibilitas dan kekuatan GPU dalam berbagai skenario komputasi
+\citep{hagoortExploringGPUArchitecture2023}.
 
 \begin{figure}[H]
   \centering
@@ -128,39 +137,41 @@ kekuatan GPU dalam berbagai skenario komputasi \citep{hagoortExploringGPUArchite
   \label{gambar gpu-cpu architecture}
 \end{figure}
 
-Berdasarkan \cite{learningUnderstandingArchitectureGPU2023}, arsitektur CPU dan GPU
-dapat digambarkan skema nya seperti pada Gambar \ref{gambar gpu-cpu architecture}.
-Warna hijau menggambarkan unit komputasi atau \emph{cores} (inti), warna orange
-menggambarkan memori, dan warna kuning menggambarkan unit kontrol.
+Berdasarkan \cite{learningUnderstandingArchitectureGPU2023}, arsitektur CPU dan
+GPU dapat digambarkan skema nya seperti pada Gambar \ref{gambar gpu-cpu
+  architecture}. Warna hijau menggambarkan unit komputasi atau \emph{cores}
+(inti), warna orange menggambarkan memori, dan warna kuning menggambarkan unit
+kontrol.
 
 \subsubsection{Unit Komputasi}
 \label{unit komputasi}
 
-Pada Gambar \ref{gambar gpu-cpu architecture}, terlihat bahwa inti dari CPU mempunyai
-ukuran yang lebih besar dari pada inti GPU. Beda ukuran ini menggambarkan bahwa
-inti CPU mempunyai kecerdasan yang lebih tinggi daripada inti GPU. Ini berarti inti
-CPU mampu mengatasi berbagai macam tugas kompleks yang diperlukan oleh komputer.
-Pada Gambar \ref{gambar gpu-cpu architecture} terlihat juga bahwa inti dari CPU
-mempunyai jumlah yang jauh lebih sedikit dari pada GPU. Perbedaan ini dikarenakan
-memang GPU memiliki inti dengan jumlah yang jauh lebih banyak daripada CPU.
+Pada Gambar \ref{gambar gpu-cpu architecture}, terlihat bahwa inti dari CPU
+mempunyai ukuran yang lebih besar dari pada inti GPU. Beda ukuran ini
+menggambarkan bahwa inti CPU mempunyai kecerdasan yang lebih tinggi daripada
+inti GPU. Ini berarti inti CPU mampu mengatasi berbagai macam tugas kompleks
+yang diperlukan oleh komputer. Pada Gambar \ref{gambar gpu-cpu architecture}
+terlihat juga bahwa inti dari CPU mempunyai jumlah yang jauh lebih sedikit dari
+pada GPU. Perbedaan ini dikarenakan memang GPU memiliki inti dengan jumlah yang
+jauh lebih banyak daripada CPU.
 
 Seiring berjalan nya waktu, inti CPU mempunyai evolusi yang semakin baik dalam
-segi performa. Sebaliknya, inti GPU mempunyai perubahan yang semakin menurun. Penurunan
-inti GPU ini bertujuan agar penggunaan inti GPU dapat mengkonsumsi daya yang lebih
-rendah. Sehingga GPU akan bisa digunakan di berbagai perangkat, termasuk perangkat
-mobile.
+segi performa. Sebaliknya, inti GPU mempunyai perubahan yang semakin menurun.
+Penurunan inti GPU ini bertujuan agar penggunaan inti GPU dapat mengkonsumsi
+daya yang lebih rendah. Sehingga GPU akan bisa digunakan di berbagai perangkat,
+termasuk perangkat mobile.
 
 Dalam eksekusi nya, CPU menggunakan konsep \emph{out of order execution} (OOE),
 yang mana instruksi pada CPU dapat segera diproses setelah sumber daya yang
-diperlukan tersedia. Instruksi yang dijalankan inipun tidak perlu menunggu instruksi
-sebelumnya selesai. Model eksekusi ini bertujuan untuk meningkatkan pemanfaatan
-sumber daya dan mengurangi waktu tunggu eksekusi.
+diperlukan tersedia. Instruksi yang dijalankan inipun tidak perlu menunggu
+instruksi sebelumnya selesai. Model eksekusi ini bertujuan untuk meningkatkan
+pemanfaatan sumber daya dan mengurangi waktu tunggu eksekusi.
 
 Berbeda dengan CPU, GPU tidak menggunakan konsep OOE, dan hanya menjalankan
-instruksi saja. Tidak menggunakan OOE ini bertujuan untuk tetap menyederhanakan arsitektur
-unit komputasi pada GPU. Selain itu, GPU memang didesain untuk mengatasi tugas yang
-tidak kompleks. Pada dasarnya, semua tugas yang menggunakan GPU hanya menggunakan
-operasi penjumlahan dan perkalian.
+instruksi saja. Tidak menggunakan OOE ini bertujuan untuk tetap menyederhanakan
+arsitektur unit komputasi pada GPU. Selain itu, GPU memang didesain untuk
+mengatasi tugas yang tidak kompleks. Pada dasarnya, semua tugas yang
+menggunakan GPU hanya menggunakan operasi penjumlahan dan perkalian.
 
 \begin{figure}[H]
   \centering
@@ -169,60 +180,63 @@ operasi penjumlahan dan perkalian.
   \label{gambar mad-and-fma}
 \end{figure}
 
-Operasi penjumlahan dan perkalian pada GPU secara umum menggunakan dua metode, yakni
-\emph{Multiply-Add} (MAD) dan \emph{Fused Multiply-Add} (FMA). Pada Gambar
-\ref{gambar mad-and-fma}, terlihat bahwa perbedaan utama antara MAD dan FMA adalah
-ada di proses nya. Proses perkalian dan penjumlahan MAD dilakukan secara
-berurutan yang mana menyebabkan ketelitian dari hasilnya akan berkurang. Sedangkan
-pada FMA, setelah proses perkalian dan penjumlahan dilakukan sekaligus yang
-menyebabkan hasilnya memiliki ketelitian yang tinggi. Dalam kinerja nya, operasi
-FMA memungkinkan GPU untuk dapat meningkatkan kinerja yang signifikan. Namun pada
-implementasi nya, operasi FMA memerlukan hardware khusus untuk optimalisasi, sedangkan
-MAD bisa lebih umum dan tidak spesifik pada perangkat keras tertentu.
+Operasi penjumlahan dan perkalian pada GPU secara umum menggunakan dua metode,
+yakni \emph{Multiply-Add} (MAD) dan \emph{Fused Multiply-Add} (FMA). Pada
+Gambar \ref{gambar mad-and-fma}, terlihat bahwa perbedaan utama antara MAD dan
+FMA adalah ada di proses nya. Proses perkalian dan penjumlahan MAD dilakukan
+secara berurutan yang mana menyebabkan ketelitian dari hasilnya akan berkurang.
+Sedangkan pada FMA, setelah proses perkalian dan penjumlahan dilakukan
+sekaligus yang menyebabkan hasilnya memiliki ketelitian yang tinggi. Dalam
+kinerja nya, operasi FMA memungkinkan GPU untuk dapat meningkatkan kinerja yang
+signifikan. Namun pada implementasi nya, operasi FMA memerlukan hardware khusus
+untuk optimalisasi, sedangkan MAD bisa lebih umum dan tidak spesifik pada
+perangkat keras tertentu.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=5cm]{images/rt-setup2.png}
   \includegraphics[width=5cm]{images/Reflections_02.png}
   \caption{Teknik \emph{Ray Tracing} dan Hasil \emph{Render} dengan menggunakan
-  Teknik \emph{Ray Tracing}}
+    Teknik \emph{Ray Tracing}}
   \label{gambar ray tracing technique}
 \end{figure}
 
-Meskipun GPU terlihat hanya bisa melakukan operasi sederhana, namun operasi sederhana
-ini dapat berupa operasi penjumlahan dan perkalian yang kompleks yang mana bisa membentuk
-operasi pada tensor dan operasi pada \emph{ray-tracing} seperti yang terlihat
-pada Gambar \ref{gambar ray tracing technique}. Kemampuan utama GPU dalam menghasilkan
-\emph{render} yang bagus seperti pada Gambar \ref{gambar ray tracing technique}
-pada dasarnya terletak pada kemampuan GPU untuk melakukan operasi secara paralel.
-Dalam melakukan operasi secara paralel ini, GPU menggunakan model \emph{Single
-Instruction Multiple Data} (SIMD) di mana semua inti nya semua core menjalankan operasi
-yang sama pada data yang berbeda.
+Meskipun GPU terlihat hanya bisa melakukan operasi sederhana, namun operasi
+sederhana ini dapat berupa operasi penjumlahan dan perkalian yang kompleks yang
+mana bisa membentuk operasi pada tensor dan operasi pada \emph{ray-tracing}
+seperti yang terlihat pada Gambar \ref{gambar ray tracing technique}. Kemampuan
+utama GPU dalam menghasilkan \emph{render} yang bagus seperti pada Gambar
+\ref{gambar ray tracing technique} pada dasarnya terletak pada kemampuan GPU
+untuk melakukan operasi secara paralel. Dalam melakukan operasi secara paralel
+ini, GPU menggunakan model \emph{Single Instruction Multiple Data} (SIMD) di
+mana semua inti nya semua core menjalankan operasi yang sama pada data yang
+berbeda.
 
 \subsubsection{Memori}
 
-Perbedaan model memori pada CPU dan GPU telah terlihat pada Gambar
-\ref{gambar gpu-cpu architecture} dengan blok yang berwarna orange. Sistem memori
-CPU menggunakan \emph{Dynamic Random Access Memory} (DRAM) dengan ukuran yang
-bervariasi. Komputer pribadi biasanya mempunyai ukuran DRAM berkisar 4GB hingga 128GB.
+Perbedaan model memori pada CPU dan GPU telah terlihat pada Gambar \ref{gambar
+  gpu-cpu architecture} dengan blok yang berwarna orange. Sistem memori CPU
+menggunakan \emph{Dynamic Random Access Memory} (DRAM) dengan ukuran yang
+bervariasi. Komputer pribadi biasanya mempunyai ukuran DRAM berkisar 4GB hingga
+128GB.
 
-Komponen kunci lainnya dari memori CPU adalah \emph{cache}, yang mana memiliki tujuan
-untuk mempercepat waktu akses antara CPU ke DRAM. Kecepatan akses ini disebabkan
-karena letak CPU yang sangat dekat dengan \emph{cache}. \emph{Cache} ini memiliki
-ukuran yang cukup kecil, biasanya berkisar puluhan KB per inti CPU. \emph{Cache}
-umumnya terdiri dari tiga level, yakni Level 1 (L1), Level 2 (L2), dan Level 3 (L3).
-L1 memiliki letak paling dekat dengan CPU namun memiliki ruang penyimpanan yang
-paling kecil (biasanya berkisar 64KB inti), sedangkan L3 memiliki letak yang paling
-jauh dengan CPU namun memiliki ruang penyimpanan yang paling besar daripada \emph{cache}
-lainnya (biasanya berkisar 4MB per inti). Proses CPU untuk mengambil data dari memori
-mempunyai urutan: pencarian pada L1, pencarian pada L2, pencarian pada L3, pencarian
-pada DRAM.
+Komponen kunci lainnya dari memori CPU adalah \emph{cache}, yang mana memiliki
+tujuan untuk mempercepat waktu akses antara CPU ke DRAM. Kecepatan akses ini
+disebabkan karena letak CPU yang sangat dekat dengan \emph{cache}. \emph{Cache}
+ini memiliki ukuran yang cukup kecil, biasanya berkisar puluhan KB per inti
+CPU. \emph{Cache} umumnya terdiri dari tiga level, yakni Level 1 (L1), Level 2
+(L2), dan Level 3 (L3). L1 memiliki letak paling dekat dengan CPU namun
+memiliki ruang penyimpanan yang paling kecil (biasanya berkisar 64KB inti),
+sedangkan L3 memiliki letak yang paling jauh dengan CPU namun memiliki ruang
+penyimpanan yang paling besar daripada \emph{cache} lainnya (biasanya berkisar
+4MB per inti). Proses CPU untuk mengambil data dari memori mempunyai urutan:
+pencarian pada L1, pencarian pada L2, pencarian pada L3, pencarian pada DRAM.
 
-Sementara itu, GPU menggunakan memori yang bertipe DRAM juga yang disebut dengan
-\emph{Global Memory} atau GMEM. Ukuran GMEM ini biasanya lebih kecil
-dibandingkan DRAM pada CPU. GMEM biasanya memiliki ukuran yang berkisar 2GB pada
-kartu grafis (GPU) ekonomis, hingga ukuran 40GB atau 80GB pada kartu grafis yang
-lebih mahal.
+Sementara itu, GPU menggunakan memori yang bertipe DRAM juga yang disebut
+dengan \emph{Global Memory} atau GMEM. Ukuran GMEM ini biasanya lebih kecil
+dibandingkan DRAM pada CPU. GMEM biasanya memiliki ukuran yang berkisar 2GB
+pada kartu grafis (GPU) ekonomis, hingga ukuran 40GB atau 80GB pada kartu
+grafis yang lebih mahal.
 
 % \section{Pemrograman GPU}
 % \subsection{Dasar-dasar pemrograman GPU}
@@ -231,35 +245,43 @@ lebih mahal.
 
 \section{Bahasa Pemrograman Julia}
 
-\subsection{Pengenalan Julia}
+Bahasa Julia dirilis pada tahun 2012 dan telah diterima secara luas di kalangan
+data scientist dan para penggiat matematika. Bahasa ini diciptakan karena
+adanya kebutuhan akan bahasa pemrograman yang ideal untuk pengkodean aritmatika
+\citep{ismiPentingUntukData2021}. Tujuan utama Julia adalah mengkombinasikan
+kemudahan dalam penggunaan, kecepatan, dan efisiensi dalam satu bahasa
+pemrograman. Julia memiliki sifat pengetikan opsional, mengadopsi berbagai
+bahasa pemrograman. Sehingga, dalam efisiensi dan kecepatan dan efisiensi
+sistem tingkat rendah, Julia dapat bersaing dengan pemrograman seperti C atau
+C++. Kemudian, dalam kemudahan penggunaan, Julia memiliki syntax yang mudah
+dipahami seperti halnya bahasa pemrograman Python. Pada bagian ini akan
+dijelaskan secara singkat mengenai sintaks - sintaks dasar Julia beserta
+perbandingan nya dengan Bahasa Python. Penulis menggunakan
+\cite{dokumentasijuliaJuliaDocumentationJulia2024} untuk menulis sintaks Julia,
+dan menggunakan buku dari \cite{matthesPythonCrashCourse2016} untuk menulis
+sintaks Python.
 
-Bahasa Julia dirilis pada tahun 2012 dan telah diterima secara luas di kalangan data
-scientist dan para penggiat matematika. Bahasa ini diciptakan karena adanya
-kebutuhan akan bahasa pemrograman yang ideal untuk pengkodean aritmatika \citep{ismiPentingUntukData2021}.
-Tujuan utama Julia adalah mengkombinasikan kemudahan dalam penggunaan, kecepatan,
-dan efisiensi dalam satu bahasa pemrograman. Julia memiliki sifat pengetikan opsional,
-mengadopsi berbagai bahasa pemrograman. Sehingga, dalam efisiensi dan kecepatan
-dan efisiensi sistem tingkat rendah, Julia dapat bersaing dengan pemrograman seperti
-C atau C++. Kemudian, dalam kemudahan penggunaan, Julia memiliki syntax yang
-mudah dipahami seperti halnya bahasa pemrograman Python.
+\subsection{Variable dan Tipe Data}
 
-% \subsection{Sejarah dan perkembangan Julia}
-
-\subsection{Dasar - Dasar Julia}
-
-\subsubsection{Variable dan Tipe Data}
-
-Variabel dalam Julia dibuat dengan cara menetapkan nilai pada suatu nama menggunakan
-\emph{assignment operator} "\cw{=}". Misalnya, seperti yang terlihat pada kode berikut:
+Variabel dalam Julia dibuat dengan cara menetapkan nilai pada suatu nama
+menggunakan \emph{assignment operator} "\cw{=}". Sintaks ini cukup identik
+dengan bahasa Python. Berikut merupakan contoh penulisan variable Julia dan
+Python
 
 \begin{lstlisting}
+# Julia
+my_name = "Alfarizi"
+my_favourite_number = 42
+my_favourite_pie = 3.1415
+
+# Python
 my_name = "Alfarizi"
 my_favourite_number = 42
 my_favourite_pie = 3.1415
 \end{lstlisting}
 
 \noindent
-Julia merupakan bahasa yang bertipe dinamis, yang berarti tidak memerlukan deklarasi
+Sama seperti Python, Julia merupakan bahasa yang bertipe dinamis, yang berarti tidak memerlukan deklarasi
 tipe variabel secara eksplisit. Tipe dari variabel secara otomatis diperoleh
 berdasarkan tipe datau \emph{value} nya. Selain itu, variabel dalam Julia dapat mengubah
 tipenya selama runtime. Misalnya saja seperti kode berikut:
@@ -275,39 +297,39 @@ Berikut merupakan tipe data dasar yang dimiliki oleh Julia:
 
 \begin{itemize}
   \item \textbf{Angka}: Ini termasuk beberapa subjenis seperti:
-    \begin{itemize}
-      \item Bilangan bulat (\cw{Int8}, \cw{Int16}, \cw{Int32}, \cw{Int64}, \cw{Int128})
+        \begin{itemize}
+          \item Bilangan bulat (\cw{Int8}, \cw{Int16}, \cw{Int32}, \cw{Int64}, \cw{Int128})
 
-      \item Angka floating-point (\cw{Float16}, \cw{Float32}, \cw{Float64})
+          \item Angka floating-point (\cw{Float16}, \cw{Float32}, \cw{Float64})
 
-      \item Angka kompleks (\cw{ComplexF32}, \cw{ComplexF64})
-    \end{itemize}
+          \item Angka kompleks (\cw{ComplexF32}, \cw{ComplexF64})
+        \end{itemize}
 
   \item \textbf{Boolean}: \cw{Bool} mewakili nilai Boolean \cw{true} dan \cw{false}.
 
   \item \textbf{Karakter} dan \textbf{String}:
-    \begin{itemize}
-      \item Karakter: \cw{Char} digunakan untuk karakter Unicode tunggal.
+        \begin{itemize}
+          \item Karakter: \cw{Char} digunakan untuk karakter Unicode tunggal.
 
-      \item String: \cw{String} mewakili rangkaian karakter.
-    \end{itemize}
+          \item String: \cw{String} mewakili rangkaian karakter.
+        \end{itemize}
 
   \item \textbf{Array}: \cw{Array{T,N}} menandakan array multidimensi dari
-    elemen tipe T.
+        elemen tipe T.
 
   \item \textbf{Tuple}: \cw{Tuple{T1,T2,...}} menunjukkan koleksi terurut dari
-    elemen dengan tipe berbeda T1, T2, dan lain-lain.
+        elemen dengan tipe berbeda T1, T2, dan lain-lain.
 
   \item \textbf{Dictionaries}: \cw{Dict{K,V}} mewakili kumpulan pasangan kunci-nilai
-    di mana K dan V adalah tipe kunci dan nilai.
+        di mana K dan V adalah tipe kunci dan nilai.
 \end{itemize}
 
 Dalam penamaan, nama variabel dalam Julia dapat mencakup subset simbol Unicode,
-yang memungkinkan berbagai macam kemungkinan penamaan, termasuk penggunaan simbol
-seperti huruf Yunani. Misalnya, untuk mewakili variabel dengan huruf Yunani dalam
-sebagian besar lingkungan pengembangan Julia, Anda dapat menggunakan sintaks
-seperti LaTeX (misalnya, \cw{\alpha} untuk $\alpha$). Sintaks ini juga mencakup penambahan
-subskrip, superskrip, dan lain-lain.
+yang memungkinkan berbagai macam kemungkinan penamaan, termasuk penggunaan
+simbol seperti huruf Yunani. Misalnya, untuk mewakili variabel dengan huruf
+Yunani dalam sebagian besar lingkungan pengembangan Julia, Anda dapat
+menggunakan sintaks seperti LaTeX (misalnya, \cw{\alpha} untuk $\alpha$).
+Sintaks ini juga mencakup penambahan subskrip, superskrip, dan lain-lain.
 
 % \markdownInput{markdowns/variable-dan-tipe-data.md}
 
@@ -319,19 +341,23 @@ subskrip, superskrip, dan lain-lain.
 % my_favourite_pie = 3.1415
 % \end{lstlisting}
 
-\subsubsection{Deklarasi Fungsi}
+\subsection{Deklarasi Fungsi}
 
-Fungsi merupakan deretan perintah yang dijalankan secara berurutan. Sama seperti
-pada Matematika, fungsi digunakan untuk menyederhanakan deretan perintah yang kemungkinan
-nanti nya akan dipanggi lagi. \cite{amerioFunctions2019} menjelaskan bahwa dalam
-Julia, fungsi dapat dideklarasikan dengan 3 cara. Deklarasi fungsi yang umumnya
-dilakukan pada Julia adalah seperti berikut
+Fungsi merupakan deretan perintah yang dijalankan secara berurutan. Sama
+seperti pada Matematika, fungsi digunakan untuk menyederhanakan deretan
+perintah yang kemungkinan nanti nya akan dipanggi lagi. Pada Julia, fungsi
+dapat dideklarasikan dengan 3 cara. Deklarasi fungsi yang umumnya dilakukan
+pada Julia adalah seperti berikut
 
 \begin{lstlisting}[label={contoh deklarasi fungsi 1}]{language=Julia}
+# Julia
 function plus_two(x)
-  #perform some operations
   return x + 2
 end
+
+# Python
+def plus_two(x):
+  return x + 2
 \end{lstlisting}
 
 \noindent
@@ -340,12 +366,17 @@ Jika dilakukan \emph{breakdown}, fungsi diatas bernama \cw{plus_two} yang mana m
 dilakukan pemanggilan fungsi \cw{plus_two(10)}, maka fungsi tersebut akan
 mengembalikan nilai \cw{12}.
 
-Pendeklarasian fungsi cara kedua disebut dengan \emph{inline-functions}, yang mana
-berarti suatu fungsi yang perintah nya bisa dituliskan dalam satu baris kode.
-Penulisan fungsi nya adalah seperti berikut:
+Pendeklarasian fungsi cara kedua disebut dengan \emph{inline-functions}, yang
+mana berarti suatu fungsi yang perintah nya bisa dituliskan dalam satu baris
+kode. Pada Python, \emph{inline-function} ini mirip seperti
+\emph{lambda-function}. Contoh penulisan fungsi nya seperti berikut
 
 \begin{lstlisting}[label={contoh deklarasi fungsi 2}]
+# Julia
 plus_two(x) = x + 2
+
+# Python
+plus_two = lambda x: x + 2
 \end{lstlisting}
 
 \noindent
@@ -353,11 +384,16 @@ Fungsi diatas identik dengan contoh fungsi pertama, yang mana mempunyai nama \cw
 mempunyai 1 parameter \cw{x}, dan mengembalikan nilai \cw{x + 2}. Jika dilakukan
 pemanggilan fungsi \cw{plus_two(20)} akan mengembalikan nilai \cw{22}.
 
-Deklarasi fungsi ketiga disebut dengan \emph{anonymous-functions}, yang mana
-mempunyai penulisan seperti berikut:
+Deklarasi fungsi ketiga disebut dengan \emph{anonymous-functions}. Pada Python,
+deklarasi fungsi ini juga identik dengan \emph{lambda-function}. Contoh
+penulisan fungsinya adalah seperti berikut mempunyai penulisan seperti berikut:
 
 \begin{lstlisting}
-plus_two = x -> x+2
+# Julia
+plus_two = x -> x + 2
+
+# Python
+plus_two = lambda x: x + 2
 \end{lstlisting}
 
 \noindent
@@ -369,17 +405,17 @@ yang memerlukan fungsi lain. Dalam bahasa C/C++, istilah fungsi yang memerlukan 
 lain ini biasanya disebut dengan \emph{predicate}, sedangkan dalam bahasa Javascript
 disebut dengan \emph{callback function}.
 
-\subsubsection{Control Flow}
+\subsection{Control Flow}
 
-Pada suatu kode, diperlukan suatu mekanisme tertentu yang dapat mengarahkan kode
-tergantung pada kondisi yang ada. Nama mekanisme ini adalah \emph{control flow}.
-\cite{amerioControlFlow2019} menjelaskan, dalam bahasa pemrograman umum nya, terdapat
-2 macam \emph{control flow}, yakni \emph{decision} (keputusan), dan perulangan.
-Penulisan keputusan pada Julia bisa dilakukan seperti berikut:
+Pada suatu kode, diperlukan suatu mekanisme tertentu yang dapat mengarahkan
+kode tergantung pada kondisi yang ada. Nama mekanisme ini adalah \emph{control
+  flow}. Dalam bahasa pemrograman umum nya, terdapat 2 macam \emph{control flow},
+yakni \emph{decision} (keputusan), dan perulangan. Penulisan keputusan pada
+Julia bisa dilakukan seperti berikut:
 
 \begin{lstlisting}
+# Julia
 x = 1000
-
 if x<1
     print("$x < 1")
 elseif x < 3
@@ -390,6 +426,18 @@ else
     print("$x is really big!")
 end
 
+# Python
+x = 1000
+if x < 1:
+    print(f"{x} < 1")
+elif x < 3:
+    print(f"{x} < 3")
+elif x < 100:
+    print(f"{x} < 100")
+else:
+    print(f"{x} is really big!")
+
+# Output
 >> "1000 is really big!"
 \end{lstlisting}
 
@@ -404,13 +452,20 @@ perulangan. Perulangan pertama disebut dengan \emph{while loop} yang mana
 penulisannya adalah seperti berikut
 
 \begin{lstlisting}
+# Julia
 i = 0
-
 while(i < 5)
     print("$i ")
     i += 1
 end
 
+# Python
+i = 0
+while i < 5:
+    print(f'${i} ')
+    i += 1
+
+# Output
 >> 0 1 2 3 4
 \end{lstlisting}
 
@@ -419,35 +474,42 @@ Kemudian perulangan tipe kedua, disebut dengan \emph{for loop} yang mana
 penulisannya adalah seperti berikut
 
 \begin{lstlisting}
+# Julia
 for i in 1:5
     print("$i ")
 end
 
+# Python
+for i in range(1, 5):
+    print(f'${i} ')
+
+# Output
 >> 1 2 3 4
 \end{lstlisting}
 
 \noindent
 Kedua tipe perulangan dapat digunakan dalam dua kasus yang berbeda. \emph{for
-loop} dapat digunakan untuk kasus dimana pengguna tahu kapan akan berhenti, misalnya
+  loop} dapat digunakan untuk kasus dimana pengguna tahu kapan akan berhenti, misalnya
 akan berhenti ketika nilai nya nilai nya lebih dari 5. Sedangkan \emph{while
-loop} dapat digunakan ketika pengguna tidak tahu kapan akan berhenti, misalnya saja
+  loop} dapat digunakan ketika pengguna tidak tahu kapan akan berhenti, misalnya saja
 dalam program game umumnya digunakan \emph{while loop} ini untuk menetukan
 apakah pengguna masih berada di dalam game atau sudah keluar dari game.
 
-\subsubsection{Data Structures}
+\subsection{Data Structures}
 
 Pada pengaplikasian suatu bahasa pemrograman, suatu masalah umumnya merupakan
-kumpulan dari beberapa variable dengan tipe data tertentu. Untuk mengatur beberapa
-variable ini diperlukan struktur khusus yang disebut dengan \emph{Data
-Structures} atau Struktur Data. Di dalam Julia, terdapat 4 \emph{data structures}
-yang umumnya digunakan, yakni \emph{arrays}, \emph{tuples}, \emph{named tuples},
-dan \emph{dictionaries}.
+kumpulan dari beberapa variable dengan tipe data tertentu. Untuk mengatur
+beberapa variable ini diperlukan struktur khusus yang disebut dengan \emph{Data
+  Structures} atau Struktur Data. Didalam Julia, terdapat 4 \emph{data
+  structures} yang umumnya digunakan, yakni \emph{arrays}, \emph{tuples},
+\emph{named tuples}, dan \emph{dictionaries}.
 
 \emph{Dictionaries} merupakan struktur data yang mempunyai \emph{keys} dan \emph{values}.
 \emph{keys} dan \emph{values} ini dipisahkan oleh simbol "\cw{=>}". Contoh penulisan
 dictionaries adalah seperti berikut
 
 \begin{lstlisting}
+# Julia
 person1 = Dict(
   "name" => "Alfarizi",
   "phone" => 123456789,
@@ -458,19 +520,37 @@ person2 = Dict(
   "phone" => 123456789,
   "shoe-size" => 38
 )
+
+# Python
+person1 = {
+  "name": "Alfarizi",
+  "phone": 123456789,
+  "shoe-size": 43
+}
+person2 = {
+  "name": "Intan",
+  "phone": 123456789,
+  "shoe-size": 38
+}
 \end{lstlisting}
 
 \noindent
 Pengaksesan isi dari \emph{dictionaries} bisa dilakukan dengan penulisan seperti
 \cw{person1["name"]} yang mana akan mengembalikan nilai \cw{"Alfarizi"}.
 
-Struktur data berikutnya adalah \emph{tuples} yang mana mempunyai ukuran yang tetap.
-tuple bisa dituliska seperti berikut ini
+Struktur data berikutnya adalah \emph{tuples} yang mana mempunyai ukuran yang
+tetap. tuple bisa dituliska seperti berikut ini
 
 \begin{lstlisting}
+# Julia
 a = (1,2,3)
 b = 1, 2, 3
 
+# Python
+a = (1, 2, 3)
+b = (1, 2, 3)
+
+# Output
 >> length(a)
 3
 >> length(b)
@@ -484,27 +564,42 @@ index pertama bisa dituliskan dengan \cw{a[1]} atau \cw{a[begin]}. Untuk mengaks
 index terakhir bisa menggunakan \cw{a[end]}. Untuk mengakses index kedua bisa menggunakan
 \cw{a[2]}.
 
-Struktur data berikutnya adalah \emph{Named tuples} yang mana perpaduan antara \emph{Tuples}
-dan \emph{Dictionaries}. \emph{Named tuples} dapat dituliskan seperti berikut
+Struktur data berikutnya adalah \emph{Named tuples} yang mana perpaduan antara
+\emph{Tuples} dan \emph{Dictionaries}. Pada Python, tidak mendukung \emph{named
+  tuple} secara \emph{built-in}, sehingga diperlukan \emph{import module} yang
+bernama \emph{collection}. \emph{Named tuples} dapat dituliskan seperti berikut
 
 \begin{lstlisting}
-namedTuple = (a = 1, b = "hello")
+# Julia
+namedTuple1 = (a = 1, b = "hello")
+
+# Python
+from collections import namedtuple
+NamedTuple = namedtuple('NamedTuple', ['a', 'b'])
+namedTuple1 = NamedTuple(a=1, b=2)
 \end{lstlisting}
 
 \noindent
 Untuk mengakses isi dari \emph{named tuple}, dapat menggunakan penulisan \cw{namedTuple[:a]}
 yang mana akan mengembalikan nilai \cw{1}. Nama dari tuple tidak boleh
 menggunakan nama yang mengandung koma. Ukuran struktur data dari \emph{named
-tuple} akan selalu tetap dan tidak bisa bertambah banyak.
+  tuple} akan selalu tetap dan tidak bisa bertambah banyak. Jika dilihat perbandingannya
+dengan bahasa Python, implementasi \emph{named tuple} tampak cukup kompleks di Python.
+Ini dikarenakan Python tidak mendukung \emph{built-in} \emph{named tuple}.
 
 Struktur data terakhir adalah \emph{Arrays}. Array ini merupakan struktur data
 yang paling banyak digunakan, dikarenakan array ini dapat membentuk vektor,
-matrik, maupun tensor. Array yang mempunyai 1 dimensi disebut dengan \emph{vektor}.
-Vektor dapat dituliskan seperti berikut
+matrik, maupun tensor. Array yang mempunyai 1 dimensi disebut dengan
+\emph{vektor}. Vektor dapat dituliskan seperti berikut
 
 \begin{lstlisting}
+# Julia
 a = [1,2,3,4,5]
 b = ["hello", "world", "julia"]
+
+# Python
+a = [1,2,3,4,5]
+b = ["hello", "world", "python"]
 \end{lstlisting}
 
 \noindent
@@ -513,11 +608,16 @@ Misalnya, dari contoh diatas untuk mengakses index kedua dari vektor \cw{b}
 dapat dilakukan dengan \cw{b[2]} yang mana akan mengembalikan nilai \cw{"world"}.
 
 Array yang berisikan 2 dimensi disebut dengan \emph{matriks}. Atau bisa juga
-dikatakan bahwa Matrik merupakan kumpulan dari beberapa vektor. Matrik dapat dituliskan
-seperti berikut
+dikatakan bahwa Matrik merupakan kumpulan dari beberapa vektor. Matrik dapat
+dituliskan seperti berikut
 
 \begin{lstlisting}
+# Julia
 mat1 = [1 2 3; 4 5 6]
+
+# Python
+import numpy as np
+mat1 = np.array([[1, 2, 3], [4, 5, 6]])
 \end{lstlisting}
 
 \noindent
@@ -528,9 +628,9 @@ contoh matrik diatas diubah ke notasi matematika, maka hasilnya adalah sebagai b
 \begin{equation}
   \text{mat1}\ = \left(
   \begin{matrix}
-    1 & 2 & 3 \\
-    4 & 5 & 6
-  \end{matrix}
+      1 & 2 & 3 \\
+      4 & 5 & 6
+    \end{matrix}
   \right)
 \end{equation}
 
@@ -541,24 +641,25 @@ dituliskan dengan \cw{mat1[1, 2]} yang mana akan mengembalikan nilai \cw{2}.
 
 \section{Fisika Komputasi dalam Operasi Matriks}
 
-Fisika komputasi merupakan cabang interdisipliner yang memanfaatkan teknik komputasi
-untuk memecahkan masalah fisika yang kompleks dan sulit diselesaikan dengan metode
-analitis. Dengan perkembangan teknologi komputer yang semakin canggih, fisika komputasi
-telah menjadi alat penting dalam penelitian dan pengembangan di berbagai bidang,
-mulai dari astrofisika hingga ilmu material.
+Fisika komputasi merupakan cabang interdisipliner yang memanfaatkan teknik
+komputasi untuk memecahkan masalah fisika yang kompleks dan sulit diselesaikan
+dengan metode analitis. Dengan perkembangan teknologi komputer yang semakin
+canggih, fisika komputasi telah menjadi alat penting dalam penelitian dan
+pengembangan di berbagai bidang, mulai dari astrofisika hingga ilmu material.
 
-Dalam fisika komputasi, matriks memainkan peran krusial dalam pemodelan dan analisis.
-Teori matriks, yang merupakan bagian dari matematika terapan, menyediakan
-kerangka kerja untuk menggambarkan dan menyelesaikan sistem persamaan linear
-yang sering muncul dalam perhitungan fisika. Misalnya, dalam mekanika kuantum, matriks
-digunakan untuk merumuskan dan memecahkan persamaan Schrödinger, sementara dalam
-dinamika fluida, matriks digunakan untuk menghitung perilaku aliran fluida.
+Dalam fisika komputasi, matriks memainkan peran krusial dalam pemodelan dan
+analisis. Teori matriks, yang merupakan bagian dari matematika terapan,
+menyediakan kerangka kerja untuk menggambarkan dan menyelesaikan sistem
+persamaan linear yang sering muncul dalam perhitungan fisika. Misalnya, dalam
+mekanika kuantum, matriks digunakan untuk merumuskan dan memecahkan persamaan
+Schrödinger, sementara dalam dinamika fluida, matriks digunakan untuk
+menghitung perilaku aliran fluida.
 
 Pada GPU, semua proses yang diproses akan dipetakan operasi penjumlahan seperti
-pada bagian \ref{unit komputasi}. Proses operasi penjumlahan merupakan proses operasi
-dasar yang mana proses operasi lainnya bisa diubah ke operasi penjumlahan ini.
-Misalnya saja, jika operasi pengurangan diubah ke bentuk operasi penjumlahan,
-maka akan menghasilkan bentuk seperti berikut
+pada bagian \ref{unit komputasi}. Proses operasi penjumlahan merupakan proses
+operasi dasar yang mana proses operasi lainnya bisa diubah ke operasi
+penjumlahan ini. Misalnya saja, jika operasi pengurangan diubah ke bentuk
+operasi penjumlahan, maka akan menghasilkan bentuk seperti berikut
 
 \[
   A - B = A + (-B)
@@ -570,7 +671,7 @@ perkalian, jika diubah ke bentuk operasi penjumlahan, akan menghasilkan bentuk s
 berikut
 
 \[
-  A \times n = \underbrace{A + A + A + A + ...}_{\text{berjumlah}\, n}
+  A \times n = \underbrace{A + A + A + A + \cdots}_{\text{berjumlah}\, n}
 \]
 
 \noindent
@@ -609,26 +710,45 @@ operasi penjumlahan matriks
 Jika matriks diatas dilakukan generalisir, maka operasi penjumlahan matriks dapat
 dituliskan sebagai berikut
 
-\begin{equation}
-  \label{eq:matrix_sum}
+%   \label{eq:matrix_sum}
+%   \begin{bmatrix}
+%     a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21}&a_{22}&\cdots&a_{2n}\\ \vdots&\vdots&\ddots&\vdots \\ a_{m1}&a_{m2}&\cdots&a_{mn}
+%   \end{bmatrix}
+%   +
+%   \begin{bmatrix}
+%     b_{11} & b_{12} & \cdots & b_{1p} \\ b_{21}&b_{22}&\cdots&b_{2p}\\ \vdots&\vdots&\ddots&\vdots \\ b_{n1}&b_{n2}&\cdots&b_{np}
+%   \end{bmatrix}
+%   =
+%   % Enter here
+%   \begin{bmatrix}
+%     a_{11} + b_{11} & a_{12} + b_{12} & \cdots & a_{1n} + b_{1n} \\ a_{21} + b_{21} & a_{22} + b_{22} & \cdots & a_{2n} + b_{2n}\\ \vdots&\vdots&\ddots&\vdots \\ a_{m1} + b_{m1} & a_{m2} + b_{m2}&\cdots& a_{mn} + a_{mn}
+%   \end{bmatrix}
+\begin{align} \label{eq:matrix_sum}
   \begin{bmatrix}
-    a & b \\
-    c & d \\
+    a_{11} & a_{12} & \cdots & a_{1n} \\
+    a_{21} & a_{22} & \cdots & a_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{m1} & a_{m2} & \cdots & a_{mn}
   \end{bmatrix}
-  +
+   & +
   \begin{bmatrix}
-    e & f \\
-    g & h \\
+    b_{11} & b_{12} & \cdots & b_{1p} \\
+    b_{21} & b_{22} & \cdots & b_{2p} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    b_{n1} & b_{n2} & \cdots & b_{np}
   \end{bmatrix}
-  =
+  \nonumber \\
+   & =
   \begin{bmatrix}
-    (a + e) & (b + f) \\
-    (c + g) & (d + h) \\
+    a_{11} + b_{11} & a_{12} + b_{12} & \cdots & a_{1n} + b_{1n} \\
+    a_{21} + b_{21} & a_{22} + b_{22} & \cdots & a_{2n} + b_{2n} \\
+    \vdots          & \vdots          & \ddots & \vdots          \\
+    a_{m1} + b_{m1} & a_{m2} + b_{m2} & \cdots & a_{mn} + b_{mn}
   \end{bmatrix}
-\end{equation}
+\end{align}
 
 \noindent
-dimana $a$, $b$, $c$, $d$, $e$, $f$, $g$, dan $h$ adalah suatu skalar. Suatu penjumlahan
+dimana $a_{11}$ hingga $a_{mn}$ dan $b_{11}$ hingga $b_{mn}$ merupakan elemen - elemen dari matriks. Suatu penjumlahan
 dapat dikatakan operasi penjumlahan matriks jika memenuhi sifat - sifat operasi penjumlahan
 matriks:
 
@@ -660,26 +780,32 @@ dengan penulisan sebagai berikut
 dimana $A$, $-B$, dan $C$ adalah suatu matriks. Dari pernyataan persamaan \ref{eq:derivatif_additional_operand}
 tersebut, maka bentuk operasi pengurangan matriks dapat dituliskan
 
-\begin{equation}
-  \label{eq:matrix_substraction}
+\begin{align} \label{eq:matrix_substraction}
   \begin{bmatrix}
-    a & b \\
-    c & d \\
+    a_{11} & a_{12} & \cdots & a_{1n} \\
+    a_{21} & a_{22} & \cdots & a_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{m1} & a_{m2} & \cdots & a_{mn}
   \end{bmatrix}
-  -
+   & -
   \begin{bmatrix}
-    e & f \\
-    g & h \\
+    b_{11} & b_{12} & \cdots & b_{1p} \\
+    b_{21} & b_{22} & \cdots & b_{2p} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    b_{n1} & b_{n2} & \cdots & b_{np}
   \end{bmatrix}
-  =
+  \nonumber \\
+   & =
   \begin{bmatrix}
-    (a - e) & (b - f) \\
-    (c - g) & (d - h) \\
+    a_{11} - b_{11} & a_{12} - b_{12} & \cdots & a_{1n} - b_{1n} \\
+    a_{21} - b_{21} & a_{22} - b_{22} & \cdots & a_{2n} - b_{2n} \\
+    \vdots          & \vdots          & \ddots & \vdots          \\
+    a_{m1} - b_{m1} & a_{m2} - b_{m2} & \cdots & a_{mn} - b_{mn}
   \end{bmatrix}
-\end{equation}
+\end{align}
 
 \noindent
-dimana $a$, $b$, $c$, $d$, $e$, $f$, $g$, dan $h$ adalah suatu skalar. Operasi
+dimana $a_{11}$ hingga $a_{mn}$ dan $b_{11}$ hingga $b_{mn}$ merupakan elemen - elemen dari matriks. Operasi
 pengurangan matriks mempunyai sifat - sifat yang hampir sama seperti operasi
 penjumlahan matriks. Berikut merupakan sifat - sifat operasi pengurangan matriks:
 
@@ -700,8 +826,8 @@ dimana $A$, $B$, $C$ adalah matriks, dan $0$ adalah matriks nol.
 
 \subsection{Operasi Perkalian dengan Skalar}
 
-Berdasarkan \cite{boydIntroductionAppliedLinear2018}, contoh operasi perkalian matriks
-dengan skalar adalah
+Berdasarkan \cite{boydIntroductionAppliedLinear2018}, contoh operasi perkalian
+matriks dengan skalar adalah
 
 \[
   (-2) \times
@@ -725,13 +851,11 @@ maka secara umum operasi perkalian matriks dengan skalar dapat dituliskan
 \begin{equation}
   \label{eq:matrix_mult_scalar}\gamma \times
   \begin{bmatrix}
-    a & b \\
-    c & d \\
+    a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21}&a_{22}&\cdots&a_{2n}\\ \vdots&\vdots&\ddots&\vdots \\ a_{m1}&a_{m2}&\cdots&a_{mn}
   \end{bmatrix}
   =
   \begin{bmatrix}
-    \gamma a & \gamma b \\
-    \gamma c & \gamma d \\
+    \gamma a_{11} & \gamma a_{12} & \cdots & \gamma a_{1n} \\ \gamma a_{21} & \gamma a_{22} & \cdots & \gamma a_{2n}\\ \vdots & \vdots & \ddots & \vdots \\ \gamma a_{m1} & \gamma a_{m2} & \cdots & \gamma a_{mn}
   \end{bmatrix}
 \end{equation}
 
@@ -749,7 +873,7 @@ dengan skalar mempunyai sifat - sifat:
   \item \emph{Multiplikasi nol}: $0\cdot A=O$ dan $c\cdot O= O$
 
   \item \emph{Penutup perkalian}: $cA$ adalah matriks dengan dimensi yang sama dengan
-    $A$
+        $A$
 \end{itemize}
 
 \noindent
@@ -803,33 +927,110 @@ matriks $A$ pada baris $i$ kolom $k$, dan $b_{kj}$ merupakan elemen matriks $B$
 pada baris $k$ kolom $j$.
 
 Berikut ini merupakan sifat - sifat yang dapat memastikan bahwa suatu operasi
-perkalian merupakan operasi perkalian matriks dengan matriks. Jika diasumsikan $A$,
-$B$, dan $C$ adalah suatu matriks, sedangkan $\gamma$ adalah sautu skalar, maka sifat-sifat
-dari operasi perkalian matriks dengan matriks adalah
+perkalian merupakan operasi perkalian matriks dengan matriks. Jika diasumsikan
+$A$, $B$, dan $C$ adalah suatu matriks, sedangkan $\gamma$ adalah sautu skalar,
+maka sifat-sifat dari operasi perkalian matriks dengan matriks adalah
 \begin{itemize}
   \item \emph{Asosiatif}: $(AB)C = A(BC)$. Oleh karena itu kita dapat menulis
-    produk tersebut secara sederhana sebagai $ABC$.
+        produk tersebut secara sederhana sebagai $ABC$.
 
   \item \emph{Asosiatif dengan perkalian skalar}: $\gamma(AB) = (\gamma A)B$, di
-    mana $\gamma$ adalah skalar, dan $A$ dan $B$ adalah matriks (yang dapat
-    dikalikan). Produk $(\gamma A)B$ juga bisa dituliskan $A(\gamma B)$. (Perhatikan
-    bahwa produk $\gamma A$ dan $\gamma B$ didefinisikan sebagai produk matriks-skalar,
-    tetapi secara umum, kecuali $A$ dan $B$ memiliki satu baris, tidak sebagai produk
-    matriks-matriks.)
+        mana $\gamma$ adalah skalar, dan $A$ dan $B$ adalah matriks (yang dapat
+        dikalikan). Produk $(\gamma A)B$ juga bisa dituliskan $A(\gamma B)$. (Perhatikan
+        bahwa produk $\gamma A$ dan $\gamma B$ didefinisikan sebagai produk matriks-skalar,
+        tetapi secara umum, kecuali $A$ dan $B$ memiliki satu baris, tidak sebagai produk
+        matriks-matriks.)
 
   \item \emph{Distributif dengan penjumlahan}: $A(B + C) = AB + AC$ dan $(A + B)C
-    = AC + BC$. Pada sisi kanan dari persamaan ini kita menggunakan preseden
-    yang lebih tinggi dari perkalian matriks dibandingkan penjumlahan, jadi,
-    misalnya, $AC + BC$ diinterpretasikan sebagai $(AC) + (BC)$.
+          = AC + BC$. Pada sisi kanan dari persamaan ini kita menggunakan preseden
+        yang lebih tinggi dari perkalian matriks dibandingkan penjumlahan, jadi,
+        misalnya, $AC + BC$ diinterpretasikan sebagai $(AC) + (BC)$.
 
   \item Transpose dari produk. Transpose dari suatu produk adalah produk dari
-    transpose-transpose, tetapi dalam urutan yang berlawanan:
-    $(AB)^{T}= B^{T}A^{T}$.
+        transpose-transpose, tetapi dalam urutan yang berlawanan: $(AB)^{T}=
+          B^{T}A^{T}$.
 \end{itemize}
 
 \subsection{Operasi Inverse}
 
+Berdasarkan \cite{strangIntroductionLinearAlgebra2023}, suatu matriks $A$
+berukuran $n \times n$ jika dikatakan mempunyai matriks inverse $A^{-1}$, maka
+akan memenuhi definisi berikut
+
+\begin{equation}
+  \label{eq:inverse_matrix}A A^{-1}= A^{-1}A = I
+\end{equation}
+
+\noindent
+dimana $I$ adalah matriks identitas yang berukuran $n \times n$. Suatu matriks
+dapat mempunyai inverse matriks jika memenuhi:
+
+\begin{enumerate}
+  \item Merupakan matriks persegi (mempunyai banyak baris yang sama dengan banyak
+        kolom).
+
+  \item Mempunyai nilai determinant yang bukan nol.
+\end{enumerate}
+
+Untuk matriks $2 \times 2$, cara mencari nilai dari inverse nya dapat
+menggunakan persamaan
+
+\begin{equation}
+  \begin{bmatrix}
+    a & b \\
+    c & d
+  \end{bmatrix}^{-1}= \frac{1}{ad - bc}
+  \begin{bmatrix}
+    d  & -b \\
+    -c & a
+  \end{bmatrix}
+\end{equation}
+
+\noindent
+Nilai $ad - bc$ ini merupakan nilai determinant dari matriks 2x2, sehingga berdasarkan
+syarat matriks untuk mempunyai inverse matriks, maka nilai $ad - bc \neq 0$. Pada
+kasus matriks yang mempunyai ukuran lebih banyak, umum nya terdapat beberapa
+metode pencarian inverse matriks yang bisa digunakan seperti metode matriks
+adjoint dan metode eliminasi gauss-jordan. Namun, perhitungan matriks secara
+manual umumnya memerlukan ketelitian yang cukup tinggi, sehingga sangat umum mencari
+inverse matriks dengan menggunakan bantuan komputer.
+
 \subsection{Nilai Eigen}
+
+Berdasarkan \cite{thomasscofieldEigenvaluesEigenvectors2018}, jika terdapat
+matriks $\mathbf{A}$ berukuran $n \times n$, dan terdapat vektor $\vec{x}$ yang
+berukuran $n$, maka dapat diperoleh persamaan
+
+\begin{equation}
+  \label{eq:eigen}\mathbf{A}\vec{x}= \lambda \vec{x}
+\end{equation}
+
+\noindent
+dimana $\lambda$ adalah nilai eigen. Jika diasumsikan $\lambda$ berupa skalar, maka
+persamaan \ref{eq:eigen} dapat dilanjutkan menjadi
+
+\begin{gather*}
+  \begin{array}{ c c }
+                    & \mathbf{A}\vec{x} = \lambda \vec{x}                       \\
+    \Leftrightarrow & \mathbf{A} \vec{x} -\lambda \vec{x} = 0                   \\
+    \Leftrightarrow & \mathbf{A} \vec{x} - \mathbf{I} \lambda \vec{x} = 0       \\
+    \Leftrightarrow & ( \mathbf{A} \vec{x} - \mathbf{I} \lambda ) \ \vec{x} = 0
+  \end{array}\\
+\end{gather*}
+
+\noindent
+dimana $\mathbf{I}$ adalah matriks identitas yang berukuran $n \times n$. Jika
+$\vec{x}$ tidak boleh vektor nol, dan $( \mathbf{A}\vec{x}- \mathbf{I}\lambda )$
+merupakan matriks $n \times n$, maka solusi dari nilai $\lambda$ yang skalar
+harus memenuhi
+
+\begin{equation}
+  \label{eq:eigenvalue}\det{(\mathbf{A} - \mathbf{I} \lambda)}= 0
+\end{equation}
+
+\noindent
+Jika disimpulkan, persamaan \ref{eq:eigen} mempunyai solusi yang tidak nol terhadap
+vektor $\vec{x}$ jika dan hanya jika memenuhi persamaan \ref{eq:eigenvalue}.
 
 % \section{Fisika Komputasi}
 
