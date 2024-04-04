@@ -112,18 +112,18 @@ Python, dan memiliki performa yang baik seperti C++
 yang membuat Julia menjadi bahasa pemrograman paling cocok untuk implementasi
 GPGPU pada saat ini.
 
-\section{Rumusan masalah}
+\section{Rumusan Masalah}
 Berdasarkan latar belakang yang telah dipaparkan, maka rumusan masalah yang
 diangkat pada penelitian ini adalah sebagai berikut:
 \begin{enumerate}
-  \item Bagaimana cara kerja komputasi paralel dengan menggunakan Bahasa Julia
+  \item Bagaimana cara kerja komputasi series dan komputasi paralel dengan menggunakan
+        Bahasa Julia
 
   \item Bagaimana performa yang dihasilkan dari komputasi secara \emph{parallel}
         dibandingkan dengan komputasi secara \emph{series}
 \end{enumerate}
 
-\section{Tujuan dan Manfaat Penelitian}
-\subsection{Tujuan Penelitian}
+\section{Tujuan Penelitian}
 \begin{enumerate}
   \item Mempelajari cara kerja komputasi secara paralel dengan menggunakan Bahasa Julia
         untuk menyelesaikan permasalahan pada metode komputasi
@@ -131,13 +131,23 @@ diangkat pada penelitian ini adalah sebagai berikut:
   \item Membandingkan performa komputasi paralel dengan komputasi series
 \end{enumerate}
 
-\subsection{Manfaat Penelitian}
+\section{Batasan Masalah}
 \begin{enumerate}
-  \item Diharapkan penelitian ini dapat membawa pandangan baru bahwa komputasi paralel
-        dengan menggunakan Bahasa Julia mempunyai kompleksitas yang tidak terlalu
-        tinggi
+  \item Agar \emph{compiler} yang digunakan mempunyai efektifitas \emph{compiling} yang
+        sama, kajian ini menggunakan bahasa yang sama, yakni Bahasa Julia. Sehingga
+        Bahasa Julia ini akan digunakan di sistem series dan sistem paralel.
 
-  \item Diharapkan hasil penelitian ini dapat menunjukkan bahwa komputasi paralel
-        dengan menggunakan Bahasa Julia mempunyai performa yang jauh lebih baik seiring
-        meningkatnya ukuran data komputasi
+  \item Proses komputasi yang digunakan pada kajian ini adalah proses komputasi
+        berbasis matriks.
+\end{enumerate}
+
+\section{Manfaat Penelitian}
+\begin{enumerate}
+  \item Diharapkan penelitian ini dapat membawa pandangan baru bahwa Bahasa Julia
+        mempunyai penulisan kode yang sederhana ketika dijalankan di sistem series
+        maupun sistem paralel
+
+  \item Diharapkan hasil penelitian ini dapat menunjukkan komputasi paralel dengan
+        menggunakan Bahasa Julia mempunyai performa yang lebih baik seiring
+        meningkatnya ukuran data, daripada komputasi series
 \end{enumerate}

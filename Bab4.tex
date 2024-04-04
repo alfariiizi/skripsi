@@ -1,5 +1,29 @@
 \chapter{Metode Penelitian}
 
+% Pada bagian ini, penulis akan memaparkan metodologi yang digunakan untuk
+% memperdalam pemahaman mengenai aplikasi General Purpose GPU (GPGPU) dengan
+% menggunakan bahasa pemrograman Julia dalam lingkup komputasi berkinerja tinggi.
+% Pemilihan metode ini didasarkan pada kebutuhan untuk mendapatkan pemahaman
+% komprehensif mengenai adaptasi GPU, yang secara tradisional ditujukan untuk
+% pemrosesan grafis, menjadi sebuah alat yang mampu menjalankan komputasi paralel
+% dan intensif. Bahasa pemrograman Julia, dikarenakan desain yang efisien dan
+% modern, diidentifikasi sebagai platform yang ideal untuk memfasilitasi
+% eksplorasi ini. Selanjutnya, penulis akan menjelaskan secara detail tentang
+% rancangan penelitian, termasuk pemilihan dan konfigurasi perangkat keras, serta
+% pendekatan dalam pemrograman yang diterapkan untuk mengoptimalkan performa
+% komputasi.
+
+Pada bagian ini, penulis akan memaparkan metodologi yang digunakan untuk
+memperdalam pemahaman mengenai aplikasi General Purpose GPU (GPGPU) dengan
+menggunakan bahasa pemrograman Julia dalam lingkup komputasi berkinerja tinggi.
+Pemilihan metode ini didasarkan pada kebutuhan untuk mendapatkan pemahaman
+komprehensif mengenai adaptasi GPU, yang secara tradisional ditujukan untuk
+pemrosesan grafis, menjadi sebuah alat yang mampu menjalankan komputasi paralel
+dan intensif. Bahasa pemrograman Julia, dikarenakan desain yang efisien dan
+modern, diidentifikasi sebagai platform yang ideal untuk memfasilitasi
+eksplorasi ini. Selanjutnya, penulis akan menjelaskan secara detail tentang
+prosedur kerja, serta pemilihan dan konfigurasi perangkat keras.
+
 \section{Bahan}
 
 Data yang digunakan untuk melakukan operasi matriks pada penelitian ini adalah
@@ -36,7 +60,9 @@ Kemudian, dalam menjalankan penelitian, penulis menggunakan berbagai perangkat
 lunak untuk melakukan \emph{benchmarking}. Adapun perangkat-perangkat lunak
 tersebut adalah:
 \begin{itemize}
-  \item Pluto.jl: sebagai \emph{interactive} editor untuk Julia
+  \item Visual Studio Code: sebagai \emph{code editor} untuk Julia
+
+  \item Jupyter Notebook: sebagai \emph{execution cell} untuk Julia
 
   \item CUDA.jl: sebagai \emph{library} utama untuk menjalankan paralelisasi pada
         perangkat GPU NVIDIA
@@ -95,6 +121,13 @@ tersebut adalah:
 
 \section{Prosedur Kerja dan Pengambilan Data}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=3cm, scale=1]{schema/metode.drawio.png}
+  \caption{Diagram alir penelitian}
+  \label{img:methods}
+\end{figure}
+
 Secara garis besar, penelitian ini mencari waktu kecepatan eksekusi pada sistem
 linear (CPU) dan sistem paralel (GPU). Pada masing - masing sistem, alur
 penelitian berawal dari pembuatan kode pada masing masing operasi matriks
@@ -104,12 +137,18 @@ eksekusi tersebut akan dianalisis perbedaan kecepatan eksekusi nya. Pada Gambar
 \ref{img:methods} disajikan alur penelitian dengan model diagram alir atau
 \emph{flowchart}.
 
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=3cm, scale=1]{schema/metode.drawio.png}
-  \caption{Diagram alir penelitian}
-  \label{img:methods}
-\end{figure}
+Sistem linear dan sistem paralel dituliskan dalam Bahasa Julia. Penggunaan
+bahasa yang sama ini bertujuan untuk mengurangi hambatan - hambatan external
+seperti hambatan karena perbedaan compiler dari suatu bahasa pemrograman.
+
+Proses komputasi paralel pada GPU menggunakan bantuan \emph{library} bernama
+CUDA.jl. CUDA.jl ini merupakan \emph{library} untuk melakukan komputasi pada
+sistem paralel GPU, khusus nya untuk Vendor GPU NVidia. Secara sederhana, cara
+kerja CUDA.jl ini adalah dengan mengirimkan data array dari CPU ke vertex
+shader di GPU, kemudian dilakukan kalkulasi yang hasilnya akan dikirimkan ke
+bagian fragment shader di GPU. Proses kalkulasi yang dijalankan di GPU disebut
+dengan \textbf{kernel}. Kernel ini pada dasarnya hanya berupa \emph{function}
+Julia yang dijalankan di GPU.
 
 \subsection{Proses Eksekusi Operasi Matriks}
 
@@ -120,10 +159,10 @@ Julia. Setelah proses penghasilan data sudah selesai, langkah selanjutnya
 adalah melakukan proses operasi matriks menggunakan CPU kemudian dilanjutkan
 dengan melakukan proses operasi matriks menggunakan GPU. Proses penghasilan
 data hingga proses kalkulasi menggunakan CPU dan GPU dilakukan sebanyak sepuluh
-kali untuk memastikan bahwa dalam kalkulasi nya, tidak terdapat hambatan
+kali untuk memastikan bahwa dalam kalkulasi nya tidak terdapat hambatan
 eksternal pada GPU dan CPU. Hambatan yang dimaksud antara lain seperti hambatan
 kapasitas DRAM maupun VRAM yang sedang sedikit dan hambatan keterbatasan
-software Pluto dalam mengeksekusi operasi yang ada. Pada Gambar
+software Jupyter dalam mengeksekusi operasi yang ada. Pada Gambar
 \ref{img:methods_execution}, telah disajikan diagram alir dalam proses eksekusi
 operasi matriks.
 
@@ -135,16 +174,16 @@ operasi matriks.
 \end{figure}
 
 Pada langkah terakhir dari Gambar \ref{img:methods_execution} terdapat
-pengecekan variasi percobaan. Setiap operasi matriks terdapat 5 variasi
-pengukuran berdasarkan ukuran matriks nya. Berikut merupakan 5 variasi
+pengecekan variasi percobaan. Setiap operasi matriks terdapat 4 variasi
+pengukuran berdasarkan ukuran matriks nya. Berikut merupakan 4 variasi
 pengukuran nya:
 
 \begin{itemize}
-  \item Variasi 1: Matriks berukuran $100 \times 100$
-  \item Variasi 2: Matriks berukuran $1000 \times 1000$
-  \item Variasi 3: Matriks berukuran $10^4 \times 10^4$
-  \item Variasi 4: Matriks berukuran $10^5 \times 10^5$
-  \item Variasi 5: Matriks berukuran $10^6 \times 10^6$
+  \item Variasi 1: Matriks berukuran $10 \times 10$
+  \item Variasi 2: Matriks berukuran $10^2 \times 10^2$
+  \item Variasi 3: Matriks berukuran $10^3 \times 10^3$
+  \item Variasi 4: Matriks berukuran $10^4 \times 10^4$
+        % \item Variasi 5: Matriks berukuran $10^6 \times 10^6$
 \end{itemize}
 
 \subsubsection{Analisis Data dan Penampilan Grafik}
@@ -155,7 +194,7 @@ pencarian nilai rata-rata dari sepuluh kali pengulangan. Pada Gambar
 \ref{img:methods_analysist} telah disajikan diagram alir dari proses analisis
 ini.
 
-\begin{figure}[H]
+\begin{figure}[h]
   \centering
   \includegraphics[width=4cm, scale=1]{schema/langkah-3.drawio.png}
   \caption{Diagram alir dalam Proses Analisis Data}
@@ -533,12 +572,12 @@ sedangkan sumbu-y untuk waktu kecepatan eksekusi pada setiap operasi.
 
 % =========================
 
-\subsection{Rencana Kegiatan Penelitian}
 % Please add the following required packages to your document preamble:
 % \usepackage{lscape}
 % \usepackage{longtable}
 % Note: It may be necessary to compile the document several times to get a multi-page table to line up properly
 \begin{landscape}
+  \subsection{Rencana Kegiatan Penelitian}
   \begin{longtable}[c]{|l|l|l|l|l|l|l|l|l|l|l|l|}
     \caption{Tabel Rencana Kegiatan November 2023 -- Mei 2024}
     \label{table:plan}                                                                                                                                                                                 \\

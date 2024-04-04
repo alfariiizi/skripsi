@@ -132,7 +132,7 @@ fleksibilitas dan kekuatan GPU dalam berbagai skenario komputasi
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=10cm]{images/cpu-gpu-architecture.png}
+  \includegraphics[width=14cm]{images/cpu-gpu-architecture.png}
   \caption{Arsitektur CPU dan GPU}
   \label{gambar gpu-cpu architecture}
 \end{figure}
@@ -175,7 +175,7 @@ menggunakan GPU hanya menggunakan operasi penjumlahan dan perkalian.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=10cm]{images/mad-and-fma.png}
+  \includegraphics[width=14cm]{images/mad-and-fma-2.png}
   \caption{MAD dan FMA pada operasi GPU}
   \label{gambar mad-and-fma}
 \end{figure}
@@ -683,32 +683,7 @@ perkalian juga akan bisa diproses oleh GPU.
 
 \subsection{Operasi Penjumlahan}
 
-Berdasarkan \cite{boydIntroductionAppliedLinear2018}, berikut merupakan contoh
-operasi penjumlahan matriks
-
-\[
-  \begin{bmatrix}
-    0 & 4 \\
-    7 & 0 \\
-    3 & 1
-  \end{bmatrix}
-  +
-  \begin{bmatrix}
-    1 & 2 \\
-    2 & 3 \\
-    0 & 4
-  \end{bmatrix}
-  =
-  \begin{bmatrix}
-    1 & 6 \\
-    9 & 3 \\
-    3 & 5
-  \end{bmatrix}
-\]
-
-\noindent
-Jika matriks diatas dilakukan generalisir, maka operasi penjumlahan matriks dapat
-dituliskan sebagai berikut
+Operasi penjumlahan matriks dapat dituliskan sebagai berikut
 
 %   \label{eq:matrix_sum}
 %   \begin{bmatrix}
@@ -826,27 +801,7 @@ dimana $A$, $B$, $C$ adalah matriks, dan $0$ adalah matriks nol.
 
 \subsection{Operasi Perkalian dengan Skalar}
 
-Berdasarkan \cite{boydIntroductionAppliedLinear2018}, contoh operasi perkalian
-matriks dengan skalar adalah
-
-\[
-  (-2) \times
-  \begin{bmatrix}
-    1 & 6 \\
-    9 & 3 \\
-    6 & 0
-  \end{bmatrix}
-  =
-  \begin{bmatrix}
-    -2  & -12 \\
-    -18 & -6  \\
-    -12 & 0
-  \end{bmatrix}
-\]
-
-\noindent
-Jika contoh operasi perkalian matriks dengan skalar diatas dilakukan generalisir,
-maka secara umum operasi perkalian matriks dengan skalar dapat dituliskan
+Operasi perkalian matriks dengan skalar dapat dituliskan
 
 \begin{equation}
   \label{eq:matrix_mult_scalar}\gamma \times
@@ -882,30 +837,7 @@ nol.
 
 \subsection{Operasi Perkalian Matriks dengan Matriks}
 
-Berdasarkan \cite{boydIntroductionAppliedLinear2018}, berikut adalah contoh
-operasi perkalian matriks dengan matriks
-
-\[
-  \begin{bmatrix}
-    -1.5 & 3  & 2 \\
-    1    & -1 & 0
-  \end{bmatrix}
-  \times
-  \begin{bmatrix}
-    -1 & -1 \\
-    0  & -2 \\
-    1  & 0
-  \end{bmatrix}
-  =
-  \begin{bmatrix}
-    3.5 & -4.5 \\
-    -1  & 1
-  \end{bmatrix}
-\]
-
-\noindent
-Dari contoh diatas, jika dilakukan generalisir, maka akan diperoleh bentuk umum
-operasi perkalian matriks dengan matriks
+Bentuk umum operasi perkalian matriks dengan matriks dapat dituliskan
 
 \begin{equation}
   \label{eq:matrix_mult_matrix}C = AB \quad \text{dimana}\quad c_{ij}= \sum_{k=1}
@@ -1031,6 +963,51 @@ harus memenuhi
 \noindent
 Jika disimpulkan, persamaan \ref{eq:eigen} mempunyai solusi yang tidak nol terhadap
 vektor $\vec{x}$ jika dan hanya jika memenuhi persamaan \ref{eq:eigenvalue}.
+
+Dalam bidang fisika, persamaan \ref{eq:eigen} digunakan dalam persamaan
+schrödinger. Persamaan schrödinger satu dimensi tak gayut waktu dapat
+dituliskan
+
+\begin{equation} \label{eq:tise} % time independent schrodinger equation
+  -\frac{\hbar^2}{2m} \frac{d^2\psi}{dx^2} = E\psi
+\end{equation}
+
+\noindent
+Jika dihubungkan dengan persamaan \ref{eq:eigen}, maka terlihat bahwa $\psi$
+merupakan vektor $\vec{x}$, kemudian $-\frac{\hbar^2}{2m} \frac{d^2}{dx^2}$ merupakan
+matriks (atau operator) $\mathbf{A}$, dan $E$ merupakan nilai eigen $\lambda$.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=7cm]{images/infinite_square_well.png}
+  \caption{Sumur tak hingga}
+  \label{img:infinite_square_well}
+\end{figure}
+
+Pada aplikasi nya, berdasarkan
+\cite{griffithsIntroductionQuantumMechanics2019}, persamaan \ref{eq:tise} dapat
+digunakan untuk mencari penyelesaian permasalahan potensial sumur tak hingga,
+seperti yang terlihat pada Gambar \ref{img:infinite_square_well}. Solusi dari
+potensial sumur tak hingga, diperoleh nilai eigen ($E$) yang dapat dituliskan
+sebagai berikut
+
+\begin{equation} \label{eq:eigenvalue_infinite_square_well}
+  E_n = \frac{\hbar^2 k_n^2}{2m} = \frac{n^2 \pi^2 \hbar^2}{2ma^2}
+\end{equation}
+
+dengan $n = 1, 2, 3, 4, \dots$
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=8cm]{images/solution_infinte_square_well.png}
+  \caption{Di sebelah kiri adalah fungsi gelombang, di sebelah kanan adalah representasi probabilitas untuk menemukan partikel pada posisi tertentu untuk berbagai keadaan kuantum}
+  \label{img:solution_infinite_square_well}
+\end{figure}
+
+\noindent
+Solusi dari persamaan \ref{eq:eigenvalue_infinite_square_well} merupakan bentuk dari
+persamaan sinusoidal. Berdasarkan \cite{dalessandrisSpiralModernPhysics2024},
+bentuk grafik nya dapat digambarkan seperti Gambar \ref{img:solution_infinite_square_well}.
 
 % \section{Fisika Komputasi}
 
