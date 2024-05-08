@@ -1,0 +1,381 @@
+\documentclass{skripsiactugm}
+\usepackage{chapterbib}
+\usepackage{setspace}
+\graphicspath{{./gambar/}}
+\usepackage{svg}
+\usepackage{empheq}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{array}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage{pdflscape}
+% \usepackage[table]{xcolor}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{caption}
+
+% \usepackage[table,xcdraw]{xcolor}
+\usepackage{lscape}
+\usepackage{longtable}
+
+\newcounter{pycodecounter}
+\newcounter{cppcodecounter}
+
+\lstnewenvironment{mypythoncode}[1][]{
+\refstepcounter{pycodecounter}
+\lstset{ language=Python, basicstyle=\small\ttfamily, numbers=left, numberstyle=\tiny,
+stepnumber=1, numbersep=5pt, backgroundcolor=
+\color{gray!10}
+, showspaces=false, showstringspaces=false, showtabs=false, frame=single, tabsize=4,
+breaklines=true, breakatwhitespace=true, escapeinside={(*@}{@*)}, captionpos=b, caption={Kode~\thepycodecounter: #1}
+} }{}
+
+\lstnewenvironment{mycppcode}[1][]{
+\refstepcounter{cppcodecounter}
+\lstset{ language=C++, basicstyle=\small\ttfamily, numbers=left, numberstyle=\tiny,
+stepnumber=1, numbersep=5pt, backgroundcolor=
+\color{gray!10}
+, showspaces=false, showstringspaces=false, showtabs=false, frame=single, tabsize=4,
+breaklines=true, breakatwhitespace=true, escapeinside={(*@}{@*)}, captionpos=b, caption={Kode~\thepycodecounter: #1}
+} }{}
+
+\captionsetup[lstlisting]{labelformat=empty}
+%-----------------------------code untuk lampiran---------------------------
+\lstnewenvironment{lampiranpythoncode}[1][]{
+\refstepcounter{pycodecounter}
+\lstset{ language=Python, basicstyle=\small\ttfamily, numbers=left, numberstyle=\tiny,
+stepnumber=1, numbersep=5pt, backgroundcolor=
+\color{gray!10}
+, showspaces=false, showstringspaces=false, showtabs=false, frame=single, tabsize=4,
+breaklines=true, breakatwhitespace=true, escapeinside={(*@}{@*)}, captionpos=b,
+% caption={Python Code~\thepycodecounter: #1}
+} }{}
+
+\lstnewenvironment{lampirancppcode}[1][]{
+\refstepcounter{cppcodecounter}
+\lstset{ language=C++, basicstyle=\small\ttfamily, numbers=left, numberstyle=\tiny,
+stepnumber=1, numbersep=5pt, backgroundcolor=
+\color{gray!10}
+, showspaces=false, showstringspaces=false, showtabs=false, frame=single, tabsize=4,
+breaklines=true, breakatwhitespace=true, escapeinside={(*@}{@*)}, captionpos=b,
+% caption={C++ Code~\thecppcodecounter: #1}
+} }{}
+
+\captionsetup[lstlisting]{labelformat=empty}
+%-----------------------------------------------------------------
+%Disini awal masukan untuk data Skripsi (ISI SESUAI DENGAN DATA ANDA!)
+%-----------------------------------------------------------------
+\titleind{ Perhitungan Persamaan Poisson Menggunakan Algoritma Convolutional Neural Network pada Koordinat Silinder Dua Dimensi }
+
+\titleeng{ Calculation of the Poisson Equation Using Convolutional Neural Network Algorithm in Two-Dimensional Cylinder Coordinates }
+
+\fullname{Samuel Johanes}
+\NIM{19/445596/PA/19420}
+\yearenrollment{2019}
+\examdate{16 Oktober 2023}
+\degree{Sarjana}
+\yearsubmit{2023}
+\firstsupervisor{Dr. Iman Santoso, S.Si., M.Sc.}
+\secondsupervisor{Ahsani Hafizhu Shali, S.Si., M.Sc.}
+\firstexaminer{Dr.rer.nat. Muhammad Farchani Rosyid, M.Si.}
+\secondexaminer{Moh. Adhib Ulil Absor, S.Si., M.Sc., Ph.D.}
+% \thirdexaminer{Nama Anggota Tim Penguji}
+
+\begin{document}
+  \cover \titlepage
+
+  \approvalpage \declarepage
+  %Setelah Anda selesai Ujian Akhir Skripsi, scan halaman pengesahan yang telah ditandatangani dosen pembimbing dan penguji, scan juga halaman pernyataan yang telah Anda tandatangani. Selanjutnya simpan hasil scan tersebut dalam bentuk PDF dengan nama pengesahanskripsi.pdf dan pernyataan.pdf (file disimpan di folder yang sama dengan folder dimana file Skripsi.tex tersimpan)
+  %Hilangkan karakter % sebelum perintah "\approvalpagescan" dan "\declarepage" di bawah ini, dan tambahkan karakter % sebelum perintah "\approvalpage" di atas.
+  %\approvalpagescan
+  %\declarepagescan
+
+  %-----------------------------------------------------------------
+  %Halaman Persembahan (ISI SESUAI DENGAN DATA ANDA!)
+  %-----------------------------------------------------------------
+  % \acknowledment
+  % \begin{flushright}
+  % \Large\emph\cal{Untuk Mama dan Papa}
+  % \end{flushright}
+  %-----------------------------------------------------------------
+  %-----------------------------------------------------------------
+
+  %-----------------------------------------------------------------
+  %Halaman Motto (ISI SESUAI DENGAN DATA ANDA!)
+  %-----------------------------------------------------------------
+  % \motto
+  % "...carilah maka kamu akan mendapat..."
+  %-----------------------------------------------------------------
+  %-----------------------------------------------------------------
+
+  %-----------------------------------------------------------------
+  %Disini awal masukan untuk Prakata (ISI SESUAI DENGAN DATA ANDA!)
+  %-----------------------------------------------------------------
+  \preface
+
+  Transkrip.xyz adalah sebuah perusahaan rintisan (\textit{startup}) yang berbasis
+  di Sleman, Indonesia, yang menyediakan jasa transkripsi audio ke teks menggunakan
+  teknologi kecerdasan buatan (\textit{artificial intelegence})LLM (\textit{large
+  language model}) dengan rata-rata hingga 20.000 pengguna. Uniknya, perusahaan
+  ini tidak diinisiasi oleh seorang dengan latar belakang teknologi atau ilmu
+  komputer, melainkan diinisiasi dan dikembangkan baik segi teknis maupun bisnisnya
+  oleh seorang dari latar belakang ilmu Filsafat. Hal yang melatarbelakangi
+  terbentuknya perusahaan ini tentu bukan berasal dari kemampuan \textit{founder}-nya,
+  melainkan berasal dari kepekaan dalam melihat kebutuhan masyarakat dan
+  perkembangan teknologi sekarang.
+
+  Belakangan banyak orang latah mengenai perkembangan pemelajaran mesin (\textit{machine
+  learning}) dan implementasinya pada kecerdasan buatan. Berbagai pekerjaan yang
+  sebelumnya dilakukan oleh manusia kini dapat diotomasi mengggunakan
+  pemelajaran mesin. Sebut saja beberapa pekerjaan yang sebelumnya kita sebagai manusia
+  saja susah melakukannya, seperti pendektesian objek, pengenalan wajah,
+  transkripsi audio, dan masih banyak lagi. Kemudian sekarang muncul pertanyaan
+  mengenai bagaimana teknologi pemelajaran mesin dapat memiliki kontribusi pada
+  pekerjaan di bidang Fisika, atau bahkan kalau mau lebih jauh lagi, seberapa
+  mampu bidang Fisika memberikan kontribusi pada bidang pemelajaran mesin.
+
+  Skripsi ini merupakan salah satu upaya untuk menjawab pertanyaan pertama
+  tersebut. Perhitungan persamaan Poisson secara numerik membutuhkan upaya yang sangat
+  besar. Hal ini yang kemudian menjadi pendorong utama penelitian ini. Pertanyaan
+  utamanya adalah bagaimana apabila pemecahan persamaan Poisson didekati dengan paradigma
+  pemrograman pemelajaran mesin: pemrogram tidak membuat aturan untuk memecahkan
+  masalah tersebut, melainkan hanya memberikan data yang sangat banyak (bisa
+  dianggap sebagai \textit{big data}) dan kemudian komputer sendiri yang akan
+  membuat aturan tersebut. Pemahaman seperti ini yang kiranya tumbuh dalam diri tiap
+  fisikawan, bahwa permasalahan fisika dapat dipecahkan secara lebih cepat dan
+  akurat. Namun hendaknya pemanfaatan pemelajaran mesin pada bidang Fisika ini harus
+  terus dikaji dan dipikirkan terus-menerus mengenai pemanfaatan hasilnya.
+
+  Seperti halnya Transkrip.xyz, para pihak yang bergelut di bidang Fisika juga
+  sebaiknya mampu melihat permasalahan apa saja yang dapat diselesaikan secara
+  lebih efisien dan efektif dengan penggunaan pemelajaran mesin. Dan lebih jauh lagi,
+  kiranya mampu untuk memberikan kontribusi dari bidang Fisika untuk
+  perkembangan teknologi ini.
+
+  Penulisan skripsi sarjana ini membuahkan banyak cerita, memberikan banyak kenangan
+  dan kenalan, serta memberikan banyak pelajaran penting. Saya merasa bertumbuh dan
+  berkembang baik secara kepribadian maupun pengetahuan keilmuannya melalui proses
+  ini. Maka, saya sangat ingin berterima kasih pada para pihak yang telah membantu
+  saya menyelesaikan karya ini:
+
+  \begin{itemize}
+    \item Kedua orangtua, Ibu Cisca Ifke Meyke Langi dan Bapak Daniel Bonifacius
+      Laluyan untuk kesabaran dan keyakinan akan setiap pilihan yang saya ambil.
+      Dukungan dan doa mereka selalu menyertai langkah ini sampai manapun.
+
+    \item Kakak serta adik saya, Diakon Brian Johnathan Laluyan, MSF dan Jennifer
+      'Jenglot' Elisabeth Laluyan, yang dengan caranya masing-masing menunjukkan
+      pengertian dan dukungan mereka masing-masing. Semoga lancar selalu tugas dan
+      pendidikan kalian.
+
+    \item Pembimbing utama saya, Bapak Dr. Iman Santoso, S.Si, M.Sc., yang selalu
+      dengan penuh kesabaran dan ketelitian memberikan masukan dan mengusahakan yang
+      terbaik untuk saya.
+
+    \item Pembimbing praktisi dari BRIN, Sleman, Bapak Ahsani Hafizhu Shali, S.Si.,
+      M.Sc. yang penuh dedikasi tinggi dan kesabaran membimbing saya,
+      mengajarkan banyak hal baru, dan mendorong saya untuk berbuat lebih.
+      Sukses untuk jenjang pendidikan selanjutnya.
+
+    \item Kawan sekaligus lawan, pengagum sekaligus panutan, yang mencinta dan yang
+      dicinta, Kimi Bulan Rumondang Sianipar, S.H. yang selalu sabar dan penuh
+      kasih memberikan arahan akademis, spiritual, tempat makan enak, hingga cara
+      melepas stres. Selalu sukses untuk tugas selanjutnya, \textit{hasiani}.
+
+    \item Kawan-kawan tempat bertumbuh, bekerja, bermain, curhat, dan mencoba hal
+      baru, para \textit{co-worker} di Transkrip.syz: Mas Unies, Yajid, dan
+      Haritz. Semoga lancar segala urusan transkripsi ini.
+
+    \item Para \textit{comrades} di UKM biasa-biasa saja, seluruh awak BPPM Balairung
+      UGM yang menjadi tempat bertumbuh dan percaya bahwa manusia selalu punya pilihan
+      yang tak terbatas, tapi sebaiknya memilih kebenaran.
+
+    \item Kawan-kawan pendamping di sisa akhir masa perkuliahan, kawan-kawan
+      \textit{nongkrong} di PPM: Darren, Carina, dan Marvy. Terima kasih untuk masukan
+      teknis, nonteknis, lawakan, dan spiritual. Semoga indah jalan kalian kedepannya.
+
+    \item Calon rekan sejawat, kawan-kawan fisikawan Fisika UGM 2019 yang selalu
+      bersedia mendukung dan memberikan masukan yang sangat berarti mengenai
+      akademik, saya sebutkan secara khusus: Fariz, tanpanya skripsi ini akan selesai
+      mungkin 6 bulan lagi; Lucky, yang memberikan masukan mengenai LaTex; Yehez,
+      yang menyelamatkan saya di menit-menit akhir penulisan skripsi, yang juga
+      membuka jalan saya berjumpa dengan semangat akademis lewat magang di BRIN,
+      serta kawan kos.
+  \end{itemize}
+  Tanpa mereka ini mustahil karya ini selesai. Sekali lagi terima kasih
+  berlimpah untuk kalian semua, semoga dilancarkan semua urusan kalian. \textit{Te
+  amo}.
+
+  Akhirnya, kiranya karya tulis ini dapat berguna bagi para pembaca. Semua yang tertulis
+  di sini merupakan tanggung jawab saya. Apabila di kemudian nanti terdapat
+  pertanyaan atau sanggahan, \textit{i'm only one call away}.
+  \vspace{0.8cm}
+
+  \begin{tabular}{p{7cm}c}
+     & Yogyakarta, 9 Oktober 2023 \\
+     &                            \\
+     &                            \\
+     & Samuel Johanes
+  \end{tabular}
+  %-----------------------------------------------------------------
+  %-----------------------------------------------------------------
+
+  %-----------------------------------------------------------------
+  %Daftar Isi (TIDAK PERLU DIUBAH)
+  %-----------------------------------------------------------------
+  \newpage
+  \phantomsection
+  \addcontentsline{toc}{chapter}{DAFTAR ISI}
+  \makeatletter
+  \renewcommand{\l@chapter}[2]{\ifnum \c@tocdepth >\z@\addpenalty\@secpenalty\addvspace{0em}
+  \setlength{\@tempdima}{1.4em}
+  \begingroup\parindent \z@ \rightskip \@pnumwidth\parfillskip -\@pnumwidth\leavevmode
+  \bfseries\advance\leftskip\@tempdima\hskip -\leftskip#1\nobreak\ \leaders\hbox{$\m@th\mkern \@dotsep mu\hbox{.}\mkern \@dotsep mu$}\hfil\nobreak\hb@xt@\@pnumwidth{\hss #2}\par\endgroup\fi}
+  \makeatother
+  \begin{singlespacing}
+    \tableofcontents
+  \end{singlespacing}
+  %-----------------------------------------------------------------
+  %-----------------------------------------------------------------
+
+  %-----------------------------------------------------------------
+  %Daftar Tabel (JIKA DIPERLUKAN, HAPUS KARAKTER % SEBELUM \newpage dan \begin)
+  %-----------------------------------------------------------------
+  \newpage
+  \phantomsection
+  \addcontentsline{toc}{chapter}{DAFTAR TABEL}
+  \begin{singlespacing}
+    \listoftables
+  \end{singlespacing}
+  %-----------------------------------------------------------------
+  %-----------------------------------------------------------------
+
+  %-----------------------------------------------------------------
+  %Daftar Gambar (JIKA DIPERLUKAN, HAPUS KARAKTER % SEBELUM \newpage dan \begin)
+  %-----------------------------------------------------------------
+  \newpage
+  \phantomsection
+  \addcontentsline{toc}{chapter}{DAFTAR GAMBAR}
+  \begin{singlespacing}
+    \listoffigures
+  \end{singlespacing}
+  %-----------------------------------------------------------------
+  %-----------------------------------------------------------------
+
+  %-----------------------------------------------------------------
+  %Daftar Lambang (ISI SESUAI DENGAN DATA ANDA!)
+  %-----------------------------------------------------------------
+  % \lambang
+  % \begin{tabular}{cp{10.5cm}}
+  % %sebagai contoh
+  %   $Q_i$ &: matriks pembobot \emph{state} subsistem $i$\\
+  %   $R_i$ &: matriks pembobot masukan subsistem $i$
+
+  % \end{tabular}
+  %-----------------------------------------------------------------
+  %-----------------------------------------------------------------
+
+  %-----------------------------------------------------------------
+  %Disini awal masukan Intisari (ISI SESUAI DENGAN DATA ANDA!)
+  %-----------------------------------------------------------------
+  \begin{abstractind}
+    Penyelesaian persamaan diferensial parsial (PDP) merupakan hal yang penting dalam
+    Ilmu Fisika. Dalam simulasi plasma pada koordinat silinder, potensial listrik
+    didefinisikan dalam bentuk salah satu jenis PDP, yaitu Persamaan Poisson
+    dengan sisi kanan merupakan distribusi partikel. Penelitian ini menawarkan pemecahan
+    solusi 162,5 kali lebih cepat dari metode iteratif Gauss-Seidel menggunakan pendekatan
+    jaringan saraf (\textit{neural network}) yaitu \textit{fully convolutional
+    layer} yang terimplementasi pada arsitektur U-Net yang dimodifikasi. Sebagai
+    domain, digunakan bentuk fisis dari kanal pendorong Hall SPT-100 dengan syarat
+    batas Dirichlet dan Neumann. Hasil ralat MSE yang dihasilkan dari pelatihan
+    berada pada orde $10^{-5}$ dan fitur umum yang secara visual sangat
+    mendekati dengan \textit{ground truth}.
+
+    Kata kunci: jaringan saraf, convolutional neural network, Poisson
+  \end{abstractind}
+  %-----------------------------------------------------------------
+  %-----------------------------------------------------------------
+
+  %-----------------------------------------------------------------
+  %Disini awal masukan untuk Abstract (ISI SESUAI DENGAN DATA ANDA!)
+  %-----------------------------------------------------------------
+  \begin{abstracteng}
+    The solution of partial differential equations (PDEs) is of paramount importance
+    in the field of Physics. In plasma simulations in cylindrical coordinates, electric
+    potential is defined in the form of one type of PDE, namely the Poisson
+    Equation with the right-hand side representing the particle distribution. This
+    research offers a solution that is 162.5 times faster than the Gauss-Seidel iterative
+    method using a neural network approach, specifically the fully convolutional
+    layer implemented on a modified U-Net architecture. As a domain, the
+    physical shape of the Hall thruster SPT-100 channel with Dirichlet and
+    Neumann boundary conditions is used. The resulting mean squared error (MSE) from
+    the training is on the order of $10^{-5}$, and the common features are
+    visually very close to the ground truth.
+
+    Keyword: neural network, convolutional neural network, Poisson
+  \end{abstracteng}
+  %-----------------------------------------------------------------
+  %-----------------------------------------------------------------
+
+  %-----------------------------------------------------------------
+  %Disini awal masukan untuk Bab (ISI BAB I DAPAT DIEDIT DI FILE Bab1.tex,
+  %ISI BAB II DAPAT DIEDIT DI FILE Bab2.tex, dst...)
+  %-----------------------------------------------------------------
+  \input{Bab1.tex}
+  % \input{Bab2.tex}
+  % \input{Bab3.tex}
+  % \input{Bab4.tex}
+  % \input{Bab5.tex}
+  % \input{Bab6.tex}
+
+  %-----------------------------------------------------------------
+  %Disini akhir masukan Bab
+  %-----------------------------------------------------------------
+
+  %-----------------------------------------------------------------
+  %Disini awal masukan untuk Daftar Pustaka (ISI SESUAI DENGAN DATA ANDA!)
+  %-----------------------------------------------------------------
+
+  % \begin{thebibliography}{99}
+  \addcontentsline{toc}{chapter}{DAFTAR PUSTAKA}
+  \input{DaftarPustaka}
+  % \bibitem[Anton(2005)]{anton05}
+  % sebagai contoh
+  % Anton,H., Rorres, C. 2005. \emph{Elementary Linear Algebra, Apllication Version, Ninth Edition}. John Wiley and Sons, New Jersey.
+
+  % \bibitem[Bazaraa(2006)]{bazaraa06}
+  % Bazaraa, M.S., dkk. 2006. \emph {Nonlinear Programming, Theory and Algorithms}, 3rd edition. John Wiley and Sons, New Jersey.
+
+  % \bibitem[Boyd(2004)]{boyd04}
+  % Boyd, S., Vandenberghe, L. 2004. \emph {Convex Optimization}. Cambridge University Press.
+
+  % \bibitem[Comacho(2007)]{comacho07}
+  % Camacho, E.F., Bordons, C. 2007. \emph{Model Predictive Control Second Edition}. Springer Verlag, London.
+
+  % \bibitem[Dalhoumi, dkk(2016)]{dalhoumi16}
+  % Dalhoumi, Latifa, dkk. 2016. \emph{Model Based Predictive Control For Linear Interconnected Systems}. Control and Energy Mangement Lab National school of engineering of Sfax, P.B. 1173, 3083 Sfax, Tunisia.  13th International Multi-Conference on Systems, Signal, and Devices.
+
+  % \bibitem[Fatimah(2019)] {fatimah19}
+  % Fatimah, K.R.N. 2019. \emph{Kendali Model Prediktif Berkendala Menggunakan Active-Set dengan Linearisasi Umpan Balik pada Sistem Rumah Kaca}. Skripsi. Departemen Matematika UGM. Yogyakarta.
+
+  % \bibitem[Maciewjowski(2000)]{maciejowski00}
+  % Maciewjowski, J.M., 2000.\emph{Predictive Control with Constrain}. Prentice Hall, USA.
+
+  % \bibitem[Olsder(1994)]{olsder94}
+  % Olsder,G.J., van der Woude,J.W..1994. \emph{Mathematical Systems Theory}. Delft University Press. The Netherlands.
+
+  % \bibitem[Ogata(1995)]{ogata95}
+  % Ogata, Katsuhiko. 1995. \emph{Discrete-Time Control System Second Edition}. Prentice Hall International, USA.
+  % \end{thebibliography}
+  %-----------------------------------------------------------------
+  %-----------------------------------------------------------------
+
+  %-----------------------------------------------------------------
+  %Disini awal masukan untuk Lampiran (JIKA DIPERLUKAN)
+  %-----------------------------------------------------------------
+  \appendix
+  \addcontentsline{toc}{chapter}{LAMPIRAN}
+  \input{lampiran}
+\end{document}

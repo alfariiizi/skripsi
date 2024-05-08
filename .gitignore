@@ -33,3 +33,5 @@ latex.out/
 build
 node_modules
 yarn.lock
+
+playgrounds

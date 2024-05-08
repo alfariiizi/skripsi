@@ -36,7 +36,7 @@ Perangkat keras yang digunakan dalam penelitian ini adalah berupa komputer
 dengan bentuk komputer jinjing (\emph{laptop}) dengan spesifikasi sebagai
 berikut:
 
-\begin{table}[ht]
+\begin{table}[H]
   \centering
   \caption{Spesifikasi komputer alat}
   \begin{tabular}{|M{5cm}|M{8cm}|}
@@ -121,7 +121,7 @@ tersebut adalah:
 
 \section{Prosedur Kerja dan Pengambilan Data}
 
-\begin{figure}[H]
+\begin{figure}[h]
   \centering
   \includegraphics[width=3cm, scale=1]{schema/metode.drawio.png}
   \caption{Diagram alir penelitian}
@@ -129,7 +129,7 @@ tersebut adalah:
 \end{figure}
 
 Secara garis besar, penelitian ini mencari waktu kecepatan eksekusi pada sistem
-linear (CPU) dan sistem paralel (GPU). Pada masing - masing sistem, alur
+series (CPU) dan sistem paralel (GPU). Pada masing - masing sistem, alur
 penelitian berawal dari pembuatan kode pada masing masing operasi matriks
 setelah itu dilanjutkan dengan pengeksekusian kode di skenario - skenario
 tertentu pada masing - masing operasi matriks, kemudian setiap hasil dari
@@ -137,7 +137,7 @@ eksekusi tersebut akan dianalisis perbedaan kecepatan eksekusi nya. Pada Gambar
 \ref{img:methods} disajikan alur penelitian dengan model diagram alir atau
 \emph{flowchart}.
 
-Sistem linear dan sistem paralel dituliskan dalam Bahasa Julia. Penggunaan
+Sistem series dan sistem paralel dituliskan dalam Bahasa Julia. Penggunaan
 bahasa yang sama ini bertujuan untuk mengurangi hambatan - hambatan external
 seperti hambatan karena perbedaan compiler dari suatu bahasa pemrograman.
 
@@ -172,6 +172,18 @@ operasi matriks.
   \caption{Diagram alir dalam Proses Eksekusi Setiap Metode}
   \label{img:methods_execution}
 \end{figure}
+
+Terdapat 6 operasi berbasis matriks yang dijalankan pada sistem series dan
+sistem paralel sebagai berikut
+
+\begin{enumerate}
+  \item Operasi Penjumlahan Matriks
+  \item Operasi Pengurangan Matriks
+  \item Operasi Perkalian antara Skalar dengan Matriks
+  \item Operasi Perkalian antar Matriks
+  \item Inverse Matriks
+  \item Pencarian Eigenvalue dari Matriks
+\end{enumerate}
 
 Pada langkah terakhir dari Gambar \ref{img:methods_execution} terdapat
 pengecekan variasi percobaan. Setiap operasi matriks terdapat 4 variasi

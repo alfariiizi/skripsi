@@ -30,8 +30,8 @@ Manfaat dari munculnya komputer tidak hanya dirasakan oleh masyarakat umum,
 namun juga dirasakan oleh akademisi, peneliti, maupun pekerja di suatu
 industri. Banyak aplikasi yang jauh lebih mudah dikerjakan jika dilakukan
 menggunakan komputer. Bahkan saat ini muncul bidang bidang baru yang
-menggunakan komputer sebagai dasar dari suatu komputasi, seperti \emph{Data
-  Science}, \emph{Data Analyst}, \emph{Machine Learning Engineering}, dan masih
+menggunakan komputer sebagai dasar dari suatu komputasi, seperti \emph{Data Science},
+\emph{Data Analyst}, \emph{Machine Learning Engineering}, dan masih
 banyak lagi. Bidang - bidang tersebut sangat bergantung pada proses komputasi
 yang cepat, sehingga memerlukan tinggi kecepatan CPU dalam melakukan kalkulasi.
 
@@ -97,7 +97,7 @@ Penggunaan GPGPU pada dasarnya mempunyai kekurangan yang membuat banyak
 pengguna memilih alternatif lain daripada GPGPU. Yakni, kompleks nya
 implementasi ketika ingin menggunakan GPGPU. Implementasi yang kompleks ini
 muncul karena GPU mempunyai jumlah inti yang banyak. Beberapa \emph{Application
-  Programming Interface} atau API \citep{evansonExplainerWhatAPI2021} yang dapat
+	Programming Interface} atau API \citep{evansonExplainerWhatAPI2021} yang dapat
 membuat penggunaan GPGPU lebih mudah, diantara nya adalah \emph{Vulkan API},
 \emph{Direct3D}, dan \emph{OpenGL}
 \citep{khairySurveyArchitecturalApproaches2019}. Namun, kedua API tersebut pada
@@ -116,38 +116,38 @@ GPGPU pada saat ini.
 Berdasarkan latar belakang yang telah dipaparkan, maka rumusan masalah yang
 diangkat pada penelitian ini adalah sebagai berikut:
 \begin{enumerate}
-  \item Bagaimana cara kerja komputasi series dan komputasi paralel dengan menggunakan
-        Bahasa Julia
+	\item Bagaimana cara kerja komputasi series dan komputasi paralel dengan menggunakan
+	      Bahasa Julia
 
-  \item Bagaimana performa yang dihasilkan dari komputasi secara \emph{parallel}
-        dibandingkan dengan komputasi secara \emph{series}
+	\item Bagaimana performa yang dihasilkan dari komputasi secara \emph{parallel}
+	      dibandingkan dengan komputasi secara \emph{series}
 \end{enumerate}
 
 \section{Tujuan Penelitian}
 \begin{enumerate}
-  \item Mempelajari cara kerja komputasi secara paralel dengan menggunakan Bahasa Julia
-        untuk menyelesaikan permasalahan pada metode komputasi
+	\item Mempelajari cara kerja komputasi secara paralel dengan menggunakan Bahasa Julia
+	      untuk menyelesaikan permasalahan pada metode komputasi
 
-  \item Membandingkan performa komputasi paralel dengan komputasi series
+	\item Membandingkan performa komputasi paralel dengan komputasi series
 \end{enumerate}
 
 \section{Batasan Masalah}
 \begin{enumerate}
-  \item Agar \emph{compiler} yang digunakan mempunyai efektifitas \emph{compiling} yang
-        sama, kajian ini menggunakan bahasa yang sama, yakni Bahasa Julia. Sehingga
-        Bahasa Julia ini akan digunakan di sistem series dan sistem paralel.
+	\item Pada kajian ini, sistem series dan paralel menggunakan bahasa yang sama, yakni
+	      Bahasa Julia, serta kajian ini tidak akan membandingkan performa sistem series
+	      dan paralel pada bahasa lain
 
-  \item Proses komputasi yang digunakan pada kajian ini adalah proses komputasi
-        berbasis matriks.
+	\item Perbandingan performa komputasi series dan komputasi parelel dilakukan dalam
+	      lingkup operasi berbasis matriks
 \end{enumerate}
 
 \section{Manfaat Penelitian}
 \begin{enumerate}
-  \item Diharapkan penelitian ini dapat membawa pandangan baru bahwa Bahasa Julia
-        mempunyai penulisan kode yang sederhana ketika dijalankan di sistem series
-        maupun sistem paralel
+	\item Diharapkan penelitian ini dapat membawa pandangan baru bahwa Bahasa Julia
+	      mempunyai penulisan kode yang sederhana ketika dijalankan di sistem series
+	      maupun sistem paralel
 
-  \item Diharapkan hasil penelitian ini dapat menunjukkan komputasi paralel dengan
-        menggunakan Bahasa Julia mempunyai performa yang lebih baik seiring
-        meningkatnya ukuran data, daripada komputasi series
+	\item Diharapkan hasil penelitian ini dapat menunjukkan komputasi paralel dengan
+	      menggunakan Bahasa Julia mempunyai performa yang lebih baik seiring
+	      meningkatnya ukuran data, daripada komputasi series
 \end{enumerate}

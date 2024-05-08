@@ -34,7 +34,7 @@ baik daripada CPU. Dari perbedaan performa inilah kemudian para peneliti
 menemukan cara untuk mengubah shader vertex dan shader fragment, menjadi suatu
 data yang dapat diolah oleh GPU secara paralel. Proses penggunaan GPU untuk
 melakukan komputasi umum secara paralel disebut dengan \emph{General Purpose
-  GPU} atau GPGPU. Beberapa bidang yang menggunakan GPGPU ini diantara lain
+	GPU} atau GPGPU. Beberapa bidang yang menggunakan GPGPU ini diantara lain
 adalah bidang pembelajaran mesin, eksplorasi minyak, aljabar linear, statistik,
 rekonstruksi 3D, dan penetapan harga opsi saham
 \citep{wikipediaGraphicsProcessingUnit2023}.
@@ -43,7 +43,7 @@ Pada perkembangannya, GPU telah mengalami perubahan bentuk ukuran, daya,
 kinerja, dan harga. Hal ini membuat GPU membukakan jalan bagi inovasi lebih
 lanjut di berbagai bidang. Dari yang awalnya hanya digunakan untuk bermain
 video game saja, menjadi komponen yang diperlukan di smartphone, \emph{virtual
-  reality}, pembelajaran mesin, mobil tanpa pengemudi, pesawat ruang angkasa,
+	reality}, pembelajaran mesin, mobil tanpa pengemudi, pesawat ruang angkasa,
 robot, perangkat rumah pintar, dan banyak bidang lainnya
 \citep{businesswireHistoryGPUInception2023}.
 
@@ -91,17 +91,17 @@ komputasi yang identik diterapkan \citep{pharrGPUGemsProgramming2005}.
 % 2. Arsitektur GPU: Perbandingan dengan CPU
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=10cm]{images/cpu-vs-gpu-cores.png}
-  \caption{Jumlah Inti CPU dan Inti GPU}
-  \label{gambar gpu-cpu cores}
+	\centering
+	\includegraphics[width=10cm]{images/cpu-vs-gpu-cores.png}
+	\caption{Jumlah Inti CPU dan Inti GPU}
+	\label{gambar gpu-cpu cores}
 \end{figure}
 
 Secara arsitektur, GPU memiliki arsitektur yang hampir sama dengan CPU. Namun
 CPU berfokus pada kecepatan akses memori cache. Sedangkan GPU dirancang untuk
 melakukan komputasi data secara paralel, sehingga dibutuhkan sebanyak mungkin
-inti yang tersedia, seperti yang terlihat pada Gambar \ref{gambar gpu-cpu
-  cores}. Arsitektur yang digunakan oleh GPU biasanya disebut dengan arsitektur
+inti yang tersedia, seperti yang terlihat pada Gambar \ref{gambar gpu-cpu cores}.
+Arsitektur yang digunakan oleh GPU biasanya disebut dengan arsitektur
 stream SIMD (\emph{Single Instruction Multiple Data}) yang mana memanfaatkan
 banyak inti dengan pemrosesan ringan \citep{helenGPUArchitectureStructure2020}.
 
@@ -131,15 +131,15 @@ fleksibilitas dan kekuatan GPU dalam berbagai skenario komputasi
 \citep{hagoortExploringGPUArchitecture2023}.
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=14cm]{images/cpu-gpu-architecture.png}
-  \caption{Arsitektur CPU dan GPU}
-  \label{gambar gpu-cpu architecture}
+	\centering
+	\includegraphics[width=14cm]{images/cpu-gpu-architecture.png}
+	\caption{Arsitektur CPU dan GPU}
+	\label{gambar gpu-cpu architecture}
 \end{figure}
 
 Berdasarkan \cite{learningUnderstandingArchitectureGPU2023}, arsitektur CPU dan
 GPU dapat digambarkan skema nya seperti pada Gambar \ref{gambar gpu-cpu
-  architecture}. Warna hijau menggambarkan unit komputasi atau \emph{cores}
+	architecture}. Warna hijau menggambarkan unit komputasi atau \emph{cores}
 (inti), warna orange menggambarkan memori, dan warna kuning menggambarkan unit
 kontrol.
 
@@ -173,13 +173,6 @@ arsitektur unit komputasi pada GPU. Selain itu, GPU memang didesain untuk
 mengatasi tugas yang tidak kompleks. Pada dasarnya, semua tugas yang
 menggunakan GPU hanya menggunakan operasi penjumlahan dan perkalian.
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=14cm]{images/mad-and-fma-2.png}
-  \caption{MAD dan FMA pada operasi GPU}
-  \label{gambar mad-and-fma}
-\end{figure}
-
 Operasi penjumlahan dan perkalian pada GPU secara umum menggunakan dua metode,
 yakni \emph{Multiply-Add} (MAD) dan \emph{Fused Multiply-Add} (FMA). Pada
 Gambar \ref{gambar mad-and-fma}, terlihat bahwa perbedaan utama antara MAD dan
@@ -193,12 +186,10 @@ untuk optimalisasi, sedangkan MAD bisa lebih umum dan tidak spesifik pada
 perangkat keras tertentu.
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=5cm]{images/rt-setup2.png}
-  \includegraphics[width=5cm]{images/Reflections_02.png}
-  \caption{Teknik \emph{Ray Tracing} dan Hasil \emph{Render} dengan menggunakan
-    Teknik \emph{Ray Tracing}}
-  \label{gambar ray tracing technique}
+	\centering
+	\includegraphics[width=10cm]{images/mad-and-fma-2.png}
+	\caption{MAD dan FMA pada operasi GPU}
+	\label{gambar mad-and-fma}
 \end{figure}
 
 Meskipun GPU terlihat hanya bisa melakukan operasi sederhana, namun operasi
@@ -212,10 +203,19 @@ ini, GPU menggunakan model \emph{Single Instruction Multiple Data} (SIMD) di
 mana semua inti nya semua core menjalankan operasi yang sama pada data yang
 berbeda.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=5cm]{images/rt-setup2.png}
+	\includegraphics[width=5cm]{images/Reflections_02.png}
+	\caption{Teknik \emph{Ray Tracing} dan Hasil \emph{Render} dengan menggunakan
+		Teknik \emph{Ray Tracing}}
+	\label{gambar ray tracing technique}
+\end{figure}
+
 \subsubsection{Memori}
 
 Perbedaan model memori pada CPU dan GPU telah terlihat pada Gambar \ref{gambar
-  gpu-cpu architecture} dengan blok yang berwarna orange. Sistem memori CPU
+	gpu-cpu architecture} dengan blok yang berwarna orange. Sistem memori CPU
 menggunakan \emph{Dynamic Random Access Memory} (DRAM) dengan ukuran yang
 bervariasi. Komputer pribadi biasanya mempunyai ukuran DRAM berkisar 4GB hingga
 128GB.
@@ -296,32 +296,32 @@ beberapa tipe data dasar seperti pada tipe data bahasa pemrograman pada umumnya.
 Berikut merupakan tipe data dasar yang dimiliki oleh Julia:
 
 \begin{itemize}
-  \item \textbf{Angka}: Ini termasuk beberapa subjenis seperti:
-        \begin{itemize}
-          \item Bilangan bulat (\cw{Int8}, \cw{Int16}, \cw{Int32}, \cw{Int64}, \cw{Int128})
+	\item \textbf{Angka}: Ini termasuk beberapa subjenis seperti:
+	      \begin{itemize}
+		      \item Bilangan bulat (\cw{Int8}, \cw{Int16}, \cw{Int32}, \cw{Int64}, \cw{Int128})
 
-          \item Angka floating-point (\cw{Float16}, \cw{Float32}, \cw{Float64})
+		      \item Angka floating-point (\cw{Float16}, \cw{Float32}, \cw{Float64})
 
-          \item Angka kompleks (\cw{ComplexF32}, \cw{ComplexF64})
-        \end{itemize}
+		      \item Angka kompleks (\cw{ComplexF32}, \cw{ComplexF64})
+	      \end{itemize}
 
-  \item \textbf{Boolean}: \cw{Bool} mewakili nilai Boolean \cw{true} dan \cw{false}.
+	\item \textbf{Boolean}: \cw{Bool} mewakili nilai Boolean \cw{true} dan \cw{false}.
 
-  \item \textbf{Karakter} dan \textbf{String}:
-        \begin{itemize}
-          \item Karakter: \cw{Char} digunakan untuk karakter Unicode tunggal.
+	\item \textbf{Karakter} dan \textbf{String}:
+	      \begin{itemize}
+		      \item Karakter: \cw{Char} digunakan untuk karakter Unicode tunggal.
 
-          \item String: \cw{String} mewakili rangkaian karakter.
-        \end{itemize}
+		      \item String: \cw{String} mewakili rangkaian karakter.
+	      \end{itemize}
 
-  \item \textbf{Array}: \cw{Array{T,N}} menandakan array multidimensi dari
-        elemen tipe T.
+	\item \textbf{Array}: \cw{Array{T,N}} menandakan array multidimensi dari
+	      elemen tipe T.
 
-  \item \textbf{Tuple}: \cw{Tuple{T1,T2,...}} menunjukkan koleksi terurut dari
-        elemen dengan tipe berbeda T1, T2, dan lain-lain.
+	\item \textbf{Tuple}: \cw{Tuple{T1,T2,...}} menunjukkan koleksi terurut dari
+	      elemen dengan tipe berbeda T1, T2, dan lain-lain.
 
-  \item \textbf{Dictionaries}: \cw{Dict{K,V}} mewakili kumpulan pasangan kunci-nilai
-        di mana K dan V adalah tipe kunci dan nilai.
+	\item \textbf{Dictionaries}: \cw{Dict{K,V}} mewakili kumpulan pasangan kunci-nilai
+	      di mana K dan V adalah tipe kunci dan nilai.
 \end{itemize}
 
 Dalam penamaan, nama variabel dalam Julia dapat mencakup subset simbol Unicode,
@@ -409,7 +409,7 @@ disebut dengan \emph{callback function}.
 
 Pada suatu kode, diperlukan suatu mekanisme tertentu yang dapat mengarahkan
 kode tergantung pada kondisi yang ada. Nama mekanisme ini adalah \emph{control
-  flow}. Dalam bahasa pemrograman umum nya, terdapat 2 macam \emph{control flow},
+	flow}. Dalam bahasa pemrograman umum nya, terdapat 2 macam \emph{control flow},
 yakni \emph{decision} (keputusan), dan perulangan. Penulisan keputusan pada
 Julia bisa dilakukan seperti berikut:
 
@@ -489,9 +489,9 @@ for i in range(1, 5):
 
 \noindent
 Kedua tipe perulangan dapat digunakan dalam dua kasus yang berbeda. \emph{for
-  loop} dapat digunakan untuk kasus dimana pengguna tahu kapan akan berhenti, misalnya
+	loop} dapat digunakan untuk kasus dimana pengguna tahu kapan akan berhenti, misalnya
 akan berhenti ketika nilai nya nilai nya lebih dari 5. Sedangkan \emph{while
-  loop} dapat digunakan ketika pengguna tidak tahu kapan akan berhenti, misalnya saja
+	loop} dapat digunakan ketika pengguna tidak tahu kapan akan berhenti, misalnya saja
 dalam program game umumnya digunakan \emph{while loop} ini untuk menetukan
 apakah pengguna masih berada di dalam game atau sudah keluar dari game.
 
@@ -500,8 +500,8 @@ apakah pengguna masih berada di dalam game atau sudah keluar dari game.
 Pada pengaplikasian suatu bahasa pemrograman, suatu masalah umumnya merupakan
 kumpulan dari beberapa variable dengan tipe data tertentu. Untuk mengatur
 beberapa variable ini diperlukan struktur khusus yang disebut dengan \emph{Data
-  Structures} atau Struktur Data. Didalam Julia, terdapat 4 \emph{data
-  structures} yang umumnya digunakan, yakni \emph{arrays}, \emph{tuples},
+	Structures} atau Struktur Data. Didalam Julia, terdapat 4 \emph{data
+	structures} yang umumnya digunakan, yakni \emph{arrays}, \emph{tuples},
 \emph{named tuples}, dan \emph{dictionaries}.
 
 \emph{Dictionaries} merupakan struktur data yang mempunyai \emph{keys} dan \emph{values}.
@@ -566,7 +566,7 @@ index terakhir bisa menggunakan \cw{a[end]}. Untuk mengakses index kedua bisa me
 
 Struktur data berikutnya adalah \emph{Named tuples} yang mana perpaduan antara
 \emph{Tuples} dan \emph{Dictionaries}. Pada Python, tidak mendukung \emph{named
-  tuple} secara \emph{built-in}, sehingga diperlukan \emph{import module} yang
+	tuple} secara \emph{built-in}, sehingga diperlukan \emph{import module} yang
 bernama \emph{collection}. \emph{Named tuples} dapat dituliskan seperti berikut
 
 \begin{lstlisting}
@@ -583,7 +583,7 @@ namedTuple1 = NamedTuple(a=1, b=2)
 Untuk mengakses isi dari \emph{named tuple}, dapat menggunakan penulisan \cw{namedTuple[:a]}
 yang mana akan mengembalikan nilai \cw{1}. Nama dari tuple tidak boleh
 menggunakan nama yang mengandung koma. Ukuran struktur data dari \emph{named
-  tuple} akan selalu tetap dan tidak bisa bertambah banyak. Jika dilihat perbandingannya
+	tuple} akan selalu tetap dan tidak bisa bertambah banyak. Jika dilihat perbandingannya
 dengan bahasa Python, implementasi \emph{named tuple} tampak cukup kompleks di Python.
 Ini dikarenakan Python tidak mendukung \emph{built-in} \emph{named tuple}.
 
@@ -626,12 +626,12 @@ koma "\cw{;}", sedangkan isi dari kolom dipisahkan dengan spasi. Sehingga, jika
 contoh matrik diatas diubah ke notasi matematika, maka hasilnya adalah sebagai berikut
 
 \begin{equation}
-  \text{mat1}\ = \left(
-  \begin{matrix}
-      1 & 2 & 3 \\
-      4 & 5 & 6
-    \end{matrix}
-  \right)
+	\text{mat1}\ = \left(
+	\begin{matrix}
+			1 & 2 & 3 \\
+			4 & 5 & 6
+		\end{matrix}
+	\right)
 \end{equation}
 
 \noindent
@@ -662,7 +662,7 @@ penjumlahan ini. Misalnya saja, jika operasi pengurangan diubah ke bentuk
 operasi penjumlahan, maka akan menghasilkan bentuk seperti berikut
 
 \[
-  A - B = A + (-B)
+	A - B = A + (-B)
 \]
 
 \noindent
@@ -671,7 +671,7 @@ perkalian, jika diubah ke bentuk operasi penjumlahan, akan menghasilkan bentuk s
 berikut
 
 \[
-  A \times n = \underbrace{A + A + A + A + \cdots}_{\text{berjumlah}\, n}
+	A \times n = \underbrace{A + A + A + A + \cdots}_{\text{berjumlah}\, n}
 \]
 
 \noindent
@@ -699,27 +699,27 @@ Operasi penjumlahan matriks dapat dituliskan sebagai berikut
 %     a_{11} + b_{11} & a_{12} + b_{12} & \cdots & a_{1n} + b_{1n} \\ a_{21} + b_{21} & a_{22} + b_{22} & \cdots & a_{2n} + b_{2n}\\ \vdots&\vdots&\ddots&\vdots \\ a_{m1} + b_{m1} & a_{m2} + b_{m2}&\cdots& a_{mn} + a_{mn}
 %   \end{bmatrix}
 \begin{align} \label{eq:matrix_sum}
-  \begin{bmatrix}
-    a_{11} & a_{12} & \cdots & a_{1n} \\
-    a_{21} & a_{22} & \cdots & a_{2n} \\
-    \vdots & \vdots & \ddots & \vdots \\
-    a_{m1} & a_{m2} & \cdots & a_{mn}
-  \end{bmatrix}
-   & +
-  \begin{bmatrix}
-    b_{11} & b_{12} & \cdots & b_{1p} \\
-    b_{21} & b_{22} & \cdots & b_{2p} \\
-    \vdots & \vdots & \ddots & \vdots \\
-    b_{n1} & b_{n2} & \cdots & b_{np}
-  \end{bmatrix}
-  \nonumber \\
-   & =
-  \begin{bmatrix}
-    a_{11} + b_{11} & a_{12} + b_{12} & \cdots & a_{1n} + b_{1n} \\
-    a_{21} + b_{21} & a_{22} + b_{22} & \cdots & a_{2n} + b_{2n} \\
-    \vdots          & \vdots          & \ddots & \vdots          \\
-    a_{m1} + b_{m1} & a_{m2} + b_{m2} & \cdots & a_{mn} + b_{mn}
-  \end{bmatrix}
+	\begin{bmatrix}
+		a_{11} & a_{12} & \cdots & a_{1n} \\
+		a_{21} & a_{22} & \cdots & a_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		a_{m1} & a_{m2} & \cdots & a_{mn}
+	\end{bmatrix}
+	 & +
+	\begin{bmatrix}
+		b_{11} & b_{12} & \cdots & b_{1p} \\
+		b_{21} & b_{22} & \cdots & b_{2p} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		b_{n1} & b_{n2} & \cdots & b_{np}
+	\end{bmatrix}
+	\nonumber \\
+	 & =
+	\begin{bmatrix}
+		a_{11} + b_{11} & a_{12} + b_{12} & \cdots & a_{1n} + b_{1n} \\
+		a_{21} + b_{21} & a_{22} + b_{22} & \cdots & a_{2n} + b_{2n} \\
+		\vdots          & \vdots          & \ddots & \vdots          \\
+		a_{m1} + b_{m1} & a_{m2} + b_{m2} & \cdots & a_{mn} + b_{mn}
+	\end{bmatrix}
 \end{align}
 
 \noindent
@@ -728,15 +728,15 @@ dapat dikatakan operasi penjumlahan matriks jika memenuhi sifat - sifat operasi 
 matriks:
 
 \begin{itemize}
-  \label{property_additional_matrix}
+	\label{property_additional_matrix}
 
-  \item \emph{Komuntatif}: $A + B = B + A$
+	\item \emph{Komuntatif}: $A + B = B + A$
 
-  \item \emph{Asosiatif}: $(A + B) + C = A + (B + C) = A + B + C$
+	\item \emph{Asosiatif}: $(A + B) + C = A + (B + C) = A + B + C$
 
-  \item \emph{Pertambahan dengan matriks nol}: $A + 0 = 0 + A = A$
+	\item \emph{Pertambahan dengan matriks nol}: $A + 0 = 0 + A = A$
 
-  \item \emph{Penjumlahan transpose}: $(A + B)^{T}= A^{T}+ B^{T}$
+	\item \emph{Penjumlahan transpose}: $(A + B)^{T}= A^{T}+ B^{T}$
 \end{itemize}
 
 \noindent
@@ -748,7 +748,7 @@ Operasi pengurangan matriks dapat diperoleh dari operasi penjumlahan matriks
 dengan penulisan sebagai berikut
 
 \begin{equation}
-  \label{eq:derivatif_additional_operand}A + (-B) = C\\ \Leftrightarrow A - B = C
+	\label{eq:derivatif_additional_operand}A + (-B) = C\\ \Leftrightarrow A - B = C
 \end{equation}
 
 \noindent
@@ -756,27 +756,27 @@ dimana $A$, $-B$, dan $C$ adalah suatu matriks. Dari pernyataan persamaan \ref{e
 tersebut, maka bentuk operasi pengurangan matriks dapat dituliskan
 
 \begin{align} \label{eq:matrix_substraction}
-  \begin{bmatrix}
-    a_{11} & a_{12} & \cdots & a_{1n} \\
-    a_{21} & a_{22} & \cdots & a_{2n} \\
-    \vdots & \vdots & \ddots & \vdots \\
-    a_{m1} & a_{m2} & \cdots & a_{mn}
-  \end{bmatrix}
-   & -
-  \begin{bmatrix}
-    b_{11} & b_{12} & \cdots & b_{1p} \\
-    b_{21} & b_{22} & \cdots & b_{2p} \\
-    \vdots & \vdots & \ddots & \vdots \\
-    b_{n1} & b_{n2} & \cdots & b_{np}
-  \end{bmatrix}
-  \nonumber \\
-   & =
-  \begin{bmatrix}
-    a_{11} - b_{11} & a_{12} - b_{12} & \cdots & a_{1n} - b_{1n} \\
-    a_{21} - b_{21} & a_{22} - b_{22} & \cdots & a_{2n} - b_{2n} \\
-    \vdots          & \vdots          & \ddots & \vdots          \\
-    a_{m1} - b_{m1} & a_{m2} - b_{m2} & \cdots & a_{mn} - b_{mn}
-  \end{bmatrix}
+	\begin{bmatrix}
+		a_{11} & a_{12} & \cdots & a_{1n} \\
+		a_{21} & a_{22} & \cdots & a_{2n} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		a_{m1} & a_{m2} & \cdots & a_{mn}
+	\end{bmatrix}
+	 & -
+	\begin{bmatrix}
+		b_{11} & b_{12} & \cdots & b_{1p} \\
+		b_{21} & b_{22} & \cdots & b_{2p} \\
+		\vdots & \vdots & \ddots & \vdots \\
+		b_{n1} & b_{n2} & \cdots & b_{np}
+	\end{bmatrix}
+	\nonumber \\
+	 & =
+	\begin{bmatrix}
+		a_{11} - b_{11} & a_{12} - b_{12} & \cdots & a_{1n} - b_{1n} \\
+		a_{21} - b_{21} & a_{22} - b_{22} & \cdots & a_{2n} - b_{2n} \\
+		\vdots          & \vdots          & \ddots & \vdots          \\
+		a_{m1} - b_{m1} & a_{m2} - b_{m2} & \cdots & a_{mn} - b_{mn}
+	\end{bmatrix}
 \end{align}
 
 \noindent
@@ -785,15 +785,15 @@ pengurangan matriks mempunyai sifat - sifat yang hampir sama seperti operasi
 penjumlahan matriks. Berikut merupakan sifat - sifat operasi pengurangan matriks:
 
 \begin{itemize}
-  \label{property_substraction_matrix}
+	\label{property_substraction_matrix}
 
-  \item \emph{Komuntatif}: $A - B = B - A$
+	\item \emph{Komuntatif}: $A - B = B - A$
 
-  \item \emph{Asosiatif}: $(A - B) - C = A - (B - C) = A - B - C$
+	\item \emph{Asosiatif}: $(A - B) - C = A - (B - C) = A - B - C$
 
-  \item \emph{Pertambahan dengan matriks nol}: $A - 0 = 0 - A = A$
+	\item \emph{Pertambahan dengan matriks nol}: $A - 0 = 0 - A = A$
 
-  \item \emph{Penjumlahan transpose}: $(A - B)^{T}= A^{T}- B^{T}$
+	\item \emph{Penjumlahan transpose}: $(A - B)^{T}= A^{T}- B^{T}$
 \end{itemize}
 
 \noindent
@@ -804,14 +804,14 @@ dimana $A$, $B$, $C$ adalah matriks, dan $0$ adalah matriks nol.
 Operasi perkalian matriks dengan skalar dapat dituliskan
 
 \begin{equation}
-  \label{eq:matrix_mult_scalar}\gamma \times
-  \begin{bmatrix}
-    a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21}&a_{22}&\cdots&a_{2n}\\ \vdots&\vdots&\ddots&\vdots \\ a_{m1}&a_{m2}&\cdots&a_{mn}
-  \end{bmatrix}
-  =
-  \begin{bmatrix}
-    \gamma a_{11} & \gamma a_{12} & \cdots & \gamma a_{1n} \\ \gamma a_{21} & \gamma a_{22} & \cdots & \gamma a_{2n}\\ \vdots & \vdots & \ddots & \vdots \\ \gamma a_{m1} & \gamma a_{m2} & \cdots & \gamma a_{mn}
-  \end{bmatrix}
+	\label{eq:matrix_mult_scalar}\gamma \times
+	\begin{bmatrix}
+		a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21}&a_{22}&\cdots&a_{2n}\\ \vdots&\vdots&\ddots&\vdots \\ a_{m1}&a_{m2}&\cdots&a_{mn}
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		\gamma a_{11} & \gamma a_{12} & \cdots & \gamma a_{1n} \\ \gamma a_{21} & \gamma a_{22} & \cdots & \gamma a_{2n}\\ \vdots & \vdots & \ddots & \vdots \\ \gamma a_{m1} & \gamma a_{m2} & \cdots & \gamma a_{mn}
+	\end{bmatrix}
 \end{equation}
 
 \noindent
@@ -819,16 +819,16 @@ dimana $a$, $b$, $c$, $d$, dan $\gamma$ adalah suatu skalar. Operasi perkalian m
 dengan skalar mempunyai sifat - sifat:
 
 \begin{itemize}
-  \item \emph{Asosiatif}: $(cd) A = c (dA)$
+	\item \emph{Asosiatif}: $(cd) A = c (dA)$
 
-  \item \emph{Distributif}: $c(A+B)=cA+cB$ dan $(c+d)A=cA+dA$
+	\item \emph{Distributif}: $c(A+B)=cA+cB$ dan $(c+d)A=cA+dA$
 
-  \item \emph{Identitas multiplikasi}: $1 A = A$
+	\item \emph{Identitas multiplikasi}: $1 A = A$
 
-  \item \emph{Multiplikasi nol}: $0\cdot A=O$ dan $c\cdot O= O$
+	\item \emph{Multiplikasi nol}: $0\cdot A=O$ dan $c\cdot O= O$
 
-  \item \emph{Penutup perkalian}: $cA$ adalah matriks dengan dimensi yang sama dengan
-        $A$
+	\item \emph{Penutup perkalian}: $cA$ adalah matriks dengan dimensi yang sama dengan
+	      $A$
 \end{itemize}
 
 \noindent
@@ -840,15 +840,15 @@ nol.
 Bentuk umum operasi perkalian matriks dengan matriks dapat dituliskan
 
 \begin{equation}
-  \label{eq:matrix_mult_matrix}C = AB \quad \text{dimana}\quad c_{ij}= \sum_{k=1}
-  ^{n}a_{ik}b_{kj}
+	\label{eq:matrix_mult_matrix}C = AB \quad \text{dimana}\quad c_{ij}= \sum_{k=1}
+	^{n}a_{ik}b_{kj}
 \end{equation}
 
 \text{dengan:}
 \begin{align*}
-  A & = \begin{bmatrix}a_{11}&a_{12}&\cdots&a_{1n}\\ a_{21}&a_{22}&\cdots&a_{2n}\\ \vdots&\vdots&\ddots&\vdots \\ a_{m1}&a_{m2}&\cdots&a_{mn}\end{bmatrix}, \\
-  B & = \begin{bmatrix}b_{11}&b_{12}&\cdots&b_{1p}\\ b_{21}&b_{22}&\cdots&b_{2p}\\ \vdots&\vdots&\ddots&\vdots \\ b_{n1}&b_{n2}&\cdots&b_{np}\end{bmatrix}, \\
-  C & = \begin{bmatrix}c_{11}&c_{12}&\cdots&c_{1p}\\ c_{21}&c_{22}&\cdots&c_{2p}\\ \vdots&\vdots&\ddots&\vdots \\ c_{m1}&c_{m2}&\cdots&c_{mp}\end{bmatrix}.
+	A & = \begin{bmatrix}a_{11}&a_{12}&\cdots&a_{1n}\\ a_{21}&a_{22}&\cdots&a_{2n}\\ \vdots&\vdots&\ddots&\vdots \\ a_{m1}&a_{m2}&\cdots&a_{mn}\end{bmatrix}, \\
+	B & = \begin{bmatrix}b_{11}&b_{12}&\cdots&b_{1p}\\ b_{21}&b_{22}&\cdots&b_{2p}\\ \vdots&\vdots&\ddots&\vdots \\ b_{n1}&b_{n2}&\cdots&b_{np}\end{bmatrix}, \\
+	C & = \begin{bmatrix}c_{11}&c_{12}&\cdots&c_{1p}\\ c_{21}&c_{22}&\cdots&c_{2p}\\ \vdots&\vdots&\ddots&\vdots \\ c_{m1}&c_{m2}&\cdots&c_{mp}\end{bmatrix}.
 \end{align*}
 
 \noindent
@@ -863,24 +863,24 @@ perkalian merupakan operasi perkalian matriks dengan matriks. Jika diasumsikan
 $A$, $B$, dan $C$ adalah suatu matriks, sedangkan $\gamma$ adalah sautu skalar,
 maka sifat-sifat dari operasi perkalian matriks dengan matriks adalah
 \begin{itemize}
-  \item \emph{Asosiatif}: $(AB)C = A(BC)$. Oleh karena itu kita dapat menulis
-        produk tersebut secara sederhana sebagai $ABC$.
+	\item \emph{Asosiatif}: $(AB)C = A(BC)$. Oleh karena itu kita dapat menulis
+	      produk tersebut secara sederhana sebagai $ABC$.
 
-  \item \emph{Asosiatif dengan perkalian skalar}: $\gamma(AB) = (\gamma A)B$, di
-        mana $\gamma$ adalah skalar, dan $A$ dan $B$ adalah matriks (yang dapat
-        dikalikan). Produk $(\gamma A)B$ juga bisa dituliskan $A(\gamma B)$. (Perhatikan
-        bahwa produk $\gamma A$ dan $\gamma B$ didefinisikan sebagai produk matriks-skalar,
-        tetapi secara umum, kecuali $A$ dan $B$ memiliki satu baris, tidak sebagai produk
-        matriks-matriks.)
+	\item \emph{Asosiatif dengan perkalian skalar}: $\gamma(AB) = (\gamma A)B$, di
+	      mana $\gamma$ adalah skalar, dan $A$ dan $B$ adalah matriks (yang dapat
+	      dikalikan). Produk $(\gamma A)B$ juga bisa dituliskan $A(\gamma B)$. (Perhatikan
+	      bahwa produk $\gamma A$ dan $\gamma B$ didefinisikan sebagai produk matriks-skalar,
+	      tetapi secara umum, kecuali $A$ dan $B$ memiliki satu baris, tidak sebagai produk
+	      matriks-matriks.)
 
-  \item \emph{Distributif dengan penjumlahan}: $A(B + C) = AB + AC$ dan $(A + B)C
-          = AC + BC$. Pada sisi kanan dari persamaan ini kita menggunakan preseden
-        yang lebih tinggi dari perkalian matriks dibandingkan penjumlahan, jadi,
-        misalnya, $AC + BC$ diinterpretasikan sebagai $(AC) + (BC)$.
+	\item \emph{Distributif dengan penjumlahan}: $A(B + C) = AB + AC$ dan $(A + B)C
+		      = AC + BC$. Pada sisi kanan dari persamaan ini kita menggunakan preseden
+	      yang lebih tinggi dari perkalian matriks dibandingkan penjumlahan, jadi,
+	      misalnya, $AC + BC$ diinterpretasikan sebagai $(AC) + (BC)$.
 
-  \item Transpose dari produk. Transpose dari suatu produk adalah produk dari
-        transpose-transpose, tetapi dalam urutan yang berlawanan: $(AB)^{T}=
-          B^{T}A^{T}$.
+	\item Transpose dari produk. Transpose dari suatu produk adalah produk dari
+	      transpose-transpose, tetapi dalam urutan yang berlawanan: $(AB)^{T}=
+		      B^{T}A^{T}$.
 \end{itemize}
 
 \subsection{Operasi Inverse}
@@ -890,7 +890,7 @@ berukuran $n \times n$ jika dikatakan mempunyai matriks inverse $A^{-1}$, maka
 akan memenuhi definisi berikut
 
 \begin{equation}
-  \label{eq:inverse_matrix}A A^{-1}= A^{-1}A = I
+	\label{eq:inverse_matrix}A A^{-1}= A^{-1}A = I
 \end{equation}
 
 \noindent
@@ -898,24 +898,24 @@ dimana $I$ adalah matriks identitas yang berukuran $n \times n$. Suatu matriks
 dapat mempunyai inverse matriks jika memenuhi:
 
 \begin{enumerate}
-  \item Merupakan matriks persegi (mempunyai banyak baris yang sama dengan banyak
-        kolom).
+	\item Merupakan matriks persegi (mempunyai banyak baris yang sama dengan banyak
+	      kolom).
 
-  \item Mempunyai nilai determinant yang bukan nol.
+	\item Mempunyai nilai determinant yang bukan nol.
 \end{enumerate}
 
 Untuk matriks $2 \times 2$, cara mencari nilai dari inverse nya dapat
 menggunakan persamaan
 
 \begin{equation}
-  \begin{bmatrix}
-    a & b \\
-    c & d
-  \end{bmatrix}^{-1}= \frac{1}{ad - bc}
-  \begin{bmatrix}
-    d  & -b \\
-    -c & a
-  \end{bmatrix}
+	\begin{bmatrix}
+		a & b \\
+		c & d
+	\end{bmatrix}^{-1}= \frac{1}{ad - bc}
+	\begin{bmatrix}
+		d  & -b \\
+		-c & a
+	\end{bmatrix}
 \end{equation}
 
 \noindent
@@ -934,7 +934,7 @@ matriks $\mathbf{A}$ berukuran $n \times n$, dan terdapat vektor $\vec{x}$ yang
 berukuran $n$, maka dapat diperoleh persamaan
 
 \begin{equation}
-  \label{eq:eigen}\mathbf{A}\vec{x}= \lambda \vec{x}
+	\label{eq:eigen}\mathbf{A}\vec{x}= \lambda \vec{x}
 \end{equation}
 
 \noindent
@@ -942,12 +942,12 @@ dimana $\lambda$ adalah nilai eigen. Jika diasumsikan $\lambda$ berupa skalar, m
 persamaan \ref{eq:eigen} dapat dilanjutkan menjadi
 
 \begin{gather*}
-  \begin{array}{ c c }
-                    & \mathbf{A}\vec{x} = \lambda \vec{x}                       \\
-    \Leftrightarrow & \mathbf{A} \vec{x} -\lambda \vec{x} = 0                   \\
-    \Leftrightarrow & \mathbf{A} \vec{x} - \mathbf{I} \lambda \vec{x} = 0       \\
-    \Leftrightarrow & ( \mathbf{A} \vec{x} - \mathbf{I} \lambda ) \ \vec{x} = 0
-  \end{array}\\
+	\begin{array}{ c c }
+		                & \mathbf{A}\vec{x} = \lambda \vec{x}                       \\
+		\Leftrightarrow & \mathbf{A} \vec{x} -\lambda \vec{x} = 0                   \\
+		\Leftrightarrow & \mathbf{A} \vec{x} - \mathbf{I} \lambda \vec{x} = 0       \\
+		\Leftrightarrow & ( \mathbf{A} \vec{x} - \mathbf{I} \lambda ) \ \vec{x} = 0
+	\end{array}\\
 \end{gather*}
 
 \noindent
@@ -957,7 +957,7 @@ merupakan matriks $n \times n$, maka solusi dari nilai $\lambda$ yang skalar
 harus memenuhi
 
 \begin{equation}
-  \label{eq:eigenvalue}\det{(\mathbf{A} - \mathbf{I} \lambda)}= 0
+	\label{eq:eigenvalue}\det{(\mathbf{A} - \mathbf{I} \lambda)}= 0
 \end{equation}
 
 \noindent
@@ -969,7 +969,7 @@ schrödinger. Persamaan schrödinger satu dimensi tak gayut waktu dapat
 dituliskan
 
 \begin{equation} \label{eq:tise} % time independent schrodinger equation
-  -\frac{\hbar^2}{2m} \frac{d^2\psi}{dx^2} = E\psi
+	-\frac{\hbar^2}{2m} \frac{d^2\psi}{dx^2} = E\psi
 \end{equation}
 
 \noindent
@@ -978,10 +978,10 @@ merupakan vektor $\vec{x}$, kemudian $-\frac{\hbar^2}{2m} \frac{d^2}{dx^2}$ meru
 matriks (atau operator) $\mathbf{A}$, dan $E$ merupakan nilai eigen $\lambda$.
 
 \begin{figure}[h]
-  \centering
-  \includegraphics[width=7cm]{images/infinite_square_well.png}
-  \caption{Sumur tak hingga}
-  \label{img:infinite_square_well}
+	\centering
+	\includegraphics[width=7cm]{images/infinite_square_well.png}
+	\caption{Sumur tak hingga}
+	\label{img:infinite_square_well}
 \end{figure}
 
 Pada aplikasi nya, berdasarkan
@@ -992,16 +992,16 @@ potensial sumur tak hingga, diperoleh nilai eigen ($E$) yang dapat dituliskan
 sebagai berikut
 
 \begin{equation} \label{eq:eigenvalue_infinite_square_well}
-  E_n = \frac{\hbar^2 k_n^2}{2m} = \frac{n^2 \pi^2 \hbar^2}{2ma^2}
+	E_n = \frac{\hbar^2 k_n^2}{2m} = \frac{n^2 \pi^2 \hbar^2}{2ma^2}
 \end{equation}
 
 dengan $n = 1, 2, 3, 4, \dots$
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=8cm]{images/solution_infinte_square_well.png}
-  \caption{Di sebelah kiri adalah fungsi gelombang, di sebelah kanan adalah representasi probabilitas untuk menemukan partikel pada posisi tertentu untuk berbagai keadaan kuantum}
-  \label{img:solution_infinite_square_well}
+	\centering
+	\includegraphics[width=7cm]{images/solution_infinte_square_well.png}
+	\caption{Di sebelah kiri adalah fungsi gelombang, di sebelah kanan adalah representasi probabilitas untuk menemukan partikel pada posisi tertentu untuk berbagai keadaan kuantum}
+	\label{img:solution_infinite_square_well}
 \end{figure}
 
 \noindent
