@@ -1,254 +1,379 @@
-\chapter{PROGRAM \textit{SOLVER} GAUSS-SEIDEL}
-\section{Potential.cpp}\label{kode_potential_cpp}
-\begin{lampirancppcode}
-#include "Potential.h"
-#include "Field.h"
+\chapter{PROGRAM OPERASI PENJUMLAHAN MATRIKS}
+\label{appx:addition}
+% \section{Kode untuk dijalankan di GPU}\label{kode_potential_cpp}
 
-#include <cmath>
-#include <iostream>
-#include <fstream>
-#include <sstream>
+\section{\emph{Module}}
 
-using namespace std;
+\begin{lstlisting}
+using CUDA
+using DataFrames
+using Statistics
+\end{lstlisting}
 
-Solver::Solver(int nz, int nr)
-    : nz{nz},
-      nr{nr},
-      phi(nz, nr),
-      rho(nz, nr),
-      object_id(nz, nr)
-{
-}
+\section{Untuk dijalankan di GPU}
 
-void Solver::setextents(double zmax, double zmin, double rmax, double rmin)
-{
-    this->x0[0] = zmin;
-    this->x0[1] = rmin;
+\begin{lstlisting}
+function operation_cuda(A, B)
+    C = CUDA.zeros(Float16, size(A))
+    CUDA.@sync C .= A .+ B
+    return C
+end
 
-    this->xm[0] = zmax;
-    this->xm[1] = rmax;
+function simulate_gpu(A_normal, B_normal)
+    # Convert your Float64 matrices to Float32 and then to CuArray{Float32}
+    A = CUDA.convert(CuArray{Float16}, A_normal)
+    B = CUDA.convert(CuArray{Float16}, B_normal)
+    # Mengukur waktu eksekusi
+    cuda_start = CUDA.@elapsed result_gpu = operation_cuda(A, B)
+    return cuda_start
+end
+\end{lstlisting}
 
-    this->dh[0] = (zmax - zmin) / 100;
-    this->dh[1] = (rmax - rmin) / 100;
+\section{Untuk dijalankan di CPU}
 
-    this->L[0] = zmax - zmin;
-    this->L[1] = rmax - rmin;
-}
+\begin{lstlisting}
+function operation_cpu(A, B)
+    C = zeros(Float16, size(A))
+    C .= A .+ B
+    return C
+end
 
-void Solver::setParam(int iter, double tol)
-{
-    this->max_solver_it = iter;
-    this->tolerance = tol;
-}
+function simulate_cpu(A_normal, B_normal)
+    normal_start = @elapsed result_cpu = operation_cpu(A_normal, B_normal)
+    return normal_start
+end
+\end{lstlisting}
+
+\section{Simulasi}
+
+\begin{lstlisting}
+function simulate(N::Int64, n_loop::Int64)
+    println("Total size: $(N*N)")
+    results_gpu = []
+    results_cpu = []
+    for i in 1:n_loop
+        A_normal = rand(Float16, N, N)
+        B_normal = rand(Float16, N, N)
+        benchmark_gpu = simulate_gpu(A_normal, B_normal)
+        benchmark_cpu = simulate_cpu(A_normal, B_normal)
+        push!(results_gpu, benchmark_gpu)
+        push!(results_cpu, benchmark_cpu)
+    end
+    println("Mean CPU: $(mean(results_cpu))")
+    println("Mean GPU: $(mean(results_gpu))")
+    return DataFrame(CPU=results_cpu, GPU=results_gpu)
+end
+\end{lstlisting}
+
+\chapter{PROGRAM OPERASI PENGURANGAN MATRIKS}
+\label{appx:substraction}
+
+\section{\emph{Module}}
+
+\begin{lstlisting}
+using CUDA
+using DataFrames
+using Statistics
+\end{lstlisting}
+
+\section{Untuk dijalankan di GPU}
+
+\begin{lstlisting}
+function operation_cuda(A, B)
+    C = CUDA.zeros(Float16, size(A))
+    CUDA.@sync C .= A .- B
+    return C
+end
+
+function simulate_gpu(A_normal, B_normal)
+    # Convert your Float64 matrices to Float32 and then to CuArray{Float32}
+    A = CUDA.convert(CuArray{Float16}, A_normal)
+    B = CUDA.convert(CuArray{Float16}, B_normal)
+    # Mengukur waktu eksekusi
+    cuda_start = CUDA.@elapsed result_gpu = operation_cuda(A, B)
+    return cuda_start
+end
+\end{lstlisting}
+
+\section{Untuk dijalankan di CPU}
+
+\begin{lstlisting}
+function operation_cpu(A, B)
+    C = zeros(Float16, size(A))
+    C .= A .- B
+    return C
+end
+
+function simulate_cpu(A_normal, B_normal)
+    normal_start = @elapsed result_cpu = operation_cpu(A_normal, B_normal)
+    return normal_start
+end
+\end{lstlisting}
+
+\section{Simulasi}
+
+\begin{lstlisting}
+function simulate(N::Int64, n_loop::Int64)
+    println("Total size: $(N*N)")
+    results_gpu = []
+    results_cpu = []
+    for i in 1:n_loop
+        A_normal = rand(Float16, N, N)
+        B_normal = rand(Float16, N, N)
+        benchmark_gpu = simulate_gpu(A_normal, B_normal)
+        benchmark_cpu = simulate_cpu(A_normal, B_normal)
+        push!(results_gpu, benchmark_gpu)
+        push!(results_cpu, benchmark_cpu)
+    end
+    println("Mean CPU: $(mean(results_cpu))")
+    println("Mean GPU: $(mean(results_gpu))")
+    return DataFrame(CPU=results_cpu, GPU=results_gpu)
+end
+\end{lstlisting}
+
+\chapter{PROGRAM OPERASI PERKALIAN SKALAR DENGAN MATRIKS}
+\label{appx:multiplication_scalar_matrix}
+
+\section{\emph{Module}}
+
+\begin{lstlisting}
+using CUDA
+using DataFrames
+using Statistics
+\end{lstlisting}
+
+\section{Untuk dijalankan di GPU}
+
+\begin{lstlisting}
+function operation_gpu(A, skalar)
+    C = CUDA.zeros(Float32, size(A))
+    CUDA.@sync C = A * skalar
+    return C
+end
+
+function simulate_gpu(A_normal, skalar_normal)
+    A = CUDA.convert(CuArray{Float32}, A_normal)
+    cuda_start = CUDA.@elapsed result_gpu = operation_gpu(A, skalar_normal)
+    return cuda_start
+end
+\end{lstlisting}
+
+\section{Untuk dijalankan di CPU}
+
+\begin{lstlisting}
+function operation_cpu(A, skalar)
+    C = zeros(Float32, size(A))
+    C = A * skalar
+    return C
+end
+
+function simulate_cpu(A_normal, skalar)
+    normal_start = @elapsed result_cpu = operation_cpu(A_normal, skalar)
+    return normal_start
+end
+\end{lstlisting}
+
+\section{Simulasi}
+
+\begin{lstlisting}
+function simulate(N::Int64, n_loop::Int64)
+    println("Total size: $(N*N)")
+    results_gpu = []
+    results_cpu = []
+    for i in 1:n_loop
+        A_normal = rand(Float32, N, N)
+        scalar_normal = rand(Float32)  # Generate a random scalar
+        benchmark_gpu = simulate_gpu(A_normal, scalar_normal)
+        benchmark_cpu = simulate_cpu(A_normal, scalar_normal)
+        push!(results_gpu, benchmark_gpu)
+        push!(results_cpu, benchmark_cpu)
+    end
+    println("Mean CPU: $(mean(results_cpu))")
+    println("Mean GPU: $(mean(results_gpu))")
+    return DataFrame(CPU=results_cpu, GPU=results_gpu)
+end
+\end{lstlisting}
+
+\chapter{PROGRAM OPERASI PERKALIAN ANTAR MATRIKS}
+\label{appx:multiplication_matrix_matrix}
+
+\section{\emph{Module}}
+
+\begin{lstlisting}
+using CUDA
+using DataFrames
+using Statistics
+\end{lstlisting}
+
+\section{Untuk dijalankan di GPU}
+
+\begin{lstlisting}
+function operation_gpu(A, B)
+    C = CUDA.zeros(Float32, size(A))
+    CUDA.@sync C = A * B
+    return C
+end
+
+function simulate_gpu(A_normal, B_normal)
+    A = CUDA.convert(CuArray{Float32}, A_normal)
+    B = CUDA.convert(CuArray{Float32}, B_normal)
+    cuda_start = CUDA.@elapsed result_gpu = operation_gpu(A, B)
+    return cuda_start
+end
+\end{lstlisting}
+
+\section{Untuk dijalankan di CPU}
+
+\begin{lstlisting}
+function operation_cpu(A, B)
+    C = zeros(Float32, size(A))
+    C = A * B
+    return C
+end
+
+function simulate_cpu(A_normal, B_normal)
+    normal_start = @elapsed result_cpu = operation_cpu(A_normal, B_normal)
+    return normal_start
+end
+\end{lstlisting}
+
+\section{Simulasi}
+
+\begin{lstlisting}
+function simulate(N::Int64, n_loop::Int64)
+    println("Total size: $(N*N)")
+    results_gpu = []
+    results_cpu = []
+    for i in 1:n_loop
+        A_normal = rand(Float32, N, N)
+        B_normal = rand(Float32, N, N)
+        benchmark_gpu = simulate_gpu(A_normal, B_normal)
+        benchmark_cpu = simulate_cpu(A_normal, B_normal)
+        push!(results_gpu, benchmark_gpu)
+        push!(results_cpu, benchmark_cpu)
+    end
+    println("Mean CPU: $(mean(results_cpu))")
+    println("Mean GPU: $(mean(results_gpu))")
+    return DataFrame(CPU=results_cpu, GPU=results_gpu)
+end
+\end{lstlisting}
 
 
-void Solver::writeSolveGS(const std::string& filename, int reshape_rows, int reshape_cols) {
-    std::ofstream out(filename);
+\chapter{PROGRAM OPERASI INVERSE MATRIKS}
+\label{appx:inverse}
 
-    double idz = 1 / this->dh[0];
-    double idr = 1 / this->dh[1];
-    double idz2 = idz * idz;
-    double idr2 = idr * idr;
+\section{\emph{Module}}
 
-    double L2 = 0;
-    bool converged = false;
+\begin{lstlisting}
+using CUDA
+using DataFrames
+using Statistics
+\end{lstlisting}
 
-    double crz = 0.5 / (idz2 + idr2);
-    for (unsigned it = 0; it < this->max_solver_it; it++)
-    {
-        for (int i = 0; i < this->nz; i++)
-        {
-            for (int j = 0; j < this->nr; j++)
-            {
-                if (i == 0 || i % reshape_rows == 0) 
-                {
-                    continue;
-                }
-                else if (i % reshape_rows == 99) 
-                {
+\section{Untuk dijalankan di GPU}
 
-                    phi[i][j] = phi[i-1][j];
-                }
-                else if (j == 0) 
-                {
-                    continue; 
+\begin{lstlisting}
+function operation_matrices_cuda(gpu_matrix)
+    inverted_gpu_matrix = inv(gpu_matrix)  
+    return inverted_gpu_matrix  
+end
 
-                }
-                else if (j == (this->nr) - 1) 
-                {
-                    continue; 
-                }
-                else // selain di syarat batas
-                {
-                    double crj = 0.5 / ((this->x0[1] + j * this->dh[1]) * this->dh[1]);
-                    double phi_baru = crz * ((this->rho_ndArr(i, j) / Const::EPS_0) + (idz2 * (this->phi[i + 1][j] + this->phi[i - 1][j])) + (this->phi[i][j + 1] * (idr2 + crj)) + (this->phi[i][j - 1] * (idr2 - crj)));
-                    // lanjutkan dengan SOR
-                    phi[i][j] += 1.4 * (phi_baru - this->phi[i][j]);
-                }
+function simulate_gpu(A_normal)
+    A = CUDA.cu(A_normal)  
+    result_gpu, cuda_start = CUDA.@timed operation_matrices_cuda(A)
+    return cuda_start 
+end
+\end{lstlisting}
 
-            }
-        }
-        if (it % 100 == 0)
-        {
-            double sum = 0;
-            for (int i = 1; i < reshape_rows - 1; i++)
-            {
-                for (int j = 1; j < reshape_cols - 1; j++)
-                {
-                    double crj = 0.5 / ((this->x0[1] + j * this->dh[1]) * this->dh[1]);
-                    double R = -2 * this->phi[i][j] * (idr2 + idz2) + ((this->rho_ndArr(i, j) / Const::EPS_0)
-                            + idz2 * (this->phi[i + 1][j]
-                            + this->phi[i - 1][j]) + this->phi[i][j + 1] * (idr2 + crj)
-                            + this->phi[i][j - 1] * (idr2 - crj));
-                    sum += R * R;
-                }
-            }
-            L2 = sqrt(sum / (reshape_cols * reshape_rows));
-            if (L2 < tolerance)
-            {
-                converged = true;
-                break;
-            }
-        }
-    }
-    if (!converged)
-    {
-        cerr << "Gauss seidel standar gagal konvergen, L2=" << L2 << endl;
-    }
-    for(int i=0; i<nz; i++)
-    {
-        for(int j=0; j<nr; j++)
-        {
-            if(j==this->nr-1)
-            {
-                out<<phi[i][j]<<'\n';
-            }
-            else
-            {
-                out<<phi[i][j]<<',';
-            }
-        }
-    }
-    out.close();
-}
-\end{lampirancppcode}
+\section{Untuk dijalankan di CPU}
 
-\section{main.cpp}\label{kode_main_cpp}
-\begin{lampirancppcode}
-#include "NumCpp.hpp"
-#include "Potential.h"
+\begin{lstlisting}
+function operation_matrices_normal(A)
+    C = zeros(Float32, size(A))
+    C = inv(A)
+    return C
+end
 
-#include <cstdlib>
-#include <iostream>
-#include <bits/stdc++.h>
-using namespace std;
+function simulate_cpu(A_normal)
+    normal_start = @elapsed result_cpu = operation_matrices_normal(A_normal)
+    return normal_start
+end
+\end{lstlisting}
 
-int main()
-{
-    time_t start, end;
-    time(&start);
-    ios_base::sync_with_stdio(false);
+\section{Simulasi}
 
-    const int nz = 200'000;
-    const int nr = 100;
-    const int batch = nz / nr;
+\begin{lstlisting}
+function simulate(N::Int64, n_loop::Int64)
+    results_gpu = []
+    results_cpu = []
+    for i in 1:n_loop
+        A_normal = rand(Float32, N, N)
+        benchmark_gpu = simulate_gpu(A_normal)
+        benchmark_cpu = simulate_cpu(A_normal)
+        push!(results_gpu, benchmark_gpu)
+        push!(results_cpu, benchmark_cpu)
+    end
+    println("Mean CPU: $(mean(results_cpu))")
+    println("Mean GPU: $(mean(results_gpu))")
+    return DataFrame(CPU=results_cpu, GPU=results_gpu)
+end
+\end{lstlisting}
 
-    const int totalData = 20'000'000;
+\chapter{PROGRAM PENCARIAN NILAI EIGEN}
+\label{appx:eigenvalue}
 
-    assert(nr * nz == totalData);
+\section{\emph{Module}}
 
-    auto rho = nc::fromfile<double>("lokasi/file_rho.csv", ',');
+\begin{lstlisting}
+using CUDA
+using DataFrames
+using Statistics
+\end{lstlisting}
 
-    rho.reshape(nz, nr);
-    Solver solver(nz, nr);
-    solver.rho_ndArr = rho;
-    solver.setextents(0.025, 0.0, 0.050, 0.035);
-    solver.setParam(100'000, 0.01);
+\section{Untuk dijalankan di GPU}
 
-    solver.writeSolveGS("phi_gaussian_pred_GS.csv", nr, nr);
+\begin{lstlisting}
+function eigen_gpu(A_gpu)
+    A_cpu = Array{Float64}(A_gpu)
+    return eigvals(A_cpu)
+end
 
-    time(&end);
-    double time_taken = double(end-start);
-    cout << "Time taken by program is: " << fixed << time_taken << setprecision(5);
-    cout << "sec" << endl;
+function simulate_gpu(A_normal)
+    A_gpu = CUDA.cu(A_normal)
+    gpu_start = CUDA.@elapsed result_gpu = eigen_gpu(A_gpu)
+    return gpu_start
+end
+\end{lstlisting}
 
-    return EXIT_SUCCESS;
-}
-\end{lampirancppcode}
+\section{Untuk dijalankan di CPU}
 
-\chapter{Program Prediksi Nilai $\phi$ Menggunakan Convolutional Neural Network}
-\section{Arsitektur U-Net}\label{unies_og}
-\begin{lampiranpythoncode}
-def modified_unet_model(input_shape):
-  inputs = layers.Input(shape=input_shape)
+\begin{lstlisting}
+function eigen_cpu(A)
+    return eigvals(A)
+end
 
-  # Encoder
-  enc1 = layers.Conv2D(64, (3, 3), activation='relu', padding='same')(inputs)
-  enc1 = layers.Conv2D(64, (3, 3), activation='relu', padding='same')(enc1)
-  enc1 = layers.MaxPooling2D((2, 2), padding='same')(enc1)
+function simulate_cpu(A_normal)
+    cpu_start = @elapsed result_cpu = eigen_cpu(A_normal)
+    return cpu_start
+end
+\end{lstlisting}
 
-  enc2 = layers.Conv2D(128, (3, 3), activation='relu', padding='same')(enc1)
-  enc2 = layers.Conv2D(128, (3, 3), activation='relu', padding='same')(enc2)
-  enc2 = layers.MaxPooling2D((2, 2), padding='same')(enc2)
+\section{Simulasi}
 
-  # Bottleneck
-  bottleneck = layers.Conv2D(256, (3, 3), activation='relu', padding='same')(enc2)
-  bottleneck = layers.Conv2D(256, (3, 3), activation='relu', padding='same')(bottleneck)
-
-  # Decoder
-  dec1 = layers.Conv2DTranspose(128, (3, 3), activation='relu', padding='same')(bottleneck)
-  dec1 = layers.Conv2DTranspose(128, (3, 3), activation='relu', padding='same')(dec1)
-  dec1 = layers.UpSampling2D((2, 2))(dec1)
-
-  dec2 = layers.Conv2DTranspose(64, (3, 3), activation='relu', padding='same')(dec1)
-  dec2 = layers.Conv2DTranspose(64, (3, 3), activation='relu', padding='same')(dec2)
-  dec2 = layers.UpSampling2D((2, 2))(dec2)
-
-  outputs = layers.Conv2D(1, (3, 3), activation='tanh', padding='same')(dec2)
-
-  model = tf.keras.Model(inputs, outputs)
-  return model
-
-input_shape = (100,100,1)
-model = modified_unet_model(input_shape)
-model.summary()
-\end{lampiranpythoncode}
-
-\section{\textit{Compile and Fit} Model}\label{training model}
-\begin{lampiranpythoncode}
-#Callback untuk menyimpan model dari setiap epoch
-checkpoint_callback = ModelCheckpoint(
-    filepath="lokasi/penyimpanan/model.h5",  # Lokasi penyimpanan model dari tiap epoch, model disimpan dalam format h5
-    save_best_only=False,  # setel ke True apabila ingin menyimpan hanya model dengan val_loss terendah
-    save_weights_only=False,  # set ke True apabila ingin hanya menyimpan bobot dari model
-    monitor='val_loss',  # pilih metrik apa yang dijadikan patokan untuk disimpan
-    save_freq='epoch'  # simpan model per epoch
-)
-
-# Loss Function and Metrics
-loss_function = tf.keras.losses.MeanSquaredError()
-mape = tf.keras.losses.MeanAbsolutePercentageError()
-metrics = [mean_absolute_percentage_error]
-
-# Hyperparameters
-batch_size = 32
-epochs = 100
-initial_learning_rate = 0.001
-
-# Learning rate schedule
-lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(
-    initial_learning_rate,
-    decay_steps=10000,
-    decay_rate=0.9)
-
-optimizer = tf.keras.optimizers.Adam(learning_rate=lr_schedule)
-
-# Model Compilation
-model.compile(optimizer=optimizer, loss=loss_function, metrics=metrics)
-
-# Assuming `x_train` and `y_train` are your actual training datasets
-history = model.fit(rho_train, phi_train, validation_data=(rho_val, phi_val), epochs=epochs, batch_size=batch_size, callbacks=[checkpoint_callback])
-\end{lampiranpythoncode}
-
-
-
+\begin{lstlisting}
+function simulate(N::Int64, n_loop::Int64)
+    println("Matrix size: $(N)x$(N)")
+    results_gpu = []
+    results_cpu = []
+    for i in 1:n_loop
+        A_normal = rand(Float64, N, N)
+        benchmark_gpu = simulate_gpu(A_normal)
+        benchmark_cpu = simulate_cpu(A_normal)
+        push!(results_gpu, benchmark_gpu)
+        push!(results_cpu, benchmark_cpu)
+    end
+    println("Mean CPU time: $(mean(results_cpu))")
+    println("Mean GPU time: $(mean(results_gpu))")
+    return DataFrame(CPU=results_cpu, GPU=results_gpu)
+end
+\end{lstlisting}
