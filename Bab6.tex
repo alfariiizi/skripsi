@@ -2,12 +2,16 @@
 \section{Kesimpulan}
 Dari penelitian ini, dapat disimpulkan
 \begin{enumerate}
-    \item Algoritma CNN yang digunakan dalam pemecahan permasalahan regresi pada persamaan diferensial parsial diimplementasikan dalam bentuk arsitektur U-Net yang dihilangkan bagian \textit{crop and copy}-nya dengan menggunakan data latih yang sudah dinormalisir pada rentang tertentu, menggunakan MSE sebagai \textit{loss function}, dan \textit{exponential decay learning rate schedule} untuk laju pemelajaran pada pengoptimasi ADAM. Untuk hasil akurat untuk jenis distribusi yang berbeda, hendaknya melatih model dengan data yang berbeda atau membangun model lain dengan data latih yang spesifik.
-    \item Hasil yang didapat dari perhitungan menggunakan dua model sama-sama dapat memberikan gambaran visual umum dan ralat yang dihasilkan relatif kecil dan dapat diterima. Meski begitu, hasil yang didapat belum dapat menggantikan perhitungan menggunakan metode numerik, namun dapat digunakan sebagai tebakan awal metode numerik iteratif seperti Gauss-Seidel.
+	% \item Algoritma CNN yang digunakan dalam pemecahan permasalahan regresi pada persamaan diferensial parsial diimplementasikan dalam bentuk arsitektur U-Net yang dihilangkan bagian \textit{crop and copy}-nya dengan menggunakan data latih yang sudah dinormalisir pada rentang tertentu, menggunakan MSE sebagai \textit{loss function}, dan \textit{exponential decay learning rate schedule} untuk laju pemelajaran pada pengoptimasi ADAM. Untuk hasil akurat untuk jenis distribusi yang berbeda, hendaknya melatih model dengan data yang berbeda atau membangun model lain dengan data latih yang spesifik.
+	% \item Hasil yang didapat dari perhitungan menggunakan dua model sama-sama dapat memberikan gambaran visual umum dan ralat yang dihasilkan relatif kecil dan dapat diterima. Meski begitu, hasil yang didapat belum dapat menggantikan perhitungan menggunakan metode numerik, namun dapat digunakan sebagai tebakan awal metode numerik iteratif seperti Gauss-Seidel.
+	\item Cara kerja komputasi di sistem paralel oleh GPU adalah dengan mengirimkan data dari CPU ke GPU untuk dilakukan komputasi. Pada GPU ini terdapat beberapa proses yang dilakukan, namun semua proses tersebut sudah ditangani oleh Julia, sehingga penulis hanya perlu membuat \emph{function} yang dikirimkan oleh CPU ke GPU.
+	\item Pada operasi yang sederhana dan pada ukuran matriks yang kecil, eksekusi sistem series oleh CPU dapat lebih cepat daripada eksekusi sistem paralel oleh GPU. Namun, pada operasi yang kompleks dan pada ukuran matriks yang besar, eksekusi sistem paralel oleh GPU dapat lebih cepat daripada eksekusi sistem series oleh CPU.
 \end{enumerate}
 
-\section{Saran}
-\begin{enumerate}
-    \item Dilakukan \textit{data cleaning} sebelum menggunakan data latih dan data uji
-    \item Membuka kemungkinan pada jenis/bentuk arsitektur lain, khususnya pemanfaatan \textit{transfer learning} dalam pembentukan arsitektur.
-\end{enumerate}
+% \section{Saran}
+% \begin{enumerate}
+% \item Dilakukan \textit{data cleaning} sebelum menggunakan data latih dan data uji
+% \item Membuka kemungkinan pada jenis/bentuk arsitektur lain, khususnya pemanfaatan \textit{transfer learning} dalam pembentukan arsitektur.
+
+% \item Penulis hanya mempunyai RAM yang terbatas, sehingga hasil pengujian pada ukuran matriks yang lebih besar masih belum bisa dilakukan
+% \end{enumerate}
