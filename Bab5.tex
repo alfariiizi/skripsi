@@ -138,7 +138,7 @@ Jika dilihat dari Tabel \ref{tab:result_matrix_matrix_multiplication}, pada vari
 
 \section{Hasil Simulasi Operasi Inverse}
 
-Berdasarkan
+Berdasarkan bagian \ref{Operasi Inverse}, operasi pencarian matriks memiliki kompleksitas yang jauh lebih tinggi daripada operasi - operasi sebelumnya. Untuk itu, diperkirakan operasi pencarian inverse matriks ini akan memperoleh hasil yang berbeda dari operasi - operasi sebelumnya. Hasil simulasi operasi inverse pada sistem series dan sistem paralel dapat dilihat pada Tabel \ref{tab:result_inverse} dan Gambar \ref{img:result_inverse}.
 
 \begin{figure}[H]
 	\centering
@@ -147,7 +147,7 @@ Berdasarkan
 	\label{img:result_inverse}
 \end{figure}
 
-Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+Berdasarkan Gambar \ref{img:result_inverse}, pada ukuran matriks yang kecil, kecepatan eksekusi series oleh CPU lebih cepat daripada kecepatan eksekusi paralel oleh GPU. Kemudian seiring meningkatnya ukuran matriks, kecepatan eksekusi paralel oleh GPU berhasil lebih cepat daripada kecepaan eksekusi series oleh CPU.
 
 \begin{table}[H]
 	\centering
@@ -168,9 +168,11 @@ Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint 
 	\end{tabular}
 \end{table}
 
-Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+Jika dilihat dari Tabel \ref{tab:result_inverse} pada variasi ke-7, kecepatan eksekusi paralel oleh GPU mempunyai durasi kurang dari 11 detik, sedangkan kecepatan eksekusi series oleh CPU mempunyai durasi lebih dari 3 menit. Jika ukuran matriks nya ditambahkan, diperkirakan akan semakin jauh durasi ekeskusi paralel oleh GPU dan durasi eksekusi series oleh CPU. Untuk itu, jika terdapat operasi pencarian inverse matriks, bisa menggunakan CPU untuk ukuran matriks yang kecil, dan bisa menggunakan GPU untuk ukuran matriks yang besar.
 
 \section{Hasil Simulasi Pencarian Nilai Eigen}
+
+Berdasarkan bagian \ref{Nilai Eigen}, operasi pencarian nilai eigen matriks merpakan operasi yang paling kompleks pada kajian ini. Untuk itu, diperkirakan hasil yang diperoleh akan berbeda dari operasi operasi sebelumnya. Hasil dari simulasi operasi pencarian nilai eigen dapat dilihat pada Tabel \ref{tab:result_eigenvalue} dan Gambar \ref{img:result_eigenvalue}.
 
 \begin{figure}[H]
 	\centering
@@ -179,7 +181,7 @@ Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint 
 	\label{img:result_eigenvalue}
 \end{figure}
 
-Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+Berdasarkan Gambar \ref{img:result_eigenvalue}, pada ukuran matriks yang kecil, kecepatan eksekusi series oleh CPU lebih cepat daripada kecepatan eksekusi paralel oleh GPU. Namun, seiring bertambahnya ukuran matriks, kecepatan eksekusi paralel oleh GPU berhasil lebih cepat daripada kecepatan eksekusi series oleh CPU.
 
 \begin{table}[H]
 	\centering
@@ -200,11 +202,19 @@ Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint 
 	\end{tabular}
 \end{table}
 
-Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+Jika dilihat dari \ref{tab:result_eigenvalue} pada variasi ke-7, kecepatan eksekusi paralel oleh GPU mempunyai durasi rata-rata kurang dari 43 detik, sedangkan kecepatan eksekusi series oleh CPU mempunyai durasi rata-rata lebih dari 6 menit. Jika ukuran matriks nya ditambah, maka diperkirakan akan menghasilkan perbedaan kecepatan yang jauh lebih berbeda antara eksekusi series oleh CPU dan eksekusi paralel oleh GPU. Untuk itu, jika terdapat operasi pencarian nilai eigen dari suatu matriks, dapat menggunakan CPU untuk ukuran matriks yang kecil, dan dapat menggunakan GPU untuk ukuran matriks yang besar.
 
 \section{Pembahasan Secara Umum}
 
-Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+Pada kajian ini, dilakukan simulasi operasi matriks yang dijalankan pada sistem series oleh CPU dan sistem paralel oleh GPU. Simulasi ini dilakukan dari operasi sederhana hingga operasi yang kompleks. Eksekusi sistem series oleh CPU secara umum dapat menjalankan operasi matriks secara cepat pada matriks berukuran kecil dan pada operasi matriks yang tidak kompleks. Sedangkan eksekusi sistem paralel oleh GPU secara umum mampu menjalankan operasi matriks secara cepat pada matriks berukuran besar dan pada operasi matriks yang lebih kompleks.
+
+Jika dilihat dari hasil gambar grafik pada masing-masing simulasi, terdapat titik dimana kecepatan eksekusi sistem paralel oleh GPU \textbf{mulai} lebih cepat daripada kecepatan eksekusi sistem series oleh CPU. Titik ini penulis sebut dengan \emph{titik balik}. Pada operasi penjumlahan, pengurangan, dan perkalian skalar dengan matriks, titik balik nya adalah di ukuran matriks $500 \times 500$ atau pada variasi ke-4. Kemudian pada operasi yang lebih kompleks, yakni operasi perkalian antar matriks, pencarian inverse, dan pencarian nilai eigen, titik balik nya ada pada ukuran matriks $100 \times 100$ atau variasi ke-3. Hasil ini dapat disimpulkan bahwa seiring meningkatnya kompleksistas operasi, eksekusi menggunakan sistem paralel oleh GPU dapat lebih efektif daripada eksekusi pada sistem series oleh CPU.
+
+Jika dilihat dari hasil tabel pada masing-masing simulasi, semakin tinggi kompleksitas operasi maka semakin tinggi pula perbedaan durasi eksekusi pada ukuran matriks terbesar (variasi ke-7). Pada operasi penjumlahan, pengurangan, dan perkalian skalar dengan matriks, perbedaan durasi eksekusi pada variasi ke-7 secara umum mempunyai rata-rata kurang dari 1 detik. Namun, pada operasi yang lebih kompleks, yakni operasi perkalian antar matriks, pencarian inverse, dan pencarian nilai eigen, durasi eksekusi pada variasi ke-7 antara sistem series oleh CPU dan sistem paralel oleh GPU semua nya diatas 1 detik dan perbedaan paling besar ada pada simulasi pencarian nilai eigen. Hasil ini dapat disimpulkan bahwa seiring meningkatnya kompleksitas operasi dan seiring meningkatnya ukuran matriks, eksekusi paralel oleh GPU jauh lebih efektif daripada eksekusi series oleh CPU.
+
+Operasi matriks tidak bergantung satu sama lain, sehingga dapat dijalankan dengan baik pada sistem paralel. Namun, pada hasil yang telah diperoleh, pada matriks berukuran kecil, sistem series lebih cepat melakukan dalam menjalankan eksekusi daripada sistem paralel. Hal ini disebabkan karena semua program pada dasarnya dijalankan di CPU. Untuk sistem series, maka eksekusi program tersebut dapat langsung dijalankan. Akan tetapi, untuk sistem paralel, eksekusi program tersebut perlu dikirimkan dari CPU ke GPU, kemudian setelah selesai dikomputasikan akan dikirimkan kembali ke CPU. Proses transfer data ini akan tampak lama jika data yang ditransferkan berukuran kecil. Dengan kata lain, proses transfer data dari CPU ke GPU dan dari GPU ke CPU akan tampak lama jika ukuran data matriks nya sedikit (matriks berukuran kecil).
+
+Dari hasil yang telah diperoleh pada masing-masing simulasi, terlihat bahwa pada ukuran matriks yang sedikit, eksekusi sistem series oleh CPU mampu lebih cepat daripada eksekusi sistem series oleh GPU. Penulis tidak memperkirakan jika CPU dapat berjalan secepat itu. Kemungkinan cepat nya eksekusi pada CPU ini disebabkan karena CPU yang penulis pakai menggunakan Intel Core i7 tipe U generasi 10, yang mana merupakan salah satu CPU tercepat di kelas nya. Untuk itu, jika simulasi dilakukan dengan menggunakan CPU lain yang lebih lambat, diperkirakan akan diperoleh \emph{titik balik} yang lebih awal.
 
 % \section{Hasil dari Metode Gauss-Seidel}
 % Untuk menghitung seluruh data menggunakan program ini, dilakukan pembagian kloter yang setiap kloternya menghitung 2000--2200 data. Hal ini dilakukan untuk menghindari perhitungan yang terlalu lama, penggunaan memori yang terlalu besar, dan juga untuk mengantisipasi kesalahan yang besar. Untuk 20200, data dibagi menjadi 10 kloter perhitungan. Pada Gambar \ref{grafik_durasi} disajikan data dari 5 perhitungan waktu program. Dari data tersebut dapat kita simpulkan bahwa rata-rata waktu perhitungan untuk 2000--2200 data adalah 6712 detik atau 1,8 jam. Sehingga, untuk menghasilkan perhitungan $\phi$ untuk satu medan adalah sebesar 3,356 detik.
