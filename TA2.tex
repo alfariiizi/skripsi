@@ -285,20 +285,26 @@ pertanyaan atau sanggahan, \textit{i'm only one call away}.
 %-----------------------------------------------------------------
 %Disini awal masukan Intisari (ISI SESUAI DENGAN DATA ANDA!)
 %-----------------------------------------------------------------
+% \begin{abstractind}
+% 	Penyelesaian persamaan diferensial parsial (PDP) merupakan hal yang penting dalam
+% 	Ilmu Fisika. Dalam simulasi plasma pada koordinat silinder, potensial listrik
+% 	didefinisikan dalam bentuk salah satu jenis PDP, yaitu Persamaan Poisson
+% 	dengan sisi kanan merupakan distribusi partikel. Penelitian ini menawarkan pemecahan
+% 	solusi 162,5 kali lebih cepat dari metode iteratif Gauss-Seidel menggunakan pendekatan
+% 	jaringan saraf (\textit{neural network}) yaitu \textit{fully convolutional
+% 		layer} yang terimplementasi pada arsitektur U-Net yang dimodifikasi. Sebagai
+% 	domain, digunakan bentuk fisis dari kanal pendorong Hall SPT-100 dengan syarat
+% 	batas Dirichlet dan Neumann. Hasil ralat MSE yang dihasilkan dari pelatihan
+% 	berada pada orde $10^{-5}$ dan fitur umum yang secara visual sangat
+% 	mendekati dengan \textit{ground truth}.
+%
+% 	Kata kunci: jaringan saraf, convolutional neural network, Poisson
+% \end{abstractind}
 \begin{abstractind}
-	Penyelesaian persamaan diferensial parsial (PDP) merupakan hal yang penting dalam
-	Ilmu Fisika. Dalam simulasi plasma pada koordinat silinder, potensial listrik
-	didefinisikan dalam bentuk salah satu jenis PDP, yaitu Persamaan Poisson
-	dengan sisi kanan merupakan distribusi partikel. Penelitian ini menawarkan pemecahan
-	solusi 162,5 kali lebih cepat dari metode iteratif Gauss-Seidel menggunakan pendekatan
-	jaringan saraf (\textit{neural network}) yaitu \textit{fully convolutional
-		layer} yang terimplementasi pada arsitektur U-Net yang dimodifikasi. Sebagai
-	domain, digunakan bentuk fisis dari kanal pendorong Hall SPT-100 dengan syarat
-	batas Dirichlet dan Neumann. Hasil ralat MSE yang dihasilkan dari pelatihan
-	berada pada orde $10^{-5}$ dan fitur umum yang secara visual sangat
-	mendekati dengan \textit{ground truth}.
+	Penyelesaian permasalahan komputasi umumnya memerlukan sistem yang cepat dalam melakukan proses komputasi. Penggunaan GPU merupakan salah satu cara agar proses komputasi bisa lebih cepat dijalankan. Julia merupakan bahasa pemrograman baru yang mempunyai integrasi dengan GPU Nvidia melalui pustaka CUDA.jl. Simulasi perbandingan antara kecepatan eksekusi sistem series oleh CPU dan kecepatan eksekusi sistem paralel oleh GPU diperlukan untuk melihat seberapa jauh perbedaan durasi eksekusi pada operasi - operasi matriks. Hasilnya adalah kecepatan eksekusi sistem series oleh CPU mampu lebih cepat pada operasi matriks sederhana dan pada matriks berukuran kecil. Untuk operasi matriks yang kompleks dan ukuran matriks yang besar, diperoleh eksekusi sistem paralel oleh GPU lebih cepat. Perbedaan durasi paling besar antara eksekusi series oleh CPU dan eksekusi paralel oleh GPU ada pada operasi paling kompleks dan variasi ukuran matriks paling besar.
 
-	Kata kunci: jaringan saraf, convolutional neural network, Poisson
+
+	Kata kunci: Sistem Paralel, GPU, Julia
 \end{abstractind}
 %-----------------------------------------------------------------
 %-----------------------------------------------------------------
@@ -307,19 +313,21 @@ pertanyaan atau sanggahan, \textit{i'm only one call away}.
 %Disini awal masukan untuk Abstract (ISI SESUAI DENGAN DATA ANDA!)
 %-----------------------------------------------------------------
 \begin{abstracteng}
-	The solution of partial differential equations (PDEs) is of paramount importance
-	in the field of Physics. In plasma simulations in cylindrical coordinates, electric
-	potential is defined in the form of one type of PDE, namely the Poisson
-	Equation with the right-hand side representing the particle distribution. This
-	research offers a solution that is 162.5 times faster than the Gauss-Seidel iterative
-	method using a neural network approach, specifically the fully convolutional
-	layer implemented on a modified U-Net architecture. As a domain, the
-	physical shape of the Hall thruster SPT-100 channel with Dirichlet and
-	Neumann boundary conditions is used. The resulting mean squared error (MSE) from
-	the training is on the order of $10^{-5}$, and the common features are
-	visually very close to the ground truth.
+	% The solution of partial differential equations (PDEs) is of paramount importance
+	% in the field of Physics. In plasma simulations in cylindrical coordinates, electric
+	% potential is defined in the form of one type of PDE, namely the Poisson
+	% Equation with the right-hand side representing the particle distribution. This
+	% research offers a solution that is 162.5 times faster than the Gauss-Seidel iterative
+	% method using a neural network approach, specifically the fully convolutional
+	% layer implemented on a modified U-Net architecture. As a domain, the
+	% physical shape of the Hall thruster SPT-100 channel with Dirichlet and
+	% Neumann boundary conditions is used. The resulting mean squared error (MSE) from
+	% the training is on the order of $10^{-5}$, and the common features are
+	% visually very close to the ground truth.
 
-	Keyword: neural network, convolutional neural network, Poisson
+	Computational problem-solving generally requires a system that can perform computational processes quickly. The use of GPUs is one way to accelerate these computational processes. Julia is a new programming language that integrates with Nvidia GPUs through the CUDA.jl library. A simulation comparing the execution speed of serial systems by the CPU and the parallel system execution speed by the GPU is needed to observe the differences in execution duration for matrix operations. The results show that the serial execution speed by the CPU is faster for simple matrix operations and smaller matrices. For complex matrix operations and larger matrices, the parallel execution by the GPU is faster. The most significant difference in duration between serial execution by the CPU and parallel execution by the GPU is found in the most complex operations and the largest matrix variations.
+
+	Keyword: Parallel Systems, GPU, Julia
 \end{abstracteng}
 %-----------------------------------------------------------------
 %-----------------------------------------------------------------
