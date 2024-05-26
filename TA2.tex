@@ -76,7 +76,7 @@
 \fullname{Moh Rizal Alfarizi}
 \NIM{19/445591/PA/19415}
 \yearenrollment{2019}
-\examdate{28 Juni 2024}
+\examdate{28 Juni 2024 (Placeholder)}
 \degree{Sarjana}
 \yearsubmit{2024}
 \firstsupervisor{Prof. Drs. Pekik Nurwantoro, M.S., Ph.D.}
@@ -120,109 +120,32 @@
 %-----------------------------------------------------------------
 \preface
 
-Transkrip.xyz adalah sebuah perusahaan rintisan (\textit{startup}) yang berbasis
-di Sleman, Indonesia, yang menyediakan jasa transkripsi audio ke teks menggunakan
-teknologi kecerdasan buatan (\textit{artificial intelegence})LLM (\textit{large
-	language model}) dengan rata-rata hingga 20.000 pengguna. Uniknya, perusahaan
-ini tidak diinisiasi oleh seorang dengan latar belakang teknologi atau ilmu
-komputer, melainkan diinisiasi dan dikembangkan baik segi teknis maupun bisnisnya
-oleh seorang dari latar belakang ilmu Filsafat. Hal yang melatarbelakangi
-terbentuknya perusahaan ini tentu bukan berasal dari kemampuan \textit{founder}-nya,
-melainkan berasal dari kepekaan dalam melihat kebutuhan masyarakat dan
-perkembangan teknologi sekarang.
+Puji syukur kehadirat Tuhan Yang Maha Esa atas segala rahmat dan karunia-Nya sehingga saya dapat menyelesaikan skripsi ini yang berjudul “Pemanfaatan General Purpose GPU dengan Bahasa Pemrograman Julia untuk Komputasi Berunjuk Kerja Tinggi”. Skripsi ini disusun sebagai salah satu syarat untuk memperoleh gelar Sarjana di bidang Fisika.
 
-Belakangan banyak orang latah mengenai perkembangan pemelajaran mesin (\textit{machine
-	learning}) dan implementasinya pada kecerdasan buatan. Berbagai pekerjaan yang
-sebelumnya dilakukan oleh manusia kini dapat diotomasi mengggunakan
-pemelajaran mesin. Sebut saja beberapa pekerjaan yang sebelumnya kita sebagai manusia
-saja susah melakukannya, seperti pendektesian objek, pengenalan wajah,
-transkripsi audio, dan masih banyak lagi. Kemudian sekarang muncul pertanyaan
-mengenai bagaimana teknologi pemelajaran mesin dapat memiliki kontribusi pada
-pekerjaan di bidang Fisika, atau bahkan kalau mau lebih jauh lagi, seberapa
-mampu bidang Fisika memberikan kontribusi pada bidang pemelajaran mesin.
-
-Skripsi ini merupakan salah satu upaya untuk menjawab pertanyaan pertama
-tersebut. Perhitungan persamaan Poisson secara numerik membutuhkan upaya yang sangat
-besar. Hal ini yang kemudian menjadi pendorong utama penelitian ini. Pertanyaan
-utamanya adalah bagaimana apabila pemecahan persamaan Poisson didekati dengan paradigma
-pemrograman pemelajaran mesin: pemrogram tidak membuat aturan untuk memecahkan
-masalah tersebut, melainkan hanya memberikan data yang sangat banyak (bisa
-dianggap sebagai \textit{big data}) dan kemudian komputer sendiri yang akan
-membuat aturan tersebut. Pemahaman seperti ini yang kiranya tumbuh dalam diri tiap
-fisikawan, bahwa permasalahan fisika dapat dipecahkan secara lebih cepat dan
-akurat. Namun hendaknya pemanfaatan pemelajaran mesin pada bidang Fisika ini harus
-terus dikaji dan dipikirkan terus-menerus mengenai pemanfaatan hasilnya.
-
-Seperti halnya Transkrip.xyz, para pihak yang bergelut di bidang Fisika juga
-sebaiknya mampu melihat permasalahan apa saja yang dapat diselesaikan secara
-lebih efisien dan efektif dengan penggunaan pemelajaran mesin. Dan lebih jauh lagi,
-kiranya mampu untuk memberikan kontribusi dari bidang Fisika untuk
-perkembangan teknologi ini.
-
-Penulisan skripsi sarjana ini membuahkan banyak cerita, memberikan banyak kenangan
-dan kenalan, serta memberikan banyak pelajaran penting. Saya merasa bertumbuh dan
-berkembang baik secara kepribadian maupun pengetahuan keilmuannya melalui proses
-ini. Maka, saya sangat ingin berterima kasih pada para pihak yang telah membantu
-saya menyelesaikan karya ini:
+Skripsi ini tidak akan terwujud tanpa bantuan, dukungan, dan bimbingan dari berbagai pihak. Oleh karena itu, dalam kesempatan ini saya ingin menyampaikan penghargaan dan ucapan terima kasih yang sebesar-besarnya kepada:
 
 \begin{itemize}
-	\item Kedua orangtua, Ibu Cisca Ifke Meyke Langi dan Bapak Daniel Bonifacius
-	      Laluyan untuk kesabaran dan keyakinan akan setiap pilihan yang saya ambil.
-	      Dukungan dan doa mereka selalu menyertai langkah ini sampai manapun.
-
-	\item Kakak serta adik saya, Diakon Brian Johnathan Laluyan, MSF dan Jennifer
-	      'Jenglot' Elisabeth Laluyan, yang dengan caranya masing-masing menunjukkan
-	      pengertian dan dukungan mereka masing-masing. Semoga lancar selalu tugas dan
-	      pendidikan kalian.
-
-	\item Pembimbing utama saya, Bapak Dr. Iman Santoso, S.Si, M.Sc., yang selalu
-	      dengan penuh kesabaran dan ketelitian memberikan masukan dan mengusahakan yang
-	      terbaik untuk saya.
-
-	\item Pembimbing praktisi dari BRIN, Sleman, Bapak Ahsani Hafizhu Shali, S.Si.,
-	      M.Sc. yang penuh dedikasi tinggi dan kesabaran membimbing saya,
-	      mengajarkan banyak hal baru, dan mendorong saya untuk berbuat lebih.
-	      Sukses untuk jenjang pendidikan selanjutnya.
-
-	\item Kawan sekaligus lawan, pengagum sekaligus panutan, yang mencinta dan yang
-	      dicinta, Kimi Bulan Rumondang Sianipar, S.H. yang selalu sabar dan penuh
-	      kasih memberikan arahan akademis, spiritual, tempat makan enak, hingga cara
-	      melepas stres. Selalu sukses untuk tugas selanjutnya, \textit{hasiani}.
-
-	\item Kawan-kawan tempat bertumbuh, bekerja, bermain, curhat, dan mencoba hal
-	      baru, para \textit{co-worker} di Transkrip.syz: Mas Unies, Yajid, dan
-	      Haritz. Semoga lancar segala urusan transkripsi ini.
-
-	\item Para \textit{comrades} di UKM biasa-biasa saja, seluruh awak BPPM Balairung
-	      UGM yang menjadi tempat bertumbuh dan percaya bahwa manusia selalu punya pilihan
-	      yang tak terbatas, tapi sebaiknya memilih kebenaran.
-
-	\item Kawan-kawan pendamping di sisa akhir masa perkuliahan, kawan-kawan
-	      \textit{nongkrong} di PPM: Darren, Carina, dan Marvy. Terima kasih untuk masukan
-	      teknis, nonteknis, lawakan, dan spiritual. Semoga indah jalan kalian kedepannya.
-
-	\item Calon rekan sejawat, kawan-kawan fisikawan Fisika UGM 2019 yang selalu
-	      bersedia mendukung dan memberikan masukan yang sangat berarti mengenai
-	      akademik, saya sebutkan secara khusus: Fariz, tanpanya skripsi ini akan selesai
-	      mungkin 6 bulan lagi; Lucky, yang memberikan masukan mengenai LaTex; Yehez,
-	      yang menyelamatkan saya di menit-menit akhir penulisan skripsi, yang juga
-	      membuka jalan saya berjumpa dengan semangat akademis lewat magang di BRIN,
-	      serta kawan kos.
+	\item Bapak Prof. Drs. Pekik Nurwantoro, M.S., Ph.D., selaku dosen pembimbing skripsi, yang telah memberikan bimbingan, arahan, dan motivasi yang sangat berarti dalam penyusunan skripsi ini.
+	\item Kedua orangtua, Bapak Mudjianto dan Ibu Khoiruroh untuk kesabaran dan keyakinan akan setiap pilihan yang saya ambil.
+	      Dukungan dan doa mereka selalu memberkahi langkah ini sampai manapun.
+	\item Teman yang selalu mendampingi dengan penuh kasih dan cinta, Intan Putri Yudanti, yang mana selalu sabar menemani dan mengingatkan dalam pengerjaan skripsi ini, mengobati ketika sakit, memberikan arahan spiritual, hingga merekomendasikan tempat makan yang enak. Semoga selalu diberi kelancaran dalam berkegiatan.
+	\item Calon rekan sejawat, kawan-kawan Fisika UGM angkatan 2019, yang selalu memberikan dukungan moral dan bantuan dalam bentuk apa pun selama proses penulisan skripsi ini, secara khusus saya sebutkan: Samuel, yang sering kali memberikan masukan dan mengingatkan untuk selalu mengerjakan skripsi; Lucky, yang selalu membantu dalam penulisan LaTex; Oscar, yang selalu memberikan masukan sehingga saya berkesempatan untuk bekerja sambil kuliah.
 \end{itemize}
-Tanpa mereka ini mustahil karya ini selesai. Sekali lagi terima kasih
-berlimpah untuk kalian semua, semoga dilancarkan semua urusan kalian. \textit{Te
-	amo}.
 
-Akhirnya, kiranya karya tulis ini dapat berguna bagi para pembaca. Semua yang tertulis
-di sini merupakan tanggung jawab saya. Apabila di kemudian nanti terdapat
-pertanyaan atau sanggahan, \textit{i'm only one call away}.
+\noindent
+Tanpa mereka, penulisan skripsi ini mustahil untuk selesai. Sekali lagi, terimkasih yang berlimpah kepada kalian semua, semoga Allah selalu memberikan kalian kesehatan dan kelancaran dalam menjalani segala urusan.
+
+Saya menyadari bahwa skripsi ini masih jauh dari sempurna. Oleh karena itu, kritik dan saran yang membangun sangat saya harapkan demi perbaikan dan penyempurnaan karya ini di masa mendatang. Semoga skripsi ini dapat memberikan manfaat dan kontribusi positif bagi perkembangan ilmu pengetahuan, khususnya di bidang komputasi.
+
+Akhir kata, semoga Allah SWT senantiasa memberikan rahmat dan hidayah-Nya kepada kita semua. Amin.
+
 \vspace{0.8cm}
 
 \begin{tabular}{p{7cm}c}
-	 & Yogyakarta, 9 Oktober 2023 \\
-	 &                            \\
-	 &                            \\
-	 & Samuel Johanes
+	 & Yogyakarta, 28 Juni 2024 (Placeholder) \\
+	 &                                        \\
+	 &                                        \\
+	 & Moh Rizal Alfarizi
 \end{tabular}
 %-----------------------------------------------------------------
 %-----------------------------------------------------------------
@@ -285,21 +208,7 @@ pertanyaan atau sanggahan, \textit{i'm only one call away}.
 %-----------------------------------------------------------------
 %Disini awal masukan Intisari (ISI SESUAI DENGAN DATA ANDA!)
 %-----------------------------------------------------------------
-% \begin{abstractind}
-% 	Penyelesaian persamaan diferensial parsial (PDP) merupakan hal yang penting dalam
-% 	Ilmu Fisika. Dalam simulasi plasma pada koordinat silinder, potensial listrik
-% 	didefinisikan dalam bentuk salah satu jenis PDP, yaitu Persamaan Poisson
-% 	dengan sisi kanan merupakan distribusi partikel. Penelitian ini menawarkan pemecahan
-% 	solusi 162,5 kali lebih cepat dari metode iteratif Gauss-Seidel menggunakan pendekatan
-% 	jaringan saraf (\textit{neural network}) yaitu \textit{fully convolutional
-% 		layer} yang terimplementasi pada arsitektur U-Net yang dimodifikasi. Sebagai
-% 	domain, digunakan bentuk fisis dari kanal pendorong Hall SPT-100 dengan syarat
-% 	batas Dirichlet dan Neumann. Hasil ralat MSE yang dihasilkan dari pelatihan
-% 	berada pada orde $10^{-5}$ dan fitur umum yang secara visual sangat
-% 	mendekati dengan \textit{ground truth}.
-%
-% 	Kata kunci: jaringan saraf, convolutional neural network, Poisson
-% \end{abstractind}
+
 \begin{abstractind}
 	Penyelesaian permasalahan komputasi umumnya memerlukan sistem yang cepat dalam melakukan proses komputasi. Penggunaan GPU merupakan salah satu cara agar proses komputasi bisa lebih cepat dijalankan. Julia merupakan bahasa pemrograman baru yang mempunyai integrasi dengan GPU Nvidia melalui pustaka CUDA.jl. Simulasi perbandingan antara kecepatan eksekusi sistem series oleh CPU dan kecepatan eksekusi sistem paralel oleh GPU diperlukan untuk melihat seberapa jauh perbedaan durasi eksekusi pada operasi - operasi matriks. Hasilnya adalah kecepatan eksekusi sistem series oleh CPU mampu lebih cepat pada operasi matriks sederhana dan pada matriks berukuran kecil. Untuk operasi matriks yang kompleks dan ukuran matriks yang besar, diperoleh eksekusi sistem paralel oleh GPU lebih cepat. Perbedaan durasi paling besar antara eksekusi series oleh CPU dan eksekusi paralel oleh GPU ada pada operasi paling kompleks dan variasi ukuran matriks paling besar.
 
@@ -313,18 +222,6 @@ pertanyaan atau sanggahan, \textit{i'm only one call away}.
 %Disini awal masukan untuk Abstract (ISI SESUAI DENGAN DATA ANDA!)
 %-----------------------------------------------------------------
 \begin{abstracteng}
-	% The solution of partial differential equations (PDEs) is of paramount importance
-	% in the field of Physics. In plasma simulations in cylindrical coordinates, electric
-	% potential is defined in the form of one type of PDE, namely the Poisson
-	% Equation with the right-hand side representing the particle distribution. This
-	% research offers a solution that is 162.5 times faster than the Gauss-Seidel iterative
-	% method using a neural network approach, specifically the fully convolutional
-	% layer implemented on a modified U-Net architecture. As a domain, the
-	% physical shape of the Hall thruster SPT-100 channel with Dirichlet and
-	% Neumann boundary conditions is used. The resulting mean squared error (MSE) from
-	% the training is on the order of $10^{-5}$, and the common features are
-	% visually very close to the ground truth.
-
 	Computational problem-solving generally requires a system that can perform computational processes quickly. The use of GPUs is one way to accelerate these computational processes. Julia is a new programming language that integrates with Nvidia GPUs through the CUDA.jl library. A simulation comparing the execution speed of serial systems by the CPU and the parallel system execution speed by the GPU is needed to observe the differences in execution duration for matrix operations. The results show that the serial execution speed by the CPU is faster for simple matrix operations and smaller matrices. For complex matrix operations and larger matrices, the parallel execution by the GPU is faster. The most significant difference in duration between serial execution by the CPU and parallel execution by the GPU is found in the most complex operations and the largest matrix variations.
 
 	Keyword: Parallel Systems, GPU, Julia
