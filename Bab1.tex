@@ -7,17 +7,17 @@
 % [Komputer]
 
 Penggunaan komputer tidak bisa lepas dari kehidupan manusia saat ini. Hampir
-semua manusia mempunyai komputer. Komputer berbentuk smartphone, laptop, hingga
+semua manusia mempunyai komputer. Komputer yang digunakan ini berbentuk smartphone, laptop, hingga
 komputer berbentuk \emph{microcontroller} seperti Arduino atau
 \emph{microprocessor} seperti Raspberry Pi. Kebergantungan manusia akan
 komputer ini disebabkan karena tingginya kecepatan komputer dalam melakukan
-komputasi. Dari yang komputasi sederhana seperti pada aplikasi kalkulator,
-hingga komputasi kompleks seperti event handler pada aplikasi mobile.
+komputasi. Dari komputasi sederhana seperti pada aplikasi kalkulator,
+hingga komputasi kompleks seperti \emph{event handler} pada aplikasi mobile.
 
 % [CPU]
 
 Kecepatan komputer dalam melakukan proses komputasi Tinggi disebabkan karena
-\emph{architecture} dari komputer sendiri yang mempunyai komponen utama bernama
+arsitektur dari komputer sendiri yang mempunyai komponen utama bernama
 \emph{Central Processing Unit} atau \emph{CPU}. CPU ini bertindak sebagai
 \emph{"Control Center"} yang mana menginterpretasi, memproses, dan mengeksekusi
 instruksi dari software dan hardware \citep{armWhatCentralProcessing2023}. Hal
@@ -47,12 +47,11 @@ digunakan.
 % [CPU]
 
 Pada komponen CPU, terdapat inti atau \emph{core} yang mana umumnya berjumlah
-kurang dari 10. Umumnya, kecepatan komputasi CPU bergantung pada banyak nya
-inti yang ada di dalamnya. Namun, CPU sendiri juga memiliki aturan dalam banyak
+kurang dari 10. Salah satu hal yang mempengaruhi kecepatan komputasi CPU jumlah inti yang ada di dalam CPU. Namun, CPU sendiri juga memiliki aturan dalam banyak
 nya inti yang digunakan. CPU didesain untuk menyelesaikan permasalahan
 komputasi dari yang mudah hingga kompleks. Berdasarkan
 \cite{kukunasChapterIntelPentium2015}, CPU sendiri mempunyai desain arsitektur
-\emph{Complex Instruction Set Computer} atau CISC untuk menyelesaikan komputasi
+\emph{Complex Instruction Set Computer} atau \emph{CISC} untuk menyelesaikan komputasi
 yang kompleks. Kemudahan dalam pemberian instruksi ini yang menjadi alasan
 mengapa CPU sengaja menggunakan inti yang sedikit.
 
@@ -94,7 +93,7 @@ yang mampu melakukan perhitungan pada kecepatan tinggi
 % [Julia]
 
 Penggunaan GPGPU pada dasarnya mempunyai kekurangan yang membuat banyak
-pengguna memilih alternatif lain daripada GPGPU. Yakni, kompleks nya
+pengguna memilih alternatif lain daripada GPGPU, yakni kompleks nya
 implementasi ketika ingin menggunakan GPGPU. Implementasi yang kompleks ini
 muncul karena GPU mempunyai jumlah inti yang banyak. Beberapa \emph{Application
 	Programming Interface} atau API \citep{evansonExplainerWhatAPI2021} yang dapat
@@ -103,12 +102,12 @@ membuat penggunaan GPGPU lebih mudah, diantara nya adalah \emph{Vulkan API},
 \citep{khairySurveyArchitecturalApproaches2019}. Namun, kedua API tersebut pada
 dasarnya merupakan \emph{Graphics API} yang dituliskan dalam bahasa C/C++ yang
 mana membutuhkan penyesuaian lagi jika ingin digunakan untuk proses kalkulasi
-tanpa \emph{rendering}. Ditambah lagi, bahasa C/C++ mempunyai syntax dan
+tanpa \emph{rendering}. Ditambah lagi, bahasa C/C++ mempunyai \emph{syntax} dan
 paradigma yang relatif lebih susah jika dibandingkan dengan bahasa lain seperti
 Python. Salah satu alternatif bahasa pemrograman yang dapat digunakan adalah
-Julia. Julia mempunyai syntax dan paradigma yang tidak terlalu kompleks seperti
+Julia. Julia mempunyai \emph{syntax} dan paradigma yang tidak terlalu kompleks seperti
 Python, dan memiliki performa yang baik seperti C++
-\cite{bezansonJuliaMicroBenchmarks2023}. Kombinasi syntax dan performa inilah
+\cite{bezansonJuliaMicroBenchmarks2023}. Kombinasi \emph{syntax} dan performa inilah
 yang membuat Julia menjadi bahasa pemrograman paling cocok untuk implementasi
 GPGPU pada saat ini.
 
@@ -116,7 +115,7 @@ GPGPU pada saat ini.
 Berdasarkan latar belakang yang telah dipaparkan, maka rumusan masalah yang
 diangkat pada penelitian ini adalah sebagai berikut:
 \begin{enumerate}
-	\item Bagaimana cara kerja komputasi series dan komputasi paralel dengan menggunakan
+	\item Bagaimana cara kerja komputasi sistem series pada CPU dan komputasi sistem paralel pada GPU dengan menggunakan
 	      Bahasa Julia
 
 	\item Bagaimana performa yang dihasilkan dari komputasi secara \emph{parallel}
@@ -125,10 +124,10 @@ diangkat pada penelitian ini adalah sebagai berikut:
 
 \section{Tujuan Penelitian}
 \begin{enumerate}
-	\item Mempelajari cara kerja komputasi secara paralel dengan menggunakan Bahasa Julia
+	\item Mempelajari cara kerja komputasi sistem paralel pada GPU dengan menggunakan Bahasa Julia
 	      untuk menyelesaikan permasalahan pada metode komputasi
 
-	\item Membandingkan performa komputasi paralel dengan komputasi series
+	\item Membandingkan performa komputasi sistem paralel pada GPU dengan komputasi sistem series pada CPU
 \end{enumerate}
 
 \section{Batasan Masalah}
