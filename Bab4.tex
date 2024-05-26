@@ -27,8 +27,7 @@ prosedur kerja, serta pemilihan dan konfigurasi perangkat keras.
 \section{Bahan}
 
 Data yang digunakan untuk melakukan operasi matriks pada penelitian ini adalah
-data random yang di-\emph{generate} oleh Julia menggunakan fungsi \cw{rand()}
-dengan mengatur \emph{seed} \cw{101}.
+data random yang di-\emph{generate} oleh Julia menggunakan fungsi \cw{rand()}.
 
 \section{Alat}
 
@@ -64,7 +63,7 @@ tersebut adalah:
 
   \item Jupyter Notebook: sebagai \emph{execution cell} untuk Julia
 
-  \item CUDA.jl: sebagai \emph{library} utama untuk menjalankan paralelisasi pada
+  \item CUDA.jl: sebagai pustaka utama untuk menjalankan paralelisasi pada
         perangkat GPU NVIDIA
 
   \item Bahasa pemrograman Julia: untuk menjalankan metode fisika komputasi
@@ -141,8 +140,8 @@ Sistem series dan sistem paralel dituliskan dalam Bahasa Julia. Penggunaan
 bahasa yang sama ini bertujuan untuk mengurangi hambatan - hambatan external
 seperti hambatan karena perbedaan compiler dari suatu bahasa pemrograman.
 
-Proses komputasi paralel pada GPU menggunakan bantuan \emph{library} bernama
-CUDA.jl. CUDA.jl ini merupakan \emph{library} untuk melakukan komputasi pada
+Proses komputasi paralel pada GPU menggunakan bantuan pustaka bernama
+CUDA.jl. CUDA.jl ini merupakan pustaka untuk melakukan komputasi pada
 sistem paralel GPU, khusus nya untuk Vendor GPU NVidia. Secara sederhana, cara
 kerja CUDA.jl ini adalah dengan mengirimkan data array dari CPU ke vertex
 shader di GPU, kemudian dilakukan kalkulasi yang hasilnya akan dikirimkan ke
@@ -186,16 +185,18 @@ sistem paralel sebagai berikut
 \end{enumerate}
 
 Pada langkah terakhir dari Gambar \ref{img:methods_execution} terdapat
-pengecekan variasi percobaan. Setiap operasi matriks terdapat 4 variasi
-pengukuran berdasarkan ukuran matriks nya. Berikut merupakan 4 variasi
+pengecekan variasi percobaan. Setiap operasi matriks terdapat 7 variasi
+pengukuran berdasarkan ukuran matriks nya. Berikut merupakan 7 variasi
 pengukuran nya:
 
 \begin{itemize}
   \item Variasi 1: Matriks berukuran $10 \times 10$
-  \item Variasi 2: Matriks berukuran $10^2 \times 10^2$
-  \item Variasi 3: Matriks berukuran $10^3 \times 10^3$
-  \item Variasi 4: Matriks berukuran $10^4 \times 10^4$
-        % \item Variasi 5: Matriks berukuran $10^6 \times 10^6$
+  \item Variasi 2: Matriks berukuran $50 \times 50$
+  \item Variasi 3: Matriks berukuran $10^2 \times 10^2$
+  \item Variasi 4: Matriks berukuran $500 \times 500$
+  \item Variasi 5: Matriks berukuran $10^3 \times 10^3$
+  \item Variasi 6: Matriks berukuran $5000 \times 5000$
+  \item Variasi 7: Matriks berukuran $10^4 \times 10^4$
 \end{itemize}
 
 \subsubsection{Analisis Data dan Penampilan Grafik}
@@ -604,7 +605,7 @@ sedangkan sumbu-y untuk waktu kecepatan eksekusi pada setiap operasi.
     \endhead
     %
     1                                                                                                                     &
-    \begin{tabular}[c]{@{}l@{}}Eksplorasi Bahasa Julia dan Library nya\end{tabular}                                       &
+    \begin{tabular}[c]{@{}l@{}}Eksplorasi Bahasa Julia dan pustaka nya\end{tabular}                                       &
     \checkmark                                                                                                            &
     \checkmark                                                                                                            &
                                                                                                                           &
