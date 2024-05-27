@@ -2,7 +2,63 @@
 
 Kajian mengenai Pemanfaatan General Purpose GPU dengan Bahasa Pemrograman Julia untuk Komputasi Berunjuk Kerja Tinggi ini diawali dengan melakukan pengukuran kecepatan eksekusi secara series oleh CPU dan secara paralel oleh GPU pada operasi penjumlahan, kemudian diakhiri dengan operasi pencarian nilai eigen. Operasi penjumlahan dinilai operasi paling sederhana sehingga dilakukan di paling awal. Sedangkan operasi pencarian nilai eigen dinilai sebagai operasi paling kompleks sehingga dilakukan di paling akhir.
 
-\section{Hasil Simulasi Operasi Penjumlahan}
+\section{Cara Kerja GPU di Julia}
+
+Semua program selalu dieksekusi oleh CPU. Pada eksekusi sistem paralel oleh GPU, yang terjadi adalah program dieksekusi oleh CPU, kemudian data dikirimkan ke GPU, hasil data akan dikirimkan kembali ke CPU. Proses pengiriman data ini memiliki durasi yang bergantung banyak nya data yang dikirim. Untuk itu, jika terdapat matriks yang berukuran besar, maka durasi pengiriman data juga akan semakin lama. Meskipun begitu, perbedaan durasi pengiriman data ini tidak terlalu signifikan, dikarenakan kedua komponen berada pada satu mesin komputer.
+
+Berdasarkan kode pada bagian Lampiran \ref{appx:addition}, eksekusi kode di CPU dilakukan dengan
+
+\begin{lstlisting}
+C .= A .+ B
+\end{lstlisting}
+
+\noindent
+Sedangkan eksekusi kode di GPU dilakukan dengan
+
+\begin{lstlisting}
+CUDA.@sync C .= A .+ B
+\end{lstlisting}
+
+\nodindent
+Eksekusi GPU di Julia dilakukan secara \emph{asynchronous}, sehingga CPU tidak menunggu GPU untuk menyelesaikan eksekusi nya. Agar CPU dapat menunggu GPU dalam melakukan eksekusi nya, digunakan \cw{@sync} yang berarti bahwa proses eksekusi di GPU berlangsung secara \emph{synchronous}, sehingga CPU akan menunggu eksekusi GPU hingga eksekusi nya selesai.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=14cm, scale=1]{images/process-cpu-gpu-calculation.png}
+	\caption{Proses eksekusi program yang dikalkulasi di GPU}
+	\label{img:process-cpu-gpu-calculation}
+\end{figure}
+
+Secara garis besar, proses eksekusi program yang dikalkulasi di GPU dapat digambarkan seperti yang terlihat pada Gambar \ref{img:process-cpu-gpu-calculation}. Jika menggunakan Gambar \ref{img:process-cpu-gpu-calculation} dan kode pada Lampiran \ref{appx:addition}, proses nya adalah sebagai berikut:
+
+\begin{enumerate}
+	\item CPU memulai eksekusi pada program
+	\item Data dikirimkan/disalin dari CPU ke GPU dengan cara
+	      \begin{lstlisting}
+      # A_normal: Data di CPU
+      # A: Data di GPU
+      # CUDA.convert: Menyalin data A_normal (di CPU) ke data A (di GPU)
+      A = CUDA.convert(CuArray{Float16}, A_normal)
+      \end{lstlisting}
+	\item Data dikalkulasi oleh GPU dengan cara
+	      \begin{lstlisting}
+	C = CUDA.zeros(Float16, size(A)) # membuat array kosong berukuran matriks A
+	CUDA.@sync C .= A .+ B # mengkalkulasi matriks di GPU
+      \end{lstlisting}
+	      Sembari proses ini berlangsung, karena terdapat \cw{@async}, maka CPU menunggu GPU hingga proses kalkulasi selesai.
+	\item GPU mengirim hasil kalkulasi ke CPU dengan menggunakan \emph{operator assignment} "\cw{=}".
+	\item CPU selesai menjalankan program
+\end{enumerate}
+
+Pada penjelasan diatas, penulis menggunakan kode simulasi operasi penjumlahan pada Lampiran \ref{appx:addition}. Untuk simulasi operasi lainnya, secara garis besar mempunyai proses eksekusi yang sama seperti operasi penjumlahan. Semua kode simulasi sudah penulis lampirkan di bagian Lampiran.
+
+\section{Hasil Simulasi}
+
+\subsection{Operasi Penjumlahan}
+
+Perbandingan kecepatan eksekusi operasi penjumlahan secara series oleh CPU dan secara paralel oleh GPU menghasilkan Gambar \ref{img:result_addition}. Terlihat bahwa eksekusi series oleh CPU berhasil lebih cepat daripada eksekusi paralel oleh GPU pada ukuran matriks yang kecil. Namun, seiring bertambahnya ukuran matriks, kecepatan eksekusi paralel oleh GPU berhasil lebih cepat daripada kecepatan eksekusi series oleh CPU.
+
+Meskipun secara grafik terlihat bahwa terdapat perbedaan kecepatan eksekusi yang signifikan, namun jika dilihat dari Tabel \ref{tab:result_addition}, semua eksekusi memerlukan waktu kurang dari 1 detik. Sehingga, operasi penjumlahan matriks masih bisa dianggap berjalan dengan baik di CPU maupun di GPU.
 
 \begin{figure}[H]
 	\centering
@@ -30,11 +86,7 @@ Kajian mengenai Pemanfaatan General Purpose GPU dengan Bahasa Pemrograman Julia 
 	\end{tabular}
 \end{table}
 
-Perbandingan kecepatan eksekusi operasi penjumlahan secara series oleh CPU dan secara paralel oleh GPU menghasilkan Gambar \ref{img:result_addition}. Terlihat bahwa eksekusi series oleh CPU berhasil lebih cepat daripada eksekusi paralel oleh GPU pada ukuran matriks yang kecil. Namun, seiring bertambahnya ukuran matriks, kecepatan eksekusi paralel oleh GPU berhasil lebih cepat daripada kecepatan eksekusi series oleh CPU.
-
-Meskipun secara grafik terlihat bahwa terdapat perbedaan kecepatan eksekusi yang signifikan, namun jika dilihat dari Tabel \ref{tab:result_addition}, semua eksekusi memerlukan waktu kurang dari 1 detik. Sehingga, operasi penjumlahan matriks masih bisa dianggap berjalan dengan baik di CPU maupun di GPU.
-
-\section{Hasil Simulasi Operasi Pengurangan}
+\subsection{Operasi Pengurangan}
 
 Berdasarkan penjelasan pada bagian \ref{Operasi Pengurangan}, operasi pengurangan merupakan modifikasi sederhana dari operasi penjumlahan. Sehingga diperkirakan akan memiliki hasil yang hampir sama dengan operasi penjumlahan. Hasil dari operasi pengurangan pada eksekusi series oleh CPU dan eksekusi paralel oleh GPU dapat dilihat pada Tabel \ref{tab:result_substraction} yang mana dapat dibentuk grafik pada Gambar \ref{img:result_substraction}.
 
@@ -68,7 +120,7 @@ Berdasarkan Gambar \ref{img:result_substraction}, terlihat bahwa eksekusi series
 
 Meskipun seiring bertambah nya ukuran matriks kecepatan eksekusi paralel oleh GPU lebih cepat daripada kecepatan eksekusi series oleh CPU, perbedaan antara kecepatan eksekusi yang diperoleh pada seperti yang terlihat pada Tabel \ref{tab:result_substraction}, tidak terlalu berbeda dan secara semua nya dibawah 1 detik. Untuk itu, operasi pengurangan matriks masih bisa dianggap berjalan dengan baik di CPU maupun di GPU.
 
-\section{Hasil Simulasi Operasi Perkalian Skalar dengan Matrik}
+\subsection{Operasi Perkalian Skalar dengan Matrik}
 
 Berdasarkan \ref{Operasi Perkalian dengan Skalar} merupakan modifikasi yang lebih kompleks dari operasi penjumlahan. Untuk itu, diperkirakan akan diperoleh hasil yang sedikit berbeda daripada operasi penjumlahan dan operasi pengurangan. Hasil dari perkalian skalar dengan matriks pada eksekusi series oleh CPU dan eksekusi paralel oleh GPU dapat dilihat pada Tabel \ref{tab:result_scalar_matrix_multiplication} yang mana hasil tersebut dapat dibentuk grafik Gambar \ref{img:result_scalar_matrix_multiplication}.
 
@@ -102,7 +154,7 @@ Berdasarkan Gambar \ref{img:result_scalar_matrix_multiplication}, terlihat bahwa
 
 Jika dilihat dari Tabel \ref{tab:result_scalar_matrix_multiplication}, meskipun terdapat perbedaan kecepatan eksekusi series oleh CPU dan eksekusi paralel oleh GPU, waktu yang diperlukan untuk menjalankan eksekusi tersebut dibawah 1 detik. Untuk itu, dapat dikatakan bahwa operasi perkalian skalar dengan matriks dapat berjalan dengan baik di GPU dan di CPU.
 
-\section{Hasil Simulasi Operasi Perkalian Antar Matrik}
+\subsection{Operasi Perkalian Antar Matrik}
 
 Berdasarkan \ref{Operasi Perkalian Matriks dengan Matriks}, operasi perkalian antar matriks merupakan modifikasi operasi penjumlahan dan operasi perkalian, sehingga dapat dibilang bahwa operasi perkalian antar matriks memiliki kompleksitas yang lebih tinggi daripada operasi perkalian skalar dengan matriks. Untuk itu, diperkirakan akan diperoleh hasil yang sangat berbeda jika dibandingkan dengan operasi - operasi sebelum nya. Hasil dari operasi perkalian antar matriks ini dapat dilihat pada Tabel \ref{tab:result_matrix_matrix_multiplication} dan Gambar \ref{img:result_matrix_matrix_multiplication}.
 
@@ -136,7 +188,7 @@ Berdasarkan Gambar \ref{img:result_matrix_matrix_multiplication}, kecepatan ekse
 
 Jika dilihat dari Tabel \ref{tab:result_matrix_matrix_multiplication}, pada variasi ke-7, kecepatan eksekusi paralel oleh GPU mempunyai durasi 2,2 detik sedangkan kecepatan eksekusi series oleh CPU mempunyai durasi 25,8 detik. Perbedaan ini cukup signifikan, dan diperkirakan akan semakin jauh perbedaannya jika ukuran matriks nya bertambah. Untuk itu, operasi perkalian antar matriks berjalan baik di CPU pada ukuran matriks yang tidak terlalu besar. Sehingga, jika terdapat operasi perkalian matriks, bisa menggunakan CPU jika ukuran matriks nya kecil, dan bisa menggunakan GPU jika ukuran matriks nya besar.
 
-\section{Hasil Simulasi Operasi Inverse}
+\subsection{Operasi Inverse}
 
 Berdasarkan bagian \ref{Operasi Inverse}, operasi pencarian matriks memiliki kompleksitas yang jauh lebih tinggi daripada operasi - operasi sebelumnya. Untuk itu, diperkirakan operasi pencarian inverse matriks ini akan memperoleh hasil yang berbeda dari operasi - operasi sebelumnya. Hasil simulasi operasi inverse pada sistem series dan sistem paralel dapat dilihat pada Tabel \ref{tab:result_inverse} dan Gambar \ref{img:result_inverse}.
 
@@ -170,7 +222,7 @@ Berdasarkan Gambar \ref{img:result_inverse}, pada ukuran matriks yang kecil, kec
 
 Jika dilihat dari Tabel \ref{tab:result_inverse} pada variasi ke-7, kecepatan eksekusi paralel oleh GPU mempunyai durasi kurang dari 11 detik, sedangkan kecepatan eksekusi series oleh CPU mempunyai durasi lebih dari 3 menit. Jika ukuran matriks nya ditambahkan, diperkirakan akan semakin jauh durasi ekeskusi paralel oleh GPU dan durasi eksekusi series oleh CPU. Untuk itu, jika terdapat operasi pencarian inverse matriks, bisa menggunakan CPU untuk ukuran matriks yang kecil, dan bisa menggunakan GPU untuk ukuran matriks yang besar.
 
-\section{Hasil Simulasi Pencarian Nilai Eigen}
+\subsection{Pencarian Nilai Eigen}
 
 Berdasarkan bagian \ref{Nilai Eigen}, operasi pencarian nilai eigen matriks merpakan operasi yang paling kompleks pada kajian ini. Untuk itu, diperkirakan hasil yang diperoleh akan berbeda dari operasi operasi sebelumnya. Hasil dari simulasi operasi pencarian nilai eigen dapat dilihat pada Tabel \ref{tab:result_eigenvalue} dan Gambar \ref{img:result_eigenvalue}.
 
