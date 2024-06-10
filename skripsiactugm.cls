@@ -90,14 +90,14 @@
 
 %Untuk setting penomoran teorema, lemma, definisi, dll..
 \newtheoremstyle{dotlesstheorem}  % follow `plain` defaults but change HEADSPACE.
-  {}   % ABOVESPACE
-  {0.4cm}   % BELOWSPACE
-  {\itshape}  % BODYFONT
-  {0pt}       % INDENT (empty value is the same as 0pt)
-  {\bfseries} % HEADFONT
-  {}         % HEADPUNCT
-  {  }  % HEADSPACE. `plain` default: {5pt plus 1pt minus 1pt}
-  {}          % CUSTOM-HEAD-SPEC
+{}   % ABOVESPACE
+{0.4cm}   % BELOWSPACE
+{\itshape}  % BODYFONT
+{0pt}       % INDENT (empty value is the same as 0pt)
+{\bfseries} % HEADFONT
+{}         % HEADPUNCT
+{  }  % HEADSPACE. `plain` default: {5pt plus 1pt minus 1pt}
+{}          % CUSTOM-HEAD-SPEC
 \theoremstyle{dotlesstheorem}
 \newtheorem{teorema}{Teorema}[section]
 \renewcommand{\theteorema}{\arabic{chapter}.\arabic{section}.\arabic{teorema}}
@@ -108,14 +108,14 @@
 \newtheorem{definisi}[teorema]{Definisi}
 
 \newtheoremstyle{dotlessexample}  % follow `plain` defaults but change HEADSPACE.
-  {}   % ABOVESPACE
-  {0.4cm}   % BELOWSPACE
-  {}  % BODYFONT
-  {0pt}       % INDENT (empty value is the same as 0pt)
-  {\bfseries} % HEADFONT
-  {}         % HEADPUNCT
-  {  }  % HEADSPACE. `plain` default: {5pt plus 1pt minus 1pt}
-  {}          % CUSTOM-HEAD-SPEC
+{}   % ABOVESPACE
+{0.4cm}   % BELOWSPACE
+{}  % BODYFONT
+{0pt}       % INDENT (empty value is the same as 0pt)
+{\bfseries} % HEADFONT
+{}         % HEADPUNCT
+{  }  % HEADSPACE. `plain` default: {5pt plus 1pt minus 1pt}
+{}          % CUSTOM-HEAD-SPEC
 \theoremstyle{dotlessexample}
 \newtheorem{contoh}[teorema]{Contoh}
 \newtheorem{algoritma}{Algoritma}[chapter]
@@ -138,40 +138,40 @@
 
 
 \def\captionsbahasa{%
-\def\prefacename{PRAKATA}%
-\def\contentsname{DAFTAR ISI}%
-\def\listfigurename{DAFTAR GAMBAR}%
-\def\listtablename{DAFTAR TABEL}%
-\def\listappendixname{DAFTAR LAMPIRAN}%
-\def\nomenclaturename{DAFTAR LAMBANG}%
-\def\abstractname{INTISARI}%
-\def\partname{BAGIAN}%
-\def\chaptername{BAB}%
-\def\appendixname{LAMPIRAN}%
-\def\refname{DAFTAR PUSTAKA}%
-\def\bibname{DAFTAR PUSTAKA}%
-\def\indexname{Indek}%
-\def\figurename{Gambar}%
-\def\tablename{Tabel}%
-\def\pagename{Halaman}%
+	\def\prefacename{PRAKATA}%
+	\def\contentsname{DAFTAR ISI}%
+	\def\listfigurename{DAFTAR GAMBAR}%
+	\def\listtablename{DAFTAR TABEL}%
+	\def\listappendixname{DAFTAR LAMPIRAN}%
+	\def\nomenclaturename{DAFTAR LAMBANG}%
+	\def\abstractname{INTISARI}%
+	\def\partname{BAGIAN}%
+	\def\chaptername{BAB}%
+	\def\appendixname{LAMPIRAN}%
+	\def\refname{DAFTAR PUSTAKA}%
+	\def\bibname{DAFTAR PUSTAKA}%
+	\def\indexname{Indek}%
+	\def\figurename{Gambar}%
+	\def\tablename{Tabel}%
+	\def\pagename{Halaman}%
 }
 \def\captionsenglish{%
-\def\prefacename{PREFACE}%
-\def\contentsname{CONTENTS}%
-\def\listfigurename{LIST OF FIGURES}%
-\def\listtablename{LIST OF TABLES}%
-\def\listappendixname{LIST OF APPENDICES}%
-\def\nomenclaturename{NOMENCLATURE}%
-\def\abstractname{ABSTRACT}%
-\def\partname{PART}%
-\def\chaptername{CHAPTER}%
-\def\appendixname{APPENDIX}%
-\def\refname{REFERENCES}%
-\def\bibname{REFERENCES}%
-\def\indexname{Index}%
-\def\figurename{Figure}%
-\def\tablename{Table}%
-\def\pagename{Page}%
+	\def\prefacename{PREFACE}%
+	\def\contentsname{CONTENTS}%
+	\def\listfigurename{LIST OF FIGURES}%
+	\def\listtablename{LIST OF TABLES}%
+	\def\listappendixname{LIST OF APPENDICES}%
+	\def\nomenclaturename{NOMENCLATURE}%
+	\def\abstractname{ABSTRACT}%
+	\def\partname{PART}%
+	\def\chaptername{CHAPTER}%
+	\def\appendixname{APPENDIX}%
+	\def\refname{REFERENCES}%
+	\def\bibname{REFERENCES}%
+	\def\indexname{Index}%
+	\def\figurename{Figure}%
+	\def\tablename{Table}%
+	\def\pagename{Page}%
 }
 
 %------------------------------------------------------------
@@ -186,10 +186,10 @@
 %Define page numbering in the first chapter
 %------------------------------------------------------------
 \def\ps@chapterheading{%
-  \let\@evenhead\@empty\let\@oddhead\@empty
-  \def\@oddfoot{\hfil\thepage\hfil}%
-  \def\@evenfoot{\hfil\thepage\hfil}
-  }
+	\let\@evenhead\@empty\let\@oddhead\@empty
+	\def\@oddfoot{\hfil\thepage\hfil}%
+	\def\@evenfoot{\hfil\thepage\hfil}
+}
 
 
 %------------------------------------------------------------]
@@ -210,9 +210,9 @@
 \newcommand{\@NIM}{}
 \newcommand{\examdate}[1]{\gdef\@examdate{#1}}
 \newcommand{\@examdate}{\number\day~\ifcase\month\or
-    Januari\or Pebruari\or Maret\or April\or Mei\or Juni\or
-    Juli\or Agustus\or September\or Oktober\or November\or Desember\fi
-    \space \number\year}
+		Januari\or Pebruari\or Maret\or April\or Mei\or Juni\or
+		Juli\or Agustus\or September\or Oktober\or November\or Desember\fi
+	\space \number\year}
 \newcommand{\degree}[1]{\gdef\@degree{#1}}
 \newcommand{\@degree}{}
 \newcommand{\yearsubmit}[1]{\gdef\@yearsubmit{#1}}
@@ -237,33 +237,33 @@
 %Define cover in Indonesian
 %------------------------------------------------------------
 \def\cover{%
-  \thispagestyle{empty}%
-  \pagenumbering{roman}
-  \setcounter{page}{1}
-    \begin{center}
-      \begin{singlespace}
-      \MakeUppercase{\normalfont\bfseries Skripsi}\\
-      \vspace{1.5cm}	
-      \MakeUppercase{\normalfont\bfseries\@titleind}\par\nobreak
-      \vspace{0.7cm}
-      {\bfseries( }\MakeUppercase{\normalfont\slshape\bfseries\@titleeng} {\bfseries )}\par\nobreak
-       \vfill
-       \includegraphics[width=5.5cm]{logougm}
-       \vfill
-       {\normalfont
-        \@fullname\\
-        \@NIM}\\
-       \vspace{1.5cm}
-       {\normalfont
-         \MakeUppercase{\normalfont\bfseries \@program}\\
-         \MakeUppercase{\normalfont\bfseries \@dept}\\
-         \MakeUppercase{\normalfont\bfseries\@faculty}\\
-         \MakeUppercase{\normalfont\bfseries\@university}\\
-         \MakeUppercase{\normalfont\bfseries\@city}\\
-         \vspace{0.3cm}
-         {\normalfont\bfseries\@yearsubmit}}\\
-      \end{singlespace}
-      \end{center}
+	\thispagestyle{empty}%
+	\pagenumbering{roman}
+	\setcounter{page}{1}
+	\begin{center}
+		\begin{singlespace}
+			\MakeUppercase{\normalfont\bfseries Skripsi}\\
+			\vspace{1.5cm}
+			\MakeUppercase{\normalfont\bfseries\@titleind}\par\nobreak
+			\vspace{0.7cm}
+			{\bfseries( }\MakeUppercase{\normalfont\slshape\bfseries\@titleeng} {\bfseries )}\par\nobreak
+			\vfill
+			\includegraphics[width=5.5cm]{logougm}
+			\vfill
+			{\normalfont
+				\@fullname\\
+				\@NIM}\\
+			\vspace{1.5cm}
+			{\normalfont
+				\MakeUppercase{\normalfont\bfseries \@program}\\
+				\MakeUppercase{\normalfont\bfseries \@dept}\\
+				\MakeUppercase{\normalfont\bfseries\@faculty}\\
+				\MakeUppercase{\normalfont\bfseries\@university}\\
+				\MakeUppercase{\normalfont\bfseries\@city}\\
+				\vspace{0.3cm}
+				{\normalfont\bfseries\@yearsubmit}}\\
+		\end{singlespace}
+	\end{center}
 }
 
 
@@ -271,37 +271,37 @@
 %Define titlepage in Indonesian
 %------------------------------------------------------------
 \def\titlepage{%
-  \newpage\thispagestyle{empty}%
-  \setcounter{page}{1}
-  \phantomsection
-    \begin{center}
-      \begin{singlespace}
-      \MakeUppercase{\normalfont\bfseries Skripsi}\\
-      \vspace{1.5cm}	
-      \MakeUppercase{\normalfont\bfseries\@titleind}\par\nobreak
-      \vspace{0.7cm}
-      {\bfseries( }\MakeUppercase{\normalfont\slshape\bfseries\@titleeng} {\bfseries )}\par\nobreak
-      \vspace{1.5cm}
-        {\normalfont Diajukan untuk memenuhi salah satu syarat memperoleh derajat\\
-         {\@degree} \@program}\\
-       \vfill
-       \includegraphics[width=5.5cm]{logougm}
-       \vfill
-       {\normalfont
-        \@fullname\\
-        \@NIM}\\
-       \vspace{1.5cm}
-       {\normalfont
-         \MakeUppercase{\normalfont\bfseries \@program}\\
-         \MakeUppercase{\normalfont\bfseries \@dept}\\
-         \MakeUppercase{\normalfont\bfseries\@faculty}\\
-         \MakeUppercase{\normalfont\bfseries\@university}\\
-         \MakeUppercase{\normalfont\bfseries\@city}\\
-         \vspace{0.3cm}
-         % {\normalfont\bfseries\@yearsubmit}}\\
-      \end{singlespace}
-      \end{center}
-\addcontentsline{toc}{chapter}{HALAMAN JUDUL}
+	\newpage\thispagestyle{empty}%
+	\setcounter{page}{1}
+	\phantomsection
+	\begin{center}
+		\begin{singlespace}
+			\MakeUppercase{\normalfont\bfseries Skripsi}\\
+			\vspace{1.5cm}
+			\MakeUppercase{\normalfont\bfseries\@titleind}\par\nobreak
+			\vspace{0.7cm}
+			{\bfseries( }\MakeUppercase{\normalfont\slshape\bfseries\@titleeng} {\bfseries )}\par\nobreak
+			\vspace{1.5cm}
+			{\normalfont Diajukan untuk memenuhi salah satu syarat memperoleh derajat\\
+			{\@degree} \@program}\\
+			\vfill
+			\includegraphics[width=5.5cm]{logougm}
+			\vfill
+			{\normalfont
+				\@fullname\\
+				\@NIM}\\
+			\vspace{1.5cm}
+			{\normalfont
+			\MakeUppercase{\normalfont\bfseries \@program}\\
+			\MakeUppercase{\normalfont\bfseries \@dept}\\
+			\MakeUppercase{\normalfont\bfseries\@faculty}\\
+			\MakeUppercase{\normalfont\bfseries\@university}\\
+			\MakeUppercase{\normalfont\bfseries\@city}\\
+			\vspace{0.3cm}
+			% {\normalfont\bfseries\@yearsubmit}}\\
+		\end{singlespace}
+	\end{center}
+	\addcontentsline{toc}{chapter}{HALAMAN JUDUL}
 }}
 
 
@@ -310,199 +310,212 @@
 %Approval Page
 %------------------------------------------------------------
 \def\approvalpage{%
-  \newpage\thispagestyle{empty}%
-  \phantomsection
-  \begin{center}
-  \begin{singlespace}
-  \MakeUppercase{\normalfont\bfseries\expandafter{HALAMAN PENGESAHAN}}\\
-  \vspace{1cm}
-  \MakeUppercase{\normalfont\bfseries\expandafter{SKRIPSI}}\\
-  \vspace{0.5cm}
-      \MakeUppercase{\normalfont\bfseries\@titleind}\par\nobreak
-  \vspace{1cm}
-Telah dipersiapkan dan disusun oleh\\
-\vspace{0.8cm}
-\@fullname\\
-\@NIM\\
-\vspace{0.8cm}
-Telah dipertahankan di depan Tim Penguji\\
-pada tanggal \expandafter{\@examdate}\\
-\vspace{0.5cm}
-Susunan Tim Penguji
+	\newpage\thispagestyle{empty}%
+	\phantomsection
+	\begin{center}
+		\begin{singlespace}
+			\MakeUppercase{\normalfont\bfseries\expandafter{HALAMAN PENGESAHAN}}\\
+			\vspace{1cm}
+			\MakeUppercase{\normalfont\bfseries\expandafter{SKRIPSI}}\\
+			\vspace{0.5cm}
+			\MakeUppercase{\normalfont\bfseries\@titleind}\par\nobreak
+			\vspace{1cm}
+			Telah dipersiapkan dan disusun oleh\\
+			\vspace{0.8cm}
+			\@fullname\\
+			\@NIM\\
+			\vspace{0.8cm}
+			Telah dipertahankan di depan Tim Penguji\\
+			pada tanggal \expandafter{\@examdate}\\
+			\vspace{0.5cm}
+			Susunan Tim Penguji
 
-\vspace{3cm}
-\begin{tabular}{p{7.5cm}p{7cm}}
-\underline{\@firstsupervisor}&\underline{\@firstexaminer}\\
-Pembimbing Utama&Penguji
-\end{tabular}
+			% \vspace{3cm}
+			% \begin{tabular}{p{7.5cm}p{7cm}}
+			% 	\underline{\@firstsupervisor} & \underline{\@firstexaminer} \\
+			% 	Pembimbing Utama              & Penguji
+			% \end{tabular}
+			%
+			% \vspace{2cm}
+			% \begin{tabular}{p{7.5cm}p{7cm}}
+			% 	\underline{\@secondsupervisor} & \underline{\@secondexaminer} \\
+			% 	% Pembimbing Pendamping&Penguji
+			% 	                               & Penguji
+			% \end{tabular}
 
-\vspace{2cm}
-\begin{tabular}{p{7.5cm}p{7cm}}
-\underline{\@secondsupervisor}&\underline{\@secondexaminer}\\
-Pembimbing Pendamping&Penguji
-\end{tabular}
+			\vspace{3cm}
+			\begin{tabular}{p{7.5cm}p{7cm}}
+				\underline{\@firstsupervisor} \\
+				Pembimbing Utama
+			\end{tabular}
 
-% \vspace{2cm}
-% \begin{tabular}{p{7.5cm}p{7cm}}
-% &\underline{\@thirdexaminer}\\
-% &Penguji
-% \end{tabular}
+			\vspace{2cm}
+			\begin{tabular}{p{7.5cm}p{7cm}}
+				\underline{\@firstexaminer} & \underline{\@secondexaminer} \\
+				Penguji                     & Penguji
+			\end{tabular}
 
-    \end{singlespace}
-    \end{center}
-\addcontentsline{toc}{chapter}{HALAMAN PENGESAHAN}
+			% \vspace{2cm}
+			% \begin{tabular}{p{7.5cm}p{7cm}}
+			% &\underline{\@thirdexaminer}\\
+			% &Penguji
+			% \end{tabular}
+
+		\end{singlespace}
+	\end{center}
+	\addcontentsline{toc}{chapter}{HALAMAN PENGESAHAN}
 }
 
 \def\approvalpagescan{%
-  \newpage\thispagestyle{empty}%
-  \phantomsection
-\addcontentsline{toc}{chapter}{HALAMAN PENGESAHAN}
-\includepdf[fitpaper]{pengesahanskripsi}
+	\newpage\thispagestyle{empty}%
+	\phantomsection
+	\addcontentsline{toc}{chapter}{HALAMAN PENGESAHAN}
+	\includepdf[fitpaper]{pengesahanskripsi}
 }
 
 %------------------------------------------------------------
 %Declare Page
 %------------------------------------------------------------
 \def\declarepage{%
-  \newpage\thispagestyle{chapterheading}%
-  \phantomsection
-  \begin{center}
-  {\normalfont\large\bfseries\expandafter{PERNYATAAN BEBAS PLAGIASI}}
-  \par\nobreak
-  \end{center}
-  \vspace{1.0cm}
-    \noindent
-Saya yang bertanda tangan di bawah ini:
+	\newpage\thispagestyle{chapterheading}%
+	\phantomsection
+	\begin{center}
+		{\normalfont\large\bfseries\expandafter{PERNYATAAN BEBAS PLAGIASI}}
+		\par\nobreak
+	\end{center}
+	\vspace{1.0cm}
+	\noindent
+	Saya yang bertanda tangan di bawah ini:
 
-\begin{tabular}{lcp{10cm}}
-Nama &:& \@fullname\\
-NIM &:& \@NIM\\
-Tahun terdaftar &:& \@yearenrollment\\
-Program Studi &:& \@program\\
-Fakultas &:& \@faculty
-\end{tabular}
-menyatakan bahwa dalam dokumen ilmiah skripsi ini tidak terdapat bagian dari
-karya ilmiah lain yang telah diajukan untuk memperoleh gelar akademik di suatu
-lembaga Pendidikan Tinggi, dan juga tidak terdapat karya atau pendapat yang
-pernah ditulis atau diterbitkan oleh oleh orang/lembaga lain, kecuali yang
-secara tertulis disitasi dalam dokumen ini dan disebutkan sumbernya secara
-lengkap dalam daftar pustaka.
-\par\noindent
-Dengan demikian saya menyatakan bahwa dokumen ilmiah ini bebas dari unsur-unsur
-plagiasi dan apabila dokumen ilmiah skripsi ini di kemudian hari terbukti
-merupakan plagiasi dari hasil karya penulis lain dan/atau dengan sengaja
-mengajukan karya atau pendapat yang merupakan hasil karya penulis lain, maka
-penulis bersedia menerima sanksi akademik dan/atau sanksi hukum yang berlaku.
+	\begin{tabular}{lcp{10cm}}
+		Nama            & : & \@fullname       \\
+		NIM             & : & \@NIM            \\
+		Tahun terdaftar & : & \@yearenrollment \\
+		Program Studi   & : & \@program        \\
+		Fakultas        & : & \@faculty
+	\end{tabular}
+	menyatakan bahwa dalam dokumen ilmiah skripsi ini tidak terdapat bagian dari
+	karya ilmiah lain yang telah diajukan untuk memperoleh gelar akademik di suatu
+	lembaga Pendidikan Tinggi, dan juga tidak terdapat karya atau pendapat yang
+	pernah ditulis atau diterbitkan oleh oleh orang/lembaga lain, kecuali yang
+	secara tertulis disitasi dalam dokumen ini dan disebutkan sumbernya secara
+	lengkap dalam daftar pustaka.
+	\par\noindent
+	Dengan demikian saya menyatakan bahwa dokumen ilmiah ini bebas dari unsur-unsur
+	plagiasi dan apabila dokumen ilmiah skripsi ini di kemudian hari terbukti
+	merupakan plagiasi dari hasil karya penulis lain dan/atau dengan sengaja
+	mengajukan karya atau pendapat yang merupakan hasil karya penulis lain, maka
+	penulis bersedia menerima sanksi akademik dan/atau sanksi hukum yang berlaku.
 
 
-\vspace{1.5cm}
-\begin{tabular}{p{7cm}c}
-&\@city,\space\@examdate\\
-&\\
-&\\
-& {\scriptsize\it Materai Rp6.000,00} \\
-&\\
-&\space\@fullname\\
-&\space\@NIM
-\end{tabular}
-\vfill \addcontentsline{toc}{chapter}{HALAMAN PERNYATAAN BEBAS PLAGIASI} }
+	\vspace{1.5cm}
+	\begin{tabular}{p{7cm}c}
+		 & \@city,\space\@examdate             \\
+		 &                                     \\
+		 &                                     \\
+		 & {\scriptsize\it Materai Rp6.000,00} \\
+		 &                                     \\
+		 & \space\@fullname                    \\
+		 & \space\@NIM
+	\end{tabular}
+	\vfill \addcontentsline{toc}{chapter}{HALAMAN PERNYATAAN BEBAS PLAGIASI} }
 
 \def\declarepagescan{%
-  \newpage\thispagestyle{chapterheading}%
-  \phantomsection
-\addcontentsline{toc}{chapter}{HALAMAN PERNYATAAN}
-\includepdf[fitpaper]{pernyataan}
+	\newpage\thispagestyle{chapterheading}%
+	\phantomsection
+	\addcontentsline{toc}{chapter}{HALAMAN PERNYATAAN}
+	\includepdf[fitpaper]{pernyataan}
 }
 
 %------------------------------------------------------------
 %Acknowlegment
 %------------------------------------------------------------
 \def\acknowledment{%
-  \clearpage\thispagestyle{chapterheading}%
-  \chapter*{}%
-\null\vfill%Force the content of acknowledment to bottom page
-\addcontentsline{toc}{chapter}{HALAMAN PERSEMBAHAN}
+	\clearpage\thispagestyle{chapterheading}%
+	\chapter*{}%
+	\null\vfill%Force the content of acknowledment to bottom page
+	\addcontentsline{toc}{chapter}{HALAMAN PERSEMBAHAN}
 }
 
 %------------------------------------------------------------
 %Motto
 %------------------------------------------------------------
 \def\motto{%
-  \clearpage\thispagestyle{chapterheading}%
-  \chapter*{}%
-\null\vfill%Force the content of acknowledment to bottom page
-\addcontentsline{toc}{chapter}{HALAMAN MOTTO}
+	\clearpage\thispagestyle{chapterheading}%
+	\chapter*{}%
+	\null\vfill%Force the content of acknowledment to bottom page
+	\addcontentsline{toc}{chapter}{HALAMAN MOTTO}
 }
 
 %------------------------------------------------------------
 %Preface
 %------------------------------------------------------------
 \def\preface{%
-  \chapter*{PRAKATA}%
-\addcontentsline{toc}{chapter}{PRAKATA}
+	\chapter*{PRAKATA}%
+	\addcontentsline{toc}{chapter}{PRAKATA}
 }
 
 %------------------------------------------------------------
 %Nomenclature
 %------------------------------------------------------------
 \def\lambang{%
-  \clearpage\thispagestyle{chapterheading}%
-  \chapter*{DAFTAR LAMBANG}%
-  \vspace{0.5cm}
-\addcontentsline{toc}{chapter}{\nomenclaturename}
+	\clearpage\thispagestyle{chapterheading}%
+	\chapter*{DAFTAR LAMBANG}%
+	\vspace{0.5cm}
+	\addcontentsline{toc}{chapter}{\nomenclaturename}
 }
 
 %------------------------------------------------------------
 %Redefine Abstract in Indonesian
 %------------------------------------------------------------
 \def\abstractind{%
-  \clearpage\thispagestyle{chapterheading}%
-  \chapter*{}%
-  {\centering \normalfont
-  {\vspace{-1.97cm}\textbf{\abstractname}} \\
-  \vspace{1.5cm}
-   {\textbf{\@titleind}}
-        \par\nobreak
-        \vskip 12\p@
-    \interlinepenalty\@M
-    {\normalsize Oleh\par
-   \vspace{0.5cm}
-    \@fullname\\
-    \@NIM\\
-    \vskip 10\p@
-    }\par\nobreak
-    }
-  \begin{singlespace}%
-  \vskip 12\p@
-  \addcontentsline{toc}{chapter}{\abstractname}
-}
-\def\endabstractind{\par\vfil\null\end{singlespace}}
+	\clearpage\thispagestyle{chapterheading}%
+	\chapter*{}%
+	 {\centering \normalfont
+	  {\vspace{-1.97cm}\textbf{\abstractname}} \\
+	  \vspace{1.5cm}
+	  {\textbf{\@titleind}}
+	  \par\nobreak
+	  \vskip 12\p@
+	  \interlinepenalty\@M
+	  {\normalsize Oleh\par
+		  \vspace{0.5cm}
+		  \@fullname\\
+		  \@NIM\\
+		  \vskip 10\p@
+	  }\par\nobreak
+	 }
+	\begin{singlespace}%
+		\vskip 12\p@
+		\addcontentsline{toc}{chapter}{\abstractname}
+		}
+		\def\endabstractind{\par\vfil\null\end{singlespace}}
 
 %------------------------------------------------------------
 %Redefine Abstract in English
 %------------------------------------------------------------
 \def\abstracteng{%
-  \clearpage\thispagestyle{chapterheading}\selectlanguage{english}%
-  \chapter*{}%
-  {\centering \normalfont
-  {\vspace{-1.97cm}\textbf{\abstractname}}\\
-  \vspace{1.5cm}
-   {\textbf{\@titleeng}}
-        \par\nobreak
-        \vskip 12\p@
-    \interlinepenalty\@M
-    {\normalsize By\par
-   \vspace{0.5cm}
-    \@fullname\\
-    \@NIM\\
-    \vskip 10\p@
-    }\par\nobreak
-    }
-  \begin{singlespace}%
-  \vskip 12\p@
-  \addcontentsline{toc}{chapter}{\abstractname}
-  }
-\def\endabstracteng{\par\vfil\null\end{singlespace}%
-\clearpage\pagenumbering{arabic}\setcounter{page}{1}}
+	\clearpage\thispagestyle{chapterheading}\selectlanguage{english}%
+	\chapter*{}%
+	 {\centering \normalfont
+	  {\vspace{-1.97cm}\textbf{\abstractname}}\\
+	  \vspace{1.5cm}
+	  {\textbf{\@titleeng}}
+	  \par\nobreak
+	  \vskip 12\p@
+	  \interlinepenalty\@M
+	  {\normalsize By\par
+		  \vspace{0.5cm}
+		  \@fullname\\
+		  \@NIM\\
+		  \vskip 10\p@
+	  }\par\nobreak
+	 }
+	\begin{singlespace}%
+		\vskip 12\p@
+		\addcontentsline{toc}{chapter}{\abstractname}
+		}
+		\def\endabstracteng{\par\vfil\null\end{singlespace}%
+	\clearpage\pagenumbering{arabic}\setcounter{page}{1}}
 
 \endinput
