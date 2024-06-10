@@ -325,22 +325,47 @@ end
 \section{\emph{Module}}
 
 \begin{lstlisting}
+using LinearAlgebra
+using SparseArrays
 using CUDA
-using DataFrames
 using Statistics
+using DataFrames
+\end{lstlisting}
+
+\section{Fungsi pembuat matriks persamaan schrodinger melalui pendekatan beda-hingga}
+
+\begin{lstlisting}
+function build_matrix(n::Int)
+    dx = 2.0f0 / n  # Menggunakan literal Float32
+    gamma = 50.0f0  # Menggunakan literal Float32
+    b = (gamma * dx) ^ 2
+    y = LinRange(-2.0f0, 2.0f0, n)  # Memastikan y adalah Float32
+
+    main_diag = fill(2.0f0, n)  # Isi dengan Float32
+    off_diag = fill(-1.0f0, n-1)  # Isi dengan Float32
+    a_sparse = spdiagm(0 => main_diag, 1 => off_diag, -1 => off_diag)
+
+    # Penyesuaian elemen diagonal berdasarkan y
+    for j in 1:n
+        if y[j] <= -1.0 || y[j] >= 1.0
+            a_sparse[j, j] += b
+        end
+    end
+
+    return Matrix{Float32}(a_sparse)  # Konversi eksplisit matriks ke Float32
+end
 \end{lstlisting}
 
 \section{Untuk dijalankan di GPU}
 
 \begin{lstlisting}
-function eigen_gpu(A_gpu)
-    A_cpu = Array{Float64}(A_gpu)
-    return eigvals(A_cpu)
-end
-
-function simulate_gpu(A_normal)
-    A_gpu = CUDA.cu(A_normal)
-    gpu_start = CUDA.@elapsed result_gpu = eigen_gpu(A_gpu)
+function simulate_gpu(A)
+    gpu_start = CUDA.@elapsed begin
+        eigenvalues, eigenvectors = CUDA.@sync eigen(A)
+        idx = sortperm(eigenvalues)
+        eigenvalues = eigenvalues[idx]
+        eigenvectors = eigenvectors[:, idx]
+    end
     return gpu_start
 end
 \end{lstlisting}
@@ -348,12 +373,14 @@ end
 \section{Untuk dijalankan di CPU}
 
 \begin{lstlisting}
-function eigen_cpu(A)
-    return eigvals(A)
-end
+function simulate_cpu(A)
+    cpu_start = @elapsed begin
+        eigenvalues, eigenvectors = eigen(A)
+        idx = sortperm(eigenvalues)
+        eigenvalues = eigenvalues[idx]
+        eigenvectors = eigenvectors[:, idx]
+    end
 
-function simulate_cpu(A_normal)
-    cpu_start = @elapsed result_cpu = eigen_cpu(A_normal)
     return cpu_start
 end
 \end{lstlisting}
@@ -361,19 +388,23 @@ end
 \section{Simulasi}
 
 \begin{lstlisting}
-function simulate(N::Int64, n_loop::Int64)
-    println("Matrix size: $(N)x$(N)")
-    results_gpu = []
-    results_cpu = []
-    for i in 1:n_loop
-        A_normal = rand(Float64, N, N)
-        benchmark_gpu = simulate_gpu(A_normal)
-        benchmark_cpu = simulate_cpu(A_normal)
+function simulate(n::Int, n_loop::Int)
+    println("Matrix size: $n x $n")
+    results_gpu = Float32[]
+    results_cpu = Float32[]
+
+    A_cpu = build_matrix(n)
+    A_gpu = CuArray(A_cpu)
+
+    for _ in 1:n_loop
+        benchmark_gpu = simulate_gpu(A_gpu)
+        benchmark_cpu = simulate_cpu(A_cpu)
         push!(results_gpu, benchmark_gpu)
         push!(results_cpu, benchmark_cpu)
     end
-    println("Mean CPU time: $(mean(results_cpu))")
-    println("Mean GPU time: $(mean(results_gpu))")
+
+    println("Mean CPU: $(mean(results_cpu))")
+    println("Mean GPU: $(mean(results_gpu))")
     return DataFrame(CPU=results_cpu, GPU=results_gpu)
 end
 \end{lstlisting}

@@ -1014,6 +1014,86 @@ Solusi dari persamaan \ref{eq:eigenvalue_infinite_square_well} merupakan bentuk 
 persamaan sinusoidal. Berdasarkan \cite{dalessandrisSpiralModernPhysics2024},
 bentuk grafik nya dapat digambarkan seperti Gambar \ref{img:solution_infinite_square_well}.
 
+Aplikasi penggunaan pencarian nilai eigen juga dapat ditemukan ketika mencari nilai eigen dari persamaan schrodinger melalui pendekatan metode beda hingga. Bentuk turunan kedua dari pendekatan metode beda hingga pada titik $x_i$ dapat dituliskan
+
+\begin{equation} \label{eq:finite_difference_method}
+	\frac{d^2 f}{dx^2} \bigg|_{x=x_i} \approx \frac{f_{i-1} - 2f_i + f_{i+1}}{(\Delta x)^2}
+\end{equation}
+
+\noindent
+dengan \( f_i = f(x_i) \) dan \( \Delta x = x_{i+1} - x_i \). Kemudian bentuk umum persamaan Schrodinger pada suatu sistem dengan potensial $V(x)$ dapat dituliskan
+
+\begin{equation} \label{eq:schrodinger_eq}
+	-\frac{\hbar^2}{2m} \frac{d^2 \psi(x)}{dx^2} + V(x) \psi(x) = E \psi(x)
+\end{equation}
+
+Jika Persamaan \ref{eq:finite_difference_method} disubstitusikan ke dalam Persamaan \ref{eq:schrodinger_eq}, maka akan diperoleh persamaan
+
+\begin{equation*}
+	-\frac{\hbar^2}{2m} \left( \frac{\psi_{i-1} - 2\psi_i + \psi_{i+1}}{(\Delta x)^2} \right) + V_i \psi_i = E \psi_i
+\end{equation*}
+
+\noindent
+dengan \( V_i = V(x_i) \) dan \( \psi_i = \psi(x_i) \). Persamaan tersebut juga dapat disajikan menjadi
+
+\begin{equation} \label{eq:schrodinger_finite_method_1}
+	-\psi_{i-1} + \left(2 + \frac{2m(\Delta x)^2}{\hbar^2} V_i - \frac{2m(\Delta x)^2}{\hbar^2} E\right) \psi_i - \psi_{i+1} = 0
+\end{equation}
+
+\noindent
+Jika diperkenalkan besaran tak bersatuan berikut
+
+\begin{equation} \label{eq:unitless_schrodinger_finite}
+	b_i = \gamma^2 (\Delta x)^2 = \frac{2m(\Delta x)^2 V_i}{\hbar^2}, \quad \lambda = \epsilon^2 (\Delta x)^2 = \frac{2m(\Delta x)^2 E}{\hbar^2}
+\end{equation}
+
+\noindent
+dimana $\epsilon$ mewakili energi sistem yang dinormalisasi, sedangkan $\gamma_i$ mewakili potensial sistem pada titik tertentu. Kemudian jika besaran tersebut dimasukkan ke Persamaan \ref{eq:schrodinger_finite_method_1}, maka akan diperoleh persamaan
+
+\begin{equation}\label{eq:schrodinger_finite_method_2}
+	-\psi_{i-1} + (2 + b_i - \lambda) \psi_i - \psi_{i}
+\end{equation}
+
+Jika misalnya terdapat partikel bermassa \( m \) yang terjebak dalam potensial berbentuk sumur dengan kedalaman tak berhingga dan dibatasi oleh dinding sumur di \( x = -1 \) dan \( x = +1 \). Anggap bahwa \( x_0 = -1 \), \( x_N = +1 \) dan daerah di dalam sumur dibagi menjadi \( N \) bagian sedemikian hingga
+
+\[
+	\Delta x = \frac{2}{N}; \quad x_j = x_0 + j\Delta x; \quad j = 1, 2, 3, \ldots, N
+\]
+
+\noindent
+Berdasarkan hasil pada penyelesaian potensial sumur tak berhingga maka diketahui bahwa \( \psi_0 = 0 \), \( \psi_N = 0 \) dan \( b_i = 0 \). Dengan demikian maka persamaan beda hingga yang mewakili persamaan Schrodinger \ref{eq:schrodinger_finite_method_2} dapat dituliskan dalam bentuk matriks
+
+\begin{equation} \label{eq:schrodinger_finite_matrix}
+	\begin{bmatrix}
+		2 - \lambda & -1          & \cdots & 0           \\
+		-1          & 2 - \lambda & \cdots & 0           \\
+		\vdots      & \vdots      & \ddots & \vdots      \\
+		0           & 0           & \cdots & 2 - \lambda \\
+	\end{bmatrix}
+	\begin{bmatrix}
+		\psi_1     \\
+		\psi_2     \\
+		\vdots     \\
+		\psi_{N-1} \\
+	\end{bmatrix}
+	= \begin{bmatrix}
+		0      \\
+		0      \\
+		\vdots \\
+		0      \\
+	\end{bmatrix}
+\end{equation}
+
+\noindent
+Persamaan diatas sudah dalam bentuk matriks, sehingga akan lebih mudah untuk dimasukkan ke model komputasi agar diperoleh nilai eigen nya. Berdasarkan besaran tak bersatuan \ref{eq:unitless_schrodinger_finite}, dapat diperoleh kaitan seperti berikut
+
+\begin{equation}
+	\epsilon = \frac{1}{\Delta x} \sqrt{\lambda}, \quad \gamma_i = \frac{1}{\Delta x} \sqrt{b_i}
+\end{equation}
+
+\noindent
+Pada persamaan \ref{eq:schrodinger_finite_matrix}, nilai $b_i$ dianggap nol. Namun, jika nilai $b_i$ ini tidak dianggap nol, maka berdasarkan kaitan diatas, dapat diperoleh nilai $b_i$ dari nilai $gamma_i$ nya.
+
 % \section{Fisika Komputasi}
 
 % Fisika Komputasi adalah cabang ilmu pengetahuan yang memadukan prinsip-prinsip

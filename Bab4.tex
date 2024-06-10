@@ -27,7 +27,7 @@ prosedur kerja, serta pemilihan dan konfigurasi perangkat keras.
 \section{Bahan}
 
 Data yang digunakan untuk melakukan operasi matriks pada penelitian ini adalah
-data random yang di-\emph{generate} oleh Julia menggunakan fungsi \cw{rand()}.
+data acak yang di-\emph{generate} oleh Julia menggunakan fungsi \cw{rand()}. Khusus pada bagian simulasi pencarian nilai eigen, digunakan bentuk matriks berdasarkan Persamaan \ref{eq:schrodinger_finite_matrix}.
 
 \section{Alat}
 
@@ -181,8 +181,12 @@ sistem paralel sebagai berikut
   \item Operasi Perkalian antara Skalar dengan Matriks
   \item Operasi Perkalian antar Matriks
   \item Inverse Matriks
-  \item Pencarian Eigenvalue dari Matriks
+  \item Pencarian Nilai Eigen
+  % \item Pencarian Nilai Eigen dari Matriks berdasarkan Persamaan  Persamaan \ref{eq:schrodinger_finite_matrix}
 \end{enumerate}
+
+\noindent
+Operasi penjumlahan hingga operasi inverse matriks menggunakan data elemen bernilai acak. Namun pada operasi pencarian nilai eigen, digunakan data matriks berdasarkan Persamaan \ref{eq:schrodinger_finite_matrix}.
 
 Pada langkah terakhir dari Gambar \ref{img:methods_execution} terdapat
 pengecekan variasi percobaan. Setiap operasi matriks terdapat 7 variasi
@@ -196,8 +200,11 @@ pengukuran nya:
   \item Variasi 4: Matriks berukuran $500 \times 500$
   \item Variasi 5: Matriks berukuran $10^3 \times 10^3$
   \item Variasi 6: Matriks berukuran $5000 \times 5000$
-  \item Variasi 7: Matriks berukuran $10^4 \times 10^4$
+  \item Variasi 7: Matriks berukuran $10^4 \times 10^4$ (Jika memungkinkan)
 \end{itemize}
+
+\noindent
+Khusus untuk variasi ke-7, terkadang terdapat keterbatasan memory (RAM/VRAM) sehingga tidak memungkinkan untuk dilakukan operasi dengan besar matriks $10^4 \times 10^4$. Untuk itu, pengkaji akan menurunkan ukuran matriks hingga cukup dialokasikan ke memory, sehingga operasi bisa dijalankan.
 
 \subsubsection{Analisis Data dan Penampilan Grafik}
 

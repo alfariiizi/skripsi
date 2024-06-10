@@ -1,6 +1,8 @@
 \chapter{HASIL DAN PEMBAHASAN}
 
-Kajian mengenai Pemanfaatan General Purpose GPU dengan Bahasa Pemrograman Julia untuk Komputasi Berunjuk Kerja Tinggi ini diawali dengan melakukan pengukuran kecepatan eksekusi secara series oleh CPU dan secara paralel oleh GPU pada operasi penjumlahan, kemudian diakhiri dengan operasi pencarian nilai eigen. Operasi penjumlahan dinilai operasi paling sederhana sehingga dilakukan di paling awal. Sedangkan operasi pencarian nilai eigen dinilai sebagai operasi paling kompleks sehingga dilakukan di paling akhir.
+Kajian mengenai Pemanfaatan General Purpose GPU dengan Bahasa Pemrograman Julia untuk Komputasi Berunjuk Kerja Tinggi ini diawali dengan melakukan pengukuran kecepatan eksekusi secara series oleh CPU dan secara paralel oleh GPU pada operasi penjumlahan, kemudian diakhiri dengan operasi pencarian nilai eigen.
+
+% Operasi penjumlahan dinilai operasi paling sederhana sehingga dilakukan di paling awal. Sedangkan operasi pencarian nilai eigen dinilai sebagai operasi paling kompleks sehingga dilakukan di paling akhir.
 
 \section{Cara Kerja GPU di Julia}
 
@@ -19,7 +21,7 @@ Sedangkan eksekusi kode di GPU dilakukan dengan
 CUDA.@sync C .= A .+ B
 \end{lstlisting}
 
-\nodindent
+\noindent
 Eksekusi GPU di Julia dilakukan secara \emph{asynchronous}, sehingga CPU tidak menunggu GPU untuk menyelesaikan eksekusi nya. Agar CPU dapat menunggu GPU dalam melakukan eksekusi nya, digunakan \cw{@sync} yang berarti bahwa proses eksekusi di GPU berlangsung secara \emph{synchronous}, sehingga CPU akan menunggu eksekusi GPU hingga eksekusi nya selesai.
 
 \begin{figure}[H]
@@ -222,39 +224,73 @@ Berdasarkan Gambar \ref{img:result_inverse}, pada ukuran matriks yang kecil, kec
 
 Jika dilihat dari Tabel \ref{tab:result_inverse} pada variasi ke-7, kecepatan eksekusi paralel oleh GPU mempunyai durasi kurang dari 11 detik, sedangkan kecepatan eksekusi series oleh CPU mempunyai durasi lebih dari 3 menit. Jika ukuran matriks nya ditambahkan, diperkirakan akan semakin jauh durasi ekeskusi paralel oleh GPU dan durasi eksekusi series oleh CPU. Untuk itu, jika terdapat operasi pencarian inverse matriks, bisa menggunakan CPU untuk ukuran matriks yang kecil, dan bisa menggunakan GPU untuk ukuran matriks yang besar.
 
-\subsection{Pencarian Nilai Eigen}
+% \subsection{Pencarian Nilai Eigen}
+%
+% Berdasarkan bagian \ref{Nilai Eigen}, operasi pencarian nilai eigen matriks merpakan operasi yang paling kompleks pada kajian ini. Untuk itu, diperkirakan hasil yang diperoleh akan berbeda dari operasi operasi sebelumnya. Hasil dari simulasi operasi pencarian nilai eigen dapat dilihat pada Tabel \ref{tab:result_eigenvalue} dan Gambar \ref{img:result_eigenvalue}.
+%
+% \begin{figure}[H]
+% 	\centering
+% 	\includegraphics[width=14cm, scale=1]{images/penelitian/eigenvalue.png}
+% 	\caption{Hasil dari Pencarian Nilai Eigen}
+% 	\label{img:result_eigenvalue}
+% \end{figure}
+%
+% Berdasarkan Gambar \ref{img:result_eigenvalue}, pada ukuran matriks yang kecil, kecepatan eksekusi series oleh CPU lebih cepat daripada kecepatan eksekusi paralel oleh GPU. Namun, seiring bertambahnya ukuran matriks, kecepatan eksekusi paralel oleh GPU berhasil lebih cepat daripada kecepatan eksekusi series oleh CPU.
+%
+% \begin{table}[H]
+% 	\centering
+% 	\caption{Hasil dari Pencarian Nilai Eigen}
+% 	\label{tab:result_eigenvalue}
+% 	\begin{tabular}{ccc}
+% 		\toprule
+% 		Variasi & CPU (s)    & GPU (s)   \\
+% 		\midrule
+% 		1       & 0.000035   & 0.000188  \\
+% 		2       & 0.000718   & 0.000885  \\
+% 		3       & 0.007700   & 0.001865  \\
+% 		4       & 0.200065   & 0.027872  \\
+% 		5       & 0.731179   & 0.121742  \\
+% 		6       & 65.235088  & 5.941858  \\
+% 		7       & 403.052508 & 42.954285 \\
+% 		\bottomrule
+% 	\end{tabular}
+% \end{table}
+%
+% Jika dilihat dari \ref{tab:result_eigenvalue} pada variasi ke-7, kecepatan eksekusi paralel oleh GPU mempunyai durasi rata-rata kurang dari 43 detik, sedangkan kecepatan eksekusi series oleh CPU mempunyai durasi rata-rata lebih dari 6 menit. Jika ukuran matriks nya ditambah, maka diperkirakan akan menghasilkan perbedaan kecepatan yang jauh lebih berbeda antara eksekusi series oleh CPU dan eksekusi paralel oleh GPU. Untuk itu, jika terdapat operasi pencarian nilai eigen dari suatu matriks, dapat menggunakan CPU untuk ukuran matriks yang kecil, dan dapat menggunakan GPU untuk ukuran matriks yang besar.
 
-Berdasarkan bagian \ref{Nilai Eigen}, operasi pencarian nilai eigen matriks merpakan operasi yang paling kompleks pada kajian ini. Untuk itu, diperkirakan hasil yang diperoleh akan berbeda dari operasi operasi sebelumnya. Hasil dari simulasi operasi pencarian nilai eigen dapat dilihat pada Tabel \ref{tab:result_eigenvalue} dan Gambar \ref{img:result_eigenvalue}.
+\section{Operasi Pencarian Nilai Eigen}
+
+Simulasi operasi penjumlahan hingga simulasi operasi inverse, penulis menggunakan matriks yang berisikan elemen yang bernilai acak. Pada operasi pencarian nilai eigen ini, digunakan bentuk matriks yang elemen nya bernilai tidak acak, yakni didasarkan ungkapan persamaan schrodinger melalui pendekatan metode beda-hingga pada Persamaan \ref{eq:schrodinger_finite_matrix}. Hasil dari simulasi operasi pencarian nilai eigen dapat dilihat pada Tabel \ref{tab:result_eigenvalue_schrodinger} dan Gambar \ref{img:result_eigenvalue_schrodinger}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=14cm, scale=1]{images/penelitian/eigenvalue.png}
+	\includegraphics[width=14cm, scale=1]{images/penelitian/eigenvalue-schrodinger.png}
 	\caption{Hasil dari Pencarian Nilai Eigen}
-	\label{img:result_eigenvalue}
+	\label{img:result_eigenvalue_schrodinger}
 \end{figure}
 
-Berdasarkan Gambar \ref{img:result_eigenvalue}, pada ukuran matriks yang kecil, kecepatan eksekusi series oleh CPU lebih cepat daripada kecepatan eksekusi paralel oleh GPU. Namun, seiring bertambahnya ukuran matriks, kecepatan eksekusi paralel oleh GPU berhasil lebih cepat daripada kecepatan eksekusi series oleh CPU.
+Berdasarkan Gambar \ref{img:result_eigenvalue_schrodinger}, pada ukuran matriks yang kecil diperoleh keceaptan eksekusi series oleh CPU yang lebih cepat daripada kecepatan eksekusi paralel oleh GPU. Kemudian, seiring bertambahnya ukuran matriks, diperoleh kecepatan eksekusi paralel oleh GPU yang lebih cepat daripada kecepatan eksekusi series oleh CPU.
 
 \begin{table}[H]
 	\centering
 	\caption{Hasil dari Pencarian Nilai Eigen}
-	\label{tab:result_eigenvalue}
+	\label{tab:result_eigenvalue_schrodinger}
 	\begin{tabular}{ccc}
 		\toprule
 		Variasi & CPU (s)    & GPU (s)   \\
 		\midrule
-		1       & 0.000035   & 0.000188  \\
-		2       & 0.000718   & 0.000885  \\
-		3       & 0.007700   & 0.001865  \\
-		4       & 0.200065   & 0.027872  \\
-		5       & 0.731179   & 0.121742  \\
-		6       & 65.235088  & 5.941858  \\
-		7       & 403.052508 & 42.954285 \\
+		1       & 0.000021   & 0.000514  \\
+		2       & 0.000851   & 0.001738  \\
+		3       & 0.006942   & 0.004741  \\
+		4       & 0.151598   & 0.071691  \\
+		5       & 0.466806   & 0.337955  \\
+		6       & 16.790000  & 6.325000  \\
+		7       & 129.823000 & 45.029000 \\
 		\bottomrule
 	\end{tabular}
 \end{table}
 
-Jika dilihat dari \ref{tab:result_eigenvalue} pada variasi ke-7, kecepatan eksekusi paralel oleh GPU mempunyai durasi rata-rata kurang dari 43 detik, sedangkan kecepatan eksekusi series oleh CPU mempunyai durasi rata-rata lebih dari 6 menit. Jika ukuran matriks nya ditambah, maka diperkirakan akan menghasilkan perbedaan kecepatan yang jauh lebih berbeda antara eksekusi series oleh CPU dan eksekusi paralel oleh GPU. Untuk itu, jika terdapat operasi pencarian nilai eigen dari suatu matriks, dapat menggunakan CPU untuk ukuran matriks yang kecil, dan dapat menggunakan GPU untuk ukuran matriks yang besar.
+Berdasarkan Tabel \ref{tab:result_eigenvalue_schrodinger}, durasi eksekusi series oleh CPU dan kecepatan eksekusi paralel oleh GPU mempunyai nilai yang hampir sama. Pada variasi ke ke-6, kecepatan eksekusi series oleh CPU mempunyai nilai yang kurang lebih $2,65$ kali lebih lambat daripada kecepatan eksekusi paralel oleh GPU. Sedangkan pada variasi ke ke-7, kecepatan eksekusi series oleh CPU mempunyai nilai yang kurang lebih $2,88$ kali lebih lambat daripada kecepatan eksekusi paralel oleh GPU. Perbedaan durasi eksekusi antara sistem series dan paralel pada simulasi pencarian nilai eigen ini tergolong tidak terlalu besar. Kemiripan kecepatan eksekusi ini diperkirakan karena sebagian besar Persamaan \ref{eq:schrodinger_finite_matrix} mempunyai elemen matriks yang bernilai nol, sehingga kecepatan eksekusi sistem series oleh CPU dapat mengeksekusi operasi dengan cepat. Namun, jika matriks diperbesar lagi, kemungkinan akan diperoleh perbedaan yang durasi eksekusi yang lebih jauh lagi antara eksekusi series oleh CPU dan eksekusi paralel oleh GPU.
 
 \section{Pembahasan Secara Umum}
 
@@ -262,9 +298,9 @@ Pada kajian ini, dilakukan simulasi operasi matriks yang dijalankan pada sistem 
 
 Jika dilihat dari hasil gambar grafik pada masing-masing simulasi, terdapat titik dimana kecepatan eksekusi sistem paralel oleh GPU \textbf{mulai} lebih cepat daripada kecepatan eksekusi sistem series oleh CPU. Titik ini penulis sebut dengan \emph{titik balik}. Pada operasi penjumlahan, pengurangan, dan perkalian skalar dengan matriks, titik balik nya adalah di ukuran matriks $500 \times 500$ atau pada variasi ke-4. Kemudian pada operasi yang lebih kompleks, yakni operasi perkalian antar matriks, pencarian inverse, dan pencarian nilai eigen, titik balik nya ada pada ukuran matriks $100 \times 100$ atau variasi ke-3. Hasil ini dapat disimpulkan bahwa seiring meningkatnya kompleksistas operasi, eksekusi menggunakan sistem paralel oleh GPU dapat lebih efektif daripada eksekusi pada sistem series oleh CPU.
 
-Jika dilihat dari hasil tabel pada masing-masing simulasi, semakin tinggi kompleksitas operasi maka semakin tinggi pula perbedaan durasi eksekusi pada ukuran matriks terbesar (variasi ke-7). Pada operasi penjumlahan, pengurangan, dan perkalian skalar dengan matriks, perbedaan durasi eksekusi pada variasi ke-7 secara umum mempunyai rata-rata kurang dari 1 detik. Namun, pada operasi yang lebih kompleks, yakni operasi perkalian antar matriks, pencarian inverse, dan pencarian nilai eigen, durasi eksekusi pada variasi ke-7 antara sistem series oleh CPU dan sistem paralel oleh GPU semua nya diatas 1 detik dan perbedaan paling besar ada pada simulasi pencarian nilai eigen. Hasil ini dapat disimpulkan bahwa seiring meningkatnya kompleksitas operasi dan seiring meningkatnya ukuran matriks, eksekusi paralel oleh GPU jauh lebih efektif daripada eksekusi series oleh CPU.
+Jika dilihat dari hasil tabel pada masing-masing simulasi, semakin tinggi kompleksitas operasi maka semakin tinggi pula perbedaan durasi eksekusi pada ukuran matriks terbesar (variasi ke-7). Pada operasi penjumlahan, pengurangan, dan perkalian skalar dengan matriks, perbedaan durasi eksekusi pada variasi ke-7 secara umum mempunyai rata-rata kurang dari 1 detik. Namun, pada operasi yang lebih kompleks, yakni operasi perkalian antar matriks, pencarian inverse, dan pencarian nilai eigen, durasi eksekusi pada variasi ke-7 antara sistem series oleh CPU dan sistem paralel oleh GPU semua nya diatas 1 detik dan perbedaan paling besar ada pada simulasi operasi inverse. Dari hasil ini dapat disimpulkan bahwa seiring meningkatnya kompleksitas operasi dan seiring meningkatnya ukuran matriks, eksekusi paralel oleh GPU jauh lebih efektif daripada eksekusi series oleh CPU.
 
-Operasi matriks tidak bergantung satu sama lain, sehingga dapat dijalankan dengan baik pada sistem paralel. Namun, pada hasil yang telah diperoleh, pada matriks berukuran kecil, sistem series lebih cepat melakukan dalam menjalankan eksekusi daripada sistem paralel. Hal ini disebabkan karena semua program pada dasarnya dijalankan di CPU. Untuk sistem series, maka eksekusi program tersebut dapat langsung dijalankan. Akan tetapi, untuk sistem paralel, eksekusi program tersebut perlu dikirimkan dari CPU ke GPU, kemudian setelah selesai dikomputasikan akan dikirimkan kembali ke CPU. Proses transfer data ini akan tampak lama jika data yang ditransferkan berukuran kecil. Dengan kata lain, proses transfer data dari CPU ke GPU dan dari GPU ke CPU akan tampak lama jika ukuran data matriks nya sedikit (matriks berukuran kecil).
+Operasi matriks tidak bergantung satu sama lain, sehingga dapat dijalankan dengan baik pada sistem paralel. Namun, dari hasil percobaan yang telah diperoleh, pada matriks berukuran kecil, sistem series lebih cepat melakukan dalam menjalankan eksekusi daripada sistem paralel. Hal ini disebabkan karena semua program pada dasarnya dijalankan di CPU. Untuk sistem series, maka eksekusi program tersebut dapat langsung dijalankan. Akan tetapi, untuk sistem paralel, eksekusi program tersebut perlu dikirimkan dari CPU ke GPU, kemudian setelah selesai dikomputasikan akan dikirimkan kembali ke CPU. Proses transfer data ini akan tampak lama jika data yang ditransferkan berukuran kecil. Dengan kata lain, proses transfer data dari CPU ke GPU dan dari GPU ke CPU akan tampak lama jika ukuran data matriks nya sedikit (matriks berukuran kecil).
 
 Dari hasil yang telah diperoleh pada masing-masing simulasi, terlihat bahwa pada ukuran matriks yang sedikit, eksekusi sistem series oleh CPU mampu lebih cepat daripada eksekusi sistem series oleh GPU. Penulis tidak memperkirakan jika CPU dapat berjalan secepat itu. Kemungkinan cepat nya eksekusi pada CPU ini disebabkan karena CPU yang penulis pakai menggunakan Intel Core i7 tipe U generasi 10, yang mana merupakan salah satu CPU tercepat di kelas nya. Untuk itu, jika simulasi dilakukan dengan menggunakan CPU lain yang lebih lambat, diperkirakan akan diperoleh \emph{titik balik} yang lebih awal.
 
