@@ -69,20 +69,20 @@
 %-----------------------------------------------------------------
 %Disini awal masukan untuk data Skripsi (ISI SESUAI DENGAN DATA ANDA!)
 %-----------------------------------------------------------------
-\titleind{Pemanfaatan General Purpose GPU dengan Bahasa Pemrograman Julia untuk Komputasi Berunjuk Kerja Tinggi}
+\titleind{Pemanfaatan General Purpose GPU berdasar Bahasa Pemrograman Julia untuk Komputasi Berunjuk Kerja Tinggi}
 
-\titleeng{Utilization of General Purpose GPUs with the Julia Programming Language for High Performance Computing}
+\titleeng{Implementation of General Purpose GPU based on the Julia Programming Language for High Performance Computation}
 
 \fullname{Moh Rizal Alfarizi}
 \NIM{19/445591/PA/19415}
 \yearenrollment{2019}
-\examdate{28 Juni 2024 (Placeholder)}
+\examdate{(Menyesuaikan)}
 \degree{Sarjana}
 \yearsubmit{2024}
 \firstsupervisor{Prof. Drs. Pekik Nurwantoro, M.S., Ph.D.}
 % \secondsupervisor{Ahsani Hafizhu Shali, S.Si., M.Sc.}
 \firstexaminer{Dr. Eko Sulistya, M.Si.}
-\secondexaminer{Sholihun, S.Si., M.Sc., Ph.D.Sc}
+\secondexaminer{Prof. Sholihun, S.Si., M.Sc., Ph.D.Sc}
 % \thirdexaminer{Nama Anggota Tim Penguji}
 
 \begin{document}
@@ -120,7 +120,7 @@
 %-----------------------------------------------------------------
 \preface
 
-Puji syukur kehadirat Tuhan Yang Maha Esa atas segala rahmat dan karunia-Nya sehingga saya dapat menyelesaikan skripsi ini yang berjudul “Pemanfaatan General Purpose GPU dengan Bahasa Pemrograman Julia untuk Komputasi Berunjuk Kerja Tinggi”. Skripsi ini disusun sebagai salah satu syarat untuk memperoleh gelar Sarjana di bidang Fisika.
+Puji syukur kehadirat Tuhan Yang Maha Esa atas segala rahmat dan karunia-Nya sehingga saya dapat menyelesaikan skripsi ini yang berjudul “Pemanfaatan General Purpose GPU berdasar Bahasa Pemrograman Julia untuk Komputasi Berunjuk Kerja Tinggi”. Skripsi ini disusun sebagai salah satu syarat untuk memperoleh gelar Sarjana di bidang Fisika.
 
 Skripsi ini tidak akan terwujud tanpa bantuan, dukungan, dan bimbingan dari berbagai pihak. Oleh karena itu, dalam kesempatan ini saya ingin menyampaikan penghargaan dan ucapan terima kasih yang sebesar-besarnya kepada:
 
@@ -142,9 +142,9 @@ Akhir kata, semoga Allah SWT senantiasa memberikan rahmat dan hidayah-Nya kepada
 \vspace{0.8cm}
 
 \begin{tabular}{p{7cm}c}
-	 & Yogyakarta, 28 Juni 2024 (Placeholder) \\
-	 &                                        \\
-	 &                                        \\
+	 & Yogyakarta, (Menyesuaikan) \\
+	 &                            \\
+	 &                            \\
 	 & Moh Rizal Alfarizi
 \end{tabular}
 %-----------------------------------------------------------------
@@ -210,7 +210,7 @@ Akhir kata, semoga Allah SWT senantiasa memberikan rahmat dan hidayah-Nya kepada
 %-----------------------------------------------------------------
 
 \begin{abstractind}
-	Penyelesaian permasalahan komputasi umumnya memerlukan sistem yang cepat dalam melakukan proses komputasi. Penggunaan GPU merupakan salah satu cara agar proses komputasi bisa lebih cepat dijalankan. Julia merupakan bahasa pemrograman baru yang mempunyai integrasi dengan GPU Nvidia melalui pustaka CUDA.jl. Simulasi perbandingan antara kecepatan eksekusi sistem series oleh CPU dan kecepatan eksekusi sistem paralel oleh GPU diperlukan untuk melihat seberapa jauh perbedaan durasi eksekusi pada operasi - operasi matriks. Hasilnya adalah kecepatan eksekusi sistem series oleh CPU mampu lebih cepat pada operasi matriks sederhana dan pada matriks berukuran kecil. Untuk operasi matriks yang kompleks dan ukuran matriks yang besar, diperoleh eksekusi sistem paralel oleh GPU lebih cepat. Perbedaan durasi paling besar antara eksekusi series oleh CPU dan eksekusi paralel oleh GPU ada pada operasi paling kompleks dan variasi ukuran matriks paling besar.
+	Penyelesaian permasalahan komputasi umumnya memerlukan sistem yang cepat dalam melakukan proses komputasi. Penggunaan Grapics Processing Unit (GPU) merupakan salah satu cara agar proses komputasi bisa lebih cepat dijalankan. Julia merupakan bahasa pemrograman baru yang mempunyai integrasi dengan GPU Nvidia melalui pustaka CUDA.jl. Simulasi perbandingan antara kecepatan eksekusi sistem series oleh CPU dan kecepatan eksekusi sistem paralel oleh GPU diperlukan untuk melihat seberapa jauh perbedaan durasi eksekusi pada operasi - operasi matriks. Hasilnya adalah kecepatan eksekusi sistem series oleh CPU mampu lebih cepat pada operasi matriks sederhana dan pada matriks berukuran kecil. Untuk operasi matriks yang kompleks dan ukuran matriks yang besar, diperoleh eksekusi sistem paralel oleh GPU lebih cepat. Perbedaan durasi paling besar antara eksekusi series oleh CPU dan eksekusi paralel oleh GPU ada pada operasi paling kompleks dan variasi ukuran matriks paling besar.
 
 
 	Kata kunci: Sistem Paralel, GPU, Julia
@@ -222,7 +222,7 @@ Akhir kata, semoga Allah SWT senantiasa memberikan rahmat dan hidayah-Nya kepada
 %Disini awal masukan untuk Abstract (ISI SESUAI DENGAN DATA ANDA!)
 %-----------------------------------------------------------------
 \begin{abstracteng}
-	Computational problem-solving generally requires a system that can perform computational processes quickly. The use of GPUs is one way to accelerate these computational processes. Julia is a new programming language that integrates with Nvidia GPUs through the CUDA.jl library. A simulation comparing the execution speed of serial systems by the CPU and the parallel system execution speed by the GPU is needed to observe the differences in execution duration for matrix operations. The results show that the serial execution speed by the CPU is faster for simple matrix operations and smaller matrices. For complex matrix operations and larger matrices, the parallel execution by the GPU is faster. The most significant difference in duration between serial execution by the CPU and parallel execution by the GPU is found in the most complex operations and the largest matrix variations.
+	Computational problem-solving generally requires a system that can perform computational processes quickly. The use of Grapics Processing Unit (GPU) is one way to accelerate these computational processes. Julia is a new programming language that integrates with Nvidia GPUs through the CUDA.jl library. A simulation comparing the execution speed of serial systems by the CPU and the parallel system execution speed by the GPU is needed to observe the differences in execution duration for matrix operations. The results show that the serial execution speed by the CPU is faster for simple matrix operations and smaller matrices. For complex matrix operations and larger matrices, the parallel execution by the GPU is faster. The most significant difference in duration between serial execution by the CPU and parallel execution by the GPU is found in the most complex operations and the largest matrix variations.
 
 	Keyword: Parallel Systems, GPU, Julia
 \end{abstracteng}

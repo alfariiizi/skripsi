@@ -349,7 +349,7 @@
 				Pembimbing Utama
 			\end{tabular}
 
-			\vspace{2cm}
+			\vspace{3cm}
 			\begin{tabular}{p{7.5cm}p{7cm}}
 				\underline{\@firstexaminer} & \underline{\@secondexaminer} \\
 				Penguji                     & Penguji

@@ -258,7 +258,7 @@ Jika dilihat dari Tabel \ref{tab:result_inverse} pada variasi ke-7, kecepatan ek
 %
 % Jika dilihat dari \ref{tab:result_eigenvalue} pada variasi ke-7, kecepatan eksekusi paralel oleh GPU mempunyai durasi rata-rata kurang dari 43 detik, sedangkan kecepatan eksekusi series oleh CPU mempunyai durasi rata-rata lebih dari 6 menit. Jika ukuran matriks nya ditambah, maka diperkirakan akan menghasilkan perbedaan kecepatan yang jauh lebih berbeda antara eksekusi series oleh CPU dan eksekusi paralel oleh GPU. Untuk itu, jika terdapat operasi pencarian nilai eigen dari suatu matriks, dapat menggunakan CPU untuk ukuran matriks yang kecil, dan dapat menggunakan GPU untuk ukuran matriks yang besar.
 
-\section{Operasi Pencarian Nilai Eigen}
+\subsection{Operasi Pencarian Nilai Eigen}
 
 Simulasi operasi penjumlahan hingga simulasi operasi inverse, penulis menggunakan matriks yang berisikan elemen yang bernilai acak. Pada operasi pencarian nilai eigen ini, digunakan bentuk matriks yang elemen nya bernilai tidak acak, yakni didasarkan ungkapan persamaan schrodinger melalui pendekatan metode beda-hingga pada Persamaan \ref{eq:schrodinger_finite_matrix}. Hasil dari simulasi operasi pencarian nilai eigen dapat dilihat pada Tabel \ref{tab:result_eigenvalue_schrodinger} dan Gambar \ref{img:result_eigenvalue_schrodinger}.
 

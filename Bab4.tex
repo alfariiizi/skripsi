@@ -36,39 +36,39 @@ dengan bentuk komputer jinjing (\emph{laptop}) dengan spesifikasi sebagai
 berikut:
 
 \begin{table}[H]
-  \centering
-  \caption{Spesifikasi komputer alat}
-  \begin{tabular}{|M{5cm}|M{8cm}|}
-    \hline
-    \textbf{Komponen} & \textbf{Spesifikasi}                                   \\
-    \hline
-    Sistem operasi    & Manjaro Linux x86\_64 (Kernel 6.1.55-1-MANJARO)        \\
-    \hline
-    CPU               & Intel i7-10510U, 4.9 GHz, 4 Cores, 8 Logical Processor \\
-    \hline
-    GPU               & NVIDIA GeForce MX2500, 2GB                             \\
-    \hline
-    RAM               & 20 GB                                                  \\
-    \hline
-    Penyimpanan       & Solid State Drive 480 GB                               \\
-    \hline
-  \end{tabular}
+	\centering
+	\caption{Spesifikasi komputer alat}
+	\begin{tabular}{|M{5cm}|M{8cm}|}
+		\hline
+		\textbf{Komponen} & \textbf{Spesifikasi}                                   \\
+		\hline
+		Sistem operasi    & Manjaro Linux x86\_64 (Kernel 6.1.55-1-MANJARO)        \\
+		\hline
+		CPU               & Intel i7-10510U, 4.9 GHz, 4 Cores, 8 Logical Processor \\
+		\hline
+		GPU               & NVIDIA GeForce MX2500, 2GB                             \\
+		\hline
+		RAM               & 20 GB                                                  \\
+		\hline
+		Penyimpanan       & Solid State Drive 480 GB                               \\
+		\hline
+	\end{tabular}
 \end{table}
 
 Kemudian, dalam menjalankan penelitian, penulis menggunakan berbagai perangkat
 lunak untuk melakukan \emph{benchmarking}. Adapun perangkat-perangkat lunak
 tersebut adalah:
 \begin{itemize}
-  \item Visual Studio Code: sebagai \emph{code editor} untuk Julia
+	\item Visual Studio Code: sebagai \emph{code editor} untuk Julia
 
-  \item Jupyter Notebook: sebagai \emph{execution cell} untuk Julia
+	\item Jupyter Notebook: sebagai \emph{execution cell} untuk Julia
 
-  \item CUDA.jl: sebagai pustaka utama untuk menjalankan paralelisasi pada
-        perangkat GPU NVIDIA
+	\item CUDA.jl: sebagai pustaka utama untuk menjalankan paralelisasi pada
+	      perangkat GPU NVIDIA
 
-  \item Bahasa pemrograman Julia: untuk menjalankan metode fisika komputasi
+	\item Bahasa pemrograman Julia: untuk menjalankan metode fisika komputasi
 
-        % \item Bahasa pemgoraman Python: untuk menjalankan metode fisika komputasi
+	      % \item Bahasa pemgoraman Python: untuk menjalankan metode fisika komputasi
 \end{itemize}
 
 % \section{Bahan}
@@ -121,10 +121,10 @@ tersebut adalah:
 \section{Prosedur Kerja dan Pengambilan Data}
 
 \begin{figure}[h]
-  \centering
-  \includegraphics[width=3cm, scale=1]{schema/metode.drawio.png}
-  \caption{Diagram alir penelitian}
-  \label{img:methods}
+	\centering
+	\includegraphics[width=3cm, scale=1]{schema/metode.drawio.png}
+	\caption{Diagram alir penelitian}
+	\label{img:methods}
 \end{figure}
 
 Secara garis besar, penelitian ini mencari waktu kecepatan eksekusi pada sistem
@@ -166,23 +166,23 @@ software Jupyter dalam mengeksekusi operasi yang ada. Pada Gambar
 operasi matriks.
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=6cm, scale=1]{schema/langkah-2.drawio.png}
-  \caption{Diagram alir dalam Proses Eksekusi Setiap Metode}
-  \label{img:methods_execution}
+	\centering
+	\includegraphics[width=6cm, scale=1]{schema/langkah-2.drawio.png}
+	\caption{Diagram alir dalam Proses Eksekusi Setiap Metode}
+	\label{img:methods_execution}
 \end{figure}
 
 Terdapat 6 operasi berbasis matriks yang dijalankan pada sistem series dan
 sistem paralel sebagai berikut
 
 \begin{enumerate}
-  \item Operasi Penjumlahan Matriks
-  \item Operasi Pengurangan Matriks
-  \item Operasi Perkalian antara Skalar dengan Matriks
-  \item Operasi Perkalian antar Matriks
-  \item Inverse Matriks
-  \item Pencarian Nilai Eigen
-  % \item Pencarian Nilai Eigen dari Matriks berdasarkan Persamaan  Persamaan \ref{eq:schrodinger_finite_matrix}
+	\item Operasi Penjumlahan Matriks
+	\item Operasi Pengurangan Matriks
+	\item Operasi Perkalian antara Skalar dengan Matriks
+	\item Operasi Perkalian antar Matriks
+	\item Inverse Matriks
+	\item Pencarian Nilai Eigen
+	      % \item Pencarian Nilai Eigen dari Matriks berdasarkan Persamaan  Persamaan \ref{eq:schrodinger_finite_matrix}
 \end{enumerate}
 
 \noindent
@@ -194,19 +194,19 @@ pengukuran berdasarkan ukuran matriks nya. Berikut merupakan 7 variasi
 pengukuran nya:
 
 \begin{itemize}
-  \item Variasi 1: Matriks berukuran $10 \times 10$
-  \item Variasi 2: Matriks berukuran $50 \times 50$
-  \item Variasi 3: Matriks berukuran $10^2 \times 10^2$
-  \item Variasi 4: Matriks berukuran $500 \times 500$
-  \item Variasi 5: Matriks berukuran $10^3 \times 10^3$
-  \item Variasi 6: Matriks berukuran $5000 \times 5000$
-  \item Variasi 7: Matriks berukuran $10^4 \times 10^4$ (Jika memungkinkan)
+	\item Variasi 1: Matriks berukuran $10 \times 10$
+	\item Variasi 2: Matriks berukuran $50 \times 50$
+	\item Variasi 3: Matriks berukuran $10^2 \times 10^2$
+	\item Variasi 4: Matriks berukuran $500 \times 500$
+	\item Variasi 5: Matriks berukuran $10^3 \times 10^3$
+	\item Variasi 6: Matriks berukuran $5000 \times 5000$
+	\item Variasi 7: Matriks berukuran $10^4 \times 10^4$ (Jika memungkinkan)
 \end{itemize}
 
 \noindent
 Khusus untuk variasi ke-7, terkadang terdapat keterbatasan memory (RAM/VRAM) sehingga tidak memungkinkan untuk dilakukan operasi dengan besar matriks $10^4 \times 10^4$. Untuk itu, pengkaji akan menurunkan ukuran matriks hingga cukup dialokasikan ke memory, sehingga operasi bisa dijalankan.
 
-\subsubsection{Analisis Data dan Penampilan Grafik}
+\subsection{Analisis Data dan Penampilan Grafik}
 
 Proses analisis data meliputi pencatatan hasil eksekusi, kemudian dilanjutkan
 dengan pengumpulan semua data yang telah dicatat, kemudian yang terakhir adalah
@@ -215,10 +215,10 @@ pencarian nilai rata-rata dari sepuluh kali pengulangan. Pada Gambar
 ini.
 
 \begin{figure}[h]
-  \centering
-  \includegraphics[width=4cm, scale=1]{schema/langkah-3.drawio.png}
-  \caption{Diagram alir dalam Proses Analisis Data}
-  \label{img:methods_analysist}
+	\centering
+	\includegraphics[width=4cm, scale=1]{schema/langkah-3.drawio.png}
+	\caption{Diagram alir dalam Proses Analisis Data}
+	\label{img:methods_analysist}
 \end{figure}
 
 Setelah proses analisis data selesai, langkah selanjutnya adalah penampilan
@@ -595,119 +595,121 @@ sedangkan sumbu-y untuk waktu kecepatan eksekusi pada setiap operasi.
 % Please add the following required packages to your document preamble:
 % \usepackage{lscape}
 % \usepackage{longtable}
+
 % Note: It may be necessary to compile the document several times to get a multi-page table to line up properly
-\begin{landscape}
-  \subsection{Rencana Kegiatan Penelitian}
-  \begin{longtable}[c]{|l|l|l|l|l|l|l|l|l|l|l|l|}
-    \caption{Tabel Rencana Kegiatan November 2023 -- Mei 2024}
-    \label{table:plan}                                                                                                                                                                                 \\
-    \hline
-    No.                                                                                                                   & Kegiatan & November  & Desember & Januari & Februari & Maret & April & Mei \\ \hline
-    \endfirsthead
-    %
-    \multicolumn{12}{c}%
-    {{\bfseries Table \thetable\ continued from previous page}}                                                                                                                                        \\
-    \hline
-    No.                                                                                                                   & Kegiatan & Novermber & Desember & Januari & Februari & Maret & April & Mei \\ \hline
-    \endhead
-    %
-    1                                                                                                                     &
-    \begin{tabular}[c]{@{}l@{}}Eksplorasi Bahasa Julia dan pustaka nya\end{tabular}                                       &
-    \checkmark                                                                                                            &
-    \checkmark                                                                                                            &
-                                                                                                                          &
-                                                                                                                          &
-                                                                                                                          &
-                                                                                                                          &
-    \\ \hline
-    %
-    2                                                                                                                     &
-    \begin{tabular}[c]{@{}l@{}}Penulisan Proposal\end{tabular}                                                            &
-    \checkmark                                                                                                            &
-    \checkmark                                                                                                            &
-    \checkmark                                                                                                            &
-    \checkmark                                                                                                            &
-                                                                                                                          &
-                                                                                                                          &
-    \\ \hline
-    %
-    3                                                                                                                     &
-    \begin{tabular}[c]{@{}l@{}}Penulisan Kode dan Pengeksekusian \\ Operasi Penjumlahan Matriks\end{tabular}              &
-                                                                                                                          &
-                                                                                                                          &
-                                                                                                                          &
-    \checkmark                                                                                                            &
-                                                                                                                          &
-                                                                                                                          &
-    \\ \hline
-    %
-    4                                                                                                                     &
-    \begin{tabular}[c]{@{}l@{}}Penulisan Kode dan Pengeksekusian \\ Operasi Pengurangan Matriks\end{tabular}              &
-                                                                                                                          &
-                                                                                                                          &
-                                                                                                                          &
-    \checkmark                                                                                                            &
-                                                                                                                          &
-                                                                                                                          &
-    \\ \hline
-    %
-    5                                                                                                                     &
-    \begin{tabular}[c]{@{}l@{}}Penulisan Kode dan Pengeksekusian \\ Operasi Perkalian Matriks dengan Skalar\end{tabular}  &
-                                                                                                                          &
-                                                                                                                          &
-                                                                                                                          &
-    \checkmark                                                                                                            &
-    \checkmark                                                                                                            &
-                                                                                                                          &
-    \\ \hline
-    %
-    6                                                                                                                     &
-    \begin{tabular}[c]{@{}l@{}}Penulisan Kode dan Pengeksekusian \\ Operasi Perkalian Matriks dengan Matriks\end{tabular} &
-                                                                                                                          &
-                                                                                                                          &
-                                                                                                                          &
-    \checkmark                                                                                                            &
-    \checkmark                                                                                                            &
-                                                                                                                          &
-    \\ \hline
-    %
-    7                                                                                                                     &
-    \begin{tabular}[c]{@{}l@{}}Penulisan Kode dan Pengeksekusian \\ Operasi Inverse Matriks\end{tabular}                  &
-                                                                                                                          &
-                                                                                                                          &
-                                                                                                                          &
-                                                                                                                          &
-    \checkmark                                                                                                            &
-                                                                                                                          &
-    \\ \hline
-    %
-    8                                                                                                                     &
-    \begin{tabular}[c]{@{}l@{}}Penulisan Kode dan Pengeksekusian \\ Nilai Eigen \end{tabular}                             &
-                                                                                                                          &
-                                                                                                                          &
-                                                                                                                          &
-                                                                                                                          &
-    \checkmark                                                                                                            &
-                                                                                                                          &
-    \\ \hline
-    %
-    9                                                                                                                     &
-    \begin{tabular}[c]{@{}l@{}} Pengumpulan dan Analisis Semua data \end{tabular}                                         &
-                                                                                                                          &
-                                                                                                                          &
-                                                                                                                          &
-                                                                                                                          &
-    \checkmark                                                                                                            &
-    \checkmark                                                                                                            &
-    \\ \hline
-    10                                                                                                                    &
-    \begin{tabular}[c]{@{}l@{}} Penulisan Hasil dan Pembahasan \end{tabular}                                              &
-                                                                                                                          &
-                                                                                                                          &
-                                                                                                                          &
-                                                                                                                          &
-    \checkmark                                                                                                            &
-    \checkmark                                                                                                            &
-    \checkmark                                                                                                                                                                                         \\ \hline
-  \end{longtable}
-\end{landscape}
+
+% \begin{landscape}
+%   \subsection{Rencana Kegiatan Penelitian}
+%   \begin{longtable}[c]{|l|l|l|l|l|l|l|l|l|l|l|l|}
+%     \caption{Tabel Rencana Kegiatan November 2023 -- Mei 2024}
+%     \label{table:plan}                                                                                                                                                                                 \\
+%     \hline
+%     No.                                                                                                                   & Kegiatan & November  & Desember & Januari & Februari & Maret & April & Mei \\ \hline
+%     \endfirsthead
+%     %
+%     \multicolumn{12}{c}%
+%     {{\bfseries Table \thetable\ continued from previous page}}                                                                                                                                        \\
+%     \hline
+%     No.                                                                                                                   & Kegiatan & Novermber & Desember & Januari & Februari & Maret & April & Mei \\ \hline
+%     \endhead
+%     %
+%     1                                                                                                                     &
+%     \begin{tabular}[c]{@{}l@{}}Eksplorasi Bahasa Julia dan pustaka nya\end{tabular}                                       &
+%     \checkmark                                                                                                            &
+%     \checkmark                                                                                                            &
+%                                                                                                                           &
+%                                                                                                                           &
+%                                                                                                                           &
+%                                                                                                                           &
+%     \\ \hline
+%     %
+%     2                                                                                                                     &
+%     \begin{tabular}[c]{@{}l@{}}Penulisan Proposal\end{tabular}                                                            &
+%     \checkmark                                                                                                            &
+%     \checkmark                                                                                                            &
+%     \checkmark                                                                                                            &
+%     \checkmark                                                                                                            &
+%                                                                                                                           &
+%                                                                                                                           &
+%     \\ \hline
+%     %
+%     3                                                                                                                     &
+%     \begin{tabular}[c]{@{}l@{}}Penulisan Kode dan Pengeksekusian \\ Operasi Penjumlahan Matriks\end{tabular}              &
+%                                                                                                                           &
+%                                                                                                                           &
+%                                                                                                                           &
+%     \checkmark                                                                                                            &
+%                                                                                                                           &
+%                                                                                                                           &
+%     \\ \hline
+%     %
+%     4                                                                                                                     &
+%     \begin{tabular}[c]{@{}l@{}}Penulisan Kode dan Pengeksekusian \\ Operasi Pengurangan Matriks\end{tabular}              &
+%                                                                                                                           &
+%                                                                                                                           &
+%                                                                                                                           &
+%     \checkmark                                                                                                            &
+%                                                                                                                           &
+%                                                                                                                           &
+%     \\ \hline
+%     %
+%     5                                                                                                                     &
+%     \begin{tabular}[c]{@{}l@{}}Penulisan Kode dan Pengeksekusian \\ Operasi Perkalian Matriks dengan Skalar\end{tabular}  &
+%                                                                                                                           &
+%                                                                                                                           &
+%                                                                                                                           &
+%     \checkmark                                                                                                            &
+%     \checkmark                                                                                                            &
+%                                                                                                                           &
+%     \\ \hline
+%     %
+%     6                                                                                                                     &
+%     \begin{tabular}[c]{@{}l@{}}Penulisan Kode dan Pengeksekusian \\ Operasi Perkalian Matriks dengan Matriks\end{tabular} &
+%                                                                                                                           &
+%                                                                                                                           &
+%                                                                                                                           &
+%     \checkmark                                                                                                            &
+%     \checkmark                                                                                                            &
+%                                                                                                                           &
+%     \\ \hline
+%     %
+%     7                                                                                                                     &
+%     \begin{tabular}[c]{@{}l@{}}Penulisan Kode dan Pengeksekusian \\ Operasi Inverse Matriks\end{tabular}                  &
+%                                                                                                                           &
+%                                                                                                                           &
+%                                                                                                                           &
+%                                                                                                                           &
+%     \checkmark                                                                                                            &
+%                                                                                                                           &
+%     \\ \hline
+%     %
+%     8                                                                                                                     &
+%     \begin{tabular}[c]{@{}l@{}}Penulisan Kode dan Pengeksekusian \\ Nilai Eigen \end{tabular}                             &
+%                                                                                                                           &
+%                                                                                                                           &
+%                                                                                                                           &
+%                                                                                                                           &
+%     \checkmark                                                                                                            &
+%                                                                                                                           &
+%     \\ \hline
+%     %
+%     9                                                                                                                     &
+%     \begin{tabular}[c]{@{}l@{}} Pengumpulan dan Analisis Semua data \end{tabular}                                         &
+%                                                                                                                           &
+%                                                                                                                           &
+%                                                                                                                           &
+%                                                                                                                           &
+%     \checkmark                                                                                                            &
+%     \checkmark                                                                                                            &
+%     \\ \hline
+%     10                                                                                                                    &
+%     \begin{tabular}[c]{@{}l@{}} Penulisan Hasil dan Pembahasan \end{tabular}                                              &
+%                                                                                                                           &
+%                                                                                                                           &
+%                                                                                                                           &
+%                                                                                                                           &
+%     \checkmark                                                                                                            &
+%     \checkmark                                                                                                            &
+%     \checkmark                                                                                                                                                                                         \\ \hline
+%   \end{longtable}
+% \end{landscape}
