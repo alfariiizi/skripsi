@@ -21,6 +21,7 @@
 % \usepackage[table,xcdraw]{xcolor}
 \usepackage{lscape}
 \usepackage{longtable}
+\usepackage{pdfpages}
 
 \newcounter{pycodecounter}
 \newcounter{cppcodecounter}
@@ -66,17 +67,21 @@
 	} }{}
 
 \captionsetup[lstlisting]{labelformat=empty}
+
+\selectlanguage{indonesian}
+
 %-----------------------------------------------------------------
 %Disini awal masukan untuk data Skripsi (ISI SESUAI DENGAN DATA ANDA!)
 %-----------------------------------------------------------------
-\titleind{Pemanfaatan General Purpose GPU berdasar Bahasa Pemrograman Julia untuk Komputasi Berunjuk Kerja Tinggi}
+\titleind{Pemanfaatan \emph{General Purpose} GPU (\emph{Graphics Processing Unit}) menggunakan Bahasa Pemrograman Julia untuk Studi Kasus Penyelesaian Masalah Nilai Eigen dalam Fisika Kuantum}
 
-\titleeng{Implementation of General Purpose GPU based on the Julia Programming Language for High Performance Computation}
+\titleeng{Implementation of General Purpose GPU (\emph{Graphics Processing Unit}) using the Julia Programming Language for the Case Study of Solving Eigenvalue Problems in Quantum Physics.}
 
 \fullname{Moh Rizal Alfarizi}
 \NIM{19/445591/PA/19415}
 \yearenrollment{2019}
-\examdate{(Menyesuaikan)}
+\examdate{21 Juni 2024}
+\draftfinishdate{13 Juni 2024}
 \degree{Sarjana}
 \yearsubmit{2024}
 \firstsupervisor{Prof. Drs. Pekik Nurwantoro, M.S., Ph.D.}
@@ -91,7 +96,10 @@
 
 % \titlepage <-- activate this
 
-\approvalpage \declarepage
+% \approvalpage \declarepage
+\approvalpagescan
+\declarepagescan
+
 %Setelah Anda selesai Ujian Akhir Skripsi, scan halaman pengesahan yang telah ditandatangani dosen pembimbing dan penguji, scan juga halaman pernyataan yang telah Anda tandatangani. Selanjutnya simpan hasil scan tersebut dalam bentuk PDF dengan nama pengesahanskripsi.pdf dan pernyataan.pdf (file disimpan di folder yang sama dengan folder dimana file Skripsi.tex tersimpan)
 %Hilangkan karakter % sebelum perintah "\approvalpagescan" dan "\declarepage" di bawah ini, dan tambahkan karakter % sebelum perintah "\approvalpage" di atas.
 %\approvalpagescan
@@ -120,7 +128,7 @@
 %-----------------------------------------------------------------
 \preface
 
-Puji syukur kehadirat Tuhan Yang Maha Esa atas segala rahmat dan karunia-Nya sehingga saya dapat menyelesaikan skripsi ini yang berjudul “Pemanfaatan General Purpose GPU berdasar Bahasa Pemrograman Julia untuk Komputasi Berunjuk Kerja Tinggi”. Skripsi ini disusun sebagai salah satu syarat untuk memperoleh gelar Sarjana di bidang Fisika.
+Puji syukur kehadirat Tuhan Yang Maha Esa atas segala rahmat dan karunia-Nya sehingga saya dapat menyelesaikan skripsi ini yang berjudul “Pemanfaatan \emph{General Purpose} GPU (\emph{Graphics Processing Unit}) menggunakan Bahasa Pemrograman Julia untuk Studi Kasus Penyelesaian Masalah Nilai Eigen dalam Fisika Kuantum”. Skripsi ini disusun sebagai salah satu syarat untuk memperoleh gelar Sarjana di bidang Fisika.
 
 Skripsi ini tidak akan terwujud tanpa bantuan, dukungan, dan bimbingan dari berbagai pihak. Oleh karena itu, dalam kesempatan ini saya ingin menyampaikan penghargaan dan ucapan terima kasih yang sebesar-besarnya kepada:
 
@@ -129,11 +137,11 @@ Skripsi ini tidak akan terwujud tanpa bantuan, dukungan, dan bimbingan dari berb
 	\item Kedua orangtua, Bapak Mudjianto dan Ibu Khoiruroh untuk kesabaran dan keyakinan akan setiap pilihan yang saya ambil.
 	      Dukungan dan doa mereka selalu memberkahi langkah ini sampai manapun.
 	\item Teman yang selalu mendampingi dengan penuh kasih dan cinta, Intan Putri Yudanti, yang mana selalu sabar menemani dan mengingatkan dalam pengerjaan skripsi ini, mengobati ketika sakit, memberikan arahan spiritual, hingga merekomendasikan tempat makan yang enak. Semoga selalu diberi kelancaran dalam berkegiatan.
-	\item Calon rekan sejawat, kawan-kawan Fisika UGM angkatan 2019, yang selalu memberikan dukungan moral dan bantuan dalam bentuk apa pun selama proses penulisan skripsi ini, secara khusus saya sebutkan: Samuel, yang sering kali memberikan masukan dan mengingatkan untuk selalu mengerjakan skripsi; Lucky, yang selalu membantu dalam penulisan LaTex; Oscar, yang selalu memberikan masukan sehingga saya berkesempatan untuk bekerja sambil kuliah.
+	\item Calon rekan sejawat, kawan-kawan Fisika UGM angkatan 2019, yang selalu memberikan dukungan moral dan bantuan dalam bentuk apa pun selama proses penulisan skripsi ini, secara khusus saya sebutkan: Samuel, yang sering kali memberikan masukan dan mengingatkan untuk selalu mengerjakan skripsi; Lucky, yang selalu membantu dalam penulisan LaTex; Oscar, yang selalu memberikan masukan sehingga saya berkesempatan untuk bekerja sambil kuliah; Syahrul, yang memberikan arahan skripsi dan selalu membawakanku Onigiri ketika saya sedang lapar.
 \end{itemize}
 
 \noindent
-Tanpa mereka, penulisan skripsi ini mustahil untuk selesai. Sekali lagi, terimkasih yang berlimpah kepada kalian semua, semoga Allah selalu memberikan kalian kesehatan dan kelancaran dalam menjalani segala urusan.
+Tanpa mereka, penulisan skripsi ini mustahil untuk selesai. Sekali lagi, terima kasih yang berlimpah kepada kalian semua, semoga Allah selalu memberikan kalian kesehatan dan kelancaran dalam menjalani segala urusan.
 
 Saya menyadari bahwa skripsi ini masih jauh dari sempurna. Oleh karena itu, kritik dan saran yang membangun sangat saya harapkan demi perbaikan dan penyempurnaan karya ini di masa mendatang. Semoga skripsi ini dapat memberikan manfaat dan kontribusi positif bagi perkembangan ilmu pengetahuan, khususnya di bidang komputasi.
 
@@ -141,10 +149,10 @@ Akhir kata, semoga Allah SWT senantiasa memberikan rahmat dan hidayah-Nya kepada
 
 \vspace{0.8cm}
 
-\begin{tabular}{p{7cm}c}
-	 & Yogyakarta, (Menyesuaikan) \\
-	 &                            \\
-	 &                            \\
+\begin{tabular}{p{7cm}r}
+	 & Yogyakarta, 13 Juni 2024 \\
+	 &                          \\
+	 &                          \\
 	 & Moh Rizal Alfarizi
 \end{tabular}
 %-----------------------------------------------------------------
@@ -210,9 +218,10 @@ Akhir kata, semoga Allah SWT senantiasa memberikan rahmat dan hidayah-Nya kepada
 %-----------------------------------------------------------------
 
 \begin{abstractind}
-	Penyelesaian permasalahan komputasi umumnya memerlukan sistem yang cepat dalam melakukan proses komputasi. Penggunaan Grapics Processing Unit (GPU) merupakan salah satu cara agar proses komputasi bisa lebih cepat dijalankan. Julia merupakan bahasa pemrograman baru yang mempunyai integrasi dengan GPU Nvidia melalui pustaka CUDA.jl. Simulasi perbandingan antara kecepatan eksekusi sistem series oleh CPU dan kecepatan eksekusi sistem paralel oleh GPU diperlukan untuk melihat seberapa jauh perbedaan durasi eksekusi pada operasi - operasi matriks. Hasilnya adalah kecepatan eksekusi sistem series oleh CPU mampu lebih cepat pada operasi matriks sederhana dan pada matriks berukuran kecil. Untuk operasi matriks yang kompleks dan ukuran matriks yang besar, diperoleh eksekusi sistem paralel oleh GPU lebih cepat. Perbedaan durasi paling besar antara eksekusi series oleh CPU dan eksekusi paralel oleh GPU ada pada operasi paling kompleks dan variasi ukuran matriks paling besar.
+	Penyelesaian permasalahan komputasi umumnya memerlukan sistem yang cepat dalam melakukan proses komputasi. Penggunaan \emph{Grapics Processing Unit} (GPU) merupakan salah satu cara agar proses komputasi bisa lebih cepat dijalankan. Julia merupakan bahasa pemrograman baru yang mempunyai integrasi dengan GPU Nvidia melalui pustaka CUDA.jl. Simulasi perbandingan antara kecepatan eksekusi sistem series oleh CPU dan kecepatan eksekusi sistem paralel oleh GPU diperlukan untuk melihat seberapa jauh perbedaan durasi eksekusi pada operasi - operasi matriks secara umum dan operasi matriks pada penyelesaian permasalahan nilai eigen dalam fisika komputasi. Hasilnya adalah kecepatan eksekusi sistem series oleh CPU mampu lebih cepat pada operasi matriks sederhana dan pada matriks berukuran kecil. Untuk operasi matriks yang kompleks dan ukuran matriks yang besar, diperoleh eksekusi sistem paralel oleh GPU lebih cepat. Perbedaan durasi paling besar antara eksekusi series oleh CPU dan eksekusi paralel oleh GPU ada pada operasi paling kompleks dan variasi ukuran matriks paling besar. Diperoleh juga hasil yang akurat jika dibandingkan nilai analitik nya pada simulasi permasalahan nilai eigen dalam fisika kuantum.
 
-
+	\vspace{0.4cm}
+	\noindent
 	Kata kunci: Sistem Paralel, GPU, Julia
 \end{abstractind}
 %-----------------------------------------------------------------
@@ -222,8 +231,10 @@ Akhir kata, semoga Allah SWT senantiasa memberikan rahmat dan hidayah-Nya kepada
 %Disini awal masukan untuk Abstract (ISI SESUAI DENGAN DATA ANDA!)
 %-----------------------------------------------------------------
 \begin{abstracteng}
-	Computational problem-solving generally requires a system that can perform computational processes quickly. The use of Grapics Processing Unit (GPU) is one way to accelerate these computational processes. Julia is a new programming language that integrates with Nvidia GPUs through the CUDA.jl library. A simulation comparing the execution speed of serial systems by the CPU and the parallel system execution speed by the GPU is needed to observe the differences in execution duration for matrix operations. The results show that the serial execution speed by the CPU is faster for simple matrix operations and smaller matrices. For complex matrix operations and larger matrices, the parallel execution by the GPU is faster. The most significant difference in duration between serial execution by the CPU and parallel execution by the GPU is found in the most complex operations and the largest matrix variations.
+	The resolution of computational problems generally requires a system that is fast in processing computations. The use of a Graphics Processing Unit (GPU) is one way to make computational processes run faster. Julia is a new programming language that has integration with Nvidia GPUs through the CUDA.jl library. A simulation comparison between the execution speed of series systems by CPU and the parallel system execution speed by GPU is needed to see how significant the differences in execution duration are for general matrix operations and matrix operations in solving eigenvalue problems in computational physics. The results show that the execution speed of series systems by the CPU is faster for simple matrix operations and for small matrices. For complex matrix operations and large matrix sizes, parallel system execution by the GPU is faster. The largest difference in duration between series execution by the CPU and parallel execution by the GPU occurs in the most complex operations and with the largest matrix size variations. Accurate results were also obtained when compared to the analytical values in simulations of eigenvalue problems in quantum physics.
 
+	\vspace{0.4cm}
+	\noindent
 	Keyword: Parallel Systems, GPU, Julia
 \end{abstracteng}
 %-----------------------------------------------------------------
@@ -291,4 +302,5 @@ Akhir kata, semoga Allah SWT senantiasa memberikan rahmat dan hidayah-Nya kepada
 \appendix
 \addcontentsline{toc}{chapter}{LAMPIRAN}
 \input{lampiran}
+
 \end{document}

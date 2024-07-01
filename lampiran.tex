@@ -408,3 +408,99 @@ function simulate(n::Int, n_loop::Int)
     return DataFrame(CPU=results_cpu, GPU=results_gpu)
 end
 \end{lstlisting}
+
+\chapter{PROGRAM VALIDASI NILAI EIGEN}
+\label{appx:eigenvalue_validation}
+
+\section{\emph{Module}}
+
+\begin{lstlisting}
+using LinearAlgebra
+using SparseArrays
+using Plots
+using CUDA
+using Statistics
+using Plots
+using DataFrames
+\end{lstlisting}
+
+\section{Konstanta dan Fungsi Pembantu}
+
+\subsection{Konstanta}
+
+\begin{lstlisting}
+hbar = 1.0545718e-34  # Konstanta Planck tereduksi (Joule sekon)
+m = 9.10938356e-31    # Massa elektron (kg)
+L = 2.0               # Panjang sumur potensial dalam meter
+\end{lstlisting}
+
+\subsection{Fungsi Pembantu}
+
+\begin{lstlisting}
+# Untuk mendapatkan nilai analitik nya
+function analytics_eigenvalues(n::Int)
+    return (n^2 * pi^2 * hbar^2) / (2 * m * L^2)
+end
+
+# Untuk mengonversi dari nilai eigen ke bentuk energi
+function convert_eigenvalue_to_energy(n::Int64, eigenvalue::Float32)
+    return (hbar^2 * eigenvalue) / (2 * m * ((L/n)^2))
+end
+\end{lstlisting}
+
+\section{Fungsi pembuat matriks persamaan schrodinger melalui pendekatan beda-hingga}
+
+\begin{lstlisting}
+function build_matrix(n::Int)
+    dx = 2.0f0 / n  # Menggunakan literal Float32
+    y = LinRange(-2.0f0, 2.0f0, n)  # Memastikan y adalah Float32
+
+    main_diag = fill(2.0f0, n)  # Isi dengan Float32
+    off_diag = fill(-1.0f0, n-1)  # Isi dengan Float32
+    a_sparse = spdiagm(0 => main_diag, 1 => off_diag, -1 => off_diag)
+
+    return Matrix{Float32}(a_sparse)  # Konversi eksplisit matriks ke Float32
+end
+\end{lstlisting}
+
+\section{Untuk dijalankan di GPU}
+
+\begin{lstlisting}
+function solve_gpu(A)
+    eigenvalues, eigenvectors = CUDA.@sync eigen(A)
+    idx = sortperm(eigenvalues)
+    eigenvalues = eigenvalues[idx]
+    eigenvectors = eigenvectors[:, idx]
+    return Array(eigenvalues), Array(eigenvectors)
+end
+\end{lstlisting}
+
+\section{Untuk dijalankan di CPU}
+
+\begin{lstlisting}
+function solve_cpu(A)
+    eigenvalues, eigenvectors = eigen(A)
+    idx = sortperm(eigenvalues)
+    eigenvalues = eigenvalues[idx]
+    eigenvectors = eigenvectors[:, idx]
+    return eigenvalues, eigenvectors
+end
+\end{lstlisting}
+
+\section{Simulasi}
+
+\begin{lstlisting}
+function simulate(n::Int)
+    A_cpu = build_matrix(n)
+    A_gpu = CuArray(A_cpu)
+    eigenvalues_gpu, eigenvectors_gpu = solve_gpu(A_gpu)
+    eigenvalues_cpu, eigenvectors_cpu = solve_gpu(A_gpu)
+
+    return DataFrame(
+        CPU=convert_eigenvalue_to_energy.(n, eigenvalues_cpu[1:10]), 
+        GPU=convert_eigenvalue_to_energy.(n, eigenvalues_gpu[1:10]), 
+        analitik=eigenvalues_analytics[1:10], 
+        perbedaan=((abs.(convert_eigenvalue_to_energy.(n, eigenvalues_cpu[1:10]) .- eigenvalues_analytics[1:10])) ./ eigenvalues_analytics[1:10]) .* 100
+        )
+end
+\end{lstlisting}

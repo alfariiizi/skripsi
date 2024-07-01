@@ -1,4 +1,4 @@
-\chapter{Metode Penelitian}
+\chapter{METODE PENELITIAN}
 
 % Pada bagian ini, penulis akan memaparkan metodologi yang digunakan untuk
 % memperdalam pemahaman mengenai aplikasi General Purpose GPU (GPGPU) dengan
@@ -46,7 +46,7 @@ berikut:
 		\hline
 		CPU               & Intel i7-10510U, 4.9 GHz, 4 Cores, 8 Logical Processor \\
 		\hline
-		GPU               & NVIDIA GeForce MX2500, 2GB                             \\
+		GPU               & NVIDIA GeForce MX250, 2GB                              \\
 		\hline
 		RAM               & 20 GB                                                  \\
 		\hline
@@ -138,15 +138,15 @@ eksekusi tersebut akan dianalisis perbedaan kecepatan eksekusi nya. Pada Gambar
 
 Sistem series dan sistem paralel dituliskan dalam Bahasa Julia. Penggunaan
 bahasa yang sama ini bertujuan untuk mengurangi hambatan - hambatan external
-seperti hambatan karena perbedaan compiler dari suatu bahasa pemrograman.
+seperti hambatan karena perbedaan \emph{compiler} dari suatu bahasa pemrograman.
 
 Proses komputasi paralel pada GPU menggunakan bantuan pustaka bernama
 CUDA.jl. CUDA.jl ini merupakan pustaka untuk melakukan komputasi pada
 sistem paralel GPU, khusus nya untuk Vendor GPU NVidia. Secara sederhana, cara
-kerja CUDA.jl ini adalah dengan mengirimkan data array dari CPU ke vertex
-shader di GPU, kemudian dilakukan kalkulasi yang hasilnya akan dikirimkan ke
-bagian fragment shader di GPU. Proses kalkulasi yang dijalankan di GPU disebut
-dengan \textbf{kernel}. Kernel ini pada dasarnya hanya berupa \emph{function}
+kerja CUDA.jl ini adalah dengan mengirimkan data array dari CPU ke \emph{vertex
+	shader} di GPU, kemudian dilakukan kalkulasi yang hasilnya akan dikirimkan ke
+bagian \emph{fragment shader} di GPU. Proses kalkulasi yang dijalankan di GPU disebut
+dengan \textbf{kernel}. \emph{Kernel} ini pada dasarnya hanya berupa \emph{function}
 Julia yang dijalankan di GPU.
 
 \subsection{Proses Eksekusi Operasi Matriks}

@@ -24,14 +24,14 @@ isian warna pada suatu area \citep{wikipediaGraphicsProcessingUnit2023}.
 
 Dalam perkembangannya, NVIDIA memperkenalkan GPU pertama mereka yang bernama
 NVIDIA GeForce 256. GPU ini mampu melakukan pemrosesan grafis secara
-\emph{real-time}, dan mampu melakukan banyak perhitungan floating-point dari
-tahan shading vertex hingga tahap shading fragment. NVIDIA GeForce 256 juga
-memiliki bandwidth memori yang tinggi
+\emph{real-time}, dan mampu melakukan banyak perhitungan \emph{floating-point} dari
+tahap \emph{shading vertex} hingga tahap \emph{shading fragment}. NVIDIA GeForce 256 juga
+memiliki \emph{bandwidth} memori yang tinggi
 \citep{dallyEvolutionGraphicsProcessing2021}. Pada tahun berikutnya, NVIDIA
 memperkenalkan NVIDIA GeForce 8 dengan unit pemrosesan stream generik yang
 baru. NVIDIA GeForce 8 menunjukkan kemajuan performa komputasi yang jauh lebih
 baik daripada CPU. Dari perbedaan performa inilah kemudian para peneliti
-menemukan cara untuk mengubah shader vertex dan shader fragment, menjadi suatu
+menemukan cara untuk mengubah \emph{shader vertex} dan \emph{shader fragment}, menjadi suatu
 data yang dapat diolah oleh GPU secara paralel. Proses penggunaan GPU untuk
 melakukan komputasi umum secara paralel disebut dengan \emph{General Purpose
 	GPU} atau GPGPU. Beberapa bidang yang menggunakan GPGPU ini diantara lain
@@ -51,7 +51,7 @@ robot, perangkat rumah pintar, dan banyak bidang lainnya
 
 % #### Kemajuan Teknologi dan Penemuan GPGPU
 Perkembangan GPGPU menjadi lebih praktis dan populer setelah tahun 2001, dengan
-munculnya shader yang dapat diprogram dan mendukung \emph{floating point} pada
+munculnya \emph{shader} yang dapat diprogram dan mendukung \emph{floating point} pada
 prosesor grafis. Masalah yang melibatkan vektor dan matriks yang mempunyai
 n-dimensi dapat dengan mudah diterjemahkan dan diproses oleh GPU. Pada tahun
 2003, ditemukan pendekatan berbasis GPU untuk solusi masalah aljabar linear
@@ -83,7 +83,7 @@ persamaan linear dan simulasi berbasis fisika. Contoh lain nya adalah simulasi
 aliran dengan batasan kompleks dan algoritma jarak terpendek untuk semua
 pasangan, seperti yang digunakan dalam prediksi struktur protein. Jenis
 komputasi ini berkinerja baik pada GPU karena sifatnya yang sangat
-data-paralel: mereka terdiri dari aliran besar elemen data, di mana kernel
+data-paralel: mereka terdiri dari aliran besar elemen data, di mana \emph{kernel}
 komputasi yang identik diterapkan \citep{pharrGPUGemsProgramming2005}.
 
 \subsection{Arsitektur dan karakteristik GPU}
@@ -98,7 +98,7 @@ komputasi yang identik diterapkan \citep{pharrGPUGemsProgramming2005}.
 \end{figure}
 
 Secara arsitektur, GPU memiliki arsitektur yang hampir sama dengan CPU. Namun
-CPU berfokus pada kecepatan akses memori cache. Sedangkan GPU dirancang untuk
+CPU berfokus pada kecepatan akses memori \emph{cache}. Sedangkan GPU dirancang untuk
 melakukan komputasi data secara paralel, sehingga dibutuhkan sebanyak mungkin
 inti yang tersedia, seperti yang terlihat pada Gambar \ref{gambar gpu-cpu cores}.
 Arsitektur yang digunakan oleh GPU biasanya disebut dengan arsitektur
@@ -124,7 +124,7 @@ pemrosesan paralel \citep{pharrGPUGemsProgramming2005}.
 
 % 5. GPU dalam High Performance Computing (HPC)
 
-Dalam konteks High Performance Computing, GPU kini menjadi pilihan utama untuk
+Dalam konteks \emph{High Performance Computing} (HPC), GPU kini menjadi pilihan utama untuk
 mempercepat beban kerja komputasi. Penggunaan GPGPU telah meluas ke berbagai
 bidang, termasuk pemodelan 3D, infrastruktur VDI, dan lebih lanjut, menunjukkan
 fleksibilitas dan kekuatan GPU dalam berbagai skenario komputasi
@@ -1093,6 +1093,19 @@ Persamaan diatas sudah dalam bentuk matriks, sehingga akan lebih mudah untuk dim
 
 \noindent
 Pada persamaan \ref{eq:schrodinger_finite_matrix}, nilai $b_i$ dianggap nol. Namun, jika nilai $b_i$ ini tidak dianggap nol, maka berdasarkan kaitan diatas, dapat diperoleh nilai $b_i$ dari nilai $gamma_i$ nya.
+
+Untuk melakukan validasi hasil antara numerik dan analitik dari persamaan schrodinger pada sumur tak hingga, nilai eigen yang diperoleh dari Persamaan \ref{eq:schrodinger_finite_matrix}, dapat dimasukkan ke persamaan berikut yang mana merupakan penyusunan ulang dari Persamaan \ref{eq:unitless_schrodinger_finite}
+
+\begin{equation} \label{eq:numerical_energy}
+	E = \frac{\hbar^2 \lambda}{2m (\Delta x)^2}
+\end{equation}
+
+\noindent
+Sedangkan besar energi secara analitis, berdasarkan \cite{griffithsIntroductionQuantumMechanics2019}, dapat diperoleh dengan persamaan
+
+\begin{equation} \label{eq:analytical_energy}
+	E = \frac{n^2 \pi^2 \hbar^2}{2m L^2}.
+\end{equation}
 
 % \section{Fisika Komputasi}
 

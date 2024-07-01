@@ -3,7 +3,7 @@
 \ProvidesClass{skripsiactugm}[2013/06/07 v2.0 The Universitas Gadjah Mada Mathematics Thesis Class]
 
 \LoadClass[a4paper,12pt]{report}
-\RequirePackage[english,bahasa]{babel}
+\RequirePackage[english,indonesian]{babel}
 \RequirePackage{times}
 \RequirePackage{setspace}
 \RequirePackage{indentfirst}
@@ -29,6 +29,23 @@
 \RequirePackage{natbib}
 \bibliographystyle{apalike.bst}
 
+\hyphenation{
+	ma-ta-ha-ri
+	te-le-kom-u-ni-ka-si
+	bio-te-kno-lo-gi
+	di-ja-lan-kan
+	men-da-pat-kan
+	ke-ce-pa-tan
+	mem-be-ri-kan
+	di-mak-si-mal-kan
+	bah-kan
+	se-dang-kan
+	men-ge-nai
+	di-la-ku-kan
+	di-lan-jut-kan
+	di-ka-re-na-kan
+}
+
 \renewcommand{\baselinestretch}{1.5}
 \parskip0.15cm
 
@@ -52,7 +69,6 @@
 \setlength{\parindent}{3em} %Indent approx 6 character
 
 \pagestyle{myheadings}
-
 
 \setcounter{secnumdepth}{3}
 \renewcommand{\thechapter}{\Roman{chapter}}
@@ -137,7 +153,7 @@
 \usepackage[pdftex,bookmarks=true]{hyperref}
 
 
-\def\captionsbahasa{%
+\def\captionsindonesian{%
 	\def\prefacename{PRAKATA}%
 	\def\contentsname{DAFTAR ISI}%
 	\def\listfigurename{DAFTAR GAMBAR}%
@@ -208,6 +224,11 @@
 \newcommand{\@fullname}{}
 \newcommand{\NIM}[1]{\gdef\@NIM{#1}}
 \newcommand{\@NIM}{}
+\newcommand{\draftfinishdate}[1]{\gdef\@draftfinishdate{#1}}
+\newcommand{\@draftfinishdate}{\number\day~\ifcase\month\or
+		Januari\or Pebruari\or Maret\or April\or Mei\or Juni\or
+		Juli\or Agustus\or September\or Oktober\or November\or Desember\fi
+	\space \number\year}
 \newcommand{\examdate}[1]{\gdef\@examdate{#1}}
 \newcommand{\@examdate}{\number\day~\ifcase\month\or
 		Januari\or Pebruari\or Maret\or April\or Mei\or Juni\or
@@ -370,7 +391,7 @@
 	\newpage\thispagestyle{empty}%
 	\phantomsection
 	\addcontentsline{toc}{chapter}{HALAMAN PENGESAHAN}
-	\includepdf[fitpaper]{pengesahanskripsi}
+	\includepdf[fitpaper]{lembar-pengesahan-skripsi}
 }
 
 %------------------------------------------------------------
@@ -393,6 +414,7 @@
 		Tahun terdaftar & : & \@yearenrollment \\
 		Program Studi   & : & \@program        \\
 		Fakultas        & : & \@faculty
+		\vspace{0.4cm}
 	\end{tabular}
 	menyatakan bahwa dalam dokumen ilmiah skripsi ini tidak terdapat bagian dari
 	karya ilmiah lain yang telah diajukan untuk memperoleh gelar akademik di suatu
@@ -410,12 +432,13 @@
 
 	\vspace{1.5cm}
 	\begin{tabular}{p{7cm}c}
-		 & \@city,\space\@examdate             \\
-		 &                                     \\
-		 &                                     \\
-		 & {\scriptsize\it Materai Rp6.000,00} \\
-		 &                                     \\
-		 & \space\@fullname                    \\
+		% & \@city,\space\@examdate              \\
+		 & \@city,\space \@draftfinishdate      \\
+		 &                                      \\
+		 &                                      \\
+		 & {\scriptsize\it Materai Rp10.000,00} \\
+		 &                                      \\
+		 & \space\@fullname                     \\
 		 & \space\@NIM
 	\end{tabular}
 	\vfill \addcontentsline{toc}{chapter}{HALAMAN PERNYATAAN BEBAS PLAGIASI} }
@@ -424,7 +447,7 @@
 	\newpage\thispagestyle{chapterheading}%
 	\phantomsection
 	\addcontentsline{toc}{chapter}{HALAMAN PERNYATAAN}
-	\includepdf[fitpaper]{pernyataan}
+	\includepdf[fitpaper]{surat-bebas-plagiasi}
 }
 
 %------------------------------------------------------------
@@ -519,3 +542,4 @@
 	\clearpage\pagenumbering{arabic}\setcounter{page}{1}}
 
 \endinput
+

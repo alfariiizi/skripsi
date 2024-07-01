@@ -111,6 +111,8 @@ Python, dan memiliki performa yang baik seperti C++
 yang membuat Julia menjadi bahasa pemrograman paling cocok untuk implementasi
 GPGPU pada saat ini.
 
+Berdasarkan \cite{jeffbezansonJuliaProgrammingLanguage2024}, Julia mempunyai ekosistem yang banyak ketika digunakan untuk menyelesaikan permasalahan komputasi ilmiah secara umum. Salah satu permasalahan komputasi adalah permasalahan pencarian nilai eigen dalam fisika kuantum. Untuk itu, penggunaan Julia ini juga diharapkan dapat mempermudah dalam melakukan implementasi penyelesaian permasalahan pencarian nilai eigen, dan diharapkan juga diperoleh nilai yang akurat ketika dibandingkan dengan nilai anlitik nya.
+
 \section{Rumusan Masalah}
 Berdasarkan latar belakang yang telah dipaparkan, maka rumusan masalah yang
 diangkat pada penelitian ini adalah sebagai berikut:
@@ -134,10 +136,10 @@ diangkat pada penelitian ini adalah sebagai berikut:
 \begin{enumerate}
 	\item Pada kajian ini, sistem series dan paralel menggunakan bahasa yang sama, yakni
 	      Bahasa Julia, serta kajian ini tidak akan membandingkan performa sistem series
-	      dan paralel pada bahasa lain
+	      dan paralel pada bahasa lain. Tidak menggunakan bahasa lain, seperti Python, dikarenakan Julia sudah mendukung sistem \emph{High Performance Computing} (HPC), sedangkan Python belum mendukung sistem HPC. Tidak menggunakan bahasa yang mendukung sistem HPC, seperti C/C++, dikarenakan Julia mendukung berbagai macam komputasi ilmiah, sedangkan C/C++ belum mendukung berbagai macam komputasi ilmiah. Serta, pada \href{https://julialang.org/}{Website Julia}, secara eksplisit dijelaskan bahwa fitur utama Julia adalah Komputasi Paralel pada GPU.
 
 	\item Perbandingan performa komputasi series dan komputasi parelel dilakukan dalam
-	      lingkup operasi berbasis matriks
+	      lingkup permasalahan fisika berbasis matriks.
 \end{enumerate}
 
 \section{Manfaat Penelitian}

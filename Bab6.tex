@@ -2,14 +2,13 @@
 \section{Kesimpulan}
 Dari penelitian ini, dapat disimpulkan
 \begin{enumerate}
-	\item Cara kerja komputasi di sistem paralel oleh GPU adalah dengan menjalankan program di CPU, kemudian mengirimkan data dari CPU ke GPU, GPU melakukan komputasi pada data yang diterima, kemudian hasil kalkulasi akan dikirimkan dari GPU ke CPU. Untuk mengatur supaya CPU menunggu kalkulasi GPU, perlu ditambahkan \cw{@async} pada kode Julia nya.
+	\item Cara kerja komputasi di sistem paralel oleh GPU adalah dengan menjalankan program di CPU, kemudian mengirimkan data dari CPU ke GPU, GPU melakukan komputasi pada data yang diterima, kemudian hasil kalkulasi akan dikirimkan dari GPU ke CPU. Untuk mengatur supaya CPU menunggu kalkulasi GPU, perlu ditambahkan \cw{@sync} pada kode Julia nya.
 	\item Pada operasi yang sederhana dan pada ukuran matriks yang kecil, eksekusi sistem series oleh CPU dapat lebih cepat daripada eksekusi sistem paralel oleh GPU. Namun, pada operasi yang kompleks dan pada ukuran matriks yang besar, eksekusi sistem paralel oleh GPU dapat lebih cepat daripada eksekusi sistem series oleh CPU.
 \end{enumerate}
 
-% \section{Saran}
-% \begin{enumerate}
-% \item Dilakukan \textit{data cleaning} sebelum menggunakan data latih dan data uji
-% \item Membuka kemungkinan pada jenis/bentuk arsitektur lain, khususnya pemanfaatan \textit{transfer learning} dalam pembentukan arsitektur.
-
-% \item Penulis hanya mempunyai RAM yang terbatas, sehingga hasil pengujian pada ukuran matriks yang lebih besar masih belum bisa dilakukan
-% \end{enumerate}
+\section{Saran}
+\begin{enumerate}
+	\item Menjalankan simulasi di laptop berjenis \emph{notebook} memunculkan keterbatasan berupa GPU yang mempunyai tujuan utama untuk memproses \emph{rendering} grafis sederhana. Jika simulasi dijalankan di \emph{laptop gaming} yang mana mempunyai GPU dengan kecepatan yang cepat dan jumlah inti yang banyak, kemungkinan besar akan diperoleh hasil yang lebih baik pada penjalanan eksekusi di GPU
+	\item Dimungkinkan untuk menjalankan simulasi di layanan berbasis awan seperti Google Colab
+	\item Dimungkinkan untuk membandingkan performa antara bahasa yang mendukung sistem \emph{HPC}, seperti Julia, dengan bahasa \emph{non-HPC} seperti Python
+\end{enumerate}

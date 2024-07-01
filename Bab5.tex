@@ -1,6 +1,6 @@
 \chapter{HASIL DAN PEMBAHASAN}
 
-Kajian mengenai Pemanfaatan General Purpose GPU dengan Bahasa Pemrograman Julia untuk Komputasi Berunjuk Kerja Tinggi ini diawali dengan melakukan pengukuran kecepatan eksekusi secara series oleh CPU dan secara paralel oleh GPU pada operasi penjumlahan, kemudian diakhiri dengan operasi pencarian nilai eigen.
+Kajian mengenai Pemanfaatan \emph{General Purpose} GPU (\emph{Graphics Processing Unit}) menggunakan Bahasa Pemrograman Julia untuk Studi Kasus Penyelesaian Masalah Nilai Eigen dalam Fisika Kuantum ini diawali dengan melakukan pengukuran kecepatan eksekusi secara series oleh CPU dan secara paralel oleh GPU pada operasi penjumlahan, kemudian diakhiri dengan operasi pencarian nilai eigen.
 
 % Operasi penjumlahan dinilai operasi paling sederhana sehingga dilakukan di paling awal. Sedangkan operasi pencarian nilai eigen dinilai sebagai operasi paling kompleks sehingga dilakukan di paling akhir.
 
@@ -53,6 +53,105 @@ Secara garis besar, proses eksekusi program yang dikalkulasi di GPU dapat digamb
 \end{enumerate}
 
 Pada penjelasan diatas, penulis menggunakan kode simulasi operasi penjumlahan pada Lampiran \ref{appx:addition}. Untuk simulasi operasi lainnya, secara garis besar mempunyai proses eksekusi yang sama seperti operasi penjumlahan. Semua kode simulasi sudah penulis lampirkan di bagian Lampiran.
+
+\section{Validasi Hasil Simulasi}
+
+Sebelum memasuki bagian hasil simulasi perbandingan durasi eksekusi sistem series oleh CPU dan sistem paralel oleh GPU, diperlukan validasi hasil simulasi agar dapat memastikan bahwa simulasi telah berjalan semestinya. Penulis hanya akan melakukan validasi hasil pada simulasi pencarian nilai eigen, dikarenakan pencarian nilai eigen ini merupakan satu satu nya metode yang menggunakan data elemen bukan acak, melainkan menggunakan data matriks berdasarkan Persamaan \ref{eq:schrodinger_finite_matrix}.
+
+Dari Persamaan \ref{eq:schrodinger_finite_matrix}, akan diperoleh nilai eigen yang mana dapat dikonversi ke bentuk energi dengan menggunakan Persamaan \ref{eq:numerical_energy}, dan hasilnya dapat dibandingkan dengan Persamaan \ref{eq:analytical_energy}. Pada validasi ini penulis hanya menggunakan 3 ukuran matriks, yakni 100x100 (mewakili matriks berukuran kecil), 1000x1000 (mewakili matriks berukuran menengah), dan 9920x9920 (mewakili matriks berukuran besar). Tabel \ref{tab:result_validation_1}, Tabel \ref{tab:result_validation_2}, dan Tabel \ref{tab:result_validation_3}.
+
+\begin{table}[H]
+	\centering
+	\caption{Hasil Validasi Nilai Energi pada pendekatan analitik dan numerik dengan Matriks Berukuran 100x100}
+	\label{tab:result_validation_1}
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		\textbf{Keadaan} & \textbf{CPU (Joule)} & \textbf{GPU (Joule)} & \textbf{Analitik (Joule)} & \textbf{Perbedaan (\%)} \\
+		\hline
+		1                & 1.47645e-38          & 1.47645e-38          & 1.50617e-38               & 1.97311                 \\
+		2                & 5.90413e-38          & 5.90413e-38          & 6.02467e-38               & 2.00075                 \\
+		3                & 1.32788e-37          & 1.32788e-37          & 1.35555e-37               & 2.04094                 \\
+		4                & 2.35934e-37          & 2.35934e-37          & 2.40987e-37               & 2.09649                 \\
+		5                & 3.6838e-37           & 3.6838e-37           & 3.76542e-37               & 2.16762                 \\
+		6                & 5.29996e-37          & 5.29996e-37          & 5.4222e-37                & 2.25445                 \\
+		7                & 7.20627e-37          & 7.20627e-37          & 7.38022e-37               & 2.35695                 \\
+		8                & 9.40088e-37          & 9.40088e-37          & 9.63947e-37               & 2.47509                 \\
+		9                & 1.18817e-36          & 1.18817e-36          & 1.22e-36                  & 2.60884                 \\
+		10               & 1.46462e-36          & 1.46462e-36          & 1.50617e-36               & 2.75814                 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Hasil Validasi Nilai Energi pada pendekatan analitik dan numerik dengan Matriks Berukuran 1000x1000}
+	\label{tab:result_validation_2}
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		\textbf{Keadaan} & \textbf{CPU (Joule)} & \textbf{GPU (Joule)} & \textbf{Analitik (Joule)} & \textbf{Perbedaan (\%)} \\
+		\hline
+		1                & 1.51197e-38          & 1.51197e-38          & 1.50617e-38               & 0.385553                \\
+		2                & 6.01974e-38          & 6.01974e-38          & 6.02467e-38               & 0.0817454               \\
+		3                & 1.35363e-37          & 1.35363e-37          & 1.35555e-37               & 0.141764                \\
+		4                & 2.40582e-37          & 2.40582e-37          & 2.40987e-37               & 0.168109                \\
+		5                & 3.75862e-37          & 3.75862e-37          & 3.76542e-37               & 0.180618                \\
+		6                & 5.41201e-37          & 5.41201e-37          & 5.4222e-37                & 0.187963                \\
+		7                & 7.36598e-37          & 7.36598e-37          & 7.38022e-37               & 0.192921                \\
+		8                & 9.62051e-37          & 9.62051e-37          & 9.63947e-37               & 0.196658                \\
+		9                & 1.21756e-36          & 1.21756e-36          & 1.22e-36                  & 0.199811                \\
+		10               & 1.50312e-36          & 1.50312e-36          & 1.50617e-36               & 0.202592                \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[H]
+	\centering
+	\caption{Hasil Validasi Nilai Energi pada pendekatan analitik dan numerik dengan Matriks Berukuran 9920x9920}
+	\label{tab:result_validation_3}
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		\textbf{Keadaan} & \textbf{CPU (Joule)} & \textbf{GPU (Joule)} & \textbf{Analitik (Joule)} & \textbf{Perbedaan (\%)} \\
+		\hline
+		1                & 4.13446e-38          & 4.13446e-38          & 1.50617e-38               & 174.502                 \\
+		2                & 1.0441e-37           & 1.0441e-37           & 6.02467e-38               & 73.3049                 \\
+		3                & 1.57082e-37          & 1.57082e-37          & 1.35555e-37               & 15.8808                 \\
+		4                & 2.95729e-37          & 2.95729e-37          & 2.40987e-37               & 22.7161                 \\
+		5                & 4.51511e-37          & 4.51511e-37          & 3.76542e-37               & 19.9101                 \\
+		6                & 7.20077e-37          & 7.20077e-37          & 5.4222e-37                & 32.8017                 \\
+		7                & 8.57807e-37          & 8.57807e-37          & 7.38022e-37               & 16.2306                 \\
+		8                & 9.8158e-37           & 9.8158e-37           & 9.63947e-37               & 7.50736                 \\
+		9                & 1.38373e-36          & 1.38373e-36          & 1.22e-36                  & 13.4209                 \\
+		10               & 1.58821e-36          & 1.58821e-36          & 1.50617e-36               & 5.44722                 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+Berdasarkan Tabel \ref{tab:result_validation_1}, Tabel \ref{tab:result_validation_2}, dan Tabel \ref{tab:result_validation_3}; pendekatan metode beda hingga pada persamaan schrodinger mempunyai hasil nilai paling bagus jika menggunakan matriks yang ukuran nya menengah, yakni dengan matriks dengan kisaran ukuran 1000x1000, yang mana mempunyai perbedaan kurang dari 1\% jika dibandingkan dengan hasil analitik nya.
+
+Berdasarkan jumlah diskritisasi, seharusnya semakin besar ukuran matriks menghasilkan peningkatan resolusi. Namun pada ukuran 9920x9920, diperoleh hasil yang menjauhi nilai analitik nya. Ini kemungkinan disebabkan karena ukuran matriks 9920x9920 merupakan ukuran dimana batas matriks bisa dijalankan oleh laptop penulis (batas maksimal 9924x9924), sehingga kemungkinan terdapat kendala yang menyebabkan nilai nya menjadi menjauhi hasil analitik nya. Kemungkinan lainnya adalah, ukuran matriks yang melebihi 1000x1000 akan menghasilkan nilai eigen yang divergensi pada pendekatan beda-hingga untuk Persamaan Schrodinger.
+
+Hasil grafik validasi fungsi eigen dapat dilihat pada Gambar \ref{img:evaluation_1}, Gambar \ref{img:evaluation_2}, dan Gambar \ref{img:evaluation_3}, yang mana berdasarkan \cite{griffithsIntroductionQuantumMechanics2019} hasil grafik tersebut memiliki hasil yang sesuai dengan grafik fungsi eigen analitik nya.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=12cm, scale=1]{images/penelitian/evaluation_1.png}
+	\caption{Grafik Fungsi Eigen berdasarkan Pendekatan Numerik pada Keadaan Dasar}
+	\label{img:evaluation_1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=14cm, scale=1]{images/penelitian/evaluation_2.png}
+	\caption{Grafik Fungsi Eigen berdasarkan Pendekatan Numerik pada Keadaan n = 1}
+	\label{img:evaluation_2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=14cm, scale=1]{images/penelitian/evaluation_3.png}
+	\caption{Grafik Fungsi Eigen berdasarkan Pendekatan Numerik pada Keadaan n = 2}
+	\label{img:evaluation_3}
+\end{figure}
 
 \section{Hasil Simulasi}
 
@@ -269,28 +368,34 @@ Simulasi operasi penjumlahan hingga simulasi operasi inverse, penulis menggunaka
 	\label{img:result_eigenvalue_schrodinger}
 \end{figure}
 
-Berdasarkan Gambar \ref{img:result_eigenvalue_schrodinger}, pada ukuran matriks yang kecil diperoleh keceaptan eksekusi series oleh CPU yang lebih cepat daripada kecepatan eksekusi paralel oleh GPU. Kemudian, seiring bertambahnya ukuran matriks, diperoleh kecepatan eksekusi paralel oleh GPU yang lebih cepat daripada kecepatan eksekusi series oleh CPU.
-
 \begin{table}[H]
 	\centering
 	\caption{Hasil dari Pencarian Nilai Eigen}
 	\label{tab:result_eigenvalue_schrodinger}
 	\begin{tabular}{ccc}
 		\toprule
-		Variasi & CPU (s)    & GPU (s)   \\
+		Variasi & CPU (s)   & GPU (s)  \\
 		\midrule
-		1       & 0.000021   & 0.000514  \\
-		2       & 0.000851   & 0.001738  \\
-		3       & 0.006942   & 0.004741  \\
-		4       & 0.151598   & 0.071691  \\
-		5       & 0.466806   & 0.337955  \\
-		6       & 16.790000  & 6.325000  \\
-		7       & 129.823000 & 45.029000 \\
+		1       & 0.000021  & 0.000514 \\
+		2       & 0.000851  & 0.001738 \\
+		3       & 0.006942  & 0.004741 \\
+		4       & 0.151598  & 0.071691 \\
+		5       & 0.466806  & 0.337955 \\
+		6       & 16.79000  & 6.32500  \\
+		7       & 129.82300 & 45.02900 \\
+		8       & 132.49300 & 49.32900 \\
+		9       & 133.11500 & 50.26700 \\
+		10      & 133.79200 & 50.26700 \\
+		11      & 132.51000 & 49.39700 \\
 		\bottomrule
 	\end{tabular}
 \end{table}
 
-Berdasarkan Tabel \ref{tab:result_eigenvalue_schrodinger}, durasi eksekusi series oleh CPU dan kecepatan eksekusi paralel oleh GPU mempunyai nilai yang hampir sama. Pada variasi ke ke-6, kecepatan eksekusi series oleh CPU mempunyai nilai yang kurang lebih $2,65$ kali lebih lambat daripada kecepatan eksekusi paralel oleh GPU. Sedangkan pada variasi ke ke-7, kecepatan eksekusi series oleh CPU mempunyai nilai yang kurang lebih $2,88$ kali lebih lambat daripada kecepatan eksekusi paralel oleh GPU. Perbedaan durasi eksekusi antara sistem series dan paralel pada simulasi pencarian nilai eigen ini tergolong tidak terlalu besar. Kemiripan kecepatan eksekusi ini diperkirakan karena sebagian besar Persamaan \ref{eq:schrodinger_finite_matrix} mempunyai elemen matriks yang bernilai nol, sehingga kecepatan eksekusi sistem series oleh CPU dapat mengeksekusi operasi dengan cepat. Namun, jika matriks diperbesar lagi, kemungkinan akan diperoleh perbedaan yang durasi eksekusi yang lebih jauh lagi antara eksekusi series oleh CPU dan eksekusi paralel oleh GPU.
+Berdasarkan Gambar \ref{img:result_eigenvalue_schrodinger}, pada ukuran matriks yang kecil diperoleh keceaptan eksekusi series oleh CPU yang lebih cepat daripada kecepatan eksekusi paralel oleh GPU. Kemudian, seiring bertambahnya ukuran matriks, diperoleh kecepatan eksekusi paralel oleh GPU yang lebih cepat daripada kecepatan eksekusi series oleh CPU.
+
+Berdasarkan Tabel \ref{tab:result_eigenvalue_schrodinger}, durasi eksekusi series oleh CPU dan kecepatan eksekusi paralel oleh GPU mempunyai nilai yang hampir sama. Pada variasi ke ke-6, kecepatan eksekusi series oleh CPU mempunyai nilai yang kurang lebih $2,65$ kali lebih lambat daripada kecepatan eksekusi paralel oleh GPU. Sedangkan pada variasi ke ke-7, kecepatan eksekusi series oleh CPU mempunyai nilai yang kurang lebih $2,88$ kali lebih lambat daripada kecepatan eksekusi paralel oleh GPU. Kemudian pada variasi ke-8 hingga ke-11, diperoleh durasi eksekusi yang hampir sama antar variasi. Pada umumnya, Julia akan menggunakan \emph{Divide-and-Conquer} atau \emph{Metode Tridiagonal QR} pada matriks simetris. Kompleksitas kedua metode tersebut adalah $\mathcal{O}(n^3)$, sehingga perbedaan ukuran matriks yang kecil tidak akan terlalu mempengaruhi kecepatan durasi eksekusi sistem series dan sistem paralel.
+
+Perbedaan durasi eksekusi antara sistem series dan sistem paralel yang tidak terlalu besar diperkirakan karena sebagian besar Persamaan \ref{eq:schrodinger_finite_matrix} mempunyai elemen matriks yang bernilai nol, sehingga kecepatan eksekusi sistem series oleh CPU dapat mengeksekusi operasi dengan cepat. Namun, jika matriks diperbesar lagi, kemungkinan akan diperoleh perbedaan yang durasi eksekusi yang lebih jauh lagi antara eksekusi series oleh CPU dan eksekusi paralel oleh GPU.
 
 \section{Pembahasan Secara Umum}
 

@@ -92,34 +92,34 @@
 
 \usepackage{titletoc}
 \titlecontents{chapter}[0cm]
-  {\vspace{-1.3ex}}
-  {\bfseries\parbox{1.75cm}{\vspace{-0.5ex}\chaptername\ \thecontentslabel}}
-  {\bfseries}
-  {\bfseries\titlerule*[0.2cm]{.}\contentspage}
+{\vspace{-1.3ex}}
+{\bfseries\parbox{1.75cm}{\vspace{-0.5ex}\chaptername\ \thecontentslabel}}
+{\bfseries}
+{\bfseries\titlerule*[0.2cm]{.}\contentspage}
 
 \titlecontents{section}[1.8em]
-  {\vspace{-1.7ex}}
-  {\hspace{-1.75em}\thecontentslabel ~~}
-  {}
-  {\titlerule*[0.2cm]{.}\contentspage}
+{\vspace{-1.7ex}}
+{\hspace{-1.75em}\thecontentslabel ~~}
+{}
+{\titlerule*[0.2cm]{.}\contentspage}
 
 \titlecontents{subsection}[1.9cm]
-  {\vspace{-1.7ex}}
-  {\hspace{-2.55em}\thecontentslabel ~~}
-  {}
-  {\titlerule*[0.2cm]{.}\contentspage}
+{\vspace{-1.7ex}}
+{\hspace{-2.55em}\thecontentslabel ~~}
+{}
+{\titlerule*[0.2cm]{.}\contentspage}
 
 
 %Untuk setting penomoran teorema, lemma, definisi, dll..
 \newtheoremstyle{dotlesstheorem}  % follow `plain` defaults but change HEADSPACE.
-  {}   % ABOVESPACE
-  {0.4cm}   % BELOWSPACE
-  {\itshape}  % BODYFONT
-  {0pt}       % INDENT (empty value is the same as 0pt)
-  {\bfseries} % HEADFONT
-  {}         % HEADPUNCT
-  {  }  % HEADSPACE. `plain` default: {5pt plus 1pt minus 1pt}
-  {}          % CUSTOM-HEAD-SPEC
+{}   % ABOVESPACE
+{0.4cm}   % BELOWSPACE
+{\itshape}  % BODYFONT
+{0pt}       % INDENT (empty value is the same as 0pt)
+{\bfseries} % HEADFONT
+{}         % HEADPUNCT
+{  }  % HEADSPACE. `plain` default: {5pt plus 1pt minus 1pt}
+{}          % CUSTOM-HEAD-SPEC
 \theoremstyle{dotlesstheorem}
 \newtheorem{teorema}{Teorema}[section]
 \renewcommand{\theteorema}{\arabic{chapter}.\arabic{section}.\arabic{teorema}}
@@ -130,14 +130,14 @@
 \newtheorem{definisi}[teorema]{Definisi}
 
 \newtheoremstyle{dotlessexample}  % follow `plain` defaults but change HEADSPACE.
-  {}   % ABOVESPACE
-  {0.4cm}   % BELOWSPACE
-  {}  % BODYFONT
-  {0pt}       % INDENT (empty value is the same as 0pt)
-  {\bfseries} % HEADFONT
-  {}         % HEADPUNCT
-  {  }  % HEADSPACE. `plain` default: {5pt plus 1pt minus 1pt}
-  {}          % CUSTOM-HEAD-SPEC
+{}   % ABOVESPACE
+{0.4cm}   % BELOWSPACE
+{}  % BODYFONT
+{0pt}       % INDENT (empty value is the same as 0pt)
+{\bfseries} % HEADFONT
+{}         % HEADPUNCT
+{  }  % HEADSPACE. `plain` default: {5pt plus 1pt minus 1pt}
+{}          % CUSTOM-HEAD-SPEC
 \theoremstyle{dotlessexample}
 \newtheorem{contoh}[teorema]{Contoh}
 \newtheorem{algoritma}{Algoritma}[chapter]
@@ -160,40 +160,40 @@
 
 
 \def\captionsbahasa{%
-\def\prefacename{PRAKATA}%
-\def\contentsname{DAFTAR ISI}%
-\def\listfigurename{DAFTAR GAMBAR}%
-\def\listtablename{DAFTAR TABEL}%
-\def\listappendixname{DAFTAR LAMPIRAN}%
-\def\nomenclaturename{DAFTAR LAMBANG}%
-\def\abstractname{INTISARI}%
-\def\partname{BAGIAN}%
-\def\chaptername{BAB}%
-\def\appendixname{LAMPIRAN}%
-\def\refname{DAFTAR PUSTAKA}%
-\def\bibname{DAFTAR PUSTAKA}%
-\def\indexname{Indek}%
-\def\figurename{Gambar}%
-\def\tablename{Tabel}%
-\def\pagename{Halaman}%
+	\def\prefacename{PRAKATA}%
+	\def\contentsname{DAFTAR ISI}%
+	\def\listfigurename{DAFTAR GAMBAR}%
+	\def\listtablename{DAFTAR TABEL}%
+	\def\listappendixname{DAFTAR LAMPIRAN}%
+	\def\nomenclaturename{DAFTAR LAMBANG}%
+	\def\abstractname{INTISARI}%
+	\def\partname{BAGIAN}%
+	\def\chaptername{BAB}%
+	\def\appendixname{LAMPIRAN}%
+	\def\refname{DAFTAR PUSTAKA}%
+	\def\bibname{DAFTAR PUSTAKA}%
+	\def\indexname{Indek}%
+	\def\figurename{Gambar}%
+	\def\tablename{Tabel}%
+	\def\pagename{Halaman}%
 }
 \def\captionsenglish{%
-\def\prefacename{PREFACE}%
-\def\contentsname{CONTENTS}%
-\def\listfigurename{LIST OF FIGURES}%
-\def\listtablename{LIST OF TABLES}%
-\def\listappendixname{LIST OF APPENDICES}%
-\def\nomenclaturename{NOMENCLATURE}%
-\def\abstractname{ABSTRACT}%
-\def\partname{PART}%
-\def\chaptername{CHAPTER}%
-\def\appendixname{APPENDIX}%
-\def\refname{REFERENCES}%
-\def\bibname{REFERENCES}%
-\def\indexname{Index}%
-\def\figurename{Figure}%
-\def\tablename{Table}%
-\def\pagename{Page}%
+	\def\prefacename{PREFACE}%
+	\def\contentsname{CONTENTS}%
+	\def\listfigurename{LIST OF FIGURES}%
+	\def\listtablename{LIST OF TABLES}%
+	\def\listappendixname{LIST OF APPENDICES}%
+	\def\nomenclaturename{NOMENCLATURE}%
+	\def\abstractname{ABSTRACT}%
+	\def\partname{PART}%
+	\def\chaptername{CHAPTER}%
+	\def\appendixname{APPENDIX}%
+	\def\refname{REFERENCES}%
+	\def\bibname{REFERENCES}%
+	\def\indexname{Index}%
+	\def\figurename{Figure}%
+	\def\tablename{Table}%
+	\def\pagename{Page}%
 }
 
 %------------------------------------------------------------
@@ -208,10 +208,10 @@
 %Define page numbering in the first chapter
 %------------------------------------------------------------
 \def\ps@chapterheading{%
-  \let\@evenhead\@empty\let\@oddhead\@empty
-  \def\@oddfoot{\hfil\thepage\hfil}%
-  \def\@evenfoot{\hfil\thepage\hfil}
-  }
+	\let\@evenhead\@empty\let\@oddhead\@empty
+	\def\@oddfoot{\hfil\thepage\hfil}%
+	\def\@evenfoot{\hfil\thepage\hfil}
+}
 
 
 %------------------------------------------------------------]
@@ -240,93 +240,93 @@
 %Define cover in Indonesian
 %------------------------------------------------------------
 \def\cover{%
-  \thispagestyle{empty}%
-  \pagenumbering{roman}
-  \setcounter{page}{1}
-    \begin{center}
-      \begin{singlespace}
-      \MakeUppercase{\normalfont\bfseries Usulan Penelitian}\\
-      \vspace{0.75cm}	
-      \MakeUppercase{\large\bfseries\@titleind}\par\nobreak
-       \vfill
-       \includegraphics[width=5.5cm]{logougm}
-       \vfill
-       {\normalfont
-        \@fullname\\
-        \@NIM}\\
-       \vspace{1cm}
+	\thispagestyle{empty}%
+	\pagenumbering{roman}
+	\setcounter{page}{1}
+	\begin{center}
+		\begin{singlespace}
+			\MakeUppercase{\normalfont\bfseries Usulan Penelitian}\\
+			\vspace{0.75cm}
+			\MakeUppercase{\large\bfseries\@titleind}\par\nobreak
+			\vfill
+			\includegraphics[width=5.5cm]{logougm}
+			\vfill
+			{\normalfont
+				\@fullname\\
+				\@NIM}\\
+			\vspace{1cm}
 
-       {\normalfont
-       \begin{tabular}{rl}
-       PEMBIMBING~:&\@firstsupervisor\\
-       &\@secondsupervisor\\
-       \end{tabular}
-       }
+			{\normalfont
+				\begin{tabular}{rl}
+					PEMBIMBING~: & \@firstsupervisor  \\
+					             & \@secondsupervisor \\
+				\end{tabular}
+			}
 
-       \vspace{1.5cm}
-       {\normalfont
-         \MakeUppercase{\normalfont\bfseries Program Studi \@program}\\
-         \MakeUppercase{\normalfont\bfseries Departemen \@dept}\\
-         \MakeUppercase{\normalfont\bfseries\@faculty}\\
-         \MakeUppercase{\normalfont\bfseries\@university}\\
-         \MakeUppercase{\normalfont\bfseries\@city}\\
-         \vspace{0.3cm}
-         {\normalfont\bfseries\@yearsubmit}}\\
-      \end{singlespace}
-      \end{center}
-      \clearpage\pagenumbering{roman}\setcounter{page}{0}
+			\vspace{1.5cm}
+			{\normalfont
+				\MakeUppercase{\normalfont\bfseries Program Studi \@program}\\
+				\MakeUppercase{\normalfont\bfseries Departemen \@dept}\\
+				\MakeUppercase{\normalfont\bfseries\@faculty}\\
+				\MakeUppercase{\normalfont\bfseries\@university}\\
+				\MakeUppercase{\normalfont\bfseries\@city}\\
+				\vspace{0.3cm}
+				{\normalfont\bfseries\@yearsubmit}}\\
+		\end{singlespace}
+	\end{center}
+	\clearpage\pagenumbering{roman}\setcounter{page}{0}
 }
 %------------------------------------------------------------
 %Redefine Abstract in Indonesian
 %------------------------------------------------------------
 \def\abstractind{%
-  \clearpage\thispagestyle{chapterheading}%
-  \chapter*{}%
-  {\centering \normalfont
-  {\vspace{-1.97cm}\textbf{\abstractname}} \\
-  \vspace{1.5cm}
-   {\textbf{\@titleind}}
-        \par\nobreak
-        \vskip 12\p@
-    \interlinepenalty\@M
-    {\normalsize Oleh\par
-   \vspace{0.5cm}
-    \@fullname\\
-    \@NIM\\
-    \vskip 10\p@
-    }\par\nobreak
-    }
-  \begin{singlespace}%
-  \vskip 12\p@
-  \addcontentsline{toc}{chapter}{\abstractname}
-}
-\def\endabstractind{\par\vfil\null\end{singlespace}}
+	\clearpage\thispagestyle{chapterheading}%
+	\chapter*{}%
+	 {\centering \normalfont
+	  {\vspace{-1.97cm}\textbf{\abstractname}} \\
+	  \vspace{1.5cm}
+	  {\textbf{\@titleind}}
+	  \par\nobreak
+	  \vskip 12\p@
+	  \interlinepenalty\@M
+	  {\normalsize Oleh\par
+		  \vspace{0.5cm}
+		  \@fullname\\
+		  \@NIM\\
+		  \vskip 10\p@
+	  }\par\nobreak
+	 }
+	\begin{singlespace}%
+		\vskip 12\p@
+		\addcontentsline{toc}{chapter}{\abstractname}
+		}
+		\def\endabstractind{\par\vfil\null\end{singlespace}}
 
 %------------------------------------------------------------
 %Redefine Abstract in English
 %------------------------------------------------------------
 \def\abstracteng{%
-  \clearpage\thispagestyle{chapterheading}\selectlanguage{english}%
-  \chapter*{}%
-  {\centering \normalfont
-  {\vspace{-1.97cm}\textbf{\abstractname}}\\
-  \vspace{1.5cm}
-   {\textbf{\@titleeng}}
-        \par\nobreak
-        \vskip 12\p@
-    \interlinepenalty\@M
-    {\normalsize By\par
-   \vspace{0.5cm}
-    \@fullname\\
-    \@NIM\\
-    \vskip 10\p@
-    }\par\nobreak
-    }
-  \begin{singlespace}%
-  \vskip 12\p@
-  \addcontentsline{toc}{chapter}{\abstractname}
-  }
-\def\endabstracteng{\par\vfil\null\end{singlespace}%
-\clearpage\pagenumbering{arabic}\setcounter{page}{1}}
+	\clearpage\thispagestyle{chapterheading}\selectlanguage{english}%
+	\chapter*{}%
+	 {\centering \normalfont
+	  {\vspace{-1.97cm}\textbf{\abstractname}}\\
+	  \vspace{1.5cm}
+	  {\textbf{\@titleeng}}
+	  \par\nobreak
+	  \vskip 12\p@
+	  \interlinepenalty\@M
+	  {\normalsize By\par
+		  \vspace{0.5cm}
+		  \@fullname\\
+		  \@NIM\\
+		  \vskip 10\p@
+	  }\par\nobreak
+	 }
+	\begin{singlespace}%
+		\vskip 12\p@
+		\addcontentsline{toc}{chapter}{\abstractname}
+		}
+		\def\endabstracteng{\par\vfil\null\end{singlespace}%
+	\clearpage\pagenumbering{arabic}\setcounter{page}{1}}
 
 \endinput
